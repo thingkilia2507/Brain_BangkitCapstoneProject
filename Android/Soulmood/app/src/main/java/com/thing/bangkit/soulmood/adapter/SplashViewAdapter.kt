@@ -18,10 +18,9 @@ class SplashViewAdapter(var data: ArrayList<SplashData>, var viewPager2: ViewPag
     ): ViewHolder {
         return ViewHolder(
             ItemSplashBinding.inflate(LayoutInflater.from(parent.context), parent, false))
-
     }
 
-    override fun onBindViewHolder(holder: SplashViewAdapter.ViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.binding.apply {
             tvSplashTitle.text = data[position].title
             tvSplashDesc.text = data[position].description
