@@ -1,20 +1,21 @@
 package com.thing.bangkit.soulmood
 
 import android.app.Dialog
+import android.content.Intent
 import android.os.Bundle
 import android.view.Window
 import android.widget.Button
 import android.widget.EditText
-import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.thing.bangkit.soulmood.adapter.GroupNameViewAdapter
 import com.thing.bangkit.soulmood.databinding.ActivityAcitivtyUntukCobaCobaBinding
-import com.thing.bangkit.soulmood.viewmodel.GroupNameViewModel
+import com.thing.bangkit.soulmood.model.ChatGroup
+import com.thing.bangkit.soulmood.viewmodel.GroupChatViewModel
 
 class AcitivtyUntukCobaCoba : AppCompatActivity() {
-    private val groupNameViewModel:GroupNameViewModel by viewModels()
+    private val groupChatViewModel:GroupChatViewModel by viewModels()
     private lateinit var binding:ActivityAcitivtyUntukCobaCobaBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -27,6 +28,15 @@ class AcitivtyUntukCobaCoba : AppCompatActivity() {
             rvGroupName.layoutManager = LinearLayoutManager(this@AcitivtyUntukCobaCoba,
                 LinearLayoutManager.HORIZONTAL,false)
             rvGroupName.adapter = adapter
+
+            adapter.setOnItemClickCallback(object :GroupNameViewAdapter.OnItemClickCallback{
+                override fun onItemClick(data: ChatGroup) {
+                    startActivity(Intent(this@AcitivtyUntukCobaCoba, ChatGroupActivity::class.java).apply {
+                        putExtra(getString(R.string.group_id),data.id)
+                        putExtra(getString(R.string.group_name),data.group_name)
+                    })
+                }
+            })
 
             floatingAdd.setOnClickListener {
                 val dialog= Dialog(this@AcitivtyUntukCobaCoba)
@@ -43,14 +53,15 @@ class AcitivtyUntukCobaCoba : AppCompatActivity() {
                         val groupName = etGroupName.text.toString()
                         if(groupName.isEmpty()) etGroupName.error = "Masukkan Nama Grup!"
                         else {
-                            groupNameViewModel.insertNewGroup(groupName,this@AcitivtyUntukCobaCoba)
+                            groupChatViewModel.insertNewGroup(groupName,this@AcitivtyUntukCobaCoba)
+                            dialog.dismiss()
                         }
                     }
                 }
             }
 
-            groupNameViewModel.setGroupName()
-            groupNameViewModel.getGroupName().observe(this@AcitivtyUntukCobaCoba, {
+            groupChatViewModel.setGroupName()
+            groupChatViewModel.getGroupName().observe(this@AcitivtyUntukCobaCoba, {
                 if (it != null) {
                     adapter.setData(it)
                 }

@@ -4,11 +4,12 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@drawable/soulmood_logo"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Soulmood">
+        <activity android:name=".ChatGroupActivity"></activity>
         <activity android:name=".AcitivtyUntukCobaCoba">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -18,12 +19,10 @@
         </activity>
         <activity
             android:name=".RegisterActivity"
-            android:theme="@style/Theme.Soulmood.NoActionBar">
-
-        </activity>
+            android:theme="@style/Theme.Soulmood.NoActionBar"></activity>
         <activity
             android:name=".splash.SplashActivity1"
-            android:theme="@style/Theme.Soulmood.NoActionBar"></activity>
+            android:theme="@style/Theme.Soulmood.NoActionBar" />
         <activity android:name=".splash.SplashActivity" />
         <activity android:name=".MainActivity" />
 

@@ -15,36 +15,15 @@ import com.thing.bangkit.soulmood.model.SplashData
 
 class SplashActivity1 : AppCompatActivity() {
     private var binding: ActivitySplash1Binding? = null
-    private  var data=ArrayList<SplashData>()
+
     private lateinit var splashViewAdapter: SplashViewAdapter
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivitySplash1Binding.inflate(layoutInflater)
         setContentView(binding?.root)
-        data.add(
-            SplashData(
-                "Ceritakan Masalah Anda",
-                "Beban terasa lebih ringan dengan menceritakan masalah anda.",
-                R.drawable.splash_1
-            )
-        )
-        data.add(
-            SplashData(
-                "Aplikasi SoulMood Siap Membantu Anda", "SoulMood menyediakan layanan \n" +
-                        "Chatbot Cerdas yang bisa digunakan\n" +
-                        "untuk bercerita.", R.drawable.splash_2
-            )
-        )
-        data.add(
-            SplashData(
-                "Layanan dapat diakses\n" +
-                        "secara gratis", "SoulMood menyediakan layanan \n" +
-                        "Chatbot secara gratis.", R.drawable.splash_3
-            )
-        )
-        binding?.apply {
 
-            splashViewAdapter = SplashViewAdapter(data, splashViewPager)
+        binding?.apply {
+            splashViewAdapter = SplashViewAdapter(SplashDataDummy.dataSplash(), splashViewPager)
             splashViewPager.adapter = splashViewAdapter
             splashViewPager.clipToPadding = false
             splashViewPager.clipChildren = false

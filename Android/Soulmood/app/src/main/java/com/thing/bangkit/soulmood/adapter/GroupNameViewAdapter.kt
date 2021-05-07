@@ -44,6 +44,9 @@ class GroupNameViewAdapter : RecyclerView.Adapter<GroupNameViewAdapter.ViewHolde
                 )
             ivGroupName.setImageDrawable(textDrawable)
             tvGroupName.text = data[position].group_name
+            llGroupName.setOnClickListener {
+                   onItemClickCallback.onItemClick(data[position])
+            }
         }
     }
 
@@ -60,7 +63,6 @@ class GroupNameViewAdapter : RecyclerView.Adapter<GroupNameViewAdapter.ViewHolde
     private fun getInitialName(name: String): String {
         val splitName = name.split("\\s+")
         val splitCount = splitName.toString().length
-        println("dataku $splitCount $splitName")
         return if (splitCount == 1) {
             " " + name[0] + name[0]
         } else {

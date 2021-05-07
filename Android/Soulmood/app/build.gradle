@@ -72,4 +72,7 @@ dependencies {
 
     //generate text to image
     implementation 'com.amulyakhare:com.amulyakhare.textdrawable:1.0.1'
+
+    //Encrypt SharedPref data
+    implementation 'androidx.security:security-crypto:1.1.0-alpha03'
 }

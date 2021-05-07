@@ -17,4 +17,6 @@
     <string name="add">Tambah</string>
     <string name="enter_new_group">Masukkan Nama Grup...</string>
     <string name="create_new_group">Buat Grup Baru</string>
+    <string name="group_id">group_id</string>
+    <string name="group_name">group_name</string>
 </resources>
