@@ -9,21 +9,29 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Soulmood">
-        <activity android:name=".ChatGroupActivity"></activity>
-        <activity android:name=".AcitivtyUntukCobaCoba">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+        <activity android:name=".ForgotPassword"
+            android:theme="@style/Theme.Soulmood.NoActionBar" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+        <activity
+            android:name=".LoginActivity"
+            android:theme="@style/Theme.Soulmood.NoActionBar" />
+        <activity android:name=".ChatGroupActivity" />
+        <activity android:name=".AcitivtyUntukCobaCoba"></activity>
         <activity
             android:name=".RegisterActivity"
-            android:theme="@style/Theme.Soulmood.NoActionBar"></activity>
+            android:theme="@style/Theme.Soulmood.NoActionBar">
+
+        </activity>
         <activity
             android:name=".splash.SplashActivity1"
             android:theme="@style/Theme.Soulmood.NoActionBar" />
-        <activity android:name=".splash.SplashActivity" />
+        <activity android:name=".splash.SplashActivity"
+            android:theme="@style/Theme.Soulmood.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity android:name=".MainActivity" />
 
         <meta-data

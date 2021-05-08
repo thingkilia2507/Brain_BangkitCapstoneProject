@@ -1,14 +1,18 @@
 package com.thing.bangkit.soulmood.splash
 
 import android.app.Activity
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import android.widget.Button
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.CompositePageTransformer
 import androidx.viewpager2.widget.MarginPageTransformer
 import androidx.viewpager2.widget.ViewPager2
+import com.thing.bangkit.soulmood.LoginActivity
 import com.thing.bangkit.soulmood.R
+import com.thing.bangkit.soulmood.RegisterActivity
 import com.thing.bangkit.soulmood.adapter.SplashViewAdapter
 import com.thing.bangkit.soulmood.databinding.ActivitySplash1Binding
 import com.thing.bangkit.soulmood.model.SplashData
@@ -44,9 +48,22 @@ class SplashActivity1 : AppCompatActivity() {
             splashViewPager.setPageTransformer(compositePageTransformer)
 
 
+            btnLogin.setOnClickListener {
+                startActivity(Intent(this@SplashActivity1,LoginActivity::class.java))
+                finish()
+            }
+
+            btnRegister.setOnClickListener {
+                startActivity(Intent(this@SplashActivity1,RegisterActivity::class.java))
+                finish()
+            }
+
+
         }
 
     }
+
+
 
     override fun onDestroy() {
         super.onDestroy()

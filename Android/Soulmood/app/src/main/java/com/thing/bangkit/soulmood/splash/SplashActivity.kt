@@ -5,17 +5,26 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import com.thing.bangkit.soulmood.AcitivtyUntukCobaCoba
 import com.thing.bangkit.soulmood.MainActivity
 import com.thing.bangkit.soulmood.R
+import com.thing.bangkit.soulmood.databinding.ActivityAcitivtyUntukCobaCobaBinding
+import com.thing.bangkit.soulmood.utils.SharedPref
 
 class SplashActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splash)
         Handler(Looper.getMainLooper()).postDelayed({
-            val intent = Intent(this@SplashActivity, SplashActivity1::class.java)
-            startActivity(intent)
-            finish()
+            if(SharedPref().getPref(this@SplashActivity,getString(R.string.email))!=null){
+                val intent = Intent(this@SplashActivity, AcitivtyUntukCobaCoba::class.java)
+                startActivity(intent)
+                finish()
+            }else{
+                val intent = Intent(this@SplashActivity, SplashActivity1::class.java)
+                startActivity(intent)
+                finish()
+            }
         }, 2000)
     }
 }

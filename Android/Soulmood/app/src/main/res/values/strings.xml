@@ -8,6 +8,7 @@
     <string name="name">Nama</string>
     <string name="password">Password</string>
     <string name="email">Email</string>
+    <string name="user_id">Email</string>
     <string name="male">Laki - Laki</string>
     <string name="female">perempuan</string>
     <string name="enter_your_name">Masukkan Nama Anda</string>
@@ -19,4 +20,5 @@
     <string name="create_new_group">Buat Grup Baru</string>
     <string name="group_id">group_id</string>
     <string name="group_name">group_name</string>
+    <string name="masuk">Masuk</string>
 </resources>

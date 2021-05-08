@@ -18,7 +18,7 @@ class SharedPref {
             .build()
         sharedPreferences = EncryptedSharedPreferences.create(
             context,
-            "preference file name",
+            PREFERENCE_KEY,
             masterKey,
             EncryptedSharedPreferences.PrefKeyEncryptionScheme.AES256_SIV,
             EncryptedSharedPreferences.PrefValueEncryptionScheme.AES256_GCM
@@ -35,7 +35,7 @@ class SharedPref {
             .build()
         sharedPreferences = EncryptedSharedPreferences.create(
             context,
-            "preference file name",
+            PREFERENCE_KEY,
             masterKey,
             EncryptedSharedPreferences.PrefKeyEncryptionScheme.AES256_SIV,
             EncryptedSharedPreferences.PrefValueEncryptionScheme.AES256_GCM
@@ -52,7 +52,7 @@ class SharedPref {
             .build()
         sharedPreferences = EncryptedSharedPreferences.create(
             context,
-            "preference file name",
+            PREFERENCE_KEY,
             masterKey,
             EncryptedSharedPreferences.PrefKeyEncryptionScheme.AES256_SIV,
             EncryptedSharedPreferences.PrefValueEncryptionScheme.AES256_GCM
@@ -67,7 +67,7 @@ class SharedPref {
             .build()
         sharedPreferences = EncryptedSharedPreferences.create(
             context,
-            "preference file name",
+            PREFERENCE_KEY,
             masterKey,
             EncryptedSharedPreferences.PrefKeyEncryptionScheme.AES256_SIV,
             EncryptedSharedPreferences.PrefValueEncryptionScheme.AES256_GCM
