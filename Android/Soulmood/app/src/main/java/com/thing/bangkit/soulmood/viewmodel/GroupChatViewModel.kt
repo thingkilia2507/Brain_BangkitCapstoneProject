@@ -10,9 +10,11 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Query
 import com.google.firebase.firestore.SetOptions
+import com.thing.bangkit.soulmood.R
 import com.thing.bangkit.soulmood.helper.DateHelper
 import com.thing.bangkit.soulmood.model.ChatGroup
 import com.thing.bangkit.soulmood.model.Message
+import com.thing.bangkit.soulmood.utils.SharedPref
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -77,7 +79,8 @@ class GroupChatViewModel : ViewModel() {
         val id = UUID.randomUUID().toString()
         viewModelScope.launch(Dispatchers.IO) {
             val database = db.collection("groups_chat").document(group_id).collection("message").add(
-                Message(id, "Phil", "a@g.com", message, message, DateHelper.getCurrentDate(), "")
+                Message(id,
+                    SharedPref().getPref(context,context.getString(R.string.name)).toString(), SharedPref().getPref(context,context.getString(R.string.email)), message, message, DateHelper.getCurrentDate(), "")
             )
             withContext(Dispatchers.Main){
                 database.addOnSuccessListener {

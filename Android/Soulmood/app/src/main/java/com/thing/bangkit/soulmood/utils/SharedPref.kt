@@ -45,7 +45,7 @@ class SharedPref {
         return data != null
     }
 
-    fun getPref(context: FragmentActivity?, key: String): String? {
+    fun getPref(context: Context?, key: String): String? {
         sharedPreferences = null
         val masterKey = MasterKey.Builder(context!!)
             .setKeyScheme(MasterKey.KeyScheme.AES256_GCM)
