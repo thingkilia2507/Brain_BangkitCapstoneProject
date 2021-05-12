@@ -20,7 +20,7 @@
             android:fontFamily="@font/poppins_semibold"/>
 
         <EditText
-            android:id="@+id/et_new_group"
+            android:id="@+id/et_group_name"
             android:layout_width="match_parent"
             android:layout_height="@dimen/dp_45"
             android:layout_marginStart="20dp"

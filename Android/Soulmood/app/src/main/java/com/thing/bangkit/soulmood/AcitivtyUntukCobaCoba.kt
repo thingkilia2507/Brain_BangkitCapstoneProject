@@ -57,7 +57,7 @@ class AcitivtyUntukCobaCoba : AppCompatActivity() {
                 dialog.show()
 
                 dialog.apply {
-                    val etGroupName = findViewById<EditText>(R.id.et_new_group)
+                    val etGroupName = findViewById<EditText>(R.id.et_group_name)
                     val btnNewGroup = findViewById<Button>(R.id.btn_add_new_group)
                     btnNewGroup.setOnClickListener {
                         val groupName = etGroupName.text.toString()

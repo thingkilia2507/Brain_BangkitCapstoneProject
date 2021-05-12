@@ -22,7 +22,7 @@
             android:layout_height="wrap_content"
             android:src="@drawable/ic_baseline_add_24"
             android:backgroundTint="@color/soulmood_primary_color"
-            app:elevation="@dimen/dp_5"
+            app:elevation="@dimen/margin_mini"
             android:elevation="@dimen/dp_16"
             app:pressedTranslationZ="@dimen/dp_10"
             app:fabCustomSize="55dp"
@@ -34,7 +34,7 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_group_name"
             android:layout_toRightOf="@+id/floating_add"
-            android:layout_marginStart="@dimen/dp_5"
+            android:layout_marginStart="@dimen/margin_mini"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:nestedScrollingEnabled="true"

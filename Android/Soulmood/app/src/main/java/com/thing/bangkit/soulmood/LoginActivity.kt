@@ -51,17 +51,18 @@ class LoginActivity : AppCompatActivity() {
                         {
                             if (it != null) {
                                 //save data to shared preference
-                                SharedPref().setPref(
+                                SharedPref.setPref(
                                     this@LoginActivity,
                                     getString(R.string.name),
                                     it.name
                                 )
-                                SharedPref().setPref(
+                                SharedPref.setPref(
                                     this@LoginActivity,
                                     getString(R.string.email),
                                     it.email
                                 )
-                                SharedPref().setPref(
+                              
+                                SharedPref.setPref(
                                     this@LoginActivity,
                                     getString(R.string.user_id),
                                     it.id
@@ -71,7 +72,7 @@ class LoginActivity : AppCompatActivity() {
                                 startActivity(
                                     Intent(
                                         this@LoginActivity,
-                                        AcitivtyUntukCobaCoba::class.java
+                                        MainActivity::class.java
                                     )
                                 )
                                 finish()
