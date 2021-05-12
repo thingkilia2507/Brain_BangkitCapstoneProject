@@ -34,12 +34,14 @@ object SharedPref {
     }
 
     fun clearOnePref(context: Context, key: String?) {
+        initSharedPref(context)
         val editor = sharedPreferences.edit()
         editor.remove(key).apply()
     }
 
     private fun initSharedPref(context: Context) {
         val masterKey = MasterKey.Builder(context).setKeyScheme(MasterKey.KeyScheme.AES256_GCM).build()
+
         sharedPreferences = EncryptedSharedPreferences.create(
             context,
             PREFERENCE_KEY,

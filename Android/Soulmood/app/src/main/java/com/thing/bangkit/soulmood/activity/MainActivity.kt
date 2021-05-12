@@ -1,11 +1,16 @@
 package com.thing.bangkit.soulmood.activity
 
+import android.content.res.ColorStateList
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
+import androidx.core.widget.ImageViewCompat
 import androidx.fragment.app.Fragment
 import com.thing.bangkit.soulmood.R
 import com.thing.bangkit.soulmood.databinding.ActivityMainBinding
+import com.thing.bangkit.soulmood.fragment.HomeFragment
+import com.thing.bangkit.soulmood.fragment.ProfileFragment
 
 class MainActivity : AppCompatActivity() {
 
@@ -41,7 +46,8 @@ class MainActivity : AppCompatActivity() {
         ivBNHome.layoutParams.height = 105
         ivBNHome.requestLayout()
         tvBNHome.setTextColor(resources.getColor(R.color.white, theme))
-        ImageViewCompat.setImageTintList(ivBNHome, ColorStateList.valueOf(ContextCompat.getColor(this@MainActivity,
+        ImageViewCompat.setImageTintList(ivBNHome, ColorStateList.valueOf(
+            ContextCompat.getColor(this@MainActivity,
             R.color.white
         )))
     }

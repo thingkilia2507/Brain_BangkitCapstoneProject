@@ -1,11 +1,11 @@
 package com.thing.bangkit.soulmood.activity
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.InputType
 import android.widget.Toast
 import androidx.activity.viewModels
+import androidx.appcompat.app.AppCompatActivity
 import com.thing.bangkit.soulmood.R
 import com.thing.bangkit.soulmood.databinding.ActivityRegisterBinding
 import com.thing.bangkit.soulmood.viewmodel.RegisterViewModel
@@ -22,7 +22,7 @@ class RegisterActivity : AppCompatActivity() {
         setContentView(binding?.root)
 
         //get gender from radio button
-        binding?.rgGender?.setOnCheckedChangeListener { group, checkedId ->
+        binding?.rgGender?.setOnCheckedChangeListener { _, checkedId ->
             when (checkedId) {
                 R.id.rb_male -> {
                     gender = getString(R.string.male)

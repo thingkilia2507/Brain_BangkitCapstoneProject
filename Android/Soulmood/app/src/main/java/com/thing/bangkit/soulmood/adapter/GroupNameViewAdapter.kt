@@ -1,6 +1,5 @@
 package com.thing.bangkit.soulmood.adapter
 
-import android.graphics.Movie
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -8,6 +7,8 @@ import com.amulyakhare.textdrawable.TextDrawable
 import com.amulyakhare.textdrawable.util.ColorGenerator
 import com.thing.bangkit.soulmood.databinding.ItemGroupNameBinding
 import com.thing.bangkit.soulmood.model.ChatGroup
+import java.util.*
+import kotlin.collections.ArrayList
 
 class GroupNameViewAdapter : RecyclerView.Adapter<GroupNameViewAdapter.ViewHolder>() {
     private val data = ArrayList<ChatGroup>()
@@ -33,13 +34,13 @@ class GroupNameViewAdapter : RecyclerView.Adapter<GroupNameViewAdapter.ViewHolde
         )
     }
 
-    override fun onBindViewHolder(holder: GroupNameViewAdapter.ViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.binding.apply {
             val colorGenerator = ColorGenerator.MATERIAL
             val textDrawable = TextDrawable.builder().beginConfig().width(50)
                 .height(50).endConfig()
                 .buildRound(
-                    getInitialName(data[position].group_name.toUpperCase()),
+                    getInitialName(data[position].group_name.toUpperCase(Locale.getDefault())),
                     colorGenerator.getColor(data[position].group_name)
                 )
             ivGroupName.setImageDrawable(textDrawable)
