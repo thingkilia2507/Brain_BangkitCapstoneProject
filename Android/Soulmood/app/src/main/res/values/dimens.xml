@@ -5,8 +5,7 @@
     <dimen name="dp_16">16dp</dimen>
     <dimen name="dp_1">1dp</dimen>
     <dimen name="sp_24">24sp</dimen>
-<<<<<<< Updated upstream
-=======
+    <dimen name="dp_5">5dp</dimen>
     <dimen name="dp_45">45dp</dimen>
     <dimen name="dp_2">2dp</dimen>
     <dimen name="dp_8">8dp</dimen>
@@ -26,5 +25,4 @@
     <dimen name="card_corner_mid">30dp</dimen>
     <dimen name="margin_big">20dp</dimen>
     <dimen name="corner_radius">15dp</dimen>
->>>>>>> Stashed changes
 </resources>

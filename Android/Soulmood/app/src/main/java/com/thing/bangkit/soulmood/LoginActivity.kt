@@ -61,6 +61,7 @@ class LoginActivity : AppCompatActivity() {
                                     getString(R.string.email),
                                     it.email
                                 )
+                              
                                 SharedPref.setPref(
                                     this@LoginActivity,
                                     getString(R.string.user_id),

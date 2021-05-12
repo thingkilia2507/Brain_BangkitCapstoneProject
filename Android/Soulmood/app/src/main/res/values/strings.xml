@@ -5,4 +5,33 @@
     <string name="daftar">Daftar</string>
     <string name="license_credit_splash1">bot png from pngtree.com</string>
     <string name="license_credit_splash2_3">mental health png from pngtree.com</string>
+    <string name="name">Nama</string>
+    <string name="password">Password</string>
+    <string name="email">Email</string>
+    <string name="user_id">Email</string>
+    <string name="male">Laki - Laki</string>
+    <string name="female">perempuan</string>
+    <string name="enter_your_name">Masukkan Nama Anda</string>
+    <string name="enter_your_email">Masukkan Email Anda</string>
+    <string name="enter_your_pass">Masukkan Password Anda</string>
+    <string name="choose_your_gender">Pilih Jenis Kelamin Anda</string>
+    <string name="add">Tambah</string>
+    <string name="enter_new_group">Masukkan Nama Grup...</string>
+    <string name="create_new_group">Buat Grup Baru</string>
+    <string name="group_id">group_id</string>
+    <string name="group_name">group_name</string>
+    <string name="masuk">Masuk</string>
+<<<<<<< Updated upstream
+    <string name="dialy_motivation">Motivasi Harian</string>
+=======
+    <string name="profil">Profil</string>
+    <string name="home">Beranda</string>
+    <string name="iv_profile_btmappbar">iv_profile_btmappbar</string>
+    <string name="iv_home_btmappbar">iv_home_btmappbar</string>
+    <string name="fab_chatbot">fab_chatbot</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="message_input_groupname_empty">Nama Grup tidak boleh kosong.</string>
+    <string name="fab_add_group_name">fab_add_group_name</string>
+>>>>>>> Stashed changes
 </resources>

@@ -69,7 +69,6 @@
             android:drawablePadding="@dimen/margin_mini"
             android:elevation="@dimen/dp_2"
             android:hint="@string/password"
-
             android:inputType="textPassword"
             android:padding="@dimen/dp_8" />
 
@@ -91,7 +90,6 @@
             android:layout_marginTop="20dp"
             android:layout_marginEnd="@dimen/dp_45"
             android:text="Lupa Kata Sandi?"
-
             android:textAlignment="textEnd"
             android:textColor="#042481"
             android:textSize="14sp" />
