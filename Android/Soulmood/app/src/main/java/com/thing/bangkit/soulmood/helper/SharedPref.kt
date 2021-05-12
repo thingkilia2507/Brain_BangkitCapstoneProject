@@ -1,4 +1,4 @@
-package com.thing.bangkit.soulmood.utils
+package com.thing.bangkit.soulmood.helper
 
 import android.content.Context
 import android.content.SharedPreferences
@@ -28,6 +28,7 @@ object SharedPref {
 
     fun clearPref(context: Context) {
         initSharedPref(context)
+
         val editor = sharedPreferences.edit()
         editor.clear().apply()
     }
@@ -37,7 +38,7 @@ object SharedPref {
         editor.remove(key).apply()
     }
 
-     fun initSharedPref(context: Context) {
+    private fun initSharedPref(context: Context) {
         val masterKey = MasterKey.Builder(context).setKeyScheme(MasterKey.KeyScheme.AES256_GCM).build()
         sharedPreferences = EncryptedSharedPreferences.create(
             context,

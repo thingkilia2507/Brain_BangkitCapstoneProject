@@ -1,21 +1,15 @@
-package com.thing.bangkit.soulmood.splash
+package com.thing.bangkit.soulmood.activity.splash
 
-import android.app.Activity
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.View
-import android.widget.Button
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.CompositePageTransformer
 import androidx.viewpager2.widget.MarginPageTransformer
-import androidx.viewpager2.widget.ViewPager2
-import com.thing.bangkit.soulmood.LoginActivity
-import com.thing.bangkit.soulmood.R
-import com.thing.bangkit.soulmood.RegisterActivity
+import com.thing.bangkit.soulmood.activity.LoginActivity
+import com.thing.bangkit.soulmood.activity.RegisterActivity
 import com.thing.bangkit.soulmood.adapter.SplashViewAdapter
 import com.thing.bangkit.soulmood.databinding.ActivitySplash1Binding
-import com.thing.bangkit.soulmood.model.SplashData
 
 class SplashActivity1 : AppCompatActivity() {
     private var binding: ActivitySplash1Binding? = null
@@ -49,12 +43,12 @@ class SplashActivity1 : AppCompatActivity() {
 
 
             btnLogin.setOnClickListener {
-                startActivity(Intent(this@SplashActivity1,LoginActivity::class.java))
+                startActivity(Intent(this@SplashActivity1, LoginActivity::class.java))
                 finish()
             }
 
             btnRegister.setOnClickListener {
-                startActivity(Intent(this@SplashActivity1,RegisterActivity::class.java))
+                startActivity(Intent(this@SplashActivity1, RegisterActivity::class.java))
                 finish()
             }
 

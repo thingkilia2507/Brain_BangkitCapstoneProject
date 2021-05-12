@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".activity.MainActivity">
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
@@ -61,7 +61,7 @@
                 android:layout_height="@dimen/heightIconBN"
                 android:layout_gravity="bottom"
                 android:layout_weight="1"
-                android:padding="@dimen/mini_padding"
+                android:padding="@dimen/small_padding"
                 android:src="@drawable/home_icon"
                 android:contentDescription="@string/iv_home_btmappbar"
                 app:tint="@color/white" />

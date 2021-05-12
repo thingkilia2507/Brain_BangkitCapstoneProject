@@ -1,4 +1,4 @@
-package com.thing.bangkit.soulmood
+package com.thing.bangkit.soulmood.activity
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.text.InputType
 import android.widget.Toast
 import androidx.activity.viewModels
+import com.thing.bangkit.soulmood.R
 import com.thing.bangkit.soulmood.databinding.ActivityRegisterBinding
 import com.thing.bangkit.soulmood.viewmodel.RegisterViewModel
 

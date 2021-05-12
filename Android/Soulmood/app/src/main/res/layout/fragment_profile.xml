@@ -1,14 +1,181 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ProfileFragment">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    tools:context=".fragment.ProfileFragment">
 
-    <!-- TODO: Update blank fragment layout -->
+    <ImageView
+        android:id="@+id/iv_topper"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:src="@drawable/topper_smol"
+        android:adjustViewBounds="true"
+        android:contentDescription="@string/iv_topper"/>
+
     <TextView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_height="wrap_content"
+        android:textColor="@color/soulmood_primary_color"
+        android:gravity="center"
+        android:textSize="@dimen/ts_heading4"
+        android:layout_marginTop="@dimen/margin_def"
+        android:fontFamily="sans-serif-black"
+        tools:text="Soulmoo"/>
 
-</FrameLayout>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/soulmood_primary_color"
+        android:gravity="center"
+        android:textSize="@dimen/ts_menu"
+        android:layout_marginBottom="@dimen/margin_mid"
+        android:fontFamily="sans-serif-black"
+        tools:text="soulmoo@gmail.com"/>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="@dimen/margin_def"
+        android:background="@color/design_default_color_on_primary"
+        android:orientation="vertical"
+        android:paddingBottom="@dimen/padding_def">
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/mini_size"
+            android:layout_marginEnd="@dimen/mini_size"
+            android:layout_marginBottom="@dimen/padding_mid"
+            android:padding="@dimen/padding_mid"
+            app:cardCornerRadius="@dimen/corner_radius"
+            app:cardElevation="@dimen/small_elevation">
+
+            <LinearLayout
+                android:id="@+id/ll_change_identity"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:orientation="horizontal"
+                android:weightSum="1">
+
+                <ImageView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.15"
+                    android:adjustViewBounds="true"
+                    android:background="@color/soulmood_primary_color"
+                    android:contentDescription="@string/ic_identity_edit"
+                    android:padding="@dimen/padding_mid"
+                    android:src="@drawable/ic_edit"
+                    app:tint="@color/white" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="0.8"
+                    android:paddingStart="@dimen/small_padding"
+                    android:paddingEnd="@dimen/small_padding"
+                    android:text="@string/private_information"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/ts_menu"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/mini_size"
+            android:layout_marginEnd="@dimen/mini_size"
+            android:layout_marginBottom="@dimen/padding_mid"
+            android:padding="@dimen/padding_mid"
+            app:cardCornerRadius="@dimen/corner_radius"
+            app:cardElevation="@dimen/small_elevation">
+
+            <LinearLayout
+                android:id="@+id/ll_change_password"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:orientation="horizontal"
+                android:weightSum="1">
+
+                <ImageView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.15"
+                    android:adjustViewBounds="true"
+                    android:background="@color/soulmood_primary_color"
+                    android:contentDescription="@string/ic_password"
+                    android:padding="@dimen/padding_mid"
+                    android:src="@drawable/ic_lock"
+                    app:tint="@color/white" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="0.8"
+                    android:paddingStart="@dimen/small_padding"
+                    android:paddingEnd="@dimen/small_padding"
+                    android:text="@string/change_password"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/ts_menu"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/mini_size"
+            android:layout_marginEnd="@dimen/mini_size"
+            android:layout_marginBottom="@dimen/padding_mid"
+            android:padding="@dimen/padding_mid"
+            app:cardCornerRadius="@dimen/corner_radius"
+            app:cardElevation="@dimen/small_elevation">
+
+            <LinearLayout
+                android:id="@+id/ll_log_out"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:orientation="horizontal"
+                android:weightSum="1">
+
+                <ImageView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.15"
+                    android:adjustViewBounds="true"
+                    android:background="@color/soulmood_primary_color"
+                    android:contentDescription="@string/ic_log_out"
+                    android:padding="@dimen/padding_mid"
+                    android:src="@drawable/ic_logout"
+                    app:tint="@color/white" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="0.8"
+                    android:paddingStart="@dimen/small_padding"
+                    android:paddingEnd="@dimen/small_padding"
+                    android:text="@string/log_out"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/ts_menu"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+    </LinearLayout>
+
+
+</LinearLayout>

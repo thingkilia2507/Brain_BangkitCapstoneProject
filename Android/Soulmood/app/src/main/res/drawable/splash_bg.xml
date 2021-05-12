@@ -3,6 +3,6 @@
     <solid
         android:color="@color/soulmood_primary_color"/>
     <corners
-        android:topRightRadius="@dimen/dp_300"
-        android:topLeftRadius="@dimen/dp_300"/>
+        android:topRightRadius="@dimen/radius_circle_topper"
+        android:topLeftRadius="@dimen/radius_circle_topper"/>
 </shape>

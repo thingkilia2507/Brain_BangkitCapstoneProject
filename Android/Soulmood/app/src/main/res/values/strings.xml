@@ -6,7 +6,6 @@
     <string name="license_credit_splash1">bot png from pngtree.com</string>
     <string name="license_credit_splash2_3">mental health png from pngtree.com</string>
     <string name="name">Nama</string>
-    <string name="password">Password</string>
     <string name="email">Email</string>
     <string name="user_id">Email</string>
     <string name="male">Laki - Laki</string>
@@ -16,7 +15,7 @@
     <string name="enter_your_pass">Masukkan Password Anda</string>
     <string name="choose_your_gender">Pilih Jenis Kelamin Anda</string>
     <string name="add">Tambah</string>
-    <string name="enter_new_group">Masukkan Nama Grup...</string>
+    <string name="enter_new_group">Masukkan Nama Grup…</string>
     <string name="create_new_group">Buat Grup Baru</string>
     <string name="group_id">group_id</string>
     <string name="group_name">group_name</string>
@@ -29,7 +28,31 @@
     <string name="iv_home_btmappbar">iv_home_btmappbar</string>
     <string name="fab_chatbot">fab_chatbot</string>
 
+
+    <string name="grade">Nilai</string>
+    <string name="certificate">Sertifikat</string>
+    <string name="change_password">Ubah Kata Sandi</string>
+    <string name="password">Kata Sandi</string>
+    <string name="log_out">Keluar</string>
+
+    <string name="signature">Tanda Tangan / Paraf</string>
+
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="message_input_groupname_empty">Nama Grup tidak boleh kosong.</string>
     <string name="fab_add_group_name">fab_add_group_name</string>
+    <string name="iv_topper">iv_topper</string>
+    <string name="ic_password">ic_password</string>
+    <string name="ic_log_out">ic_logout</string>
+    <string name="ic_identity_edit">ic_identity_edit</string>
+    <string name="private_information">Informasi Pribadi</string>
+
+
+    <string name="error">Gagal</string>
+    <string name="input_old_password">Kata Sandi Lama tidak boleh kosong!</string>
+    <string name="input_new_password">Kata Sandi Baru tidak boleh kosong!</string>
+    <string name="input_confirm_new_password">Ulangi Kata Sandi Baru!</string>
+    <string name="old_password">Kata Sandi Saat Ini</string>
+    <string name="new_password">Kata Sandi Baru</string>
+    <string name="confirm_new_password">Konfirmasi Kata Sandi Baru</string>
+    <string name="sorry_confirm_password_wrong">Maaf, Pengulangan Kata Sandi Baru tidak sama</string>
 </resources>

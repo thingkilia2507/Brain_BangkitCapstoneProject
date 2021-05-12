@@ -1,12 +1,13 @@
-package com.thing.bangkit.soulmood
+package com.thing.bangkit.soulmood.activity
 
 import android.content.Intent
 import android.os.Bundle
 import android.text.InputType
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import com.thing.bangkit.soulmood.R
 import com.thing.bangkit.soulmood.databinding.ActivityLoginBinding
-import com.thing.bangkit.soulmood.utils.SharedPref
+import com.thing.bangkit.soulmood.helper.SharedPref
 import com.thing.bangkit.soulmood.viewmodel.LoginViewModel
 
 class LoginActivity : AppCompatActivity() {
@@ -23,8 +24,7 @@ class LoginActivity : AppCompatActivity() {
             ivEyePass.setOnClickListener {
                 if (visibility){
                     visibility = false
-                    etPassword.inputType =
-                        InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_VARIATION_PASSWORD
+                    etPassword.inputType = InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_VARIATION_PASSWORD
                     etPassword.setSelection(etPassword.text.length)
                     ivEyePass.setImageResource(R.drawable.ic_baseline_visibility_24)
 
@@ -90,7 +90,7 @@ class LoginActivity : AppCompatActivity() {
             tvForgotPassword.setOnClickListener { startActivity(
                 Intent(
                     this@LoginActivity,
-                    ForgotPassword::class.java
+                    ForgotPasswordActivity::class.java
                 )
             ) }
 

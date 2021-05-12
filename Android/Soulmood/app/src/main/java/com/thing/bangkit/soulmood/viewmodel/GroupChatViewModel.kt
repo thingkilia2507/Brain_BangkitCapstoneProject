@@ -11,9 +11,9 @@ import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Query
 import com.thing.bangkit.soulmood.R
 import com.thing.bangkit.soulmood.helper.DateHelper
+import com.thing.bangkit.soulmood.helper.SharedPref
 import com.thing.bangkit.soulmood.model.ChatGroup
 import com.thing.bangkit.soulmood.model.Message
-import com.thing.bangkit.soulmood.utils.SharedPref
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext

@@ -1,4 +1,4 @@
-package com.thing.bangkit.soulmood.splash
+package com.thing.bangkit.soulmood.activity.splash
 
 import com.thing.bangkit.soulmood.R
 import com.thing.bangkit.soulmood.model.SplashData
