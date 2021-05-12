@@ -5,4 +5,26 @@
     <dimen name="dp_16">16dp</dimen>
     <dimen name="dp_1">1dp</dimen>
     <dimen name="sp_24">24sp</dimen>
+<<<<<<< Updated upstream
+=======
+    <dimen name="dp_45">45dp</dimen>
+    <dimen name="dp_2">2dp</dimen>
+    <dimen name="dp_8">8dp</dimen>
+    <dimen name="sp_20">20sp</dimen>
+
+    <dimen name="high_of_bottom_navigation">60dp</dimen>
+    <dimen name="round_fab_corner">16dp</dimen>
+    <dimen name="fab_size">80dp</dimen>
+    <dimen name="heightIconBN">40dp</dimen>
+    <dimen name="jarakIconBN_dariBottom">1dp</dimen>
+    <dimen name="mini_padding">5dp</dimen>
+    <dimen name="margin_def">10dp</dimen>
+    <dimen name="margin_mini">5dp</dimen>
+    <dimen name="ts_default">14sp</dimen>
+    <dimen name="fab_image_size">30dp</dimen>
+    <dimen name="card_elevation">10dp</dimen>
+    <dimen name="card_corner_mid">30dp</dimen>
+    <dimen name="margin_big">20dp</dimen>
+    <dimen name="corner_radius">15dp</dimen>
+>>>>>>> Stashed changes
 </resources>
