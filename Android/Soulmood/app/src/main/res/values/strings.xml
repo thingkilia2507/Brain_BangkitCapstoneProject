@@ -21,5 +21,17 @@
     <string name="group_id">group_id</string>
     <string name="group_name">group_name</string>
     <string name="masuk">Masuk</string>
+<<<<<<< Updated upstream
     <string name="dialy_motivation">Motivasi Harian</string>
+=======
+    <string name="profil">Profil</string>
+    <string name="home">Beranda</string>
+    <string name="iv_profile_btmappbar">iv_profile_btmappbar</string>
+    <string name="iv_home_btmappbar">iv_home_btmappbar</string>
+    <string name="fab_chatbot">fab_chatbot</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="message_input_groupname_empty">Nama Grup tidak boleh kosong.</string>
+    <string name="fab_add_group_name">fab_add_group_name</string>
+>>>>>>> Stashed changes
 </resources>

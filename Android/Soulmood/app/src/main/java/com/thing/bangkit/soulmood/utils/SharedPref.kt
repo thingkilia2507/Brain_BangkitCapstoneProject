@@ -2,49 +2,31 @@ package com.thing.bangkit.soulmood.utils
 
 import android.content.Context
 import android.content.SharedPreferences
-import androidx.fragment.app.FragmentActivity
 import androidx.security.crypto.EncryptedSharedPreferences
 import androidx.security.crypto.MasterKey
 
-class SharedPref {
+object SharedPref {
     private var PREFERENCE_KEY = "mySharedPreference"
-    private var sharedPreferences: SharedPreferences? = null
-    private var editor: SharedPreferences.Editor? = null
-    private var value: String? = null
+    private lateinit var sharedPreferences: SharedPreferences
+    private lateinit var value: String
+
+    fun isNotNull(context: Context, key: String?): Boolean {
+        initSharedPref(context)
+        return sharedPreferences.getString(key, null) != null
+    }
+
     fun setPref(context: Context, key: String, value: String) {
-        sharedPreferences = null
-        val masterKey = MasterKey.Builder(context)
-            .setKeyScheme(MasterKey.KeyScheme.AES256_GCM)
-            .build()
-        sharedPreferences = EncryptedSharedPreferences.create(
-            context,
-            PREFERENCE_KEY,
-            masterKey,
-            EncryptedSharedPreferences.PrefKeyEncryptionScheme.AES256_SIV,
-            EncryptedSharedPreferences.PrefValueEncryptionScheme.AES256_GCM
-        )
-
-        editor = sharedPreferences?.edit()
-        editor?.putString(key, value)
-        editor?.apply()
+        initSharedPref(context)
+        val editor = sharedPreferences.edit()
+        editor.putString(key, value).apply()
     }
 
-    fun checkPref(context: Context, key: String): Boolean {
-        val masterKey = MasterKey.Builder(context)
-            .setKeyScheme(MasterKey.KeyScheme.AES256_GCM)
-            .build()
-        sharedPreferences = EncryptedSharedPreferences.create(
-            context,
-            PREFERENCE_KEY,
-            masterKey,
-            EncryptedSharedPreferences.PrefKeyEncryptionScheme.AES256_SIV,
-            EncryptedSharedPreferences.PrefValueEncryptionScheme.AES256_GCM
-        )
-
-        var data: String? = sharedPreferences?.getString(key, value)
-        return data != null
+    fun getPref(context: Context, key: String): String? {
+        initSharedPref(context)
+        return sharedPreferences.getString(key, value)
     }
 
+<<<<<<< Updated upstream
     fun getPref(context: Context?, key: String): String? {
         sharedPreferences = null
         val masterKey = MasterKey.Builder(context!!)
@@ -57,14 +39,22 @@ class SharedPref {
             EncryptedSharedPreferences.PrefKeyEncryptionScheme.AES256_SIV,
             EncryptedSharedPreferences.PrefValueEncryptionScheme.AES256_GCM
         )
+=======
+    fun clearPref(context: Context) {
+        initSharedPref(context)
+>>>>>>> Stashed changes
 
-        return sharedPreferences?.getString(key, value)
+        val editor = sharedPreferences.edit()
+        editor.clear().apply()
     }
 
-    fun clearPref(context: Context) {
-        val masterKey = MasterKey.Builder(context)
-            .setKeyScheme(MasterKey.KeyScheme.AES256_GCM)
-            .build()
+    fun clearOnePref(context: Context, key: String?) {
+        val editor = sharedPreferences.edit()
+        editor.remove(key).apply()
+    }
+
+    private fun initSharedPref(context: Context) {
+        val masterKey = MasterKey.Builder(context).setKeyScheme(MasterKey.KeyScheme.AES256_GCM).build()
         sharedPreferences = EncryptedSharedPreferences.create(
             context,
             PREFERENCE_KEY,
@@ -72,9 +62,5 @@ class SharedPref {
             EncryptedSharedPreferences.PrefKeyEncryptionScheme.AES256_SIV,
             EncryptedSharedPreferences.PrefValueEncryptionScheme.AES256_GCM
         )
-
-        editor = sharedPreferences?.edit()
-        editor?.putString("username", null)
-        editor?.apply()
     }
 }
