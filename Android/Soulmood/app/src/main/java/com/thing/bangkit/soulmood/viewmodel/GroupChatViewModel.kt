@@ -11,9 +11,9 @@ import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Query
 import com.thing.bangkit.soulmood.R
 import com.thing.bangkit.soulmood.helper.DateHelper
+import com.thing.bangkit.soulmood.helper.SharedPref
 import com.thing.bangkit.soulmood.model.ChatGroup
 import com.thing.bangkit.soulmood.model.Message
-import com.thing.bangkit.soulmood.utils.SharedPref
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -51,7 +51,7 @@ class GroupChatViewModel : ViewModel() {
         viewModelScope.launch(Dispatchers.IO) {
             val database = db.collection("groups_chat").orderBy("created_at", Query.Direction.DESCENDING)
             withContext(Dispatchers.Main) {
-                database.addSnapshotListener { value, error ->
+                database.addSnapshotListener { value, _ ->
                     if (value != null) {
                         var group = ArrayList<ChatGroup>()
                         for (data in value.documents) {
@@ -99,7 +99,7 @@ class GroupChatViewModel : ViewModel() {
             val database =db.collection("groups_chat").document(group_id).collection("message")
                 .orderBy("created_at", Query.Direction.ASCENDING)
             withContext(Dispatchers.Main){
-                database.addSnapshotListener { value, error ->
+                database.addSnapshotListener { value, _ ->
                     if (value != null) {
                         var chatData = ArrayList<Message>()
                         for (data in value.documents) {

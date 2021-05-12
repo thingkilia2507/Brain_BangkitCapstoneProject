@@ -5,7 +5,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:layout_marginEnd="@dimen/margin_mini">
+    android:layout_marginEnd="@dimen/small_margin">
 
     <ImageView
         android:id="@+id/iv_group_name"
@@ -13,7 +13,7 @@
         android:layout_height="55dp"
         android:elevation="3dp"/>
     <TextView
-        android:layout_marginTop="@dimen/margin_mini"
+        android:layout_marginTop="@dimen/small_margin"
         android:id="@+id/tv_group_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

@@ -8,8 +8,8 @@ import android.media.RingtoneManager
 import android.os.Build
 import androidx.core.app.NotificationCompat
 import androidx.core.content.ContextCompat
-import com.thing.bangkit.soulmood.MainActivity
 import com.thing.bangkit.soulmood.R
+import com.thing.bangkit.soulmood.activity.MainActivity
 import java.util.*
 
 class AlarmReceiver : BroadcastReceiver() {

@@ -1,11 +1,10 @@
-package com.thing.bangkit.soulmood
+package com.thing.bangkit.soulmood.activity
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.LinearLayout
-import android.widget.Toast
 import androidx.activity.viewModels
+import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.thing.bangkit.soulmood.R
 import com.thing.bangkit.soulmood.adapter.GroupChatViewAdapter
 import com.thing.bangkit.soulmood.databinding.ActivityChatGroupBinding
 import com.thing.bangkit.soulmood.viewmodel.GroupChatViewModel

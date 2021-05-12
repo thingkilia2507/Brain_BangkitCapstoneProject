@@ -1,4 +1,4 @@
-package com.thing.bangkit.soulmood
+package com.thing.bangkit.soulmood.fragment
 
 import android.app.Dialog
 import android.content.Intent
@@ -10,6 +10,8 @@ import android.view.Window
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.thing.bangkit.soulmood.R
+import com.thing.bangkit.soulmood.activity.ChatGroupActivity
 import com.thing.bangkit.soulmood.adapter.GroupNameViewAdapter
 import com.thing.bangkit.soulmood.databinding.AddNewGroupDialogBinding
 import com.thing.bangkit.soulmood.databinding.FragmentHomeBinding

@@ -8,14 +8,10 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.firestore.auth.User
-import com.thing.bangkit.soulmood.helper.DateHelper
 import com.thing.bangkit.soulmood.model.UserData
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import java.util.*
-import kotlin.collections.HashMap
 
 class LoginViewModel : ViewModel() {
     private var auth = FirebaseAuth.getInstance()
@@ -30,7 +26,7 @@ class LoginViewModel : ViewModel() {
             withContext(Dispatchers.Main){
                 firebaseAuth.addOnSuccessListener {
                     db.collection("users").whereEqualTo("email",email)
-                        .addSnapshotListener { value, error ->
+                        .addSnapshotListener { value, _ ->
                             val data = value?.documents
                             if(data != null){
                                 for (data1 in data) {

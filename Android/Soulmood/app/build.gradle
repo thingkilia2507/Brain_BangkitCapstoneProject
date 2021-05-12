@@ -76,5 +76,7 @@ dependencies {
     //Encrypt SharedPref data
     implementation 'androidx.security:security-crypto:1.1.0-alpha03'
 
+    //work manager
+    implementation 'androidx.work:work-runtime:2.5.0'
 
 }
