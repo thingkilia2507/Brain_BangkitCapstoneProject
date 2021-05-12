@@ -12,10 +12,9 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.thing.bangkit.soulmood.adapter.GroupNameViewAdapter
 import com.thing.bangkit.soulmood.alarmreceiver.AlarmReceiver
-import com.thing.bangkit.soulmood.apiservice.ApiService
 import com.thing.bangkit.soulmood.databinding.ActivityAcitivtyUntukCobaCobaBinding
 import com.thing.bangkit.soulmood.model.ChatGroup
-import com.thing.bangkit.soulmood.utils.RetrofitData
+import com.thing.bangkit.soulmood.utils.ApiConfig
 import com.thing.bangkit.soulmood.viewmodel.GroupChatViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -81,8 +80,8 @@ class AcitivtyUntukCobaCoba : AppCompatActivity() {
 
 
 
-    fun getQuoteOfTheDay() {
-        val service = RetrofitData().getRetrofit().create(ApiService::class.java)
+    private fun getQuoteOfTheDay() {
+        val service = ApiConfig.getRetrofit()
         CoroutineScope(Dispatchers.IO).launch {
             try{
                 val response = service.getDialyQuote(1)

@@ -7,17 +7,17 @@ import androidx.recyclerview.widget.RecyclerView
 import com.amulyakhare.textdrawable.TextDrawable
 import com.amulyakhare.textdrawable.util.ColorGenerator
 import com.google.firebase.auth.FirebaseAuth
+import com.thing.bangkit.soulmood.R
 import com.thing.bangkit.soulmood.databinding.ItemChatBinding
 import com.thing.bangkit.soulmood.databinding.ItemGroupNameBinding
 import com.thing.bangkit.soulmood.model.ChatGroup
 import com.thing.bangkit.soulmood.model.Message
+import com.thing.bangkit.soulmood.utils.SharedPref
 
 class GroupChatViewAdapter : RecyclerView.Adapter<GroupChatViewAdapter.ViewHolder>() {
     private val data = ArrayList<Message>()
 
-    class ViewHolder(val binding: ItemChatBinding) : RecyclerView.ViewHolder(binding.root) {
-
-    }
+    class ViewHolder(val binding: ItemChatBinding) : RecyclerView.ViewHolder(binding.root)
 
     override fun onCreateViewHolder(
         parent: ViewGroup,
@@ -32,7 +32,7 @@ class GroupChatViewAdapter : RecyclerView.Adapter<GroupChatViewAdapter.ViewHolde
         )
     }
 
-    override fun onBindViewHolder(holder: GroupChatViewAdapter.ViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.binding.apply {
             val colorGenerator = ColorGenerator.MATERIAL
 //            val textDrawable = TextDrawable.builder().beginConfig().width(50)
@@ -43,7 +43,8 @@ class GroupChatViewAdapter : RecyclerView.Adapter<GroupChatViewAdapter.ViewHolde
 //                )
 //            ivGroupName.setImageDrawable(textDrawable)
             //jika pesan dari pengirim
-            if(data[position].email == FirebaseAuth.getInstance().currentUser.email){
+            if(data[position].email == SharedPref.getPref(holder.itemView.context,holder.itemView.context.getString(
+                    R.string.email))){
                 llReceiver.visibility = View.GONE
                 llSender.visibility = View.VISIBLE
                 tvSenderName.text = data[position].sender

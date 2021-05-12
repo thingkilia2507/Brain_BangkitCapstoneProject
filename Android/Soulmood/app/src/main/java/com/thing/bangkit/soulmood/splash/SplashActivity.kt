@@ -1,22 +1,12 @@
 package com.thing.bangkit.soulmood.splash
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
-import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
-import com.thing.bangkit.soulmood.AcitivtyUntukCobaCoba
-import com.thing.bangkit.soulmood.MainActivity
-import com.thing.bangkit.soulmood.R
-import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import androidx.appcompat.app.AppCompatActivity
 import com.thing.bangkit.soulmood.MainActivity
 import com.thing.bangkit.soulmood.R
-import com.thing.bangkit.soulmood.utils.SharedPref
-import com.thing.bangkit.soulmood.databinding.ActivityAcitivtyUntukCobaCobaBinding
 import com.thing.bangkit.soulmood.utils.SharedPref
 
 class SplashActivity : AppCompatActivity() {

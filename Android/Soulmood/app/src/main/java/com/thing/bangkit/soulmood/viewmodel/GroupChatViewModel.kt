@@ -9,7 +9,6 @@ import androidx.lifecycle.viewModelScope
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Query
-import com.google.firebase.firestore.SetOptions
 import com.thing.bangkit.soulmood.R
 import com.thing.bangkit.soulmood.helper.DateHelper
 import com.thing.bangkit.soulmood.model.ChatGroup
@@ -34,7 +33,7 @@ class GroupChatViewModel : ViewModel() {
         map["id"] = id
         map["group_name"] = groupName
         map["created_at"] = DateHelper.getCurrentDate()
-        map["created_by"] = auth.currentUser.email
+        map["created_by"] = auth.currentUser?.email.toString()
         viewModelScope.launch(Dispatchers.IO) {
             val database = db.collection("groups_chat").document(id).set(map)
             withContext(Dispatchers.Main) {
@@ -80,7 +79,7 @@ class GroupChatViewModel : ViewModel() {
         viewModelScope.launch(Dispatchers.IO) {
             val database = db.collection("groups_chat").document(group_id).collection("message").add(
                 Message(id,
-                    SharedPref().getPref(context,context.getString(R.string.name)).toString(), SharedPref().getPref(context,context.getString(R.string.email)), message, message, DateHelper.getCurrentDate(), "")
+                    SharedPref.getPref(context,context.getString(R.string.name)).toString(), SharedPref.getPref(context,context.getString(R.string.email)), message, message, DateHelper.getCurrentDate(), "")
             )
             withContext(Dispatchers.Main){
                 database.addOnSuccessListener {

@@ -26,24 +26,8 @@ object SharedPref {
         return sharedPreferences.getString(key, value)
     }
 
-<<<<<<< Updated upstream
-    fun getPref(context: Context?, key: String): String? {
-        sharedPreferences = null
-        val masterKey = MasterKey.Builder(context!!)
-            .setKeyScheme(MasterKey.KeyScheme.AES256_GCM)
-            .build()
-        sharedPreferences = EncryptedSharedPreferences.create(
-            context,
-            PREFERENCE_KEY,
-            masterKey,
-            EncryptedSharedPreferences.PrefKeyEncryptionScheme.AES256_SIV,
-            EncryptedSharedPreferences.PrefValueEncryptionScheme.AES256_GCM
-        )
-=======
     fun clearPref(context: Context) {
         initSharedPref(context)
->>>>>>> Stashed changes
-
         val editor = sharedPreferences.edit()
         editor.clear().apply()
     }
@@ -53,7 +37,7 @@ object SharedPref {
         editor.remove(key).apply()
     }
 
-    private fun initSharedPref(context: Context) {
+     fun initSharedPref(context: Context) {
         val masterKey = MasterKey.Builder(context).setKeyScheme(MasterKey.KeyScheme.AES256_GCM).build()
         sharedPreferences = EncryptedSharedPreferences.create(
             context,

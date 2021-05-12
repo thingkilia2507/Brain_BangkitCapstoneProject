@@ -35,7 +35,7 @@ class RegisterViewModel : ViewModel() {
                     val map = HashMap<String, String>()
                     map["id"] = id
                     map["name"] = name
-                    map["email"] = auth.currentUser.email
+                    map["email"] = auth.currentUser?.email.toString()
                     map["gender"] = gender
                     map["created_at"] = DateHelper.getCurrentDate()
                     db.collection("users").document(id).set(
