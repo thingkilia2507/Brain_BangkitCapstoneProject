@@ -79,4 +79,7 @@
     <string name="forgot_password">Lupa Kata Sandi ?</string>
     <string name="register">Daftar</string>
     <string name="not_having_account">Belum punya akun?</string>
+    <string name="account_validation">Validasi Akun</string>
+    <string name="send">kirim</string>
+    <string name="invalid_password_message">Kata sandi yang diberikan tidak valid. [Kata sandi harus terdiri dari setidaknya 6 karakter]</string>
 </resources>

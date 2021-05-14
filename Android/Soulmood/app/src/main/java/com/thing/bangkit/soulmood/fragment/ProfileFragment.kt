@@ -4,6 +4,8 @@ import android.app.Dialog
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.LayoutInflater
@@ -14,7 +16,6 @@ import android.widget.Button
 import android.widget.EditText
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.lifecycleScope
 import cn.pedant.SweetAlert.SweetAlertDialog
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
@@ -26,9 +27,6 @@ import com.thing.bangkit.soulmood.helper.MyAsset
 import com.thing.bangkit.soulmood.helper.SharedPref
 import com.thing.bangkit.soulmood.viewmodel.ChangePasswordViewModel
 import com.thing.bangkit.soulmood.viewmodel.ProfileViewModel
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
 
 class ProfileFragment : Fragment(), IProgressResult {
     private lateinit var binding: FragmentProfileBinding
@@ -44,17 +42,22 @@ class ProfileFragment : Fragment(), IProgressResult {
         return binding.root
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
+    override fun onResume() {
+        super.onResume()
         binding.apply {
-
             context?.let {
                 tvNameProfile.text = SharedPref.getPref(it, MyAsset.KEY_NAME)
                 tvEmailProfile.text = SharedPref.getPref(it, MyAsset.KEY_EMAIL)
             }
+        }
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        binding.apply {
             llChangeIdentity.setOnClickListener { _ ->
-                context?.let {
-                    val dialog = Dialog(it)
+                context?.let {itContext->
+                    val dialog = Dialog(itContext)
                     dialog.window?.setBackgroundDrawableResource(android.R.color.transparent)
                     dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
                     dialog.setContentView(R.layout.edit_info_profile_dialog)
@@ -63,24 +66,42 @@ class ProfileFragment : Fragment(), IProgressResult {
 
                     val btnSaveEditProfile: Button = dialog.findViewById(R.id.btn_save_edit_profile)
                     val etNameProfile: TextInputEditText = dialog.findViewById(R.id.et_name_profile)
-                    val etEmailProfile: TextInputEditText = dialog.findViewById(R.id.et_email_profile)
+                    val etEmailProfile: TextInputEditText =
+                        dialog.findViewById(R.id.et_email_profile)
 
-                    etNameProfile.text = Editable.Factory.getInstance().newEditable(tvNameProfile.text.toString())
-                    etEmailProfile.text = Editable.Factory.getInstance().newEditable(tvEmailProfile.text.toString())
+                    etNameProfile.text =
+                        Editable.Factory.getInstance().newEditable(tvNameProfile.text.toString())
+                    etEmailProfile.text =
+                        Editable.Factory.getInstance().newEditable(tvEmailProfile.text.toString())
 
                     btnSaveEditProfile.setOnClickListener { _: View? ->
                         emptyCheckedProfile(etEmailProfile, etNameProfile)
 
-                        if (etNameProfile.text.toString()
-                                .isNotEmpty() && etEmailProfile.text.toString().isNotEmpty()
-                        ) {
-                            onProgress()
-                            profileViewModel.onChangeProfileInformation(
-                                it,
-                                etNameProfile.text.toString(),
-                                etEmailProfile.text.toString(),
-                                this@ProfileFragment
-                            )
+                        if (etNameProfile.text.toString().isNotEmpty() && etEmailProfile.text.toString().isNotEmpty()) {
+                            val name = etNameProfile.text.toString()
+                            val email = etEmailProfile.text.toString()
+
+                            dialog.setContentView(R.layout.validation_with_password_dialog)
+
+                            val (btnSubmit, tfPassword, etPassword) = initTripleValidation(dialog)
+
+                            btnSubmit.setOnClickListener {
+                                if (etPassword.text.toString().isEmpty()) {
+                                    tfPassword.endIconMode = TextInputLayout.END_ICON_NONE
+                                    etPassword.error = getString(R.string.input_old_password)
+                                }else{
+                                    dialog.dismiss()
+                                    onProgress()
+                                    profileViewModel.onChangeProfileInformation(
+                                        itContext,
+                                        name,
+                                        email,
+                                        etPassword.text.toString(),
+                                        this@ProfileFragment
+                                    )
+                                }
+                            }
+
                         }
 
                     }
@@ -97,20 +118,24 @@ class ProfileFragment : Fragment(), IProgressResult {
                     dialog.setCancelable(true)
                     dialog.show()
 
-                    val btnChangePassword : Button = dialog.findViewById(R.id.btn_change_password)
-                    val etOldPassword : TextInputEditText = dialog.findViewById(R.id.etOld_password)
-                    val tfOldPassword : TextInputLayout = dialog.findViewById(R.id.tfOldPassword)
-                    val etNewPassword : TextInputEditText = dialog.findViewById(R.id.etNew_password)
-                    val tfNewPassword : TextInputLayout = dialog.findViewById(R.id.tfNewPassword)
-                    val etConfirmNewPassword : TextInputEditText = dialog.findViewById(R.id.etConfirmNew_password)
-                    val tfConfirmNewPassword : TextInputLayout = dialog.findViewById(R.id.tfConfirmNewPassword)
+                    val btnChangePassword: Button = dialog.findViewById(R.id.btn_change_password)
+                    val etOldPassword: TextInputEditText = dialog.findViewById(R.id.etOld_password)
+                    val tfOldPassword: TextInputLayout = dialog.findViewById(R.id.tfOldPassword)
+                    val etNewPassword: TextInputEditText = dialog.findViewById(R.id.etNew_password)
+                    val tfNewPassword: TextInputLayout = dialog.findViewById(R.id.tfNewPassword)
+                    val etConfirmNewPassword: TextInputEditText =
+                        dialog.findViewById(R.id.etConfirmNew_password)
+                    val tfConfirmNewPassword: TextInputLayout =
+                        dialog.findViewById(R.id.tfConfirmNewPassword)
 
-                    initDialogView(etOldPassword,
+                    initDialogView(
+                        etOldPassword,
                         tfOldPassword,
                         etNewPassword,
                         tfNewPassword,
                         etConfirmNewPassword,
-                        tfConfirmNewPassword)
+                        tfConfirmNewPassword
+                    )
 
                     btnChangePassword.setOnClickListener { _: View? ->
                         emptyCheckedChangePassword(
@@ -122,14 +147,11 @@ class ProfileFragment : Fragment(), IProgressResult {
                             tfConfirmNewPassword
                         )
 
-                        if (etOldPassword.text.toString()
-                                .isNotEmpty() && etNewPassword.text.toString()
-                                .isNotEmpty() && etConfirmNewPassword.text.toString()
-                                .isNotEmpty()
-                        ) {
+                        if (etOldPassword.text.toString().isNotEmpty() && etNewPassword.text.toString().isNotEmpty() && etConfirmNewPassword.text.toString().isNotEmpty()) {
                             if (etNewPassword.text.toString() != etConfirmNewPassword.text.toString()) {
                                 this@ProfileFragment.onFailure(getString(R.string.sorry_confirm_password_wrong))
                             } else {
+                                dialog.dismiss()
                                 onProgress()
                                 changePassViewModel.onChangePassword(
                                     it,
@@ -145,14 +167,44 @@ class ProfileFragment : Fragment(), IProgressResult {
                 }
             }
 
-            llLogOut.setOnClickListener { context?.let { logoutAlert(it) }}
+            llLogOut.setOnClickListener { context?.let { logoutAlert(it) } }
 
         }
 
 
     }
 
-    private fun logoutAlert(mContext : Context) {
+    private fun initTripleValidation(dialog: Dialog): Triple<Button, TextInputLayout, TextInputEditText> {
+        val btnSubmit = dialog.findViewById<Button>(R.id.btn_submit_validation)
+        val tfPassword = dialog.findViewById<TextInputLayout>(R.id.tf_password_validation)
+        val etPassword = dialog.findViewById<TextInputEditText>(R.id.et_password_validation)
+        etPassword.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(
+                s: CharSequence,
+                start: Int,
+                count: Int,
+                after: Int
+            ) {
+            }
+
+            override fun onTextChanged(
+                s: CharSequence,
+                start: Int,
+                before: Int,
+                count: Int
+            ) {
+            }
+
+            override fun afterTextChanged(s: Editable) {
+                if (tfPassword.endIconMode == TextInputLayout.END_ICON_NONE) tfPassword.endIconMode =
+                    TextInputLayout.END_ICON_PASSWORD_TOGGLE
+            }
+        })
+        return Triple(btnSubmit, tfPassword, etPassword)
+    }
+
+
+    private fun logoutAlert(mContext: Context) {
         val dialog = MyAsset.makeSweetAlertDialog(
             mContext,
             mContext.getString(R.string.log_out),
@@ -214,7 +266,8 @@ class ProfileFragment : Fragment(), IProgressResult {
         etNewPassword: TextInputEditText,
         tfNewPassword: TextInputLayout,
         etConfirmNewPassword: TextInputEditText,
-        tfConfirmNewPassword: TextInputLayout) {
+        tfConfirmNewPassword: TextInputLayout
+    ) {
         etOldPassword.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(
                 s: CharSequence,
@@ -303,20 +356,22 @@ class ProfileFragment : Fragment(), IProgressResult {
     }
 
     override fun onSuccess(message: String) {
-        lifecycleScope.launch(Dispatchers.Default) {
-            sweetAlertDialog.setTitleText(getString(R.string.success)).setContentText(message)
-                .hideConfirmButton()
-                .changeAlertType(SweetAlertDialog.SUCCESS_TYPE)
-            delay(2000)
+        sweetAlertDialog.setTitleText(getString(R.string.success)).setContentText(message)
+            .hideConfirmButton()
+            .changeAlertType(SweetAlertDialog.SUCCESS_TYPE)
+        Handler(Looper.getMainLooper()).postDelayed({
             sweetAlertDialog.dismiss()
-        }
+        }, 2000)
+
     }
 
     override fun onFailure(message: String) {
-        lifecycleScope.launch(Dispatchers.Default) {
-            sweetAlertDialog.setTitleText(getString(R.string.error))
-                .setContentText(message)
-                .changeAlertType(SweetAlertDialog.ERROR_TYPE)
-        }
+        sweetAlertDialog.setTitleText(getString(R.string.error))
+            .setContentText(message)
+            .hideConfirmButton()
+            .changeAlertType(SweetAlertDialog.ERROR_TYPE)
+        Handler(Looper.getMainLooper()).postDelayed({
+            sweetAlertDialog.dismiss()
+        }, 2000)
     }
 }

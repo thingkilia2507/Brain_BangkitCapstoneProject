@@ -2,6 +2,7 @@ package com.thing.bangkit.soulmood.helper
 
 import android.content.Context
 import cn.pedant.SweetAlert.SweetAlertDialog
+import com.thing.bangkit.soulmood.R
 
 object MyAsset {
 
@@ -15,6 +16,7 @@ object MyAsset {
         cancelableLoading: Boolean
     ): SweetAlertDialog {
         val pDialog = SweetAlertDialog(context, SweetAlertDialog.PROGRESS_TYPE)
+        pDialog.progressHelper.barColor = R.color.soulmood_primary_color
         pDialog.titleText = titleLoading
         pDialog.setCancelable(cancelableLoading) //usually false
         return pDialog

@@ -8,6 +8,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
+import com.thing.bangkit.soulmood.R
 import com.thing.bangkit.soulmood.helper.DateHelper
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -18,7 +19,7 @@ import kotlin.collections.HashMap
 class RegisterViewModel : ViewModel() {
     private var auth = FirebaseAuth.getInstance()
     private val db = FirebaseFirestore.getInstance()
-    private  var status =MutableLiveData<Boolean>()
+    private var status = MutableLiveData<Boolean>()
 
     fun setData(
         name: String,
@@ -44,7 +45,17 @@ class RegisterViewModel : ViewModel() {
                     status.postValue(true)
                 }.addOnFailureListener {
                     status.postValue(false)
-                    Toast.makeText(context, it.message, Toast.LENGTH_SHORT).show()
+                    it.message?.let { message->
+                        if (message.equals("The given password is invalid. [ Password should be at least 6 characters ]",true)) {
+                            Toast.makeText(
+                                context,
+                                context.getString(R.string.invalid_password_message),
+                                Toast.LENGTH_SHORT
+                            ).show()
+                        } else {
+                            Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
+                        }
+                    }
                 }
             }
         }

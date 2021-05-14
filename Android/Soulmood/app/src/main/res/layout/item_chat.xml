@@ -1,17 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@color/soulmood_primary_color"
     android:layout_marginBottom="10dp"
-    >
+    android:orientation="horizontal"
+    android:weightSum="1"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <LinearLayout
         android:id="@+id/ll_sender"
-        android:visibility="gone"
-        android:layout_alignParentRight="true"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_weight="0.5"
         android:background="@drawable/sender"
         android:orientation="vertical"
         android:padding="5dp">
@@ -20,7 +21,7 @@
             android:id="@+id/tv_sender_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="You"
+            tools:text="You"
             android:textAlignment="textEnd"
             android:textColor="#FD8415" />
 
@@ -30,7 +31,8 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="3dp"
             android:fontFamily="@font/roboto"
-            android:text="sdlkfjsdkfjmsdnfmsdnfsdfklsdfnsdnkf dslfnsdlnkfn dsfksdfkdslkfljdsfkjdskfsdkfjsdklfjsdfsdkfdjklsdjfdjklsdjfsd"
+            android:gravity="end"
+            tools:text="@tools:sample/lorem"
             android:textColor="@color/black" />
 
         <TextView
@@ -38,15 +40,16 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="2dp"
-            android:text="30-01-2021"
-            android:textSize="10sp" />
+            tools:text="30-01-2021"
+            android:textSize="@dimen/ts_standard" />
 
     </LinearLayout>
 
     <LinearLayout
         android:id="@+id/ll_receiver"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_weight="0.5"
         android:background="@drawable/receiver"
         android:orientation="vertical"
         android:padding="5dp">
@@ -55,7 +58,7 @@
             android:id="@+id/tv_receiver_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Philip"
+            tools:text="Philip"
             android:textColor="#610430" />
 
         <TextView
@@ -64,7 +67,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="3dp"
             android:fontFamily="@font/roboto"
-            android:text="sdlkfjsdkfjmsdnfmsdnfsdfklsdfnsdnkf dslfnsdlnkfn dsfksdfkdslkfljdsfkjdskfsdkfjsdklfjsdfsdkfdjklsdjfdjklsdjfsd"
+            tools:text="@tools:sample/lorem"
             android:textColor="@color/black" />
 
         <TextView
@@ -72,9 +75,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="2dp"
-            android:text="30-01-2021"
+            tools:text="30-01-2021"
             android:textAlignment="textEnd"
-            android:textSize="10sp" />
+            android:textSize="@dimen/ts_standard" />
 
     </LinearLayout>
-</RelativeLayout>
+</LinearLayout>
