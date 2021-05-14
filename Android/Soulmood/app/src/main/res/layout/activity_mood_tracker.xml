@@ -1,0 +1,287 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activity.MoodTrackerActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="@dimen/margin_big">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/tv_mood_date"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:textSize="18sp"
+            android:fontFamily="@font/poppins_semibold"
+            android:text="Mei 2021"/>
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/floating_filter_by_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/soulmood_primary_color"
+            android:elevation="@dimen/dp_16"
+            android:src="@drawable/ic_baseline_filter_list_24"
+            app:elevation="@dimen/small_margin"
+            app:maxImageSize="@dimen/fab_image_size"
+            app:pressedTranslationZ="@dimen/dp_10"
+            app:rippleColor="@color/white"
+            app:tint="@color/white" />
+    </LinearLayout>
+    <com.github.mikephil.charting.charts.LineChart
+        android:id="@+id/lineChart"
+        android:layout_width="fill_parent"
+        android:layout_height="300dp" />
+
+    <androidx.cardview.widget.CardView
+        android:layout_marginTop="@dimen/margin_def"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="20dp"
+        android:backgroundTint="#E1EFF5">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="@dimen/padding_def">
+            <androidx.cardview.widget.CardView
+                app:cardCornerRadius="@dimen/margin_def"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/margin_def"
+               >
+                <LinearLayout
+                    android:padding="@dimen/padding_def"
+                    android:background="#6193D6"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:id="@+id/iv_joy"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:src="@drawable/joy"
+                        android:layout_marginEnd="@dimen/margin_def"
+                        />
+                    <TextView
+                        android:layout_weight="1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/white"
+                        android:fontFamily="@font/poppins_semibold"
+                        android:text="Senang"/>
+                    <TextView
+                        android:id="@+id/tv_joy_score"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="end"
+                        android:fontFamily="@font/poppins_semibold"
+                        android:textColor="@color/white"
+                        android:text="1"/>
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+            <androidx.cardview.widget.CardView
+                app:cardCornerRadius="@dimen/margin_def"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/margin_def"
+               >
+                <LinearLayout
+                    android:padding="@dimen/padding_def"
+                    android:background="#1372BB"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:id="@+id/iv_love"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_marginEnd="@dimen/margin_def"
+                        android:src="@drawable/love" />
+
+                    <TextView
+                        android:id="@+id/tv_love"
+                        android:layout_weight="1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/white"
+                        android:fontFamily="@font/poppins_semibold"
+                        android:text="Asmara"/>
+                    <TextView
+                        android:id="@+id/tv_love_score"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="end"
+                        android:fontFamily="@font/poppins_semibold"
+                        android:textColor="@color/white"
+                        android:text="1"/>
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+            <androidx.cardview.widget.CardView
+                app:cardCornerRadius="@dimen/margin_def"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/margin_def"
+               >
+                <LinearLayout
+                    android:padding="@dimen/padding_def"
+                    android:background="#7513BB"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:id="@+id/iv_good"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_marginEnd="@dimen/margin_def"
+                        android:src="@drawable/good" />
+
+                    <TextView
+                        android:id="@+id/tv_good"
+                        android:layout_weight="1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/white"
+                        android:fontFamily="@font/poppins_semibold"
+                        android:text="Baik"/>
+                    <TextView
+                        android:id="@+id/tv_good_score"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="end"
+                        android:fontFamily="@font/poppins_semibold"
+                        android:textColor="@color/white"
+                        android:text="1"/>
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+            <androidx.cardview.widget.CardView
+                app:cardCornerRadius="@dimen/margin_def"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/margin_def"
+               >
+                <LinearLayout
+                    android:padding="@dimen/padding_def"
+                    android:background="#A52DE4"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:id="@+id/iv_sad"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_marginEnd="@dimen/margin_def"
+                        android:src="@drawable/sad" />
+
+                    <TextView
+                        android:layout_weight="1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/white"
+                        android:fontFamily="@font/poppins_semibold"
+                        android:text="Sedih"/>
+                    <TextView
+                        android:id="@+id/tv_sad_score"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="end"
+                        android:fontFamily="@font/poppins_semibold"
+                        android:textColor="@color/white"
+                        android:text="1"/>
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+            <androidx.cardview.widget.CardView
+                app:cardCornerRadius="@dimen/margin_def"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/margin_def">
+
+
+
+                <LinearLayout
+                    android:padding="@dimen/padding_def"
+                    android:background="#7C075B"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                    <ImageView
+                        android:id="@+id/iv_fear"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_marginEnd="@dimen/margin_def"
+                        android:src="@drawable/fear" />
+                    <TextView
+                        android:layout_weight="1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/white"
+                        android:fontFamily="@font/poppins_semibold"
+                        android:text="Takut"/>
+                    <TextView
+                        android:id="@+id/tv_fear_score"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="end"
+                        android:fontFamily="@font/poppins_semibold"
+                        android:textColor="@color/white"
+                        android:text="1"/>
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+            <androidx.cardview.widget.CardView
+                app:cardCornerRadius="@dimen/margin_def"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/margin_def"
+               >
+
+                <LinearLayout
+                    android:padding="@dimen/padding_def"
+                    android:background="#C3091F"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                    <ImageView
+                        android:id="@+id/iv_angry"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_marginEnd="@dimen/margin_def"
+                        android:src="@drawable/angry" />
+                    <TextView
+                        android:layout_weight="1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/white"
+                        android:fontFamily="@font/poppins_semibold"
+                        android:text="Marah"/>
+                    <TextView
+                        android:id="@+id/tv_angry_score"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="end"
+                        android:fontFamily="@font/poppins_semibold"
+                        android:textColor="@color/white"
+                        android:text="1"/>
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+    </LinearLayout>
+
+</ScrollView>

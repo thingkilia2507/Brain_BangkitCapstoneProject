@@ -13,11 +13,11 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.thing.bangkit.soulmood.activity.ChatGroupActivity
 import com.thing.bangkit.soulmood.adapter.GroupNameViewAdapter
 import com.thing.bangkit.soulmood.alarmreceiver.AlarmReceiver
-import com.thing.bangkit.soulmood.apiservice.ApiService
 import com.thing.bangkit.soulmood.databinding.ActivityAcitivtyUntukCobaCobaBinding
 import com.thing.bangkit.soulmood.model.ChatGroup
 import com.thing.bangkit.soulmood.utils.ApiConfig
 import com.thing.bangkit.soulmood.viewmodel.GroupChatViewModel
+import com.thing.bangkit.soulmood.viewmodel.MoodTrackerViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -25,6 +25,7 @@ import kotlinx.coroutines.withContext
 
 class AcitivtyUntukCobaCoba : AppCompatActivity() {
     private val groupChatViewModel:GroupChatViewModel by viewModels()
+    private val moodTrackerViewModel: MoodTrackerViewModel by viewModels()
     private lateinit var binding:ActivityAcitivtyUntukCobaCobaBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -35,7 +36,7 @@ class AcitivtyUntukCobaCoba : AppCompatActivity() {
         getQuoteOfTheDay()
 
         binding.apply {
-            val adapter = GroupNameViewAdapter()
+            val adapter = GroupNameViewAdapter("homeFragment")
             rvGroupName.layoutManager = LinearLayoutManager(this@AcitivtyUntukCobaCoba,
                 LinearLayoutManager.HORIZONTAL,false)
             rvGroupName.adapter = adapter
@@ -78,6 +79,7 @@ class AcitivtyUntukCobaCoba : AppCompatActivity() {
                 }
             })
         }
+        moodTrackerViewModel.insertMoodData(this)
     }
 
 

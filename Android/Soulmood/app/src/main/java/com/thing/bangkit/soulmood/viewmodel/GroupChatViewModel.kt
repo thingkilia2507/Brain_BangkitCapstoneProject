@@ -77,7 +77,8 @@ class GroupChatViewModel : ViewModel() {
     fun insertNewChat(group_id: String, message: String, context: Context) {
         val id = UUID.randomUUID().toString()
         viewModelScope.launch(Dispatchers.IO) {
-            val database = db.collection("groups_chat").document(group_id).collection("message").add(
+            val database = db.collection("groups_chat")
+                .document(group_id).collection("message").add(
                 Message(id,
                     SharedPref.getPref(context,MyAsset.KEY_NAME).toString(), SharedPref.getPref(context,MyAsset.KEY_EMAIL), message, message, DateHelper.getCurrentDate(), "")
             )

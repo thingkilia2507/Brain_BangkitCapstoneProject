@@ -18,6 +18,8 @@ import androidx.viewpager2.widget.MarginPageTransformer
 import androidx.viewpager2.widget.ViewPager2
 import com.thing.bangkit.soulmood.R
 import com.thing.bangkit.soulmood.activity.ChatGroupActivity
+import com.thing.bangkit.soulmood.activity.GroupNameActivity
+import com.thing.bangkit.soulmood.activity.MoodTrackerActivity
 import com.thing.bangkit.soulmood.adapter.GroupNameViewAdapter
 import com.thing.bangkit.soulmood.adapter.SliderCSFAdapter
 import com.thing.bangkit.soulmood.databinding.AddNewGroupDialogBinding
@@ -30,6 +32,7 @@ import java.lang.Math.abs
 class HomeFragment : Fragment() {
 
     private lateinit var sliderRunnable: Runnable
+   
     private val groupChatViewModel: GroupChatViewModel by viewModels()
     private lateinit var binding: FragmentHomeBinding
     private var bindingDialog: AddNewGroupDialogBinding? = null
@@ -49,13 +52,12 @@ class HomeFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         binding.apply {
-            val adapter = GroupNameViewAdapter()
+            val adapter = GroupNameViewAdapter("homeFragment")
             rvGroupName.layoutManager = LinearLayoutManager(
                 context,
                 LinearLayoutManager.HORIZONTAL, false
             )
             rvGroupName.adapter = adapter
-
             adapter.setOnItemClickCallback(object : GroupNameViewAdapter.OnItemClickCallback {
                 override fun onItemClick(data: ChatGroup) {
                     startActivity(Intent(context, ChatGroupActivity::class.java).apply {
@@ -85,10 +87,11 @@ class HomeFragment : Fragment() {
                             }
                         }
                     }
-
                 }
             }
 
+            floatingSeeAll.setOnClickListener { startActivity(Intent(requireActivity(),GroupNameActivity::class.java)) }
+            constraintDashboard.setOnClickListener { startActivity(Intent(requireActivity(),MoodTrackerActivity::class.java)) }
             groupChatViewModel.setGroupName()
             groupChatViewModel.getGroupName().observe(viewLifecycleOwner, {
                 if (it != null) {

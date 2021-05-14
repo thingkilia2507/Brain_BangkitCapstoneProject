@@ -26,6 +26,7 @@
             android:name="com.thing.bangkit.soulmood.activity.splash.SplashActivity1"
             android:theme="@style/Theme.Soulmood.NoActionBar" />
 
+
         <activity android:name="com.thing.bangkit.soulmood.activity.splash.SplashActivity"
             android:theme="@style/Theme.Soulmood.NoActionBar">
             <intent-filter>
@@ -35,6 +36,7 @@
         </activity>
         <activity android:name=".activity.MainActivity"
             android:theme="@style/Theme.Soulmood.NoActionBar"/>
+
         <receiver
             android:name=".alarmreceiver.AlarmReceiver"
             android:enabled="true"
@@ -42,6 +44,12 @@
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
+        <activity
+            android:name="com.thing.bangkit.soulmood.activity.GroupNameActivity"
+            />
+        <activity
+            android:name="com.thing.bangkit.soulmood.activity.MoodTrackerActivity"
+            />
     </application>
 
 </manifest>

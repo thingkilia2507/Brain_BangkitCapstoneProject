@@ -1,11 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    android:id="@+id/ll_group_name"
-    android:orientation="vertical"
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:layout_marginEnd="@dimen/small_margin">
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+<LinearLayout
+    android:visibility="gone"
+    android:id="@+id/ll_group_name"
+    android:orientation="vertical"
+    android:layout_marginEnd="@dimen/small_margin"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
 
     <ImageView
         android:id="@+id/iv_group_name"
@@ -24,3 +28,26 @@
         android:maxWidth="55dp"
         android:text="groupname"/>
 </LinearLayout>
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/cv_group_name"
+        android:layout_width="match_parent"
+        android:layout_height="140dp"
+        android:layout_margin="@dimen/margin_def"
+        app:cardCornerRadius="@dimen/margin_def">
+        <LinearLayout
+            android:padding="@dimen/margin_def"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <TextView
+                android:id="@+id/tv_group_name_card"
+                android:maxLines="2"
+                android:ellipsize="end"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="18sp"
+                android:text="group name"/>
+        </LinearLayout>
+    </com.google.android.material.card.MaterialCardView>
+
+</RelativeLayout>

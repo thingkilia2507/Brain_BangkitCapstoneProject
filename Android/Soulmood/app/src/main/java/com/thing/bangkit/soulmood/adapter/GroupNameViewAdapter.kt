@@ -1,6 +1,8 @@
 package com.thing.bangkit.soulmood.adapter
 
+import android.graphics.Color
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.amulyakhare.textdrawable.TextDrawable
@@ -10,7 +12,7 @@ import com.thing.bangkit.soulmood.model.ChatGroup
 import java.util.*
 import kotlin.collections.ArrayList
 
-class GroupNameViewAdapter : RecyclerView.Adapter<GroupNameViewAdapter.ViewHolder>() {
+class GroupNameViewAdapter(private val type:String) : RecyclerView.Adapter<GroupNameViewAdapter.ViewHolder>() {
     private val data = ArrayList<ChatGroup>()
     private lateinit var onItemClickCallback: OnItemClickCallback
     fun setOnItemClickCallback(onItemClickCallback: OnItemClickCallback) {
@@ -36,6 +38,9 @@ class GroupNameViewAdapter : RecyclerView.Adapter<GroupNameViewAdapter.ViewHolde
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.binding.apply {
+            if(type == "homeFragment"){
+                cvGroupName.visibility = View.GONE
+                llGroupName.visibility= View.VISIBLE
             val colorGenerator = ColorGenerator.MATERIAL
             val textDrawable = TextDrawable.builder().beginConfig().width(50)
                 .height(50).endConfig()
@@ -48,10 +53,22 @@ class GroupNameViewAdapter : RecyclerView.Adapter<GroupNameViewAdapter.ViewHolde
             llGroupName.setOnClickListener {
                    onItemClickCallback.onItemClick(data[position])
             }
+        }else{
+                llGroupName.visibility= View.GONE
+                cvGroupName.visibility = View.VISIBLE
+                tvGroupNameCard.text = data[position].group_name
+                cvGroupName.setOnClickListener {
+                    onItemClickCallback.onItemClick(data[position])
+                }
+            }
         }
+
     }
 
-    override fun getItemCount(): Int = data.size
+    override fun getItemCount(): Int {
+        return if(data.size >30) 30
+        else data.size
+    }
 
     interface OnItemClickCallback {
         fun onItemClick(data: ChatGroup)

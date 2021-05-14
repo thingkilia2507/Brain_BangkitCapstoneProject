@@ -31,12 +31,10 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 class ProfileFragment : Fragment(), IProgressResult {
-
     private lateinit var binding: FragmentProfileBinding
     private val changePassViewModel: ChangePasswordViewModel by viewModels()
     private val profileViewModel: ProfileViewModel by viewModels()
     private lateinit var sweetAlertDialog: SweetAlertDialog
-
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

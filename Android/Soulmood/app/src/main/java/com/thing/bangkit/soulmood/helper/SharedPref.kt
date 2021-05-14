@@ -8,7 +8,6 @@ import androidx.security.crypto.MasterKey
 object SharedPref {
     private var PREFERENCE_KEY = "mySharedPreference"
     private lateinit var sharedPreferences: SharedPreferences
-    private lateinit var value: String
 
     fun isNotNull(context: Context, key: String?): Boolean {
         initSharedPref(context)
@@ -23,7 +22,7 @@ object SharedPref {
 
     fun getPref(context: Context, key: String): String? {
         initSharedPref(context)
-        return sharedPreferences.getString(key, value)
+        return sharedPreferences.getString(key,null)
     }
 
     fun clearPref(context: Context) {

@@ -1,12 +1,13 @@
 package com.thing.bangkit.soulmood.activity.splash
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
-import com.thing.bangkit.soulmood.activity.MainActivity
+import androidx.appcompat.app.AppCompatActivity
 import com.thing.bangkit.soulmood.R
+import com.thing.bangkit.soulmood.activity.MainActivity
+import com.thing.bangkit.soulmood.helper.MyAsset
 import com.thing.bangkit.soulmood.helper.SharedPref
 
 class SplashActivity : AppCompatActivity() {
@@ -14,7 +15,7 @@ class SplashActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splash)
         Handler(Looper.getMainLooper()).postDelayed({
-            if(SharedPref.isNotNull(this@SplashActivity,getString(R.string.email))){
+            if(SharedPref.isNotNull(this@SplashActivity, MyAsset.KEY_EMAIL)){
                 val intent = Intent(this@SplashActivity, MainActivity::class.java)
                 startActivity(intent)
                 finish()
