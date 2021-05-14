@@ -16,6 +16,7 @@
         android:contentDescription="@string/iv_topper"/>
 
     <TextView
+        android:id="@+id/tv_name_profile"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textColor="@color/soulmood_primary_color"
@@ -26,6 +27,7 @@
         tools:text="Soulmoo"/>
 
     <TextView
+        android:id="@+id/tv_email_profile"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textColor="@color/soulmood_primary_color"

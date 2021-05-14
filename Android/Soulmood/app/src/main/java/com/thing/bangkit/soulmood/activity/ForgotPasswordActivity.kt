@@ -1,12 +1,12 @@
 package com.thing.bangkit.soulmood.activity
 
 import android.os.Bundle
-import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import com.thing.bangkit.soulmood.R
 import com.thing.bangkit.soulmood.databinding.ActivityForgotPasswordBinding
 import com.thing.bangkit.soulmood.viewmodel.LoginViewModel
+import es.dmoral.toasty.Toasty
 
 class ForgotPasswordActivity : AppCompatActivity() {
     private  val loginViewModel: LoginViewModel by viewModels()
@@ -24,8 +24,7 @@ class ForgotPasswordActivity : AppCompatActivity() {
                     loginViewModel.forgotPassword(email,this@ForgotPasswordActivity).observe(this@ForgotPasswordActivity,
                         { status ->
                             if (status) {
-                                Toast.makeText(this@ForgotPasswordActivity, "Kami telah mengirim link ubah password" +
-                                        "pada Email Anda", Toast.LENGTH_SHORT).show()
+                                Toasty.warning(this@ForgotPasswordActivity, getString(R.string.message_forgot_pass_email), Toasty.LENGTH_SHORT).show()
                                 etEmail.text.clear()
                             }
                         })

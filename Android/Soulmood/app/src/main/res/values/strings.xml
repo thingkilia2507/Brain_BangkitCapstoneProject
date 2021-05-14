@@ -7,7 +7,7 @@
     <string name="license_credit_splash2_3">mental health png from pngtree.com</string>
     <string name="name">Nama</string>
     <string name="email">Email</string>
-    <string name="user_id">Email</string>
+    <string name="user_id">User_id</string>
     <string name="male">Laki - Laki</string>
     <string name="female">perempuan</string>
     <string name="enter_your_name">Masukkan Nama Anda</string>
@@ -35,6 +35,10 @@
     <string name="password">Kata Sandi</string>
     <string name="log_out">Keluar</string>
 
+    <string name="logout_message_alert">Keluar dari akun ini ?</string>
+    <string name="cancel">Batal</string>
+    <string name="yes">Ya</string>
+
     <string name="signature">Tanda Tangan / Paraf</string>
 
     <string name="hello_blank_fragment">Hello blank fragment</string>
@@ -47,12 +51,32 @@
     <string name="private_information">Informasi Pribadi</string>
 
 
+    <string name="success">Berhasil</string>
     <string name="error">Gagal</string>
+    <string name="changepassword_failed_message">Maaf, Kata Sandi Lama Anda Salah.</string>
     <string name="input_old_password">Kata Sandi Lama tidak boleh kosong!</string>
     <string name="input_new_password">Kata Sandi Baru tidak boleh kosong!</string>
+    <string name="input_name">Masukkan Nama disini…</string>
+    <string name="input_email">Masukkan Emailmu (email valid untuk verifikasi data) </string>
     <string name="input_confirm_new_password">Ulangi Kata Sandi Baru!</string>
     <string name="old_password">Kata Sandi Saat Ini</string>
     <string name="new_password">Kata Sandi Baru</string>
     <string name="confirm_new_password">Konfirmasi Kata Sandi Baru</string>
     <string name="sorry_confirm_password_wrong">Maaf, Pengulangan Kata Sandi Baru tidak sama</string>
+    <string name="change">ubah</string>
+    <string name="message_forgot_pass_email">Kami telah mengirim link ubah password pada Email Anda</string>
+    <string name="save">simpan</string>
+    <string name="privacy_information">Informasi Pribadi</string>
+    <string name="change_password_succes">Password Berhasil Diubah</string>
+    <string name="changeProfileSuccess">Informasi Pribadi Diperbarui</string>
+    <string name="coming_soon_feature">Fitur Mendatang</string>
+    <string name="my_friend">Teman Curhatku</string>
+    <string name="iv_psikolog_konsultasi_soulmood">iv_psikolog_konsultasi_soulmood</string>
+    <string name="iv_soulcare">iv_soulcare</string>
+    <string name="iv_soulmood_chat_kuy">iv_soulmood_chat_kuy</string>
+    <string name="today_motivation">Kata Motivasimu Hari ini</string>
+    <string name="iv_coming_soon_feature">iv_coming_soon_feature</string>
+    <string name="forgot_password">Lupa Kata Sandi ?</string>
+    <string name="register">Daftar</string>
+    <string name="not_having_account">Belum punya akun?</string>
 </resources>

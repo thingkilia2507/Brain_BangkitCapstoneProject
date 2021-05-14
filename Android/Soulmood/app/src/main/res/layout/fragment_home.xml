@@ -1,67 +1,118 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
+    android:scrollbars="vertical"
     tools:context=".fragment.HomeFragment">
 
-    <HorizontalScrollView
-        android:id="@+id/groupview"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/margin_def"
-        android:layout_marginTop="@dimen/margin_def"
-        android:scrollbars="none">
+        android:orientation="vertical">
 
-        <RelativeLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
-
-            <com.google.android.material.floatingactionbutton.FloatingActionButton
-                android:id="@+id/floating_add"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:backgroundTint="@color/soulmood_primary_color"
-                android:contentDescription="@string/fab_add_group_name"
-                android:elevation="@dimen/dp_16"
-                android:src="@drawable/ic_baseline_add_24"
-                app:elevation="@dimen/small_margin"
-                app:maxImageSize="@dimen/fab_image_size"
-                app:pressedTranslationZ="@dimen/dp_10"
-                app:rippleColor="@color/white"
-                app:tint="@color/white" />
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rv_group_name"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/small_margin"
-                android:layout_toEndOf="@+id/floating_add"
-                android:nestedScrollingEnabled="true" />
-        </RelativeLayout>
-
-    </HorizontalScrollView>
-
-    <androidx.cardview.widget.CardView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:cardCornerRadius="@dimen/card_corner_mid"
-        app:cardElevation="@dimen/card_elevation"
-        android:layout_margin="@dimen/margin_big">
-
-        <RelativeLayout
+        <HorizontalScrollView
+            android:id="@+id/groupview"
             android:layout_width="match_parent"
-            android:background="@drawable/gradient_background"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_def"
+            android:layout_marginTop="@dimen/margin_def"
+            android:nestedScrollingEnabled="true"
+            android:overScrollMode="never"
+            android:scrollbars="none">
 
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:src="@drawable/soulmood_chat_kuy" />
-        </RelativeLayout>
-    </androidx.cardview.widget.CardView>
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <com.google.android.material.floatingactionbutton.FloatingActionButton
+                    android:id="@+id/floating_add"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="@color/soulmood_primary_color"
+                    android:contentDescription="@string/fab_add_group_name"
+                    android:elevation="@dimen/dp_16"
+                    android:src="@drawable/ic_baseline_add_24"
+                    app:elevation="@dimen/small_margin"
+                    app:maxImageSize="@dimen/fab_image_size"
+                    app:pressedTranslationZ="@dimen/dp_10"
+                    app:rippleColor="@color/white"
+                    app:tint="@color/white" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rv_group_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/small_margin"
+                    android:layout_toEndOf="@+id/floating_add"
+                    android:nestedScrollingEnabled="true" />
+            </RelativeLayout>
+
+        </HorizontalScrollView>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_big"
+            android:layout_marginTop="@dimen/margin_def"
+            android:layout_marginEnd="@dimen/margin_big"
+            android:fontFamily="sans-serif"
+            android:text="@string/today_motivation"
+            android:textColor="@color/ts_color_def"
+            android:textSize="@dimen/ts_menu" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_big"
+            android:layout_marginBottom="@dimen/margin_def"
+            android:layout_marginEnd="@dimen/margin_big"
+            android:fontFamily="monospace"
+            tools:text="@tools:sample/lorem"
+            android:textAlignment="center"
+            android:textColor="@color/ts_color_def"
+            android:textSize="@dimen/ts_mid" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_big"
+            android:layout_marginTop="@dimen/margin_def"
+            android:layout_marginEnd="@dimen/margin_big"
+            android:fontFamily="sans-serif"
+            android:text="@string/coming_soon_feature"
+            android:textColor="@color/ts_color_def"
+            android:textSize="@dimen/ts_menu" />
+
+        <androidx.viewpager2.widget.ViewPager2
+            android:id="@+id/view_pager_coming_soon_feature"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginStart="@dimen/margin_big"
+            android:layout_marginEnd="@dimen/margin_big"
+            android:layout_marginBottom="@dimen/margin_def"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_big"
+            android:layout_marginTop="@dimen/margin_def"
+            android:layout_marginEnd="@dimen/margin_big"
+            android:fontFamily="sans-serif"
+            android:text="@string/my_friend"
+            android:textColor="@color/ts_color_def"
+            android:textSize="@dimen/ts_menu" />
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:adjustViewBounds="true"
+            android:layout_marginStart="@dimen/margin_big"
+            android:layout_marginEnd="@dimen/margin_big"
+            android:padding="@dimen/padding_def"
+            android:src="@drawable/soulmood_chat_kuy"
+            android:contentDescription="@string/iv_soulmood_chat_kuy" />
 
 
-</LinearLayout>
+    </LinearLayout>
+</ScrollView>

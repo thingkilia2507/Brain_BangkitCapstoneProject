@@ -3,44 +3,73 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:padding="@dimen/padding_big"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    app:cardCornerRadius="20dp">
+    app:cardCornerRadius="@dimen/card_corner_def">
    <LinearLayout
-       android:padding="20dp"
+       android:padding="@dimen/padding_big"
        android:layout_width="match_parent"
        android:layout_height="wrap_content"
        android:orientation="vertical">
 
         <TextView
-            android:textSize="22sp"
+            android:textSize="@dimen/ts_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/create_new_group"
+            android:text="@string/privacy_information"
             android:textAlignment="center"
             android:fontFamily="@font/poppins_semibold"/>
 
-        <EditText
-            android:id="@+id/et_group_name"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/dp_45"
-            android:layout_marginStart="20dp"
-            android:layout_marginEnd="20dp"
-            android:layout_marginTop="15dp"
-            android:background="@drawable/custom_edittext"
-            android:elevation="@dimen/dp_2"
-            android:hint="@string/enter_new_group"
-            android:inputType="text"
-            android:padding="8dp" />
+       <com.google.android.material.textfield.TextInputLayout
+           android:id="@+id/tf_name_profile"
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:layout_marginLeft="@dimen/margin_def"
+           android:layout_marginRight="@dimen/margin_def"
+           app:boxStrokeWidth="0dp"
+           app:boxStrokeWidthFocused="0dp">
+
+           <com.google.android.material.textfield.TextInputEditText
+               android:id="@+id/et_name_profile"
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:layout_gravity="center"
+               android:background="@drawable/custom_edittext"
+               android:hint="@string/name"
+               android:inputType="text"
+               android:textSize="@dimen/ts_standard" />
+       </com.google.android.material.textfield.TextInputLayout>
+
+       <com.google.android.material.textfield.TextInputLayout
+           android:id="@+id/tf_email_profile"
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:layout_marginTop="@dimen/margin_def"
+           android:layout_marginLeft="@dimen/margin_def"
+           android:layout_marginRight="@dimen/margin_def"
+           app:boxStrokeWidth="0dp"
+           app:boxStrokeWidthFocused="0dp">
+
+           <com.google.android.material.textfield.TextInputEditText
+               android:id="@+id/et_email_profile"
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:layout_gravity="center"
+               android:background="@drawable/custom_edittext"
+               android:hint="@string/email"
+               android:inputType="text"
+               android:textSize="@dimen/ts_standard" />
+       </com.google.android.material.textfield.TextInputLayout>
 
        <Button
-           android:id="@+id/btn_add_new_group"
+           android:id="@+id/btn_save_edit_profile"
            android:layout_width="match_parent"
-           android:layout_height="40dp"
-           android:layout_marginTop="30dp"
+           android:layout_height="wrap_content"
+           android:layout_marginTop="@dimen/margin_def"
            android:background="@drawable/ripple_btn_primary"
-           android:text="@string/add"
-           android:layout_marginEnd="20dp"
-           android:layout_marginStart="20dp"
+           android:text="@string/save"
+           android:layout_marginEnd="@dimen/margin_def"
+           android:layout_marginStart="@dimen/margin_def"
            android:layout_marginBottom="@dimen/dp_1"
            />
    </LinearLayout>

@@ -1,49 +1,48 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.google.android.material.card.MaterialCardView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    app:cardCornerRadius="20dp">
-   <LinearLayout
-       android:padding="20dp"
-       android:layout_width="match_parent"
-       android:layout_height="wrap_content"
-       android:orientation="vertical">
+    app:cardCornerRadius="@dimen/card_corner_def">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="@dimen/padding_def">
 
         <TextView
-            android:textSize="22sp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/poppins_semibold"
             android:text="@string/create_new_group"
             android:textAlignment="center"
-            android:fontFamily="@font/poppins_semibold"/>
+            android:textSize="@dimen/ts_title" />
 
         <EditText
             android:id="@+id/et_group_name"
             android:layout_width="match_parent"
             android:layout_height="@dimen/dp_45"
             android:layout_marginStart="20dp"
-            android:layout_marginEnd="20dp"
             android:layout_marginTop="15dp"
+            android:layout_marginEnd="20dp"
             android:background="@drawable/custom_edittext"
             android:elevation="@dimen/dp_2"
             android:hint="@string/enter_new_group"
             android:inputType="text"
             android:padding="8dp" />
 
-       <Button
-           android:id="@+id/btn_add_new_group"
-           android:layout_width="match_parent"
-           android:layout_height="40dp"
-           android:layout_marginTop="30dp"
-           android:background="@drawable/ripple_btn_primary"
-           android:text="@string/add"
-           android:layout_marginEnd="20dp"
-           android:layout_marginStart="20dp"
-           android:layout_marginBottom="@dimen/dp_1"
-           />
-   </LinearLayout>
+        <Button
+            android:id="@+id/btn_add_new_group"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_big"
+            android:layout_marginTop="@dimen/margin_big"
+            android:layout_marginEnd="@dimen/margin_big"
+            android:layout_marginBottom="@dimen/mini_size"
+            android:background="@drawable/ripple_btn_primary"
+            android:text="@string/add" />
+    </LinearLayout>
 
-    </com.google.android.material.card.MaterialCardView>
+</com.google.android.material.card.MaterialCardView>
 

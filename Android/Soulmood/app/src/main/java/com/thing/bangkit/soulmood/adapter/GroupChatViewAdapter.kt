@@ -5,8 +5,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.amulyakhare.textdrawable.util.ColorGenerator
-import com.thing.bangkit.soulmood.R
 import com.thing.bangkit.soulmood.databinding.ItemChatBinding
+import com.thing.bangkit.soulmood.helper.MyAsset
 import com.thing.bangkit.soulmood.helper.SharedPref
 import com.thing.bangkit.soulmood.model.Message
 
@@ -39,8 +39,7 @@ class GroupChatViewAdapter : RecyclerView.Adapter<GroupChatViewAdapter.ViewHolde
 //                )
 //            ivGroupName.setImageDrawable(textDrawable)
             //jika pesan dari pengirim
-            if(data[position].email == SharedPref.getPref(holder.itemView.context,holder.itemView.context.getString(
-                    R.string.email))){
+            if(data[position].email == SharedPref.getPref(holder.itemView.context, MyAsset.KEY_EMAIL)){
                 llReceiver.visibility = View.GONE
                 llSender.visibility = View.VISIBLE
                 tvSenderName.text = data[position].sender

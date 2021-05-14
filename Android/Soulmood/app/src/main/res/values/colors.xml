@@ -17,5 +17,11 @@
     <color name="light_blue_A200">#40C4FF</color>
 
     <color name="wheat">#F5DEB3</color>
+    <color name="soulmood_primary_color_light">#C2DCFF</color>
     <color name="soulmood_primary_color">#88B0E6</color>
+    <color name="soulmood_primary_color_darkmiddle">#0C499C</color>
+    <color name="soulmood_primary_color_dark">#052047</color>
+
+    <color name="ts_color_def">#FF000000</color>
+
 </resources>

@@ -23,6 +23,7 @@
 
     <dimen name="card_elevation">10dp</dimen>
     <dimen name="card_corner_mid">30dp</dimen>
+    <dimen name="card_corner_def">20dp</dimen>
     <dimen name="corner_radius">15dp</dimen>
 
     <dimen name="mini_size">2dp</dimen>
@@ -35,6 +36,7 @@
     <dimen name="ts_heading4">34sp</dimen>
     <dimen name="ts_heading5">24sp</dimen>
     <dimen name="ts_heading6">10sp</dimen>
+    <dimen name="ts_title">22sp</dimen>
     <dimen name="ts_menu">18sp</dimen>
     <dimen name="ts_mid">16sp</dimen>
     <dimen name="ts_default">14sp</dimen>
@@ -55,4 +57,5 @@
 
 
     <dimen name="margin_big">20dp</dimen>
+    <dimen name="padding_big">25dp</dimen>
 </resources>
