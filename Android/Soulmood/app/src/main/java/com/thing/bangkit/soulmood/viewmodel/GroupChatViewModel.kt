@@ -9,8 +9,8 @@ import androidx.lifecycle.viewModelScope
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Query
-import com.thing.bangkit.soulmood.R
 import com.thing.bangkit.soulmood.helper.DateHelper
+import com.thing.bangkit.soulmood.helper.MyAsset
 import com.thing.bangkit.soulmood.helper.SharedPref
 import com.thing.bangkit.soulmood.model.ChatGroup
 import com.thing.bangkit.soulmood.model.Message
@@ -79,7 +79,7 @@ class GroupChatViewModel : ViewModel() {
         viewModelScope.launch(Dispatchers.IO) {
             val database = db.collection("groups_chat").document(group_id).collection("message").add(
                 Message(id,
-                    SharedPref.getPref(context,context.getString(R.string.name)).toString(), SharedPref.getPref(context,context.getString(R.string.email)), message, message, DateHelper.getCurrentDate(), "")
+                    SharedPref.getPref(context,MyAsset.KEY_NAME).toString(), SharedPref.getPref(context,MyAsset.KEY_EMAIL), message, message, DateHelper.getCurrentDate(), "")
             )
             withContext(Dispatchers.Main){
                 database.addOnSuccessListener {

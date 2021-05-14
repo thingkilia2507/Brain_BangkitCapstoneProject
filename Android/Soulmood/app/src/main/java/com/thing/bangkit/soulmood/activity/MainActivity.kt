@@ -21,7 +21,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         binding.apply {
-            setTampilanAwal()
+            handleFragment(HomeFragment.newInstance())
             fabChatbot.setOnClickListener {
                 Toast.makeText(
                     this@MainActivity,
@@ -38,20 +38,8 @@ class MainActivity : AppCompatActivity() {
             fabChatbot.imageTintMode = null
 
         }
+        
     }
-
-    private fun ActivityMainBinding.setTampilanAwal() {
-        ivBNProfile.layoutParams.height = 80
-        ivBNProfile.requestLayout()
-        ivBNHome.layoutParams.height = 105
-        ivBNHome.requestLayout()
-        tvBNHome.setTextColor(resources.getColor(R.color.white, theme))
-        ImageViewCompat.setImageTintList(ivBNHome, ColorStateList.valueOf(
-            ContextCompat.getColor(this@MainActivity,
-            R.color.white
-        )))
-    }
-
 
     private fun handleFragment(fragment: Fragment) {
         val fragmentManager = supportFragmentManager

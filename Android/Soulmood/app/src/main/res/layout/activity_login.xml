@@ -42,56 +42,61 @@
             android:textAlignment="center"
             android:textSize="22sp" />
 
-        <EditText
-            android:id="@+id/et_email"
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/tf_email"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/dp_45"
-            android:layout_marginStart="@dimen/dp_45"
-            android:layout_marginTop="@dimen/dp_16"
-            android:layout_marginEnd="@dimen/dp_45"
-            android:background="@drawable/custom_edittext"
-            android:drawableStart="@drawable/ic_baseline_email_24"
-            android:drawablePadding="@dimen/small_margin"
-            android:elevation="@dimen/dp_2"
-            android:hint="@string/email"
-            android:inputType="text"
-            android:padding="@dimen/dp_8" />
-
-        <EditText
-            android:id="@+id/et_password"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/dp_45"
-            android:layout_marginStart="@dimen/dp_45"
-            android:layout_marginTop="@dimen/dp_16"
-            android:layout_marginEnd="@dimen/dp_45"
-            android:background="@drawable/custom_edittext"
-            android:drawableStart="@drawable/ic_baseline_lock_24"
-            android:drawablePadding="@dimen/small_margin"
-            android:elevation="@dimen/dp_2"
-            android:hint="@string/password"
-            android:inputType="textPassword"
-            android:padding="@dimen/dp_8" />
-
-        <ImageView
-            android:id="@+id/iv_eye_pass"
-            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="end"
-            android:layout_marginTop="-35dp"
+            android:layout_marginStart="@dimen/dp_45"
+            android:layout_marginTop="@dimen/dp_16"
+            android:layout_marginEnd="@dimen/dp_45"
+            android:gravity="center"
+            app:startIconDrawable="@drawable/ic_baseline_email_24"
+            app:startIconTint="@color/soulmood_primary_color_dark"
+            app:boxStrokeWidth="0dp"
+            app:boxStrokeWidthFocused="0dp">
 
-            android:layout_marginEnd="52dp"
-            android:elevation="3dp"
-            android:src="@drawable/ic_baseline_visibility_24" />
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/et_email"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/custom_edittext"
+                android:hint="@string/email"
+                android:inputType="text" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/tf_password"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/dp_45"
+            android:layout_marginTop="@dimen/dp_16"
+            android:layout_marginEnd="@dimen/dp_45"
+            android:gravity="center"
+            app:startIconDrawable="@drawable/ic_baseline_lock_24"
+            app:startIconTint="@color/soulmood_primary_color_dark"
+            app:boxStrokeWidth="0dp"
+            app:boxStrokeWidthFocused="0dp"
+            app:passwordToggleEnabled="true">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/et_password"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/custom_edittext"
+                android:hint="@string/password"
+                android:inputType="textPassword" />
+        </com.google.android.material.textfield.TextInputLayout>
 
         <TextView
             android:id="@+id/tvForgotPassword"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
+            android:layout_marginStart="@dimen/dp_45"
             android:layout_marginEnd="@dimen/dp_45"
-            android:text="Lupa Kata Sandi?"
+            android:text="@string/forgot_password"
             android:textAlignment="textEnd"
-            android:textColor="#042481"
+            android:textStyle="bold"
+            android:textColor="@color/soulmood_primary_color"
             android:textSize="14sp" />
 
         <Button
@@ -116,7 +121,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="120dp"
                 android:layout_marginTop="15dp"
-                android:text="Belum punya akun?"
+                android:text="@string/not_having_account"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/btn_register" />
 
@@ -124,9 +129,10 @@
                 android:id="@+id/tv_register"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="3dp"
+                android:layout_marginStart="3dp"
                 android:layout_marginTop="15dp"
-                android:text="Daftar"
+                android:text="@string/register"
+                android:textStyle="bold"
                 android:textColor="@color/soulmood_primary_color"
                 app:layout_constraintStart_toEndOf="@+id/textView3"
                 app:layout_constraintTop_toBottomOf="@+id/btn_register" />

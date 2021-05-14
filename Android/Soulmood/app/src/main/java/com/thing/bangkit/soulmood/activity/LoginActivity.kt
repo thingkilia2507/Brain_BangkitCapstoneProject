@@ -2,11 +2,15 @@ package com.thing.bangkit.soulmood.activity
 
 import android.content.Intent
 import android.os.Bundle
-import android.text.InputType
+import android.text.Editable
+import android.text.TextWatcher
+import android.util.Log
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import com.google.android.material.textfield.TextInputLayout
 import com.thing.bangkit.soulmood.R
 import com.thing.bangkit.soulmood.databinding.ActivityLoginBinding
+import com.thing.bangkit.soulmood.helper.MyAsset
 import com.thing.bangkit.soulmood.helper.SharedPref
 import com.thing.bangkit.soulmood.viewmodel.LoginViewModel
 
@@ -21,50 +25,60 @@ class LoginActivity : AppCompatActivity() {
 
         binding?.apply {
             var visibility = false
-            ivEyePass.setOnClickListener {
-                if (visibility){
-                    visibility = false
-                    etPassword.inputType = InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_VARIATION_PASSWORD
-                    etPassword.setSelection(etPassword.text.length)
-                    ivEyePass.setImageResource(R.drawable.ic_baseline_visibility_24)
 
-                }else{
-                    visibility = true
-                    etPassword.inputType = InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD
-                    etPassword.setSelection(etPassword.text.length)
-                    ivEyePass.setImageResource(R.drawable.ic_baseline_visibility_off_24)
+            etPassword.addTextChangedListener(object : TextWatcher {
+                override fun beforeTextChanged(
+                    s: CharSequence,
+                    start: Int,
+                    count: Int,
+                    after: Int
+                ) {
                 }
-            }
+
+                override fun onTextChanged(
+                    s: CharSequence,
+                    start: Int,
+                    before: Int,
+                    count: Int
+                ) {
+                }
+
+                override fun afterTextChanged(s: Editable) {
+                    if (tfPassword.endIconMode == TextInputLayout.END_ICON_NONE) tfPassword.endIconMode =
+                        TextInputLayout.END_ICON_PASSWORD_TOGGLE
+                }
+            })
 
             btnLogin.setOnClickListener {
                 val email = etEmail.text.toString()
                 val password = etPassword.text.toString()
 
                 if(email.isEmpty())etEmail.error = getString(R.string.enter_your_email)
-                else if (password.isEmpty())etPassword.error = getString(R.string.enter_your_pass)
-                else if (email.isEmpty() && password.isEmpty()){
-                    etEmail.error = getString(R.string.enter_your_email)
-                    etPassword.error = getString(R.string.enter_your_pass)
+                if (password.isEmpty()) {
+                    tfPassword.endIconMode = TextInputLayout.END_ICON_NONE
+                    etPassword.error = getString(R.string.input_old_password)
                 }
-                else{
+
+                if(email.isNotEmpty() && password.isNotEmpty()){
                     loginViewModel.login(email, password, this@LoginActivity).observe(this@LoginActivity,
                         {
                             if (it != null) {
+                                Log.d("dataku", "onCreate: notnull")
                                 //save data to shared preference
                                 SharedPref.setPref(
                                     this@LoginActivity,
-                                    getString(R.string.name),
+                                    MyAsset.KEY_NAME,
                                     it.name
                                 )
                                 SharedPref.setPref(
                                     this@LoginActivity,
-                                    getString(R.string.email),
+                                    MyAsset.KEY_EMAIL,
                                     it.email
                                 )
                               
                                 SharedPref.setPref(
                                     this@LoginActivity,
-                                    getString(R.string.user_id),
+                                    MyAsset.KEY_USER_ID,
                                     it.id
                                 )
 
@@ -76,6 +90,8 @@ class LoginActivity : AppCompatActivity() {
                                     )
                                 )
                                 finish()
+                            }else{
+                                Log.d("dataku", "onCreate: NULL")
                             }
                         })
                 }
