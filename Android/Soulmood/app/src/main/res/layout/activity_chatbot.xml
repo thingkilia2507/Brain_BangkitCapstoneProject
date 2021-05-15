@@ -15,24 +15,24 @@
 
         <ImageView
             android:id="@+id/iv_back"
-            android:layout_width="?attr/actionBarSize"
-            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/height_action_bar"
             android:adjustViewBounds="true"
-            android:padding="@dimen/small_mid_padding"
+            android:padding="@dimen/small_padding"
             android:src="@drawable/ic_baseline_arrow_back_24"
             app:tint="@color/white" />
 
         <ImageView
-            android:layout_width="?attr/actionBarSize"
-            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/height_action_bar"
             android:adjustViewBounds="true"
+            android:layout_marginEnd="@dimen/small_margin"
             android:padding="@dimen/mini_size"
             android:src="@drawable/soulmood_circle_black" />
 
         <TextView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
+            android:layout_height="@dimen/height_action_bar"
             android:fontFamily="@font/poppins_semibold"
             android:text="@string/soulmoo"
             android:textColor="@color/black"
@@ -42,6 +42,7 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_chatbot"
         android:layout_width="match_parent"
+        android:overScrollMode="never"
         android:layout_height="wrap_content"
         android:layout_above="@+id/ll_type_message"
         android:layout_below="@+id/ll_action_bar"
@@ -57,11 +58,11 @@
 
 
         <androidx.recyclerview.widget.RecyclerView
-            android:visibility="gone"
             android:id="@+id/rv_suggestion_message"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/margin_def"
+            android:layout_marginStart="@dimen/margin_def"
+            android:layout_marginEnd="@dimen/margin_def"
             android:orientation="horizontal"
             tools:listitem="@layout/item_suggestion_chat"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>

@@ -4,8 +4,9 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.thing.bangkit.soulmood.databinding.ItemSuggestionChatBinding
+import com.thing.bangkit.soulmood.helper.IClickedItemListener
 
-class SuggestionChatAdapter(var onSuggestionClicked : () -> Unit) : RecyclerView.Adapter<SuggestionChatAdapter.ViewHolder>() {
+class SuggestionChatAdapter(var clickedListener: IClickedItemListener) : RecyclerView.Adapter<SuggestionChatAdapter.ViewHolder>() {
 
     var suggestionMessage = ArrayList<String>()
 
@@ -13,7 +14,9 @@ class SuggestionChatAdapter(var onSuggestionClicked : () -> Unit) : RecyclerView
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.binding.tvRecommendChat.text = suggestionMessage[position]
-        holder.binding.tvRecommendChat.setOnClickListener{ onSuggestionClicked }
+        holder.binding.tvRecommendChat.setOnClickListener{
+            clickedListener.onClicked(suggestionMessage[position])
+        }
     }
 
     override fun getItemCount(): Int = suggestionMessage.size

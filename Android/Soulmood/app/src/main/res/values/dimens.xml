@@ -65,4 +65,5 @@
     <dimen name="width_minimum_card_chat">150dp</dimen>
 
     <dimen name="margin_chat_max">50dp</dimen>
+    <dimen name="height_action_bar">40dp</dimen>
 </resources>

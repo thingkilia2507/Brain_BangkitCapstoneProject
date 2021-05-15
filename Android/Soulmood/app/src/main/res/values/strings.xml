@@ -85,4 +85,6 @@
     <string name="invalid_password_message">Kata sandi yang diberikan tidak valid. [Kata sandi harus terdiri dari setidaknya 6 karakter]</string>
     <string name="coming_soon">Segera tersedia pada Soulmood versi terbaru.</string>
     <string name="enter_message_hint">Masukkan Pesan Anda…</string>
+    <string name="group_added">Grup Berhasil ditambah</string>
+    <string name="loading">Loading…</string>
 </resources>

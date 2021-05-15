@@ -21,7 +21,7 @@
         <activity android:name=".AcitivtyUntukCobaCoba" />
         <activity
             android:name=".activity.RegisterActivity"
-            android:theme="@style/Theme.Soulmood.NoActionBar"></activity>
+            android:theme="@style/Theme.Soulmood.NoActionBar"/>
         <activity
             android:name=".activity.splash.SplashActivity1"
             android:theme="@style/Theme.Soulmood.NoActionBar" />

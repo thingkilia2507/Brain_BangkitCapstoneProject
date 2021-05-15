@@ -1,7 +1,6 @@
 package com.thing.bangkit.soulmood.viewmodel
 
 import android.content.Context
-import android.widget.Toast
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -9,6 +8,7 @@ import androidx.lifecycle.viewModelScope
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Query
+import com.thing.bangkit.soulmood.R
 import com.thing.bangkit.soulmood.helper.DateHelper
 import com.thing.bangkit.soulmood.helper.MyAsset
 import com.thing.bangkit.soulmood.helper.SharedPref
@@ -39,9 +39,9 @@ class GroupChatViewModel : ViewModel() {
             val database = db.collection("groups_chat").document(id).set(map)
             withContext(Dispatchers.Main) {
                 database.addOnSuccessListener {
-                    Toast.makeText(context, "Grup Berhasil ditambah", Toast.LENGTH_SHORT).show()
+                    Toasty.success(context, context.getString(R.string.group_added), Toasty.LENGTH_SHORT).show()
                 }.addOnFailureListener {
-                    Toast.makeText(context, it.message, Toast.LENGTH_SHORT).show()
+                    Toasty.error(context, it.message.toString(), Toasty.LENGTH_SHORT).show()
                 }
             }
         }

@@ -51,11 +51,6 @@ dependencies {
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
 
-    //keyboard_listener
-    implementation "androidx.lifecycle:lifecycle-common:2.3.1"
-    implementation "androidx.lifecycle:lifecycle-extensions:2.2.0"
-    kapt 'androidx.lifecycle:lifecycle-compiler:2.3.1'
-
     //glide
     implementation 'com.github.bumptech.glide:glide:4.12.0'
 

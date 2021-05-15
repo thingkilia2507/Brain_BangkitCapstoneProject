@@ -24,12 +24,13 @@ class ChatbotViewModel : ViewModel() {
     private val db = FirebaseFirestore.getInstance()
     private var messageReqReply : String = ""
     private var _chat = MutableLiveData<ArrayList<ChatbotMessage>>()
+    private val _suggestionResponse = MutableLiveData<ArrayList<String>>()
     val chat : LiveData<ArrayList<ChatbotMessage>> = _chat
+    val suggestionResponse : LiveData<ArrayList<String>> = _suggestionResponse
     private val currentDate : String= SimpleDateFormat("yyyyMMdd", Locale.getDefault()).format(Date())
 
     fun initChatbot(context: Context) {
         val name = SharedPref.getPref(context, MyAsset.KEY_NAME)
-        messageReqReply = "$name::"
         viewModelScope.launch {
             reqChatbotMessagesData(context)
             sendMessage(context, "Halo, $name!")
@@ -85,7 +86,7 @@ class ChatbotViewModel : ViewModel() {
                 )
             withContext(Dispatchers.Main){
                 database.addOnSuccessListener {
-                    Log.d("TAGDATAKU", "sendMessage: message_sent")
+                    Log.d("TAGDATAKU", "sendMessage: message_sent" + message)
                 }.addOnFailureListener {
                     Toasty.error(context, it.message.toString(), Toasty.LENGTH_SHORT).show()
                 }
@@ -93,26 +94,24 @@ class ChatbotViewModel : ViewModel() {
         }
     }
 
-    fun reqChatbotReply(context: Context): ArrayList<String> {
-        val name = SharedPref.getPref(context, MyAsset.KEY_NAME)
-        val suggestionResponse = ArrayList<String>()
-        Log.d("TAGdataku", "reqChatbotReply: "+messageReqReply)
-        Log.d("TAGdataku", "reqChatbotReply: "+!messageReqReply.equals("$name::", true))
-        if(!messageReqReply.equals("$name::", true)){
+    fun reqChatbotReply(context: Context){
+        val name = SharedPref.getPref(context, MyAsset.KEY_NAME)!!
+        Log.d("TAGDATAKU", "reqChatbotReply isnotempty: ${messageReqReply.isNotEmpty()}")
+        if(messageReqReply.isNotEmpty()){
             val apiService = ApiConfig.getRetrofitSoulmood()
 
             CoroutineScope(Dispatchers.IO).launch {
                 try{
-                    val response = apiService.reqChatbotResponse(messageReqReply)
+                    val response = apiService.reqChatbotResponse(name, messageReqReply)
                     withContext(Dispatchers.Main){
                         if(response.code() == 200){
                             response.body()?.let {
                                 for (reply in it.message) {
+                                    Log.d("TAGDATAKU", "===MessageSend: message " + reply)
                                     sendMessage(context, reply)
                                 }
-
-                                suggestionResponse.addAll(it.suggestion)
-                                messageReqReply = "$name::"
+                                _suggestionResponse.postValue(it.suggestion)
+                                messageReqReply = ""
                             }
                         }else{
                             Log.d("TAGDATAKU", "reqChatbotReply: "+ response.code())
@@ -129,7 +128,6 @@ class ChatbotViewModel : ViewModel() {
             }
         }
 
-        return suggestionResponse
 
     }
 

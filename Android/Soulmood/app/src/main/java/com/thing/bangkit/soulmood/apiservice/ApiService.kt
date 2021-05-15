@@ -12,7 +12,7 @@ interface ApiService {
 
     @FormUrlEncoded
     @POST("chatbot")
-    suspend fun reqChatbotResponse(@Field("message") message:String):Response<ChatbotResponse>
+    suspend fun reqChatbotResponse(@Field("name") name:String, @Field("message") message:String):Response<ChatbotResponse>
 
     @FormUrlEncoded
     @POST("kataKasar")
