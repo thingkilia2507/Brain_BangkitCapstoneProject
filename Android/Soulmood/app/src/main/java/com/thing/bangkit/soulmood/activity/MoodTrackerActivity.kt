@@ -42,7 +42,7 @@ class MoodTrackerActivity : AppCompatActivity() {
         binding = ActivityMoodTrackerBinding.inflate(layoutInflater)
         setContentView(binding?.root)
 
-        moodTrackerViewModel.setMoodData(DateHelper.getCurrentDate(), this)
+        moodTrackerViewModel.setMoodData(DateHelper.getCurrentDateTime(), this)
 
         moodTrackerViewModel.getMoodData().observe(this, {
             it.let {

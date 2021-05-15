@@ -63,7 +63,7 @@ class LoginActivity : AppCompatActivity() {
                     loginViewModel.login(email, password, this@LoginActivity).observe(this@LoginActivity,
                         {
                             if (it != null) {
-                                Log.d("dataku", "onCreate: notnull")
+                                Log.d("TAGDATAKU", "onCreate: notnull")
                                 //save data to shared preference
                                 SharedPref.setPref(
                                     this@LoginActivity,
@@ -91,7 +91,7 @@ class LoginActivity : AppCompatActivity() {
                                 )
                                 finish()
                             }else{
-                                Log.d("dataku", "onCreate: NULL")
+                                Log.d("TAGDATAKU", "onCreate: NULL")
                             }
                         })
                 }

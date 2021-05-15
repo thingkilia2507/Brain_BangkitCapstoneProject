@@ -5,7 +5,7 @@ import java.util.*
 
 
 object DateHelper {
-    fun getCurrentDate(): String {
+    fun getCurrentDateTime(): String {
         val dateFormat = SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault())
         val date = Date()
         return dateFormat.format(date)

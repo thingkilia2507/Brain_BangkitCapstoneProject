@@ -42,20 +42,27 @@
     <dimen name="ts_default">14sp</dimen>
     <dimen name="ts_standard">12sp</dimen>
 
-    <dimen name="small_padding">5dp</dimen>
+    <dimen name="mini_padding">5dp</dimen>
+
+    <dimen name="small_padding">8dp</dimen>
     <dimen name="small_margin">5dp</dimen>
     <dimen name="small_elevation">5dp</dimen>
     <dimen name="small_corner">5dp</dimen>
+
+    <dimen name="small_mid_padding">12dp</dimen>
 
     <dimen name="elevation_def">15dp</dimen>
     <dimen name="margin_def">10dp</dimen>
     <dimen name="padding_def">16dp</dimen>
 
     <dimen name="elevation_mid">7dp</dimen>
-    <dimen name="padding_mid">15dp</dimen>
+    <dimen name="padding_mid">20dp</dimen>
     <dimen name="margin_mid">15dp</dimen>
 
 
     <dimen name="margin_big">20dp</dimen>
     <dimen name="padding_big">25dp</dimen>
+    <dimen name="width_minimum_card_chat">150dp</dimen>
+
+    <dimen name="margin_chat_max">50dp</dimen>
 </resources>

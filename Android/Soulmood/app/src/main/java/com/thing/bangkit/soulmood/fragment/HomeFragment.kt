@@ -5,6 +5,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -18,16 +19,22 @@ import androidx.viewpager2.widget.MarginPageTransformer
 import androidx.viewpager2.widget.ViewPager2
 import com.thing.bangkit.soulmood.R
 import com.thing.bangkit.soulmood.activity.ChatGroupActivity
+import com.thing.bangkit.soulmood.activity.ChatbotActivity
 import com.thing.bangkit.soulmood.activity.GroupNameActivity
 import com.thing.bangkit.soulmood.activity.MoodTrackerActivity
 import com.thing.bangkit.soulmood.adapter.GroupNameViewAdapter
 import com.thing.bangkit.soulmood.adapter.SliderCSFAdapter
+import com.thing.bangkit.soulmood.alarmreceiver.AlarmReceiver
+import com.thing.bangkit.soulmood.apiservice.ApiConfig
 import com.thing.bangkit.soulmood.databinding.AddNewGroupDialogBinding
 import com.thing.bangkit.soulmood.databinding.FragmentHomeBinding
 import com.thing.bangkit.soulmood.model.ChatGroup
 import com.thing.bangkit.soulmood.model.ComingSoonFeatureSliderItem
 import com.thing.bangkit.soulmood.viewmodel.GroupChatViewModel
-import java.lang.Math.abs
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class HomeFragment : Fragment() {
 
@@ -52,6 +59,10 @@ class HomeFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         binding.apply {
+            ivChatbot.setOnClickListener {
+                startActivity(Intent(requireActivity(), ChatbotActivity::class.java))
+            }
+            getQuoteOfTheDay()
             val adapter = GroupNameViewAdapter("homeFragment")
             rvGroupName.layoutManager = LinearLayoutManager(
                 context,
@@ -99,14 +110,14 @@ class HomeFragment : Fragment() {
                 }
             })
 
-            var sliderItem = ArrayList<ComingSoonFeatureSliderItem>()
+            val sliderItem = ArrayList<ComingSoonFeatureSliderItem>()
             sliderItem.add(ComingSoonFeatureSliderItem(R.drawable.psikolog_konsultasi_soulmood))
             sliderItem.add(ComingSoonFeatureSliderItem(R.drawable.soulcare))
 
             val compositePageTransformer = CompositePageTransformer()
             compositePageTransformer.addTransformer(MarginPageTransformer(30))
             compositePageTransformer.addTransformer { page, position ->
-                val r = 1 - abs(position)
+                val r = 1 - kotlin.math.abs(position)
                 page.scaleY = 0.85f + r * 0.25f
             }
 
@@ -145,6 +156,35 @@ class HomeFragment : Fragment() {
     override fun onResume() {
         super.onResume()
         sliderHandler.postDelayed(sliderRunnable, 3000)
+    }
+
+    private fun FragmentHomeBinding.getQuoteOfTheDay() {
+        val service = ApiConfig.getRetrofitQuotes()
+        CoroutineScope(Dispatchers.IO).launch {
+            try{
+                val response = service.getDialyQuote(1)
+                withContext(Dispatchers.Main){
+                    if(response.code() == 200){
+                        if(response.body() != null){
+
+                            response.body()?.quotes?.get(0)?.let {
+                                tvMotivationQuotes.text = StringBuilder("${it.text} \n- ${it.author} -")
+
+                                AlarmReceiver().setRepeatingAlarm(
+                                    requireContext(),
+                                    "${it.text} \n- ${it.author} -"
+                                )
+                            }
+                        }
+                    }
+                }
+            }
+            catch (e: Throwable){
+                withContext(Dispatchers.Main) {
+                    Log.v("retrofit error", e.message.toString())
+                }
+            }
+        }
     }
 
     companion object {

@@ -18,7 +18,7 @@ import kotlinx.coroutines.withContext
 class MoodTrackerViewModel : ViewModel() {
 
     private var moodData = MutableLiveData<ArrayList<MoodData>>()
-    val date = DateHelper.getCurrentDate()
+    val date = DateHelper.getCurrentDateTime()
 
 
     fun insertMoodData(context: Context) {

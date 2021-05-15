@@ -38,7 +38,7 @@ class RegisterViewModel : ViewModel() {
                     map["name"] = name
                     map["email"] = auth.currentUser?.email.toString()
                     map["gender"] = gender
-                    map["created_at"] = DateHelper.getCurrentDate()
+                    map["created_at"] = DateHelper.getCurrentDateTime()
                     db.collection("users").document(id).set(
                         map
                     )

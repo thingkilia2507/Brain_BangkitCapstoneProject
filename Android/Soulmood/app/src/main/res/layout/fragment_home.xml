@@ -11,12 +11,13 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
+
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/constraint_dashboard"
-            android:padding="10dp"
             android:layout_width="match_parent"
             android:layout_height="100dp"
-            android:background="@drawable/dashboard_bg">
+            android:background="@drawable/dashboard_bg"
+            android:padding="10dp">
 
             <ImageView
                 android:id="@+id/iv_dashboard_mood"
@@ -94,31 +95,32 @@
                     app:rippleColor="@color/white"
                     app:tint="@color/white" />
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rv_group_name"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/small_margin"
-                android:layout_toEndOf="@+id/floating_add"
-                android:nestedScrollingEnabled="true" />
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rv_group_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/small_margin"
+                    android:layout_toEndOf="@+id/floating_add"
+                    android:nestedScrollingEnabled="true"/>
 
-            <com.google.android.material.floatingactionbutton.FloatingActionButton
-                android:id="@+id/floating_see_all"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_toRightOf="@+id/rv_group_name"
-                android:backgroundTint="@color/soulmood_primary_color"
-                android:elevation="@dimen/dp_16"
-                android:src="@drawable/ic_baseline_double_arrow_24"
-                app:elevation="@dimen/small_margin"
-                app:maxImageSize="@dimen/fab_image_size"
-                app:pressedTranslationZ="@dimen/dp_10"
-                app:rippleColor="@color/white"
+                <com.google.android.material.floatingactionbutton.FloatingActionButton
+                    android:id="@+id/floating_see_all"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@+id/rv_group_name"
+                    android:backgroundTint="@color/soulmood_primary_color"
+                    android:elevation="@dimen/dp_16"
+                    android:src="@drawable/ic_baseline_double_arrow_24"
+                    app:elevation="@dimen/small_margin"
+                    app:maxImageSize="@dimen/fab_image_size"
+                    app:pressedTranslationZ="@dimen/dp_10"
+                    app:rippleColor="@color/white"
 
-                app:tint="@color/white" />
-        </RelativeLayout>
+                    app:tint="@color/white" />
+            </RelativeLayout>
 
         </HorizontalScrollView>
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -126,21 +128,32 @@
             android:layout_marginTop="@dimen/margin_def"
             android:layout_marginEnd="@dimen/margin_big"
             android:fontFamily="sans-serif"
-            android:text="@string/today_motivation"
+            android:text="@string/quote_motivation"
             android:textColor="@color/ts_color_def"
             android:textSize="@dimen/ts_menu" />
 
-        <TextView
+        <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/margin_big"
-            android:layout_marginBottom="@dimen/margin_def"
             android:layout_marginEnd="@dimen/margin_big"
-            android:fontFamily="monospace"
-            tools:text="@tools:sample/lorem"
-            android:textAlignment="center"
-            android:textColor="@color/ts_color_def"
-            android:textSize="@dimen/ts_mid" />
+            android:layout_marginBottom="@dimen/margin_def"
+            app:cardCornerRadius="@dimen/corner_radius"
+            app:cardElevation="@dimen/card_elevation">
+
+            <TextView
+                android:id="@+id/tv_motivation_quotes"
+                android:background="@drawable/gradient_background"
+                android:padding="@dimen/small_padding"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/poppins_semibold"
+                android:textAlignment="center"
+                android:textColor="@color/soulmood_primary_color_dark"
+                android:textSize="@dimen/ts_standard"
+                tools:text="@tools:sample/lorem" />
+
+        </androidx.cardview.widget.CardView>
 
         <TextView
             android:layout_width="wrap_content"
@@ -159,7 +172,7 @@
             android:layout_height="match_parent"
             android:layout_marginStart="@dimen/margin_big"
             android:layout_marginEnd="@dimen/margin_big"
-            android:layout_marginBottom="@dimen/margin_def"/>
+            android:layout_marginBottom="@dimen/margin_def" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -173,14 +186,15 @@
             android:textSize="@dimen/ts_menu" />
 
         <ImageView
+            android:id="@+id/iv_chatbot"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:adjustViewBounds="true"
             android:layout_marginStart="@dimen/margin_big"
             android:layout_marginEnd="@dimen/margin_big"
+            android:adjustViewBounds="true"
+            android:contentDescription="@string/iv_soulmood_chat_kuy"
             android:padding="@dimen/padding_def"
-            android:src="@drawable/soulmood_chat_kuy"
-            android:contentDescription="@string/iv_soulmood_chat_kuy" />
+            android:src="@drawable/soulmood_chat_kuy" />
 
 
     </LinearLayout>

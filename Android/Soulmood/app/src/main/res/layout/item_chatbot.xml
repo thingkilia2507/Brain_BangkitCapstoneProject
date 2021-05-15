@@ -7,7 +7,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <LinearLayout
-        android:id="@+id/ll_sender"
+        android:id="@+id/ll_user_chatbot"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:minWidth="@dimen/width_minimum_card_chat"
@@ -18,15 +18,7 @@
         android:padding="5dp">
 
         <TextView
-            android:id="@+id/tv_sender_name"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            tools:text="You"
-            android:textAlignment="textEnd"
-            android:textColor="#FD8415" />
-
-        <TextView
-            android:id="@+id/tv_message_sender"
+            android:id="@+id/tv_message_user_chatbot"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="3dp"
@@ -36,17 +28,17 @@
             android:textColor="@color/black" />
 
         <TextView
-            android:id="@+id/tv_date_sender"
+            android:id="@+id/tv_date_user_chatbot"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="2dp"
-            tools:text="30-01-2021"
-            android:textSize="@dimen/ts_standard" />
+            android:layout_margin="2dp"
+            tools:text="@tools:sample/date/ddmmyy"
+            android:textSize="@dimen/ts_heading6" />
 
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/ll_receiver"
+        android:id="@+id/ll_soulmoo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@drawable/receiver"
@@ -56,14 +48,7 @@
         android:padding="5dp">
 
         <TextView
-            android:id="@+id/tv_receiver_name"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            tools:text="Philip"
-            android:textColor="#610430" />
-
-        <TextView
-            android:id="@+id/tv_message_receiver"
+            android:id="@+id/tv_message_soulmoo"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="3dp"
@@ -72,13 +57,13 @@
             android:textColor="@color/black" />
 
         <TextView
-            android:id="@+id/tv_date_receiver"
+            android:id="@+id/tv_date_soulmoo"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="2dp"
-            tools:text="30-01-2021"
+            android:layout_margin="2dp"
+            tools:text="@tools:sample/date/ddmmyy"
             android:textAlignment="textEnd"
-            android:textSize="@dimen/ts_standard" />
+            android:textSize="@dimen/ts_heading6" />
 
     </LinearLayout>
 </RelativeLayout>

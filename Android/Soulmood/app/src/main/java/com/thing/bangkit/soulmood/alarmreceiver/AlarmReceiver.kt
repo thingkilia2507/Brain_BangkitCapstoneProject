@@ -70,8 +70,8 @@ class AlarmReceiver : BroadcastReceiver() {
             .addNextIntent(notifDetailIntent)
             .getPendingIntent(ID_REPEATING, PendingIntent.FLAG_UPDATE_CURRENT)
 
-        val channelId = "Channel_1"
-        val channelName = "AlarmManager channel"
+        val channelId = "Channel_Soulmood_1"
+        val channelName = "Channel_Soulmood"
         val notificationManagerCompat =
             context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
         val alarmSound = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION)
