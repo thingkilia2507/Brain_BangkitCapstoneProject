@@ -12,7 +12,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_above="@+id/rl"
-        android:layout_margin="@dimen/margin_def"
+        android:layout_marginEnd="@dimen/margin_def"
+        android:layout_marginTop="@dimen/margin_def"
+        android:layout_marginStart="@dimen/margin_def"
         tools:listitem="@layout/item_chat" />
 
     <RelativeLayout
@@ -34,6 +36,7 @@
             android:hint="@string/enter_message_hint"
             android:inputType="textMultiLine|text"
             android:maxLines="7"
+            android:maxHeight="60dp"
             android:padding="@dimen/small_padding"
             android:scrollbars="vertical" />
 
@@ -45,6 +48,7 @@
             android:layout_margin="@dimen/small_margin"
             android:src="@drawable/ic_baseline_send_24"
             app:rippleColor="@color/white"
+            android:layout_centerVertical="true"
             app:tint="@color/white" />
     </RelativeLayout>
 

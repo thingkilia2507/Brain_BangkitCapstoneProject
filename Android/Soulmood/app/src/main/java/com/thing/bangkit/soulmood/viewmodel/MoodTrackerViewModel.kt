@@ -6,6 +6,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.Query
 import com.thing.bangkit.soulmood.helper.DateHelper
 import com.thing.bangkit.soulmood.helper.MyAsset
 import com.thing.bangkit.soulmood.helper.SharedPref
@@ -14,6 +15,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+
 
 class MoodTrackerViewModel : ViewModel() {
 
@@ -26,39 +28,64 @@ class MoodTrackerViewModel : ViewModel() {
             val insert1 = FirebaseFirestore.getInstance()
                 .collection("mood_tracker")
                 .document("mood_tracker1")
-                .collection(SharedPref.getPref(context,MyAsset.KEY_USER_ID).toString())
+                .collection(SharedPref.getPref(context, MyAsset.KEY_USER_ID).toString())
                 .document(date.take(4))
                 .collection(date.substring(5, 7))
                 .document(date.substring(8, 10))
-                //untuk mood perhari(slalu update)
-                insert1.set(mapOf("current_mood" to "good","mood_code" to "1",
-                    "updated_at" to date))
-            insert1.collection("list_mood").add(mapOf("mood" to "good","mood_code" to "1",
-                "updated_at" to date))
+            //untuk mood perhari(slalu update)
+            insert1.set(
+                mapOf(
+                    "current_mood" to "good", "mood_code" to "1",
+                    "updated_at" to date
+                )
+            )
+            insert1.collection("list_mood").add(
+                mapOf(
+                    "mood" to "good", "mood_code" to "1",
+                    "updated_at" to date
+                )
+            )
         }
     }
 
     //untuk dashboard
-    fun getDashboardMood(context: Context):LiveData<MoodData> {
+    fun getDashboardMood(context: Context): LiveData<MoodData> {
+        val date = DateHelper.getCurrentDateTime()
         val dataMood = MutableLiveData<MoodData>()
         viewModelScope.launch(IO) {
             val db = FirebaseFirestore.getInstance().collection("mood_tracker")
                 .document("mood_tracker1")
-                .collection(MyAsset.KEY_USER_ID)
+                .collection(SharedPref.getPref(context, MyAsset.KEY_USER_ID).toString())
                 .document(date.take(4))
                 .collection(date.substring(5, 7))
-                .document(date.substring(8,10))
-            withContext(Dispatchers.Default) {
-                db.get().addOnSuccessListener {
-                    dataMood.postValue(MoodData(it.getString("current_mood").toString(),it.getString("mood_code").toString(),it.getString("updated_at").toString()))
+                .orderBy("updated_at", Query.Direction.DESCENDING)
+                .limit(1)
+//                .document(date.substring(8,10))
+            withContext(Dispatchers.Main) {
+                db.addSnapshotListener { value, error ->
+                    if (value != null) {
+                        for (i in 0 until value.size()) {
+                            val doc = value.documents[i]
+                            dataMood.postValue(MoodData(doc.getString("current_mood").toString(),
+                            doc.getString("mood_code").toString(),
+                            doc.getString("updated_at").toString()))
+                        }
+                    }
+                    if(value?.documents?.size == 0){
+                        dataMood.postValue(MoodData("","",""))
+                    }
                 }
+
+
             }
         }
+
         return dataMood
     }
 
-//untuk chart
-    fun setMoodData(date:String, context: Context) {
+    //untuk chart
+    fun setMoodData(date: String, context: Context) {
+        moodData.value?.clear()
         val data = ArrayList<MoodData>()
         viewModelScope.launch(IO) {
             val db = FirebaseFirestore.getInstance().collection("mood_tracker")
@@ -67,16 +94,25 @@ class MoodTrackerViewModel : ViewModel() {
                 .document(date.take(4))
                 .collection(date.substring(5, 7))
             withContext(Dispatchers.Default) {
-                db.addSnapshotListener { value, error ->
+                db.get().addOnSuccessListener {value->
                     if (value != null) {
-                        for(i in 0 until value.size()){
+                        for (i in 0 until value.size()) {
+                            println("mydata" + value.documents[i])
                             val doc = value.documents[i]
-                            data.add(MoodData(doc.getString("current_mood").toString(),
-                            doc.getString("mood_code").toString(),doc.getString("updated_at").toString()))
+                            data.add(
+                                MoodData(
+                                    doc.getString("current_mood").toString(),
+                                    doc.getString("mood_code").toString(),
+                                    doc.getString("updated_at").toString()
+                                )
+                            )
                         }
                         moodData.postValue(data)
                     }
                 }
+
+
+
 
             }
         }

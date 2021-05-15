@@ -2,10 +2,13 @@ package com.thing.bangkit.soulmood.activity
 
 import android.content.Intent
 import android.os.Bundle
-import android.os.Handler
-import android.text.InputType
+import android.text.Editable
+import android.text.TextWatcher
+import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import com.google.android.material.textfield.TextInputLayout
+import android.os.Handler
 import cn.pedant.SweetAlert.SweetAlertDialog
 import com.thing.bangkit.soulmood.R
 import com.thing.bangkit.soulmood.databinding.ActivityRegisterBinding
@@ -39,6 +42,27 @@ class RegisterActivity : AppCompatActivity() {
 
 
         binding?.apply {
+            etPassword.addTextChangedListener(object : TextWatcher {
+                override fun beforeTextChanged(
+                    s: CharSequence,
+                    start: Int,
+                    count: Int,
+                    after: Int
+                ) {
+                }
+                override fun onTextChanged(
+                    s: CharSequence,
+                    start: Int,
+                    before: Int,
+                    count: Int
+                ) {
+                }
+                override fun afterTextChanged(s: Editable) {
+                    if (tfPassword.endIconMode == TextInputLayout.END_ICON_NONE) tfPassword.endIconMode =
+                        TextInputLayout.END_ICON_PASSWORD_TOGGLE
+                }
+            })
+
             btnRegister.setOnClickListener {
                 val name = etName.text.toString()
                 val email = etEmail.text.toString()
@@ -47,12 +71,30 @@ class RegisterActivity : AppCompatActivity() {
 
                 if (name.isEmpty()) etName.error = getString(R.string.enter_your_name)
                 if (email.isEmpty()) etEmail.error = getString(R.string.enter_your_email)
-                if (password.isEmpty()) etPassword.error = getString(R.string.enter_your_pass)
+
+                if (password.isEmpty()){
+                    tfPassword.endIconMode = TextInputLayout.END_ICON_NONE
+                    etPassword.error = getString(R.string.enter_your_pass)
+                }
+
                 if (gender.isEmpty()) Toasty.error(
                     this@RegisterActivity,
                     getString(R.string.choose_your_gender),
                     Toasty.LENGTH_SHORT
                 ).show()
+
+
+                if (name.isEmpty() && email.isEmpty() && password.isEmpty() && gender.isEmpty()) {
+                    etName.error = getString(R.string.enter_your_name)
+                    etEmail.error = getString(R.string.enter_your_email)
+                    etPassword.error = getString(R.string.enter_your_pass)
+                    tfPassword.endIconMode = TextInputLayout.END_ICON_NONE
+                    Toasty.error(
+                        this@RegisterActivity,
+                        getString(R.string.choose_your_gender),
+                        Toasty.LENGTH_SHORT
+                    ).show()
+                }
 
                 if (name.isNotEmpty() && email.isNotEmpty() && password.isNotEmpty() && gender.isNotEmpty()) {
 
@@ -80,27 +122,9 @@ class RegisterActivity : AppCompatActivity() {
                 }
             }
 
-
             tvLogin.setOnClickListener {
                 startActivity(Intent(this@RegisterActivity, LoginActivity::class.java))
                 finish()
-            }
-
-            var visibility = false
-            ivEyePass.setOnClickListener {
-                if (visibility){
-                    visibility = false
-                    etPassword.inputType =
-                        InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_VARIATION_PASSWORD
-                    etPassword.setSelection(etPassword.text.length)
-                    ivEyePass.setImageResource(R.drawable.ic_baseline_visibility_24)
-
-                }else{
-                    visibility = true
-                    etPassword.inputType = InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD
-                    etPassword.setSelection(etPassword.text.length)
-                    ivEyePass.setImageResource(R.drawable.ic_baseline_visibility_off_24)
-                }
             }
 
 

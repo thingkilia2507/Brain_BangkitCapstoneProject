@@ -2,7 +2,7 @@ package com.thing.bangkit.soulmood.activity
 
 import android.graphics.Color
 import android.os.Bundle
-import android.widget.Toast
+import android.view.View
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
@@ -19,6 +19,7 @@ import com.thing.bangkit.soulmood.helper.DateHelper
 import com.thing.bangkit.soulmood.viewmodel.MoodTrackerViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import java.util.*
 import kotlin.collections.ArrayList
@@ -42,20 +43,25 @@ class MoodTrackerActivity : AppCompatActivity() {
         binding = ActivityMoodTrackerBinding.inflate(layoutInflater)
         setContentView(binding?.root)
 
+
+        supportActionBar?.title = getString(R.string.your_mood_recap)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true);
+
+
         moodTrackerViewModel.setMoodData(DateHelper.getCurrentDateTime(), this)
 
+        moodTrackerViewModel.setMoodData(DateHelper.getCurrentDateTime(), this)
         moodTrackerViewModel.getMoodData().observe(this, {
-            it.let {
-                lineChartArrayEntry.clear()
-                dateList.clear()
-                angry.clear()
-                joy.clear()
-                good.clear()
-                sad.clear()
-                fear.clear()
-                love.clear()
-
-                CoroutineScope(Dispatchers.IO).launch {
+            lineChartArrayEntry.clear()
+            dateList.clear()
+            angry.clear()
+            joy.clear()
+            good.clear()
+            sad.clear()
+            fear.clear()
+            love.clear()
+            if(it.isNotEmpty()){
+                CoroutineScope(Dispatchers.Default).launch {
                     for (i in 0 until it.size) {
                         lineChartArrayEntry.add(Entry(i.toFloat(), it[i].mood_code.toFloat()))
                         dateList.add(it[i].date.substring(8, 10))
@@ -69,18 +75,45 @@ class MoodTrackerActivity : AppCompatActivity() {
                         }
                     }
                 }
-                Toast.makeText(this, "$dateList", Toast.LENGTH_SHORT).show()
-                lineChart()
+
+                CoroutineScope(Dispatchers.Main).launch {
+                    delay(300)
+                    lineChart()
+                }
+            }else{
+                binding?.apply {
+                    lineChart.visibility = View.GONE
+                    noDataAnimation.visibility = View.VISIBLE
+                }
+            }
+
+            CoroutineScope(Dispatchers.Main).launch {
+                delay(300)
+                binding?.apply {
+                    tvJoyScore.text = joy.size.toString()
+                    tvLoveScore.text = love.size.toString()
+                    tvGoodScore.text = good.size.toString()
+                    tvFearScore.text = fear.size.toString()
+                    tvSadScore.text = sad.size.toString()
+                    tvAngryScore.text = angry.size.toString()
+                }
             }
         })
 
         binding?.apply {
+            tvMoodDate.text = DateHelper.convertDateToMonthYearFormat(DateHelper.getCurrentDateTime().take(7))
             floatingFilterByDate.setOnClickListener { datePicker() }
         }
+
     }
 
     private fun lineChart() {
+        binding?.apply {
+            noDataAnimation.visibility = View.GONE
+            lineChart.visibility = View.VISIBLE
+        }
         val lineDataSet = LineDataSet(lineChartArrayEntry, "Rekapan Mood Anda")
+        lineDataSet.notifyDataSetChanged()
         val color = ContextCompat.getColor(this, R.color.soulmood_primary_color)
         lineDataSet.color = color
         lineDataSet.lineWidth = 4f
@@ -93,14 +126,13 @@ class MoodTrackerActivity : AppCompatActivity() {
         val desc = Description()
         desc.text = ""
         binding?.apply {
+
+            lineChart.notifyDataSetChanged()
+            lineChart.invalidate()
             lineChart.description = desc
 
             var lineData = LineData(lineDataSet)
 
-
-//                    if(dateList.size < 3){
-//                        barData.barWidth = 0.2f
-//                    }
 
 
             lineChart.data = lineData
@@ -120,14 +152,9 @@ class MoodTrackerActivity : AppCompatActivity() {
             xAxis.labelCount = dateList.size
             xAxis.position = XAxis.XAxisPosition.BOTTOM
             lineChart.animate()
-            lineChart.invalidate()
 
-            tvJoyScore.text = joy.size.toString()
-            tvLoveScore.text = love.size.toString()
-            tvGoodScore.text = good.size.toString()
-            tvFearScore.text = fear.size.toString()
-            tvSadScore.text = sad.size.toString()
-            tvAngryScore.text = angry.size.toString()
+
+
 
         }
     }
@@ -145,10 +172,15 @@ class MoodTrackerActivity : AppCompatActivity() {
         val dialogFragment = MonthYearPickerDialogFragment.getInstance(month, year, title)
         dialogFragment.show(supportFragmentManager, null)
         dialogFragment.setOnDateSetListener { year, monthOfYear ->
-            Toast.makeText(this, "$year-0" + (monthOfYear + 1), Toast.LENGTH_SHORT).show()
             moodTrackerViewModel.setMoodData("$year-0" + (monthOfYear + 1), this)
+            binding?.apply{
+                tvMoodDate.text = DateHelper.convertDateToMonthYearFormat("$year-0" + (monthOfYear + 1))
+            }
         }
     }
 
-
+    override fun onSupportNavigateUp(): Boolean {
+        onBackPressed()
+        return super.onSupportNavigateUp()
+    }
 }

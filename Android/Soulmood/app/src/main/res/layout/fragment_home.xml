@@ -21,49 +21,55 @@
 
             <ImageView
                 android:id="@+id/iv_dashboard_mood"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginStart="12dp"
                 android:src="@drawable/soulmood_logo"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <TextView
-                android:id="@+id/tv_dashboard_name"
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="12dp"
-                android:maxLines="1"
-                android:text="Hi, Philip"
-                android:textColor="@color/black"
-                android:textSize="18sp"
+                android:orientation="vertical"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.032"
+                app:layout_constraintHorizontal_bias="0.059"
                 app:layout_constraintStart_toEndOf="@+id/iv_dashboard_mood"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.523">
 
-            <TextView
-                android:id="@+id/tv_dashboard_date"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Kamis, 22 April 2021 (terakhir diubah)"
-                android:textSize="14sp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.089"
-                app:layout_constraintStart_toEndOf="@+id/iv_dashboard_mood"
-                app:layout_constraintTop_toBottomOf="@+id/tv_dashboard_name" />
+                <TextView
+                    android:id="@+id/tv_dashboard_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:maxLines="1"
+                    android:text="Hi, Philip"
+                    android:fontFamily="@font/poppins_semibold"
+                    android:textSize="16sp"
 
-            <TextView
-                android:id="@+id/tv_dashboard_mood"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Good Mood"
-                android:textColor="@color/black"
-                android:textSize="18sp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.035"
-                app:layout_constraintStart_toEndOf="@+id/iv_dashboard_mood"
-                app:layout_constraintTop_toBottomOf="@+id/tv_dashboard_date" />
+                    />
+
+                <TextView
+                    android:id="@+id/tv_dashboard_date"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="-5dp"
+                    android:visibility="gone"
+                    tools:text="Kamis, 22 April 2021 (terakhir diubah)"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:id="@+id/tv_dashboard_mood"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Semoga Harimu menyenangkan ya :)"
+                    android:textColor="@color/black"
+                    android:textSize="16sp" />
+
+            </LinearLayout>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -94,6 +100,15 @@
                     app:pressedTranslationZ="@dimen/dp_10"
                     app:rippleColor="@color/white"
                     app:tint="@color/white" />
+                <TextView
+                    android:layout_below="@+id/floating_add"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/poppins_semibold"
+                    android:text="@string/add"
+                    android:textSize="13sp"
+                    android:layout_marginTop="@dimen/small_margin"
+                    />
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/rv_group_name"
@@ -103,21 +118,34 @@
                     android:layout_toEndOf="@+id/floating_add"
                     android:nestedScrollingEnabled="true"/>
 
-                <com.google.android.material.floatingactionbutton.FloatingActionButton
-                    android:id="@+id/floating_see_all"
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/floating_see_all"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@+id/rv_group_name"
+                android:backgroundTint="@color/soulmood_primary_color"
+                android:elevation="@dimen/dp_16"
+                android:src="@drawable/ic_baseline_double_arrow_24"
+                app:elevation="@dimen/small_margin"
+                app:maxImageSize="@dimen/fab_image_size"
+                app:pressedTranslationZ="@dimen/dp_10"
+                app:rippleColor="@color/white"
+
+                app:tint="@color/white" />
+
+                <TextView
+                    android:layout_below="@+id/floating_see_all"
+                    android:layout_toRightOf="@+id/rv_group_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_toRightOf="@+id/rv_group_name"
-                    android:backgroundTint="@color/soulmood_primary_color"
-                    android:elevation="@dimen/dp_16"
-                    android:src="@drawable/ic_baseline_double_arrow_24"
-                    app:elevation="@dimen/small_margin"
-                    app:maxImageSize="@dimen/fab_image_size"
-                    app:pressedTranslationZ="@dimen/dp_10"
-                    app:rippleColor="@color/white"
+                    android:layout_centerHorizontal="true"
+                    android:fontFamily="@font/poppins_semibold"
+                    android:text="@string/others"
+                    android:textSize="13sp"
+                    android:layout_margin="@dimen/small_margin"
+                   />
+        </RelativeLayout>
 
-                    app:tint="@color/white" />
-            </RelativeLayout>
 
         </HorizontalScrollView>
 

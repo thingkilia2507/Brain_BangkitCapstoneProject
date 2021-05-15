@@ -219,6 +219,7 @@ class ProfileFragment : Fragment(), IProgressResult {
                 .changeAlertType(SweetAlertDialog.SUCCESS_TYPE)
             val intent = Intent(mContext, LoginActivity::class.java)
             mContext.startActivity(intent)
+            requireActivity().finish()
             sweetAlertDialog.dismiss()
         }
         dialog.show()

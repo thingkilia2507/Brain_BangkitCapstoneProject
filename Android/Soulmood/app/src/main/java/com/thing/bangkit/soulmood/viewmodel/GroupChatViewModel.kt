@@ -99,7 +99,7 @@ class GroupChatViewModel : ViewModel() {
     fun setDataChat(group_id: String) {
         viewModelScope.launch(Dispatchers.IO) {
             val database =db.collection("groups_chat").document(group_id).collection("message")
-                .orderBy("created_at", Query.Direction.ASCENDING)
+                .orderBy("created_at", Query.Direction.DESCENDING)
             withContext(Dispatchers.Main){
                 database.addSnapshotListener { value, _ ->
                     if (value != null) {

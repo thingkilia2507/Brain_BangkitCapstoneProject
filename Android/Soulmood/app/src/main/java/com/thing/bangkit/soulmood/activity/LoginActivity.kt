@@ -19,6 +19,7 @@ import com.thing.bangkit.soulmood.viewmodel.LoginViewModel
 
 class LoginActivity : AppCompatActivity(), IProgressResult {
     //view model
+
     private  val loginViewModel:LoginViewModel by viewModels()
     private lateinit var alerDialog: SweetAlertDialog
     var binding :ActivityLoginBinding? = null
@@ -37,7 +38,6 @@ class LoginActivity : AppCompatActivity(), IProgressResult {
                     after: Int
                 ) {
                 }
-
                 override fun onTextChanged(
                     s: CharSequence,
                     start: Int,
@@ -45,7 +45,6 @@ class LoginActivity : AppCompatActivity(), IProgressResult {
                     count: Int
                 ) {
                 }
-
                 override fun afterTextChanged(s: Editable) {
                     if (tfPassword.endIconMode == TextInputLayout.END_ICON_NONE) tfPassword.endIconMode =
                         TextInputLayout.END_ICON_PASSWORD_TOGGLE
@@ -56,7 +55,7 @@ class LoginActivity : AppCompatActivity(), IProgressResult {
                 val email = etEmail.text.toString()
                 val password = etPassword.text.toString()
 
-                if(email.isEmpty())etEmail.error = getString(R.string.enter_your_email)
+                if (email.isEmpty()) etEmail.error = getString(R.string.enter_your_email)
                 if (password.isEmpty()) {
                     tfPassword.endIconMode = TextInputLayout.END_ICON_NONE
                     etPassword.error = getString(R.string.input_old_password)
@@ -95,13 +94,14 @@ class LoginActivity : AppCompatActivity(), IProgressResult {
                 finish()
             }
 
-            tvForgotPassword.setOnClickListener { startActivity(
-                Intent(
-                    this@LoginActivity,
-                    ForgotPasswordActivity::class.java
+            tvForgotPassword.setOnClickListener {
+                startActivity(
+                    Intent(
+                        this@LoginActivity,
+                        ForgotPasswordActivity::class.java
+                    )
                 )
-            ) }
-
+            }
         }
 
 
