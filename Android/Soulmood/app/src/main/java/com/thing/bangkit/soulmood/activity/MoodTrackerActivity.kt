@@ -43,11 +43,14 @@ class MoodTrackerActivity : AppCompatActivity() {
         binding = ActivityMoodTrackerBinding.inflate(layoutInflater)
         setContentView(binding?.root)
 
+
         supportActionBar?.title = getString(R.string.your_mood_recap)
         supportActionBar?.setDisplayHomeAsUpEnabled(true);
 
 
-        moodTrackerViewModel.setMoodData(DateHelper.getCurrentDate(), this)
+        moodTrackerViewModel.setMoodData(DateHelper.getCurrentDateTime(), this)
+
+        moodTrackerViewModel.setMoodData(DateHelper.getCurrentDateTime(), this)
         moodTrackerViewModel.getMoodData().observe(this, {
             lineChartArrayEntry.clear()
             dateList.clear()
@@ -98,7 +101,7 @@ class MoodTrackerActivity : AppCompatActivity() {
         })
 
         binding?.apply {
-            tvMoodDate.text = DateHelper.convertDateToMonthYearFormat(DateHelper.getCurrentDate().take(7))
+            tvMoodDate.text = DateHelper.convertDateToMonthYearFormat(DateHelper.getCurrentDateTime().take(7))
             floatingFilterByDate.setOnClickListener { datePicker() }
         }
 

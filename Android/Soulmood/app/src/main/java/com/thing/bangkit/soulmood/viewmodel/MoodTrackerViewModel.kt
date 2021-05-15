@@ -20,7 +20,7 @@ import kotlinx.coroutines.withContext
 class MoodTrackerViewModel : ViewModel() {
 
     private var moodData = MutableLiveData<ArrayList<MoodData>>()
-    val date = DateHelper.getCurrentDate()
+    val date = DateHelper.getCurrentDateTime()
 
 
     fun insertMoodData(context: Context) {
@@ -50,7 +50,7 @@ class MoodTrackerViewModel : ViewModel() {
 
     //untuk dashboard
     fun getDashboardMood(context: Context): LiveData<MoodData> {
-        val date = DateHelper.getCurrentDate()
+        val date = DateHelper.getCurrentDateTime()
         val dataMood = MutableLiveData<MoodData>()
         viewModelScope.launch(IO) {
             val db = FirebaseFirestore.getInstance().collection("mood_tracker")

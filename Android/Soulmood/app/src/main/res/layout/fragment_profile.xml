@@ -52,7 +52,7 @@
             android:layout_marginStart="@dimen/mini_size"
             android:layout_marginEnd="@dimen/mini_size"
             android:layout_marginBottom="@dimen/small_margin"
-            android:padding="@dimen/padding_mid"
+            android:padding="@dimen/padding_def"
             app:cardCornerRadius="@dimen/corner_radius"
             app:cardElevation="@dimen/small_elevation">
 
@@ -71,7 +71,7 @@
                     android:adjustViewBounds="true"
                     android:background="@color/soulmood_primary_color"
                     android:contentDescription="@string/ic_identity_edit"
-                    android:padding="@dimen/padding_mid"
+                    android:padding="@dimen/padding_def"
                     android:src="@drawable/ic_edit"
                     app:tint="@color/white" />
 
@@ -95,7 +95,7 @@
             android:layout_marginStart="@dimen/mini_size"
             android:layout_marginEnd="@dimen/mini_size"
             android:layout_marginBottom="@dimen/small_margin"
-            android:padding="@dimen/padding_mid"
+            android:padding="@dimen/padding_def"
             app:cardCornerRadius="@dimen/corner_radius"
             app:cardElevation="@dimen/small_elevation">
 
@@ -114,7 +114,7 @@
                     android:adjustViewBounds="true"
                     android:background="@color/soulmood_primary_color"
                     android:contentDescription="@string/ic_password"
-                    android:padding="@dimen/padding_mid"
+                    android:padding="@dimen/padding_def"
                     android:src="@drawable/ic_lock"
                     app:tint="@color/white" />
 
@@ -139,7 +139,7 @@
             android:layout_marginStart="@dimen/mini_size"
             android:layout_marginEnd="@dimen/mini_size"
             android:layout_marginBottom="@dimen/small_margin"
-            android:padding="@dimen/padding_mid"
+            android:padding="@dimen/padding_def"
             app:cardCornerRadius="@dimen/corner_radius"
             app:cardElevation="@dimen/small_elevation">
 
@@ -158,7 +158,7 @@
                     android:adjustViewBounds="true"
                     android:background="@color/soulmood_primary_color"
                     android:contentDescription="@string/ic_log_out"
-                    android:padding="@dimen/padding_mid"
+                    android:padding="@dimen/padding_def"
                     android:src="@drawable/ic_logout"
                     app:tint="@color/white" />
 

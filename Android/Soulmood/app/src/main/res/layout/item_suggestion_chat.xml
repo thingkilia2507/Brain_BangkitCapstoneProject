@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    app:cardCornerRadius="@dimen/corner_radius"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_margin="@dimen/small_margin"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <TextView
+        android:id="@+id/tv_recommend_chat"
+        android:layout_width="wrap_content"
+        android:padding="@dimen/padding_def"
+        android:background="@drawable/gradient_background"
+        tools:text = "@tools:sample/lorem"
+        android:textColor="@color/black"
+        android:layout_height="match_parent"/>
+
+</androidx.cardview.widget.CardView>

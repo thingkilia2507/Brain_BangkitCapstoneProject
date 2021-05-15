@@ -1,7 +1,6 @@
 package com.thing.bangkit.soulmood.viewmodel
 
 import android.content.Context
-import android.widget.Toast
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -10,6 +9,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.thing.bangkit.soulmood.R
 import com.thing.bangkit.soulmood.helper.DateHelper
+import es.dmoral.toasty.Toasty
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -38,7 +38,7 @@ class RegisterViewModel : ViewModel() {
                     map["name"] = name
                     map["email"] = auth.currentUser?.email.toString()
                     map["gender"] = gender
-                    map["created_at"] = DateHelper.getCurrentDate()
+                    map["created_at"] = DateHelper.getCurrentDateTime()
                     db.collection("users").document(id).set(
                         map
                     )
@@ -47,13 +47,13 @@ class RegisterViewModel : ViewModel() {
                     status.postValue(false)
                     it.message?.let { message->
                         if (message.equals("The given password is invalid. [ Password should be at least 6 characters ]",true)) {
-                            Toast.makeText(
+                            Toasty.error(
                                 context,
                                 context.getString(R.string.invalid_password_message),
-                                Toast.LENGTH_SHORT
+                                Toasty.LENGTH_SHORT
                             ).show()
                         } else {
-                            Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
+                            Toasty.error(context, message, Toasty.LENGTH_SHORT).show()
                         }
                     }
                 }

@@ -15,8 +15,7 @@
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true">
+        android:layout_height="match_parent">
 
         <com.google.android.material.bottomappbar.BottomAppBar
             android:id="@+id/bottomAppBar"
@@ -25,8 +24,7 @@
             android:layout_height="@dimen/high_of_bottom_navigation"
             android:layout_gravity="bottom"
             android:backgroundTint="@color/soulmood_primary_color"
-            app:fabAlignmentMode="center"
-            app:fabCradleRoundedCornerRadius="@dimen/round_fab_corner">
+            app:fabAlignmentMode="center">
 
         </com.google.android.material.bottomappbar.BottomAppBar>
 

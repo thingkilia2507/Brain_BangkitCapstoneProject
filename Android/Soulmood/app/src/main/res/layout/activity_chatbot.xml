@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/gradient_background_chat"
+    tools:context=".activity.ChatbotActivity">
+
+    <LinearLayout
+        android:id="@+id/ll_action_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/iv_back"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/height_action_bar"
+            android:adjustViewBounds="true"
+            android:padding="@dimen/small_padding"
+            android:src="@drawable/ic_baseline_arrow_back_24"
+            app:tint="@color/white" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/height_action_bar"
+            android:adjustViewBounds="true"
+            android:layout_marginEnd="@dimen/small_margin"
+            android:padding="@dimen/mini_size"
+            android:src="@drawable/soulmood_circle_black" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/height_action_bar"
+            android:fontFamily="@font/poppins_semibold"
+            android:text="@string/soulmoo"
+            android:textColor="@color/black"
+            android:textSize="@dimen/ts_heading5" />
+    </LinearLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_chatbot"
+        android:layout_width="match_parent"
+        android:overScrollMode="never"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/ll_type_message"
+        android:layout_below="@+id/ll_action_bar"
+        android:layout_margin="@dimen/margin_def"
+        tools:listitem="@layout/item_chatbot" />
+
+    <LinearLayout
+        android:id="@+id/ll_type_message"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_alignParentBottom="true">
+
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_suggestion_message"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_def"
+            android:layout_marginEnd="@dimen/margin_def"
+            android:orientation="horizontal"
+            tools:listitem="@layout/item_suggestion_chat"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <EditText
+                android:id="@+id/et_chatbot"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_margin="@dimen/small_margin"
+                android:layout_toStartOf="@+id/fab_chatbot_send"
+                android:background="@drawable/custom_edittext"
+                android:elevation="@dimen/small_elevation"
+                android:hint="@string/enter_message_hint"
+                android:inputType="textMultiLine|text"
+                android:maxLines="7"
+                android:padding="@dimen/small_padding"
+                android:scrollbars="vertical" />
+
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/fab_chatbot_send"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_margin="@dimen/small_margin"
+                android:src="@drawable/ic_baseline_send_24"
+                app:rippleColor="@color/white"
+                app:tint="@color/white" />
+        </RelativeLayout>
+    </LinearLayout>
+</RelativeLayout>
