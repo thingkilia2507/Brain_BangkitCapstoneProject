@@ -14,7 +14,6 @@
     <string name="enter_your_email">Masukkan Email Anda</string>
     <string name="enter_your_pass">Masukkan Password Anda</string>
     <string name="choose_your_gender">Pilih Jenis Kelamin Anda</string>
-    <string name="add">Tambah</string>
     <string name="enter_new_group">Masukkan Nama Grup…</string>
     <string name="create_new_group">Buat Grup Baru</string>
     <string name="group_id">group_id</string>
@@ -82,4 +81,7 @@
     <string name="account_validation">Validasi Akun</string>
     <string name="send">kirim</string>
     <string name="invalid_password_message">Kata sandi yang diberikan tidak valid. [Kata sandi harus terdiri dari setidaknya 6 karakter]</string>
+    <string name="your_mood_recap">Rekapan Mood Anda</string>
+    <string name="add">Tambah</string>
+    <string name="others">Lainnya</string>
 </resources>

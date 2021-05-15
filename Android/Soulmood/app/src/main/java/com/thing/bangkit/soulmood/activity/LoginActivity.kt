@@ -16,8 +16,8 @@ import com.thing.bangkit.soulmood.viewmodel.LoginViewModel
 
 class LoginActivity : AppCompatActivity() {
     //view model
-    private  val loginViewModel:LoginViewModel by viewModels()
-    var binding :ActivityLoginBinding? = null
+    private val loginViewModel: LoginViewModel by viewModels()
+    var binding: ActivityLoginBinding? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityLoginBinding.inflate(layoutInflater)
@@ -25,7 +25,6 @@ class LoginActivity : AppCompatActivity() {
 
         binding?.apply {
             var visibility = false
-
             etPassword.addTextChangedListener(object : TextWatcher {
                 override fun beforeTextChanged(
                     s: CharSequence,
@@ -34,7 +33,6 @@ class LoginActivity : AppCompatActivity() {
                     after: Int
                 ) {
                 }
-
                 override fun onTextChanged(
                     s: CharSequence,
                     start: Int,
@@ -42,7 +40,6 @@ class LoginActivity : AppCompatActivity() {
                     count: Int
                 ) {
                 }
-
                 override fun afterTextChanged(s: Editable) {
                     if (tfPassword.endIconMode == TextInputLayout.END_ICON_NONE) tfPassword.endIconMode =
                         TextInputLayout.END_ICON_PASSWORD_TOGGLE
@@ -53,47 +50,46 @@ class LoginActivity : AppCompatActivity() {
                 val email = etEmail.text.toString()
                 val password = etPassword.text.toString()
 
-                if(email.isEmpty())etEmail.error = getString(R.string.enter_your_email)
+                if (email.isEmpty()) etEmail.error = getString(R.string.enter_your_email)
                 if (password.isEmpty()) {
                     tfPassword.endIconMode = TextInputLayout.END_ICON_NONE
                     etPassword.error = getString(R.string.input_old_password)
                 }
 
-                if(email.isNotEmpty() && password.isNotEmpty()){
-                    loginViewModel.login(email, password, this@LoginActivity).observe(this@LoginActivity,
-                        {
-                            if (it != null) {
-                                Log.d("dataku", "onCreate: notnull")
-                                //save data to shared preference
-                                SharedPref.setPref(
-                                    this@LoginActivity,
-                                    MyAsset.KEY_NAME,
-                                    it.name
-                                )
-                                SharedPref.setPref(
-                                    this@LoginActivity,
-                                    MyAsset.KEY_EMAIL,
-                                    it.email
-                                )
-                              
-                                SharedPref.setPref(
-                                    this@LoginActivity,
-                                    MyAsset.KEY_USER_ID,
-                                    it.id
-                                )
-
-                                //intent
-                                startActivity(
-                                    Intent(
+                if (email.isNotEmpty() && password.isNotEmpty()) {
+                    loginViewModel.login(email, password, this@LoginActivity)
+                        .observe(this@LoginActivity,
+                            {
+                                if (it != null) {
+                                    Log.d("dataku", "onCreate: notnull")
+                                    //save data to shared preference
+                                    SharedPref.setPref(
                                         this@LoginActivity,
-                                        MainActivity::class.java
+                                        MyAsset.KEY_NAME,
+                                        it.name
                                     )
-                                )
-                                finish()
-                            }else{
-                                Log.d("dataku", "onCreate: NULL")
-                            }
-                        })
+                                    SharedPref.setPref(
+                                        this@LoginActivity,
+                                        MyAsset.KEY_EMAIL,
+                                        it.email
+                                    )
+                                    SharedPref.setPref(
+                                        this@LoginActivity,
+                                        MyAsset.KEY_USER_ID,
+                                        it.id
+                                    )
+                                    //intent
+                                    startActivity(
+                                        Intent(
+                                            this@LoginActivity,
+                                            MainActivity::class.java
+                                        )
+                                    )
+                                    finish()
+                                } else {
+                                    Log.d("dataku", "onCreate: NULL")
+                                }
+                            })
                 }
             }
 
@@ -103,13 +99,14 @@ class LoginActivity : AppCompatActivity() {
                 finish()
             }
 
-            tvForgotPassword.setOnClickListener { startActivity(
-                Intent(
-                    this@LoginActivity,
-                    ForgotPasswordActivity::class.java
+            tvForgotPassword.setOnClickListener {
+                startActivity(
+                    Intent(
+                        this@LoginActivity,
+                        ForgotPasswordActivity::class.java
+                    )
                 )
-            ) }
-
+            }
         }
 
 

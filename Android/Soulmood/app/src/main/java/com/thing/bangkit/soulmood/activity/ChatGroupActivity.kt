@@ -22,10 +22,12 @@ class ChatGroupActivity : AppCompatActivity() {
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         groupChatViewModel.setDataChat(groupId.toString())
 
-
         binding?.apply {
             val adapter = GroupChatViewAdapter()
-            rvChatGroup.layoutManager = LinearLayoutManager(this@ChatGroupActivity)
+            val linearLayout = LinearLayoutManager(this@ChatGroupActivity)
+            //auto scroll recyclerview to bottom
+            linearLayout.reverseLayout = true
+            rvChatGroup.layoutManager = linearLayout
             rvChatGroup.adapter = adapter
 
             floatingSend.setOnClickListener {

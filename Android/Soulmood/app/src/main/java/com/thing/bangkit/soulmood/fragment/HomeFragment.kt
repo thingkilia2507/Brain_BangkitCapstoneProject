@@ -9,6 +9,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.Window
+import android.widget.Button
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -16,26 +18,27 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.CompositePageTransformer
 import androidx.viewpager2.widget.MarginPageTransformer
 import androidx.viewpager2.widget.ViewPager2
+import com.google.android.material.textfield.TextInputEditText
 import com.thing.bangkit.soulmood.R
 import com.thing.bangkit.soulmood.activity.ChatGroupActivity
 import com.thing.bangkit.soulmood.activity.GroupNameActivity
 import com.thing.bangkit.soulmood.activity.MoodTrackerActivity
 import com.thing.bangkit.soulmood.adapter.GroupNameViewAdapter
 import com.thing.bangkit.soulmood.adapter.SliderCSFAdapter
-import com.thing.bangkit.soulmood.databinding.AddNewGroupDialogBinding
 import com.thing.bangkit.soulmood.databinding.FragmentHomeBinding
+import com.thing.bangkit.soulmood.helper.MyAsset
+import com.thing.bangkit.soulmood.helper.SharedPref
 import com.thing.bangkit.soulmood.model.ChatGroup
 import com.thing.bangkit.soulmood.model.ComingSoonFeatureSliderItem
 import com.thing.bangkit.soulmood.viewmodel.GroupChatViewModel
+import com.thing.bangkit.soulmood.viewmodel.MoodTrackerViewModel
 import java.lang.Math.abs
 
 class HomeFragment : Fragment() {
-
     private lateinit var sliderRunnable: Runnable
-   
     private val groupChatViewModel: GroupChatViewModel by viewModels()
+    private val moodTrackerViewModel : MoodTrackerViewModel by viewModels()
     private lateinit var binding: FragmentHomeBinding
-    private var bindingDialog: AddNewGroupDialogBinding? = null
 
     private val sliderHandler = Handler(Looper.getMainLooper())
     override fun onCreateView(
@@ -43,14 +46,13 @@ class HomeFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentHomeBinding.inflate(inflater, container, false)
-        bindingDialog = AddNewGroupDialogBinding.inflate(inflater, container, false)
         return binding.root
 
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+        setDashboard()
         binding.apply {
             val adapter = GroupNameViewAdapter("homeFragment")
             rvGroupName.layoutManager = LinearLayoutManager(
@@ -75,8 +77,8 @@ class HomeFragment : Fragment() {
                     dialog.setContentView(R.layout.add_new_group_dialog)
                     dialog.setCancelable(true)
                     dialog.show()
-
-                    bindingDialog?.apply {
+                    val etGroupName = dialog.findViewById<TextInputEditText>(R.id.et_group_name)
+                    val btnAddNewGroup = dialog.findViewById<Button>(R.id.btn_add_new_group)
                         btnAddNewGroup.setOnClickListener {
                             val groupName = etGroupName.text.toString()
                             if (groupName.isEmpty()) etGroupName.error =
@@ -86,7 +88,7 @@ class HomeFragment : Fragment() {
                                 dialog.dismiss()
                             }
                         }
-                    }
+
                 }
             }
 
@@ -134,6 +136,7 @@ class HomeFragment : Fragment() {
                     }
                 })
             }
+
         }
     }
 
@@ -150,6 +153,30 @@ class HomeFragment : Fragment() {
     companion object {
         @JvmStatic
         fun newInstance() = HomeFragment()
+    }
+
+    private fun setDashboard(){
+        moodTrackerViewModel.getDashboardMood(requireActivity()).observe(requireActivity(),{
+            if(it.mood != "") {
+
+                binding.apply {
+                    when(it.mood_code){
+                        "1" -> ivDashboardMood.setImageDrawable(requireActivity().getDrawable(R.drawable.angry))
+                        "2" -> ivDashboardMood.setImageDrawable(requireActivity().getDrawable(R.drawable.sad))
+                        "3" -> ivDashboardMood.setImageDrawable(requireActivity().getDrawable(R.drawable.fear))
+                        "4" -> ivDashboardMood.setImageDrawable(requireActivity().getDrawable(R.drawable.good))
+                        "5" -> ivDashboardMood.setImageDrawable(requireActivity().getDrawable(R.drawable.love))
+                        "6" -> ivDashboardMood.setImageDrawable(requireActivity().getDrawable(R.drawable.joy))
+                    }
+                    tvDashboardMood.text = it.mood
+                    tvDashboardName.text = "Hi, ${SharedPref.getPref(requireActivity(), MyAsset.KEY_NAME)}"
+                    tvDashboardDate.visibility = View.VISIBLE
+                    tvDashboardDate.text = it.date
+                }
+            }else{
+                Toast.makeText(requireActivity(), "this", Toast.LENGTH_SHORT).show()
+            }
+        })
     }
 
 }

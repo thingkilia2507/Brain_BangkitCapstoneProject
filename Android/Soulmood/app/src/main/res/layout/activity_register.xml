@@ -7,7 +7,6 @@
     android:orientation="vertical"
     tools:context=".activity.RegisterActivity">
 
-
     <View
         android:id="@+id/view3"
         android:layout_width="match_parent"
@@ -27,75 +26,87 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <EditText
-        android:id="@+id/et_name"
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/tf_name"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/dp_45"
+        android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/dp_45"
+        android:layout_marginTop="@dimen/dp_16"
         android:layout_marginEnd="@dimen/dp_45"
-        android:layout_marginTop="56dp"
-        android:background="@drawable/custom_edittext"
-        android:drawableStart="@drawable/ic_baseline_person_24"
-        android:drawablePadding="@dimen/small_margin"
-        android:elevation="@dimen/dp_2"
-        android:hint="@string/name"
-        android:inputType="text"
-        android:padding="8dp"
+        android:gravity="center"
+        app:startIconDrawable="@drawable/ic_baseline_person_24"
+        app:startIconTint="@color/soulmood_primary_color_dark"
+        app:boxStrokeWidth="0dp"
+        app:boxStrokeWidthFocused="0dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/view3" />
+        app:layout_constraintTop_toBottomOf="@+id/view3">
 
-    <EditText
-        android:id="@+id/et_email"
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/et_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/custom_edittext"
+            android:hint="@string/name"
+            android:inputType="text" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/tf_email"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/dp_45"
+        android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/dp_45"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="@dimen/dp_16"
         android:layout_marginEnd="@dimen/dp_45"
-        android:background="@drawable/custom_edittext"
-        android:drawableStart="@drawable/ic_baseline_email_24"
-        android:drawablePadding="@dimen/small_margin"
-        android:elevation="@dimen/dp_2"
-        android:hint="@string/email"
-        android:inputType="text"
-        android:padding="8dp"
+        android:gravity="center"
+        app:startIconDrawable="@drawable/ic_baseline_email_24"
+        app:startIconTint="@color/soulmood_primary_color_dark"
+        app:boxStrokeWidth="0dp"
+        app:boxStrokeWidthFocused="0dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/et_name" />
+        app:layout_constraintTop_toBottomOf="@+id/tf_name">
 
-    <EditText
-        android:id="@+id/et_password"
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/et_email"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/custom_edittext"
+            android:hint="@string/email"
+            android:inputType="text" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/tf_password"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/dp_45"
-        android:layout_marginTop="16dp"
-        android:background="@drawable/custom_edittext"
-        android:drawableStart="@drawable/ic_baseline_lock_24"
-        android:drawablePadding="@dimen/small_margin"
-        android:elevation="@dimen/dp_2"
-        android:hint="@string/password"
-        android:inputType="textPassword"
-        android:padding="8dp"
+        android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/dp_45"
+        android:layout_marginTop="@dimen/dp_16"
         android:layout_marginEnd="@dimen/dp_45"
+        android:gravity="center"
+        app:startIconDrawable="@drawable/ic_baseline_lock_24"
+        app:startIconTint="@color/soulmood_primary_color_dark"
+        app:boxStrokeWidth="0dp"
+        app:boxStrokeWidthFocused="0dp"
+        app:passwordToggleEnabled="true"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/et_email" />
+        app:layout_constraintTop_toBottomOf="@+id/tf_email" >
 
-    <ImageView
-        android:id="@+id/ivEyePass"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="end"
-        android:layout_marginEnd="8dp"
-        android:elevation="3dp"
-        android:src="@drawable/ic_baseline_visibility_24"
-        app:layout_constraintBottom_toBottomOf="@+id/et_password"
-        app:layout_constraintEnd_toEndOf="@+id/et_password"
-        app:layout_constraintTop_toTopOf="@+id/et_password"
-        app:layout_constraintVertical_bias="0.523" />
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/et_password"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/custom_edittext"
+            android:hint="@string/password"
+            android:inputType="textPassword" />
+    </com.google.android.material.textfield.TextInputLayout>
+
 
     <RadioGroup
         android:id="@+id/rg_gender"
@@ -105,7 +116,7 @@
         app:layout_constraintStart_toStartOf="parent"
         android:layout_marginStart="@dimen/dp_45"
         android:layout_marginTop="@dimen/dp_16"
-        app:layout_constraintTop_toBottomOf="@+id/et_password">
+        app:layout_constraintTop_toBottomOf="@+id/tf_password">
 
         <RadioButton
             android:id="@+id/rb_male"

@@ -10,5 +10,10 @@ object DateHelper {
         val date = Date()
         return dateFormat.format(date)
     }
-
+    fun convertDateToMonthYearFormat(date:String):String{
+        val df = SimpleDateFormat("yyyy-MM",Locale.ENGLISH)
+        val df1 = SimpleDateFormat("MMM yyyy",Locale.ENGLISH)
+        val date1 = df.parse(date)
+        return df1.format(date1)
+    }
 }
