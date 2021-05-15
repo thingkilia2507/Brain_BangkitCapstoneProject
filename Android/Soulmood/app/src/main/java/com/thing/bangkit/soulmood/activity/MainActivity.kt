@@ -1,8 +1,8 @@
 package com.thing.bangkit.soulmood.activity
 
+import android.content.Intent
 import android.content.res.ColorStateList
 import android.os.Bundle
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.core.widget.ImageViewCompat
@@ -23,11 +23,7 @@ class MainActivity : AppCompatActivity() {
         binding.apply {
             handleFragment(HomeFragment.newInstance())
             fabChatbot.setOnClickListener {
-                Toast.makeText(
-                    this@MainActivity,
-                    "chatbot here",
-                    Toast.LENGTH_LONG
-                ).show()
+                startActivity(Intent(this@MainActivity, ChatbotActivity::class.java))
             }
 
             ivBNProfile.setOnClickListener { setProfileFrament() }

@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">Soulmood</string>
     <string name="soulmood">SoulMood</string>
+    <string name="soulmoo">SoulMoo</string>
     <string name="login">Login</string>
     <string name="daftar">Daftar</string>
     <string name="license_credit_splash1">bot png from pngtree.com</string>
@@ -74,7 +75,7 @@
     <string name="iv_psikolog_konsultasi_soulmood">iv_psikolog_konsultasi_soulmood</string>
     <string name="iv_soulcare">iv_soulcare</string>
     <string name="iv_soulmood_chat_kuy">iv_soulmood_chat_kuy</string>
-    <string name="today_motivation">Kata Motivasimu Hari ini</string>
+    <string name="quote_motivation">Kata Motivasimu</string>
     <string name="iv_coming_soon_feature">iv_coming_soon_feature</string>
     <string name="forgot_password">Lupa Kata Sandi ?</string>
     <string name="register">Daftar</string>
@@ -82,4 +83,8 @@
     <string name="account_validation">Validasi Akun</string>
     <string name="send">kirim</string>
     <string name="invalid_password_message">Kata sandi yang diberikan tidak valid. [Kata sandi harus terdiri dari setidaknya 6 karakter]</string>
+    <string name="coming_soon">Segera tersedia pada Soulmood versi terbaru.</string>
+    <string name="enter_message_hint">Masukkan Pesan Anda…</string>
+    <string name="group_added">Grup Berhasil ditambah</string>
+    <string name="loading">Loading…</string>
 </resources>

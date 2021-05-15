@@ -9,47 +9,46 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Soulmood">
-        <activity android:name=".activity.ForgotPasswordActivity"
+        <activity android:name=".activity.ChatbotActivity"
+            android:theme="@style/Theme.Soulmood.NoActionBar"/>
+        <activity
+            android:name=".activity.ForgotPasswordActivity"
             android:theme="@style/Theme.Soulmood.NoActionBar" />
-
         <activity
             android:name=".activity.LoginActivity"
             android:theme="@style/Theme.Soulmood.NoActionBar" />
         <activity android:name=".activity.ChatGroupActivity" />
-        <activity android:name=".AcitivtyUntukCobaCoba"></activity>
+        <activity android:name=".AcitivtyUntukCobaCoba" />
         <activity
             android:name=".activity.RegisterActivity"
-            android:theme="@style/Theme.Soulmood.NoActionBar">
-
-        </activity>
+            android:theme="@style/Theme.Soulmood.NoActionBar"/>
         <activity
-            android:name="com.thing.bangkit.soulmood.activity.splash.SplashActivity1"
+            android:name=".activity.splash.SplashActivity1"
             android:theme="@style/Theme.Soulmood.NoActionBar" />
-
-
-        <activity android:name="com.thing.bangkit.soulmood.activity.splash.SplashActivity"
+        <activity
+            android:name=".activity.splash.SplashActivity"
             android:theme="@style/Theme.Soulmood.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activity.MainActivity"
-            android:theme="@style/Theme.Soulmood.NoActionBar"/>
+        <activity
+            android:name=".activity.MainActivity"
+            android:theme="@style/Theme.Soulmood.NoActionBar" />
 
         <receiver
             android:name=".alarmreceiver.AlarmReceiver"
             android:enabled="true"
             android:exported="true" />
+
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
-        <activity
-            android:name="com.thing.bangkit.soulmood.activity.GroupNameActivity"
-            />
-        <activity
-            android:name="com.thing.bangkit.soulmood.activity.MoodTrackerActivity"
-            />
+
+        <activity android:name=".activity.GroupNameActivity" />
+        <activity android:name=".activity.MoodTrackerActivity" />
     </application>
 
 </manifest>

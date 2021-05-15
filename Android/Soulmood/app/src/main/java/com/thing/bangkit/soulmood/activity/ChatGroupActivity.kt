@@ -30,8 +30,8 @@ class ChatGroupActivity : AppCompatActivity() {
 
             floatingSend.setOnClickListener {
                 val message = etChatGroup.text.toString()
-                if (message.isEmpty()) etChatGroup.error = "Masukkan Pesan Anda!"
-                else {
+                //if (message.isEmpty()) etChatGroup.error = "Masukkan Pesan Anda!"
+                if(message.isNotEmpty()) {
                     groupChatViewModel.insertNewChat(
                         groupId.toString(),
                         message,

@@ -6,6 +6,7 @@ import com.thing.bangkit.soulmood.R
 
 object MyAsset {
 
+    const val SOULMOOD_CHATBOT_NAME = "soulmood0280_chatbot"
     const val KEY_NAME = "key_name"
     const val KEY_EMAIL = "key_email"
     const val KEY_USER_ID = "key_user_id"
@@ -79,6 +80,4 @@ object MyAsset {
             .setTitleText(titleConfirmation) //"Are you sure?"
             .setContentText(messageConfirmation) //"Won't be able to recover this file!"
     }
-
-
 }

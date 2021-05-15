@@ -7,7 +7,7 @@ data class ChatGroup(
 )
 
 
-data class Message(
+data class ChatMessage(
     val id :String,
     val sender: String,
     val email: String?=null,

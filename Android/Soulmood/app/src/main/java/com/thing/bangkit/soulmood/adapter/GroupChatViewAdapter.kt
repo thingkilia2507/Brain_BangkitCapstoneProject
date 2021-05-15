@@ -8,10 +8,10 @@ import com.amulyakhare.textdrawable.util.ColorGenerator
 import com.thing.bangkit.soulmood.databinding.ItemChatBinding
 import com.thing.bangkit.soulmood.helper.MyAsset
 import com.thing.bangkit.soulmood.helper.SharedPref
-import com.thing.bangkit.soulmood.model.Message
+import com.thing.bangkit.soulmood.model.ChatMessage
 
 class GroupChatViewAdapter : RecyclerView.Adapter<GroupChatViewAdapter.ViewHolder>() {
-    private val data = ArrayList<Message>()
+    private val data = ArrayList<ChatMessage>()
 
     class ViewHolder(val binding: ItemChatBinding) : RecyclerView.ViewHolder(binding.root)
 
@@ -59,7 +59,7 @@ class GroupChatViewAdapter : RecyclerView.Adapter<GroupChatViewAdapter.ViewHolde
     override fun getItemCount(): Int = data.size
 
 
-    fun setData(data: ArrayList<Message>) {
+    fun setData(data: ArrayList<ChatMessage>) {
         this.data.clear()
         this.data.addAll(data)
         notifyDataSetChanged()
