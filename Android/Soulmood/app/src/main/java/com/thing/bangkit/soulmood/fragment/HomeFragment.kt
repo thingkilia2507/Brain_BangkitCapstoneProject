@@ -26,6 +26,7 @@ import com.thing.bangkit.soulmood.activity.MoodTrackerActivity
 import com.thing.bangkit.soulmood.adapter.GroupNameViewAdapter
 import com.thing.bangkit.soulmood.adapter.SliderCSFAdapter
 import com.thing.bangkit.soulmood.databinding.FragmentHomeBinding
+import com.thing.bangkit.soulmood.helper.DateHelper
 import com.thing.bangkit.soulmood.helper.MyAsset
 import com.thing.bangkit.soulmood.helper.SharedPref
 import com.thing.bangkit.soulmood.model.ChatGroup
@@ -180,7 +181,7 @@ class HomeFragment : Fragment() {
                     tvDashboardMood.text = it.mood
                     tvDashboardName.text = "Hi, ${SharedPref.getPref(requireActivity(), MyAsset.KEY_NAME)}"
                     tvDashboardDate.visibility = View.VISIBLE
-                    tvDashboardDate.text = it.date
+                    tvDashboardDate.text = DateHelper.dateFormat(it.date.take(10)) + "(Terakhir diubah)"
                 }
             }else{
                 binding.tvDashboardName.text = "Hi, ${SharedPref.getPref(requireActivity(), MyAsset.KEY_NAME)}"

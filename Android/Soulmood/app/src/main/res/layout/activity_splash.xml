@@ -27,6 +27,9 @@
         android:text="@string/soulmood"
         android:textAlignment="center"
         android:textSize="35sp"
+        android:fontFamily="@font/yanone_kaffeesatz"
+        android:textStyle="bold"
+        android:textColor="@color/soulmood_primary_color"
         app:layout_constraintBottom_toTopOf="@+id/view"
         tools:layout_editor_absoluteX="0dp" />
 

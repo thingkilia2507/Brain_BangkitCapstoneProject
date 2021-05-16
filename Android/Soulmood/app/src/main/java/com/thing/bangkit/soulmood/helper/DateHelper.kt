@@ -16,4 +16,14 @@ object DateHelper {
         val date1 = df.parse(date)
         return df1.format(date1)
     }
+    fun dateFormat(tanggal: String): String {
+        var newFormat = "dd MMMM yyyy"
+        var format = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
+        var date: Date? = null
+        date = format.parse(tanggal)
+        format.applyPattern(newFormat)
+        var dates = format.format(date)
+        dates.replace("00:00:00 GMT+07:00", "")
+        return dates
+    }
 }

@@ -4,33 +4,57 @@
     android:layout_height="wrap_content"
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto">
-<LinearLayout
-    android:id="@+id/ll_group_name"
-    android:orientation="vertical"
-    android:layout_marginEnd="@dimen/small_margin"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content">
 
-    <ImageView
-        android:id="@+id/iv_group_name"
-        android:layout_width="55dp"
-        android:layout_height="55dp"
-        android:elevation="3dp"/>
-    <TextView
-        android:layout_marginTop="@dimen/small_margin"
-        android:id="@+id/tv_group_name"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:maxLines="2"
-        android:ellipsize="end"
-        android:textAlignment="center"
-        android:fontFamily="sans-serif-condensed"
-        android:maxWidth="55dp"
-        tools:text="groupname"/>
-</LinearLayout>
+        <LinearLayout
+            android:id="@+id/ll_group_name"
+            android:orientation="vertical"
+            android:layout_marginEnd="@dimen/small_margin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/cv_group_name1"
+                android:layout_width="55dp"
+                android:layout_height="55dp"
+                app:cardCornerRadius="300dp"
+                app:cardBackgroundColor="@color/soulmood_primary_color"
+                >
+                <LinearLayout
+                    android:layout_width="55dp"
+                    android:layout_height="55dp"
+                    android:background="@drawable/bg_vector_group_name">
+                    <TextView
+                        android:id="@+id/iv_group_name"
+                        android:layout_width="match_parent"
+                        android:textAlignment="center"
+                        android:layout_height="wrap_content"
+                        android:text="AB"
+                        android:textSize="18sp"
+                        android:fontFamily="@font/poppins_semibold"
+                        android:textColor="@color/white"
+                        android:layout_gravity="center_vertical|center_horizontal|center"
+                        android:elevation="3dp"/>
+                </LinearLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <TextView
+                android:layout_marginTop="@dimen/small_margin"
+                android:id="@+id/tv_group_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:maxLines="2"
+                android:ellipsize="end"
+                android:textAlignment="center"
+                android:fontFamily="sans-serif-condensed"
+                android:maxWidth="55dp"
+                tools:text="groupname"/>
+        </LinearLayout>
+
+
 
     <com.google.android.material.card.MaterialCardView
-        android:visibility="visible"
+        android:visibility="gone"
         android:id="@+id/cv_group_name"
         android:layout_width="match_parent"
         android:layout_height="150dp"
@@ -38,10 +62,11 @@
         app:cardCornerRadius="@dimen/margin_def"
         >
         <LinearLayout
+            android:id="@+id/ll_group"
             android:padding="@dimen/margin_def"
             android:layout_width="match_parent"
             android:layout_height="150dp"
-            android:background="@drawable/gradient_background_chat"
+            android:background="@drawable/bg_vector_group_name"
             >
             <TextView
                 android:id="@+id/tv_group_name_card"
