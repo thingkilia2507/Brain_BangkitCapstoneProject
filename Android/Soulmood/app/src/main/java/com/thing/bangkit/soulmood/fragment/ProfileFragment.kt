@@ -21,6 +21,7 @@ import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
 import com.thing.bangkit.soulmood.R
 import com.thing.bangkit.soulmood.activity.LoginActivity
+import com.thing.bangkit.soulmood.alarmreceiver.AlarmReceiver
 import com.thing.bangkit.soulmood.databinding.FragmentProfileBinding
 import com.thing.bangkit.soulmood.helper.IProgressResult
 import com.thing.bangkit.soulmood.helper.MyAsset
@@ -215,6 +216,7 @@ class ProfileFragment : Fragment(), IProgressResult {
         dialog.setCancelClickListener { sweetAlertDialog: SweetAlertDialog -> sweetAlertDialog.dismiss() }
         dialog.setConfirmClickListener { sweetAlertDialog: SweetAlertDialog ->
             SharedPref.clearPref(mContext)
+            AlarmReceiver().cancelAlarm(mContext)
             sweetAlertDialog.setTitleText(getString(R.string.success)).hideConfirmButton()
                 .changeAlertType(SweetAlertDialog.SUCCESS_TYPE)
             val intent = Intent(mContext, LoginActivity::class.java)
@@ -375,4 +377,6 @@ class ProfileFragment : Fragment(), IProgressResult {
             sweetAlertDialog.dismiss()
         }, 2000)
     }
+
+
 }

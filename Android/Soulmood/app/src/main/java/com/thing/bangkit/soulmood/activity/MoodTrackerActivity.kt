@@ -45,7 +45,7 @@ class MoodTrackerActivity : AppCompatActivity() {
 
 
         supportActionBar?.title = getString(R.string.your_mood_recap)
-        supportActionBar?.setDisplayHomeAsUpEnabled(true);
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
 
         moodTrackerViewModel.setMoodData(DateHelper.getCurrentDateTime(), this)

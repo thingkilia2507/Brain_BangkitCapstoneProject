@@ -1,14 +1,14 @@
 package com.thing.bangkit.soulmood.activity
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.activity.viewModels
+import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.thing.bangkit.soulmood.R
 import com.thing.bangkit.soulmood.adapter.GroupNameViewAdapter
 import com.thing.bangkit.soulmood.databinding.ActivityGroupNameBinding
+import com.thing.bangkit.soulmood.helper.MyAsset
 import com.thing.bangkit.soulmood.model.ChatGroup
 import com.thing.bangkit.soulmood.viewmodel.GroupChatViewModel
 
@@ -20,6 +20,9 @@ class GroupNameActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityGroupNameBinding.inflate(layoutInflater)
         setContentView(binding?.root)
+        supportActionBar?.title = "Daftar Grup"
+        supportActionBar?.setDisplayHomeAsUpEnabled(true);
+
         initAdapter()
         observeGroupChatViewModel()
 
@@ -50,7 +53,7 @@ class GroupNameActivity : AppCompatActivity() {
     }
 
     private fun observeGroupChatViewModel() {
-        groupChatViewModel.setGroupName()
+        groupChatViewModel.setGroupName(MyAsset.GROUP_NAME_ACTIVITY)
         groupChatViewModel.getGroupName().observe(this@GroupNameActivity, {
             if (it != null) {
                 adapter.setData(it)
@@ -61,5 +64,10 @@ class GroupNameActivity : AppCompatActivity() {
     override fun onDestroy() {
         super.onDestroy()
         binding = null
+    }
+
+    override fun onSupportNavigateUp(): Boolean {
+        onBackPressed()
+        return super.onSupportNavigateUp()
     }
 }

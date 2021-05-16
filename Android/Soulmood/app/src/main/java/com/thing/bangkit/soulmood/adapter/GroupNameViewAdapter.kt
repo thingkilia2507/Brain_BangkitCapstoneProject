@@ -1,16 +1,17 @@
 package com.thing.bangkit.soulmood.adapter
 
-import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.amulyakhare.textdrawable.TextDrawable
 import com.amulyakhare.textdrawable.util.ColorGenerator
+import com.thing.bangkit.soulmood.R
 import com.thing.bangkit.soulmood.databinding.ItemGroupNameBinding
 import com.thing.bangkit.soulmood.model.ChatGroup
 import java.util.*
 import kotlin.collections.ArrayList
+
 
 class GroupNameViewAdapter(private val type:String) : RecyclerView.Adapter<GroupNameViewAdapter.ViewHolder>() {
     private val data = ArrayList<ChatGroup>()
@@ -54,6 +55,13 @@ class GroupNameViewAdapter(private val type:String) : RecyclerView.Adapter<Group
                    onItemClickCallback.onItemClick(data[position])
             }
         }else{
+
+//                val colors =
+//                    intArrayOf(R.drawable.gradient_background, R.drawable.gradient_background, R.drawable.gradient_background)
+//                val ranndom = Random()
+//                val ranndomColor = ranndom.nextInt(3)
+//                cvGroupName.setBackgroundColor(colors[ranndomColor])
+
                 llGroupName.visibility= View.GONE
                 cvGroupName.visibility = View.VISIBLE
                 tvGroupNameCard.text = data[position].group_name
@@ -65,8 +73,11 @@ class GroupNameViewAdapter(private val type:String) : RecyclerView.Adapter<Group
 
     }
 
+
+
     override fun getItemCount(): Int {
         return if(data.size >30) 30
+        else if(type != "homeFragment") data.size
         else data.size
     }
 

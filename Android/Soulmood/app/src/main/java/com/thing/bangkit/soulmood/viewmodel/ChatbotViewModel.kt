@@ -39,10 +39,10 @@ class ChatbotViewModel : ViewModel() {
         }
     }
 
-    private fun reqChatbotMessagesData(context: Context) {
+     fun reqChatbotMessagesData(context: Context) {
         viewModelScope.launch(Dispatchers.IO) {
             val data = db.collection("db_chatbot").document("1.0").collection("user_chatbot")
-                .document(SharedPref.getPref(context, MyAsset.KEY_USER_ID)!!).collection("chatbot_messages").document(currentDate).collection("message")
+                .document(SharedPref.getPref(context, MyAsset.KEY_USER_ID).toString()).collection("chatbot_messages").document(currentDate).collection("message")
                 .orderBy("created_at", Query.Direction.ASCENDING)
             withContext(Dispatchers.Main){
                 data.addSnapshotListener { value, _ ->
@@ -99,7 +99,6 @@ class ChatbotViewModel : ViewModel() {
         Log.d("TAGDATAKU", "reqChatbotReply isnotempty: ${messageReqReply.isNotEmpty()}")
         if(messageReqReply.isNotEmpty()){
             val apiService = ApiConfig.getRetrofitSoulmood()
-
             CoroutineScope(Dispatchers.IO).launch {
                 try{
                     val response = apiService.reqChatbotResponse(name, messageReqReply)
