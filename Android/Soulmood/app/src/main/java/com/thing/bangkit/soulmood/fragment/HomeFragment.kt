@@ -5,14 +5,12 @@ import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.Window
 import android.widget.Button
 import android.widget.EditText
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -20,7 +18,6 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.CompositePageTransformer
 import androidx.viewpager2.widget.MarginPageTransformer
 import androidx.viewpager2.widget.ViewPager2
-import com.google.android.material.textfield.TextInputEditText
 import com.thing.bangkit.soulmood.R
 import com.thing.bangkit.soulmood.activity.ChatGroupActivity
 import com.thing.bangkit.soulmood.activity.ChatbotActivity
@@ -28,28 +25,20 @@ import com.thing.bangkit.soulmood.activity.GroupNameActivity
 import com.thing.bangkit.soulmood.activity.MoodTrackerActivity
 import com.thing.bangkit.soulmood.adapter.GroupNameViewAdapter
 import com.thing.bangkit.soulmood.adapter.SliderCSFAdapter
-
-import com.thing.bangkit.soulmood.alarmreceiver.AlarmReceiver
-import com.thing.bangkit.soulmood.apiservice.ApiConfig
-
 import com.thing.bangkit.soulmood.databinding.FragmentHomeBinding
 import com.thing.bangkit.soulmood.helper.MyAsset
 import com.thing.bangkit.soulmood.helper.SharedPref
 import com.thing.bangkit.soulmood.model.ChatGroup
 import com.thing.bangkit.soulmood.model.ComingSoonFeatureSliderItem
+import com.thing.bangkit.soulmood.viewmodel.ChatbotViewModel
 import com.thing.bangkit.soulmood.viewmodel.GroupChatViewModel
-
 import com.thing.bangkit.soulmood.viewmodel.MoodTrackerViewModel
-
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 
 class HomeFragment : Fragment() {
     private lateinit var sliderRunnable: Runnable
     private val groupChatViewModel: GroupChatViewModel by viewModels()
     private val moodTrackerViewModel : MoodTrackerViewModel by viewModels()
+    private val chatBotViewModel:ChatbotViewModel by viewModels()
     private lateinit var binding: FragmentHomeBinding
 
     private val sliderHandler = Handler(Looper.getMainLooper())
@@ -69,7 +58,12 @@ class HomeFragment : Fragment() {
             ivChatbot.setOnClickListener {
                 startActivity(Intent(requireActivity(), ChatbotActivity::class.java))
             }
-            getQuoteOfTheDay()
+            //chatBotViewModel.reqChatbotMessagesData(requireActivity())
+          groupChatViewModel.getQuoteOfTheDay().observe(requireActivity(),{
+              it.let {
+                  tvMotivationQuotes.text = StringBuilder(it)
+              }
+          })
             val adapter = GroupNameViewAdapter("homeFragment")
             rvGroupName.layoutManager = LinearLayoutManager(
                 context,
@@ -166,35 +160,6 @@ class HomeFragment : Fragment() {
         sliderHandler.postDelayed(sliderRunnable, 3000)
     }
 
-    private fun FragmentHomeBinding.getQuoteOfTheDay() {
-        val service = ApiConfig.getRetrofitQuotes()
-        CoroutineScope(Dispatchers.IO).launch {
-            try{
-                val response = service.getDialyQuote(1)
-                withContext(Dispatchers.Main){
-                    if(response.code() == 200){
-                        if(response.body() != null){
-
-                            response.body()?.quotes?.get(0)?.let {
-                                tvMotivationQuotes.text = StringBuilder("${it.text} \n- ${it.author} -")
-
-                                AlarmReceiver().setRepeatingAlarm(
-                                    requireContext(),
-                                    "${it.text} \n- ${it.author} -"
-                                )
-                            }
-                        }
-                    }
-                }
-            }
-            catch (e: Throwable){
-                withContext(Dispatchers.Main) {
-                    Log.v("retrofit error", e.message.toString())
-                }
-            }
-        }
-    }
-
     companion object {
         @JvmStatic
         fun newInstance() = HomeFragment()
@@ -203,7 +168,6 @@ class HomeFragment : Fragment() {
     private fun setDashboard(){
         moodTrackerViewModel.getDashboardMood(requireActivity()).observe(requireActivity(),{
             if(it.mood != "") {
-
                 binding.apply {
                     when(it.mood_code){
                         "1" -> ivDashboardMood.setImageDrawable(requireActivity().getDrawable(R.drawable.angry))
@@ -219,7 +183,7 @@ class HomeFragment : Fragment() {
                     tvDashboardDate.text = it.date
                 }
             }else{
-                Toast.makeText(requireActivity(), "this", Toast.LENGTH_SHORT).show()
+                binding.tvDashboardName.text = "Hi, ${SharedPref.getPref(requireActivity(), MyAsset.KEY_NAME)}"
             }
         })
     }

@@ -30,23 +30,29 @@
 </LinearLayout>
 
     <com.google.android.material.card.MaterialCardView
-        android:visibility="gone"
+        android:visibility="visible"
         android:id="@+id/cv_group_name"
         android:layout_width="match_parent"
-        android:layout_height="140dp"
+        android:layout_height="150dp"
         android:layout_margin="@dimen/margin_def"
-        app:cardCornerRadius="@dimen/margin_def">
+        app:cardCornerRadius="@dimen/margin_def"
+        >
         <LinearLayout
             android:padding="@dimen/margin_def"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:background="@drawable/gradient_background_chat"
+            >
             <TextView
                 android:id="@+id/tv_group_name_card"
                 android:maxLines="2"
                 android:ellipsize="end"
+                android:textAlignment="center"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textSize="18sp"
+                android:textColor="@color/white"
+                android:fontFamily="@font/poppins_semibold"
                 android:text="group name"/>
         </LinearLayout>
     </com.google.android.material.card.MaterialCardView>

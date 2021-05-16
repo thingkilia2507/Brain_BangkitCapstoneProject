@@ -79,7 +79,7 @@ class AcitivtyUntukCobaCoba : AppCompatActivity() {
                 }
             })
         }
-        moodTrackerViewModel.insertMoodData(this)
+       // moodTrackerViewModel.insertMoodData(this)
     }
 
 

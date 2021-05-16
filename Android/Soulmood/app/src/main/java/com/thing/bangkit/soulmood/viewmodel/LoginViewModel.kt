@@ -38,6 +38,7 @@ class LoginViewModel : ViewModel() {
                                 }
                             }
                         }
+
                     progressResult.onSuccess("")
                 }.addOnFailureListener {
                     progressResult.onFailure("")

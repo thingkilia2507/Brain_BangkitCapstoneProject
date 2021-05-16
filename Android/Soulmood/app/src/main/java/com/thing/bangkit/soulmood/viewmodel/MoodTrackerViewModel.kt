@@ -23,7 +23,7 @@ class MoodTrackerViewModel : ViewModel() {
     val date = DateHelper.getCurrentDateTime()
 
 
-    fun insertMoodData(context: Context) {
+    fun insertMoodData(currentMood:String,moodCode:String,context: Context) {
         viewModelScope.launch(IO) {
             val insert1 = FirebaseFirestore.getInstance()
                 .collection("mood_tracker")
@@ -35,13 +35,13 @@ class MoodTrackerViewModel : ViewModel() {
             //untuk mood perhari(slalu update)
             insert1.set(
                 mapOf(
-                    "current_mood" to "good", "mood_code" to "1",
+                    "current_mood" to currentMood, "mood_code" to moodCode,
                     "updated_at" to date
                 )
             )
             insert1.collection("list_mood").add(
                 mapOf(
-                    "mood" to "good", "mood_code" to "1",
+                    "mood" to currentMood, "mood_code" to moodCode,
                     "updated_at" to date
                 )
             )

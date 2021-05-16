@@ -91,5 +91,6 @@
     <string name="enter_message_hint">Masukkan Pesan Anda…</string>
     <string name="group_added">Grup Berhasil ditambah</string>
     <string name="loading">Loading…</string>
+    <string name="group_name_activity">GroupNameActivity</string>
 
 </resources>

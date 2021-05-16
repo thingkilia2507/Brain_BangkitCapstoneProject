@@ -1,10 +1,10 @@
 package com.thing.bangkit.soulmood.adapter
 
+import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.amulyakhare.textdrawable.util.ColorGenerator
 import com.thing.bangkit.soulmood.databinding.ItemChatBinding
 import com.thing.bangkit.soulmood.helper.MyAsset
 import com.thing.bangkit.soulmood.helper.SharedPref
@@ -30,14 +30,6 @@ class GroupChatViewAdapter : RecyclerView.Adapter<GroupChatViewAdapter.ViewHolde
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.binding.apply {
-            val colorGenerator = ColorGenerator.MATERIAL
-//            val textDrawable = TextDrawable.builder().beginConfig().width(50)
-//                .height(50).endConfig()
-//                .buildRound(
-//                    getInitialName(data[position].group_name.toUpperCase()),
-//                    colorGenerator.getColor(data[position].group_name)
-//                )
-//            ivGroupName.setImageDrawable(textDrawable)
             //jika pesan dari pengirim
             if(data[position].email == SharedPref.getPref(holder.itemView.context, MyAsset.KEY_EMAIL)){
                 llReceiver.visibility = View.GONE
@@ -51,6 +43,13 @@ class GroupChatViewAdapter : RecyclerView.Adapter<GroupChatViewAdapter.ViewHolde
                 tvReceiverName.text = data[position].sender
                 tvMessageReceiver.text = data[position].ai_message
                 tvDateReceiver.text = data[position].created_at
+            }
+            if(data[position].status =="false"){
+                tvMessageSender.setTextColor(Color.RED)
+                tvMessageReceiver.setTextColor(Color.RED)
+            }else{
+                tvMessageSender.setTextColor(Color.BLACK)
+                tvMessageReceiver.setTextColor(Color.BLACK)
             }
 
         }

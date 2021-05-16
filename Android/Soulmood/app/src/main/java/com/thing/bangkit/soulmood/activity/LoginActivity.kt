@@ -11,16 +11,18 @@ import androidx.appcompat.app.AppCompatActivity
 import cn.pedant.SweetAlert.SweetAlertDialog
 import com.google.android.material.textfield.TextInputLayout
 import com.thing.bangkit.soulmood.R
+import com.thing.bangkit.soulmood.alarmreceiver.AlarmReceiver
 import com.thing.bangkit.soulmood.databinding.ActivityLoginBinding
 import com.thing.bangkit.soulmood.helper.IProgressResult
 import com.thing.bangkit.soulmood.helper.MyAsset
 import com.thing.bangkit.soulmood.helper.SharedPref
+import com.thing.bangkit.soulmood.viewmodel.GroupChatViewModel
 import com.thing.bangkit.soulmood.viewmodel.LoginViewModel
 
 class LoginActivity : AppCompatActivity(), IProgressResult {
     //view model
-
     private  val loginViewModel:LoginViewModel by viewModels()
+    private  val groupChatViewModel:GroupChatViewModel by viewModels()
     private lateinit var alerDialog: SweetAlertDialog
     var binding :ActivityLoginBinding? = null
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -63,7 +65,8 @@ class LoginActivity : AppCompatActivity(), IProgressResult {
 
                 if(email.isNotEmpty() && password.isNotEmpty()){
                     onProgress()
-                    loginViewModel.login(email, password, this@LoginActivity, this@LoginActivity).observe(this@LoginActivity, {
+                    loginViewModel.login(email, password, this@LoginActivity,
+                        this@LoginActivity).observe(this@LoginActivity, {
                             if (it != null) {
                                 Log.d("TAGDATAKU", "onCreate: notnull")
                                 //save data to shared preference
@@ -83,6 +86,17 @@ class LoginActivity : AppCompatActivity(), IProgressResult {
                                     MyAsset.KEY_USER_ID,
                                     it.id
                                 )
+
+                                //set dialy motivation word repeat alarm
+                                groupChatViewModel.getQuoteOfTheDay().observe(this@LoginActivity,{
+                                    if(it.isNotEmpty()){
+                                        AlarmReceiver().setRepeatingAlarm(
+                                            this@LoginActivity,
+                                            it
+                                        )
+                                    }
+                                })
+
                             }
                         })
                 }

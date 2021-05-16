@@ -7,6 +7,7 @@ import com.thing.bangkit.soulmood.R
 object MyAsset {
 
     const val SOULMOOD_CHATBOT_NAME = "soulmood0280_chatbot"
+    const val GROUP_NAME_ACTIVITY = "GroupNameActivity"
     const val KEY_NAME = "key_name"
     const val KEY_EMAIL = "key_email"
     const val KEY_USER_ID = "key_user_id"

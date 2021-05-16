@@ -7,18 +7,20 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.core.widget.ImageViewCompat
 import androidx.fragment.app.Fragment
+import androidx.work.*
 import com.thing.bangkit.soulmood.R
+import com.thing.bangkit.soulmood.alarmreceiver.AlarmReceiver
 import com.thing.bangkit.soulmood.databinding.ActivityMainBinding
 import com.thing.bangkit.soulmood.fragment.HomeFragment
 import com.thing.bangkit.soulmood.fragment.ProfileFragment
 
 class MainActivity : AppCompatActivity() {
-
     private lateinit var binding : ActivityMainBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        startPeriodicTask()
 
         binding.apply {
             handleFragment(HomeFragment.newInstance())
@@ -74,7 +76,20 @@ class MainActivity : AppCompatActivity() {
         ImageViewCompat.setImageTintList(ivBNHome, ColorStateList.valueOf(ContextCompat.getColor(this@MainActivity,
             R.color.grey
         )))
-
     }
+
+
+private fun startPeriodicTask(){
+        //set data
+        AlarmReceiver().setRepeating1(
+            this,
+            "message"
+        )
+
+
+
+
+
+}
 
 }
