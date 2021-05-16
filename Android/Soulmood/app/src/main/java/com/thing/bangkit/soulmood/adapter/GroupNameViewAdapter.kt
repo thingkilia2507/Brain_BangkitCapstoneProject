@@ -4,9 +4,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.amulyakhare.textdrawable.TextDrawable
 import com.amulyakhare.textdrawable.util.ColorGenerator
-import com.thing.bangkit.soulmood.R
 import com.thing.bangkit.soulmood.databinding.ItemGroupNameBinding
 import com.thing.bangkit.soulmood.model.ChatGroup
 import java.util.*
@@ -38,30 +36,20 @@ class GroupNameViewAdapter(private val type:String) : RecyclerView.Adapter<Group
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+        val colorGenerator = ColorGenerator.MATERIAL
         holder.binding.apply {
             if(type == "homeFragment"){
                 cvGroupName.visibility = View.GONE
                 llGroupName.visibility= View.VISIBLE
-            val colorGenerator = ColorGenerator.MATERIAL
-            val textDrawable = TextDrawable.builder().beginConfig().width(50)
-                .height(50).endConfig()
-                .buildRound(
-                    getInitialName(data[position].group_name.toUpperCase(Locale.getDefault())),
-                    colorGenerator.getColor(data[position].group_name)
-                )
-            ivGroupName.setImageDrawable(textDrawable)
-            tvGroupName.text = data[position].group_name
+
+            ivGroupName.text = getInitialName(data[position].group_name.toUpperCase(Locale.getDefault()))
+                cvGroupName1.setCardBackgroundColor(colorGenerator.randomColor)
+                tvGroupName.text = data[position].group_name
             llGroupName.setOnClickListener {
                    onItemClickCallback.onItemClick(data[position])
             }
         }else{
-
-//                val colors =
-//                    intArrayOf(R.drawable.gradient_background, R.drawable.gradient_background, R.drawable.gradient_background)
-//                val ranndom = Random()
-//                val ranndomColor = ranndom.nextInt(3)
-//                cvGroupName.setBackgroundColor(colors[ranndomColor])
-
+                cvGroupName.setCardBackgroundColor(colorGenerator.randomColor)
                 llGroupName.visibility= View.GONE
                 cvGroupName.visibility = View.VISIBLE
                 tvGroupNameCard.text = data[position].group_name

@@ -40,7 +40,10 @@
             android:layout_marginBottom="20dp"
             android:text="SoulMood"
             android:textAlignment="center"
-            android:textSize="22sp" />
+            android:fontFamily="@font/yanone_kaffeesatz"
+            android:textStyle="bold"
+            android:textColor="@color/soulmood_primary_color"
+            android:textSize="35sp" />
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/tf_email"
