@@ -1,6 +1,5 @@
 package com.thing.bangkit.soulmood.activity
 
-import android.graphics.Color
 import android.os.Bundle
 import android.view.View
 import androidx.activity.viewModels
@@ -9,6 +8,7 @@ import androidx.core.content.ContextCompat
 import com.github.dewinjm.monthyearpicker.MonthYearPickerDialogFragment
 import com.github.mikephil.charting.components.Description
 import com.github.mikephil.charting.components.XAxis
+import com.github.mikephil.charting.components.YAxis
 import com.github.mikephil.charting.data.Entry
 import com.github.mikephil.charting.data.LineData
 import com.github.mikephil.charting.data.LineDataSet
@@ -112,13 +112,12 @@ class MoodTrackerActivity : AppCompatActivity() {
             noDataAnimation.visibility = View.GONE
             lineChart.visibility = View.VISIBLE
         }
-        val lineDataSet = LineDataSet(lineChartArrayEntry, "Rekapan Mood Anda")
+        val lineDataSet = LineDataSet(lineChartArrayEntry, "Mood Harianmu")
         lineDataSet.notifyDataSetChanged()
         val color = ContextCompat.getColor(this, R.color.soulmood_primary_color)
         lineDataSet.color = color
         lineDataSet.lineWidth = 4f
-        lineDataSet.valueTextSize = 5f
-        lineDataSet.valueTextColor = Color.BLACK
+        lineDataSet.valueTextSize = 0f
         lineDataSet.circleRadius = 6f
         lineDataSet.setCircleColor(color)
         lineDataSet.circleHoleColor = color
@@ -138,6 +137,9 @@ class MoodTrackerActivity : AppCompatActivity() {
             lineChart.data = lineData
             val xAxis: XAxis = lineChart.xAxis
             xAxis.valueFormatter = IndexAxisValueFormatter(dateList)
+            lineChart.setVisibleYRange(1f,6f, YAxis.AxisDependency.LEFT)
+            val yAxis : YAxis = lineChart.getAxis(YAxis.AxisDependency.LEFT)
+            yAxis.valueFormatter = IndexAxisValueFormatter(arrayOf("","Marah", "Takut", "Sedih", "Baik", "Asmara", "Bahagia"))
 
 
             //remove line in right side
@@ -158,6 +160,7 @@ class MoodTrackerActivity : AppCompatActivity() {
 
         }
     }
+
 
     override fun onDestroy() {
         super.onDestroy()

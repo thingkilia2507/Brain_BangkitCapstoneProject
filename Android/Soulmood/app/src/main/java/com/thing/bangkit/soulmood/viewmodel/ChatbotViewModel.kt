@@ -27,7 +27,7 @@ class ChatbotViewModel : ViewModel() {
     private val _suggestionResponse = MutableLiveData<ArrayList<String>>()
     val chat : LiveData<ArrayList<ChatbotMessage>> = _chat
     val suggestionResponse : LiveData<ArrayList<String>> = _suggestionResponse
-    private val currentDate : String= SimpleDateFormat("yyyyMMdd", Locale.getDefault()).format(Date())
+    private val currentDate : String= SimpleDateFormat("yyyyMMdd", Locale("in", "ID")).format(Date())
 
     fun initChatbot(context: Context) {
         val name = SharedPref.getPref(context, MyAsset.KEY_NAME)
