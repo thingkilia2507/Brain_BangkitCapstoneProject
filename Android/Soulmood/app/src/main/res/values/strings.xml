@@ -92,5 +92,10 @@
     <string name="group_added">Grup Berhasil ditambah</string>
     <string name="loading">Loading…</string>
     <string name="group_name_activity">GroupNameActivity</string>
+    <string name="dummy_date">Mei 2021</string>
+    <string name="happy">Bahagia</string>
+    <string name="wrong_password">Maaf, kata sandi yang dimasukkan salah.</string>
+    <string name="wrong_email_login">Email yang Anda masukkan belum terdaftar.</string>
+    <string name="wrong_email_input_format">Harap masukkan email yang benar.</string>
 
 </resources>

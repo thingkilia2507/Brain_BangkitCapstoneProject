@@ -15,7 +15,8 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/constraint_dashboard"
             android:layout_width="match_parent"
-            android:layout_height="100dp"
+            android:layout_height="wrap_content"
+            android:minHeight="@dimen/height_of_mood"
             android:background="@drawable/dashboard_bg"
             android:padding="10dp">
 
@@ -65,9 +66,10 @@
                     android:id="@+id/tv_dashboard_mood"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Semoga Harimu menyenangkan ya :)"
-                    android:textColor="@color/black"
-                    android:textSize="16sp" />
+                    android:fontFamily="@font/poppins_semibold"
+                    tools:text="Bahagia"
+                    android:textColor="@color/yellow"
+                    android:textSize="@dimen/ts_mid" />
 
             </LinearLayout>
 

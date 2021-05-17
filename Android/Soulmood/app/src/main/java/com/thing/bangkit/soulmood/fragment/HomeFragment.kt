@@ -181,7 +181,7 @@ class HomeFragment : Fragment() {
                     tvDashboardMood.text = it.mood
                     tvDashboardName.text = "Hi, ${SharedPref.getPref(requireActivity(), MyAsset.KEY_NAME)}"
                     tvDashboardDate.visibility = View.VISIBLE
-                    tvDashboardDate.text = DateHelper.dateFormat(it.date.take(10)) + "(Terakhir diubah)"
+                    tvDashboardDate.text = "Moodmu saat ini ("+DateHelper.dateFormat(it.date.take(10)) + ")"
                 }
             }else{
                 binding.tvDashboardName.text = "Hi, ${SharedPref.getPref(requireActivity(), MyAsset.KEY_NAME)}"

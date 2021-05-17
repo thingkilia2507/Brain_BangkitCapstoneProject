@@ -42,7 +42,7 @@ class GroupNameViewAdapter(private val type:String) : RecyclerView.Adapter<Group
                 cvGroupName.visibility = View.GONE
                 llGroupName.visibility= View.VISIBLE
 
-            ivGroupName.text = getInitialName(data[position].group_name.toUpperCase(Locale.getDefault()))
+            ivGroupName.text = getInitialName(data[position].group_name.toUpperCase(Locale("in", "ID")))
                 cvGroupName1.setCardBackgroundColor(colorGenerator.randomColor)
                 tvGroupName.text = data[position].group_name
             llGroupName.setOnClickListener {

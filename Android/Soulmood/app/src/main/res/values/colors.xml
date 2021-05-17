@@ -10,7 +10,8 @@
     <color name="white">#FFFFFFFF</color>
 
     <color name="red_A200">#FF5252</color>
-    <color name="yellow_900">#F57F17</color>
+    <color name="yellow">#F5EA17</color>
+    <color name="orange">#F57F17</color>
 
     <color name="colorBlueNavy">#0B0074</color>
     <color name="light_green">#69F0AE</color>

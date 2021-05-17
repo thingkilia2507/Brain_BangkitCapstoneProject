@@ -38,9 +38,9 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
             android:layout_marginBottom="20dp"
-            android:text="SoulMood"
+            android:text="@string/soulmood"
             android:textAlignment="center"
-            android:fontFamily="@font/yanone_kaffeesatz"
+            android:fontFamily="@font/righteous"
             android:textStyle="bold"
             android:textColor="@color/soulmood_primary_color"
             android:textSize="35sp" />

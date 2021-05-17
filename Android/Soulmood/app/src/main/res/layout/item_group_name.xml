@@ -9,6 +9,7 @@
             android:id="@+id/ll_group_name"
             android:orientation="vertical"
             android:layout_marginEnd="@dimen/small_margin"
+            android:layout_marginStart="@dimen/small_margin"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
 

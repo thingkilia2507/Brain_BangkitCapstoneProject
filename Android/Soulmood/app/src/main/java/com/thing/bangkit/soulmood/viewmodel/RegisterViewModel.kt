@@ -52,8 +52,10 @@ class RegisterViewModel : ViewModel() {
                                 context.getString(R.string.invalid_password_message),
                                 Toasty.LENGTH_SHORT
                             ).show()
-                        } else {
-                            Toasty.error(context, message, Toasty.LENGTH_SHORT).show()
+                        } else if(message.equals("The email address is badly formatted",true)){
+                            Toasty.error(context,  context.getString(R.string.wrong_email_input_format), Toasty.LENGTH_SHORT).show()
+                        }else {
+                            Toasty.error(context, message.toString(), Toasty.LENGTH_SHORT).show()
                         }
                     }
                 }

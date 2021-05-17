@@ -6,6 +6,7 @@ import android.content.Context
 import android.content.Intent
 import android.media.RingtoneManager
 import android.os.Build
+import android.util.Log
 import androidx.core.app.NotificationCompat
 import androidx.core.content.ContextCompat
 import com.google.firebase.firestore.FirebaseFirestore
@@ -41,7 +42,8 @@ class AlarmReceiver : BroadcastReceiver() {
             )
         }
         if(message1 != null){
-            sendMessageToDb(context)
+            Log.d("TAGDATAKU", "onReceive: $message \n$message1")
+            sendMessageToDb(context, message1)
         }
     }
 
@@ -165,7 +167,7 @@ class AlarmReceiver : BroadcastReceiver() {
         )
     }
 
-    private fun sendMessageToDb(context: Context){
+    private fun sendMessageToDb(context: Context, quotes: String){
         var message= StringBuilder("")
         var it = getChatbotData(context)
         CoroutineScope(Dispatchers.Main).launch {
@@ -173,9 +175,9 @@ class AlarmReceiver : BroadcastReceiver() {
             if(it.isNotEmpty()){
                 for(i in 0 until it.size){
                     if(it[i].name == "soulmood0280_chatbot"){
-                        message.append("<CB>:${it[i].message}")
+                        message.append("<CB>:${it[i].message}\n")
                     }else{
-                        message.append("<USER>:${it[i].message}")
+                        message.append("<USER>:${it[i].message}\n")
                     }
                 }
             }else{
@@ -184,12 +186,12 @@ class AlarmReceiver : BroadcastReceiver() {
             showAlarmNotification(
                 context,
                 context.getString(R.string.dialy_motivation),
-               "test background task is running",
+               quotes,
                 ID_REPEATING1
             )
 
             //retrofit send data to api and get the response
-            insertMoodData("baik","4",context)
+            insertMoodData("Bahagia","6",context)
 
         }
 
@@ -198,7 +200,7 @@ class AlarmReceiver : BroadcastReceiver() {
     private fun getChatbotData(context: Context):ArrayList<ChatbotMessage>{
          val db = FirebaseFirestore.getInstance()
         val chatData = ArrayList<ChatbotMessage>()
-         val currentDate : String= SimpleDateFormat("yyyyMMdd", Locale.getDefault()).format(Date())
+         val currentDate : String= SimpleDateFormat("yyyyMMdd", Locale("in", "ID")).format(Date())
 
         CoroutineScope(Dispatchers.IO).launch {
             val data = db.collection("db_chatbot").document("1.0").collection("user_chatbot")
