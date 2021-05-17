@@ -42,7 +42,7 @@ class GroupChatViewModel : ViewModel() {
             val database = db.collection("groups_chat").document(id).set(map)
             withContext(Dispatchers.Main) {
                 database.addOnSuccessListener {
-                    Toasty.success(context, context.getString(R.string.group_added), Toasty.LENGTH_SHORT).show()
+                    Toasty.success(context, context.getString(R.string.room_added), Toasty.LENGTH_SHORT).show()
                 }.addOnFailureListener {
                     Toasty.error(context, it.message.toString(), Toasty.LENGTH_SHORT).show()
                 }
