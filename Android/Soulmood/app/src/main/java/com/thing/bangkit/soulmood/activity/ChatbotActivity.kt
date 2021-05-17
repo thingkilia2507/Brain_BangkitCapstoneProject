@@ -10,6 +10,7 @@ import com.thing.bangkit.soulmood.adapter.ChatbotAdapter
 import com.thing.bangkit.soulmood.adapter.SuggestionChatAdapter
 import com.thing.bangkit.soulmood.databinding.ActivityChatbotBinding
 import com.thing.bangkit.soulmood.helper.IClickedItemListener
+import com.thing.bangkit.soulmood.helper.IFinishedListener
 import com.thing.bangkit.soulmood.helper.MyAsset
 import com.thing.bangkit.soulmood.helper.SharedPref
 import com.thing.bangkit.soulmood.viewmodel.ChatbotViewModel
@@ -40,10 +41,15 @@ class ChatbotActivity : AppCompatActivity(), IClickedItemListener {
             }
             fabChatbotSend.setOnClickListener {
                 if(etChatbot.text.toString().isNotEmpty()) {
-                    viewModel.sendMessage(this@ChatbotActivity,etChatbot.text.toString(), SharedPref.getPref(this@ChatbotActivity, MyAsset.KEY_NAME)!!, SharedPref.getPref(this@ChatbotActivity, MyAsset.KEY_EMAIL)!!)
+                    viewModel.sendMessage(object : IFinishedListener{
+                        override fun onFinish() {
+                            viewModel.reqChatbotReply(this@ChatbotActivity)
+                            binding?.rvSuggestionMessage?.visibility = GONE
+                        }
+
+                    },this@ChatbotActivity,etChatbot.text.toString(), SharedPref.getPref(this@ChatbotActivity, MyAsset.KEY_NAME)!!, SharedPref.getPref(this@ChatbotActivity, MyAsset.KEY_EMAIL)!!)
                     etChatbot.text.clear()
-                    viewModel.reqChatbotReply(this@ChatbotActivity)
-                    binding?.rvSuggestionMessage?.visibility = GONE
+
                 }
 
             }
@@ -71,8 +77,11 @@ class ChatbotActivity : AppCompatActivity(), IClickedItemListener {
     }
 
     override fun onClicked(message: String) {
-        viewModel.sendMessage(this@ChatbotActivity,message, SharedPref.getPref(this@ChatbotActivity, MyAsset.KEY_NAME)!!, SharedPref.getPref(this@ChatbotActivity, MyAsset.KEY_EMAIL)!!)
-        viewModel.reqChatbotReply(this@ChatbotActivity)
-        binding?.rvSuggestionMessage?.visibility = GONE
+        viewModel.sendMessage( object :IFinishedListener{
+            override fun onFinish() {
+                viewModel.reqChatbotReply(this@ChatbotActivity)
+                binding?.rvSuggestionMessage?.visibility = GONE
+            }
+        },this@ChatbotActivity,message, SharedPref.getPref(this@ChatbotActivity, MyAsset.KEY_NAME)!!, SharedPref.getPref(this@ChatbotActivity, MyAsset.KEY_EMAIL)!!)
     }
 }

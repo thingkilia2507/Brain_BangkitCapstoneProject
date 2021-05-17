@@ -88,8 +88,9 @@ class LoginActivity : AppCompatActivity(), IProgressResult {
                                 )
 
                                 //set dialy motivation word repeat alarm
-                                groupChatViewModel.getQuoteOfTheDay().observe(this@LoginActivity,{
-                                    if(it.isNotEmpty()){
+                                groupChatViewModel.getQuoteOfTheDay().observe(this@LoginActivity,{ it ->
+                                    Log.d("TAGDATAKU", "onCreatequotes: "+it)
+                                    it?.let{
                                         AlarmReceiver().setRepeatingAlarm(
                                             this@LoginActivity,
                                             it
