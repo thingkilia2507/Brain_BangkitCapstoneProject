@@ -105,7 +105,7 @@ class HomeFragment : Fragment() {
 
             floatingSeeAll.setOnClickListener { startActivity(Intent(requireActivity(),GroupNameActivity::class.java)) }
             constraintDashboard.setOnClickListener { startActivity(Intent(requireActivity(),MoodTrackerActivity::class.java)) }
-            groupChatViewModel.setGroupName()
+            groupChatViewModel.setGroupName(MyAsset.HOME_FRAGMENT)
             groupChatViewModel.getGroupName().observe(viewLifecycleOwner, {
                 if (it != null) {
                     adapter.setData(it)
@@ -172,11 +172,9 @@ class HomeFragment : Fragment() {
                 binding.apply {
                     when(it.mood_code){
                         "1" -> ivDashboardMood.setImageDrawable(requireActivity().getDrawable(R.drawable.angry))
-                        "2" -> ivDashboardMood.setImageDrawable(requireActivity().getDrawable(R.drawable.sad))
-                        "3" -> ivDashboardMood.setImageDrawable(requireActivity().getDrawable(R.drawable.fear))
-                        "4" -> ivDashboardMood.setImageDrawable(requireActivity().getDrawable(R.drawable.good))
-                        "5" -> ivDashboardMood.setImageDrawable(requireActivity().getDrawable(R.drawable.love))
-                        "6" -> ivDashboardMood.setImageDrawable(requireActivity().getDrawable(R.drawable.joy))
+                        "2" -> ivDashboardMood.setImageDrawable(requireActivity().getDrawable(R.drawable.fear))
+                        "3" -> ivDashboardMood.setImageDrawable(requireActivity().getDrawable(R.drawable.sad))
+                        "4" -> ivDashboardMood.setImageDrawable(requireActivity().getDrawable(R.drawable.joy))
                     }
                     tvDashboardMood.text = it.mood
                     tvDashboardName.text = "Hi, ${SharedPref.getPref(requireActivity(), MyAsset.KEY_NAME)}"
