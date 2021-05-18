@@ -24,16 +24,16 @@ import java.util.*
 
 class AlarmReceiver : BroadcastReceiver() {
     companion object {
-        const val EXTRA_MESSAGE = "message"
-        const val EXTRA_MESSAGE1 = "message1"
+        const val EXTRA_MESSAGE_MOTIVATION_WORD = "motivation_word"
+        const val EXTRA_MESSAGE_CHATBOT_DATA = "chatbot_data"
         private const val ID_REPEATING = 101
         private const val ID_REPEATING1 = 102
     }
 
     override fun onReceive(context: Context, intent: Intent) {
         // This method is called when the BroadcastReceiver is receiving an Intent broadcast.
-        val message = intent.getStringExtra(EXTRA_MESSAGE)
-        val message1 = intent.getStringExtra(EXTRA_MESSAGE1)
+        val message = intent.getStringExtra(EXTRA_MESSAGE_MOTIVATION_WORD)
+        val message1 = intent.getStringExtra(EXTRA_MESSAGE_CHATBOT_DATA)
         if (message != null) {
             showAlarmNotification(
                 context,
@@ -48,10 +48,10 @@ class AlarmReceiver : BroadcastReceiver() {
         }
     }
 
-    fun setRepeatingAlarm(context: Context, message: String) {
+    fun setRepeatingAlarmMotivationWord(context: Context, message: String) {
         val alarmManager = context.getSystemService(Context.ALARM_SERVICE) as AlarmManager
         val intent = Intent(context, AlarmReceiver::class.java)
-        intent.putExtra(EXTRA_MESSAGE, message)
+        intent.putExtra(EXTRA_MESSAGE_MOTIVATION_WORD, message)
 
         val calendar = Calendar.getInstance().apply {
             set(Calendar.HOUR_OF_DAY, 8)
@@ -68,10 +68,10 @@ class AlarmReceiver : BroadcastReceiver() {
         )
     }
 
-    fun setRepeating1(context: Context, message: String) {
+    fun setRepeatingSendChatbotDataToApi(context: Context, message: String) {
         val alarmManager = context.getSystemService(Context.ALARM_SERVICE) as AlarmManager
         val intent = Intent(context, AlarmReceiver::class.java)
-        intent.putExtra(EXTRA_MESSAGE1, message)
+        intent.putExtra(EXTRA_MESSAGE_CHATBOT_DATA, message)
 
 
         val pendingIntent = PendingIntent.getBroadcast(context, ID_REPEATING1, intent, 0)
@@ -171,6 +171,7 @@ class AlarmReceiver : BroadcastReceiver() {
     //background task insert mood data to db
     private fun sendMessageToDb(context: Context) {
         var message = StringBuilder("")
+        //get dialy chatbot data from firestore
         var it = getChatbotData(context)
         CoroutineScope(Dispatchers.Main).launch {
             delay(1000)
