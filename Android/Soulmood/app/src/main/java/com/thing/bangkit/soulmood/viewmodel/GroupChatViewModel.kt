@@ -90,7 +90,7 @@ class GroupChatViewModel : ViewModel() {
                             var aiMessage=""
                             var status="true"
                             if(response.body()!!.status){
-                                aiMessage = response.body()!!.message
+                                aiMessage = message
                                 status = "false"
                             }else{
                                 aiMessage = "*Pesan ini mengandung kata kasar*"
