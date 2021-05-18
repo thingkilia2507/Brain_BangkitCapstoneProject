@@ -53,9 +53,14 @@ class GroupChatViewModel : ViewModel() {
     //get group name data and add to livedata
     fun setGroupName(type:String?=null) {
         viewModelScope.launch(Dispatchers.IO) {
-            val database = db.collection("groups_chat").orderBy("created_at",Query.Direction.DESCENDING)
+            var database:Query
             withContext(Dispatchers.Main) {
-                if(type == MyAsset.HOME_FRAGMENT) database.limit(20)
+                if(type == MyAsset.HOME_FRAGMENT) {
+                    database = db.collection("groups_chat").orderBy("created_at",Query.Direction.DESCENDING).limit(20)
+                }
+                else{
+                    database=db.collection("groups_chat").orderBy("created_at",Query.Direction.DESCENDING)
+                }
                 database.addSnapshotListener { value, _ ->
                     if (value != null) {
                         var group = ArrayList<ChatGroup>()
