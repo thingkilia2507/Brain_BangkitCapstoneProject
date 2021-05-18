@@ -31,7 +31,6 @@ import com.thing.bangkit.soulmood.helper.MyAsset
 import com.thing.bangkit.soulmood.helper.SharedPref
 import com.thing.bangkit.soulmood.model.ChatGroup
 import com.thing.bangkit.soulmood.model.ComingSoonFeatureSliderItem
-import com.thing.bangkit.soulmood.viewmodel.ChatbotViewModel
 import com.thing.bangkit.soulmood.viewmodel.GroupChatViewModel
 import com.thing.bangkit.soulmood.viewmodel.MoodTrackerViewModel
 
@@ -39,7 +38,6 @@ class HomeFragment : Fragment() {
     private lateinit var sliderRunnable: Runnable
     private val groupChatViewModel: GroupChatViewModel by viewModels()
     private val moodTrackerViewModel : MoodTrackerViewModel by viewModels()
-    private val chatBotViewModel:ChatbotViewModel by viewModels()
     private lateinit var binding: FragmentHomeBinding
 
     private val sliderHandler = Handler(Looper.getMainLooper())
@@ -172,8 +170,8 @@ class HomeFragment : Fragment() {
                 binding.apply {
                     when(it.mood_code){
                         "1" -> ivDashboardMood.setImageDrawable(requireActivity().getDrawable(R.drawable.angry))
-                        "2" -> ivDashboardMood.setImageDrawable(requireActivity().getDrawable(R.drawable.sad))
-                        "3" -> ivDashboardMood.setImageDrawable(requireActivity().getDrawable(R.drawable.fear))
+                        "2" -> ivDashboardMood.setImageDrawable(requireActivity().getDrawable(R.drawable.fear))
+                        "3" -> ivDashboardMood.setImageDrawable(requireActivity().getDrawable(R.drawable.sad))
                         "4" -> ivDashboardMood.setImageDrawable(requireActivity().getDrawable(R.drawable.happy))
                     }
                     tvDashboardMood.text = it.mood

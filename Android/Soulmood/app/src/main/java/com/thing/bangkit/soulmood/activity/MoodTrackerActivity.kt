@@ -129,8 +129,9 @@ class MoodTrackerActivity : AppCompatActivity() {
             lineChart.data = lineData
             val xAxis: XAxis = lineChart.xAxis
             xAxis.valueFormatter = IndexAxisValueFormatter(dateList)
-            lineChart.setVisibleYRange(1f,4f, YAxis.AxisDependency.LEFT)
+            lineChart.setVisibleYRange(0f,4f, YAxis.AxisDependency.LEFT)
             val yAxis : YAxis = lineChart.getAxis(YAxis.AxisDependency.LEFT)
+            yAxis.granularity = 1f
             yAxis.valueFormatter = IndexAxisValueFormatter(arrayOf("","Marah", "Takut", "Sedih", "Bahagia"))
 
             //remove line in right side
