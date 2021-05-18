@@ -12,7 +12,7 @@ import kotlin.collections.ArrayList
 
 
 class GroupNameViewAdapter(private val type:String) : RecyclerView.Adapter<GroupNameViewAdapter.ViewHolder>() {
-    private val data = ArrayList<ChatGroup>()
+    private var data = ArrayList<ChatGroup>()
     private lateinit var onItemClickCallback: OnItemClickCallback
     fun setOnItemClickCallback(onItemClickCallback: OnItemClickCallback) {
         this.onItemClickCallback = onItemClickCallback
@@ -61,13 +61,8 @@ class GroupNameViewAdapter(private val type:String) : RecyclerView.Adapter<Group
 
     }
 
+    override fun getItemCount(): Int =  data.size
 
-
-    override fun getItemCount(): Int {
-        return if(data.size >30) 30
-        else if(type != "homeFragment") data.size
-        else data.size
-    }
 
     interface OnItemClickCallback {
         fun onItemClick(data: ChatGroup)
@@ -89,5 +84,10 @@ class GroupNameViewAdapter(private val type:String) : RecyclerView.Adapter<Group
             " " + firstName[0] + lastName[0]
         }
 
+    }
+
+    fun searchGroupName(groupNameData: ArrayList<ChatGroup>) {
+        data = groupNameData
+        notifyDataSetChanged()
     }
 }

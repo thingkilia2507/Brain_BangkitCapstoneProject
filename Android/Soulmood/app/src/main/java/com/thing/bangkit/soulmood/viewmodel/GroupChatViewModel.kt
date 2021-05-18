@@ -53,9 +53,9 @@ class GroupChatViewModel : ViewModel() {
     //get group name data and add to livedata
     fun setGroupName(type:String?=null) {
         viewModelScope.launch(Dispatchers.IO) {
-            val database = db.collection("groups_chat").orderBy("created_at", Query.Direction.DESCENDING)
+            val database = db.collection("groups_chat").orderBy("created_at",Query.Direction.DESCENDING)
             withContext(Dispatchers.Main) {
-                if(type == MyAsset.GROUP_NAME_ACTIVITY) database.orderBy("group_name",Query.Direction.ASCENDING)
+                if(type == MyAsset.HOME_FRAGMENT) database.limit(20)
                 database.addSnapshotListener { value, _ ->
                     if (value != null) {
                         var group = ArrayList<ChatGroup>()
@@ -91,10 +91,10 @@ class GroupChatViewModel : ViewModel() {
                             var status="true"
                             if(response.body()!!.status){
                                 aiMessage = response.body()!!.message
-                                status = "true"
+                                status = "false"
                             }else{
                                 aiMessage = "*Pesan ini mengandung kata kasar*"
-                                status = "false"
+                                status = "true"
                             }
                             val id = UUID.randomUUID().toString()
                             viewModelScope.launch(Dispatchers.IO) {
@@ -122,9 +122,6 @@ class GroupChatViewModel : ViewModel() {
             }
 
         }
-
-
-
 
     }
 

@@ -13,6 +13,7 @@ import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Query
 import com.thing.bangkit.soulmood.R
 import com.thing.bangkit.soulmood.activity.MainActivity
+import com.thing.bangkit.soulmood.apiservice.ApiConfig
 import com.thing.bangkit.soulmood.helper.DateHelper
 import com.thing.bangkit.soulmood.helper.MyAsset
 import com.thing.bangkit.soulmood.helper.SharedPref
@@ -43,7 +44,7 @@ class AlarmReceiver : BroadcastReceiver() {
         }
         if(message1 != null){
             Log.d("TAGDATAKU", "onReceive: $message \n$message1")
-            sendMessageToDb(context, message1)
+            sendMessageToDb(context)
         }
     }
 
@@ -167,46 +168,63 @@ class AlarmReceiver : BroadcastReceiver() {
         )
     }
 
-    private fun sendMessageToDb(context: Context, quotes: String){
-        var message= StringBuilder("")
+    //background task insert mood data to db
+    private fun sendMessageToDb(context: Context) {
+        var message = StringBuilder("")
         var it = getChatbotData(context)
         CoroutineScope(Dispatchers.Main).launch {
             delay(1000)
-            if(it.isNotEmpty()){
-                for(i in 0 until it.size){
-                    if(it[i].name == "soulmood0280_chatbot"){
+            if (it.isNotEmpty()) {
+                for (i in 0 until it.size) {
+                    if (it[i].name == "soulmood0280_chatbot") {
                         message.append("<CB>:${it[i].message}")
-                    }else{
+                    } else {
                         message.append("<USER>:${it[i].message}")
                     }
                 }
-            }else{
+            } else {
                 message.append("")
             }
-            showAlarmNotification(
-                context,
-                context.getString(R.string.dialy_motivation),
-               quotes,
-                ID_REPEATING1
-            )
 
-            //retrofit send data to api and get the response
-            insertMoodData("Bahagia","4",context)
-
+            val service = ApiConfig.getRetrofitSoulmood()
+            CoroutineScope(Dispatchers.IO).launch {
+                try {
+                    val response = service.moodDetectorResponse(message.toString())
+                    withContext(Dispatchers.Main) {
+                        if (response.code() == 200) {
+                            if (response.body() != null) {
+                                val mood = response.body()!!.mood
+                                var moodCode:String = ""
+                                when(mood){
+                                    "Bahagia"-> moodCode = "4"
+                                    "Sedih"-> moodCode = "3"
+                                    "Takut"-> moodCode = "2"
+                                    "Marah"-> moodCode = "1"
+                                }
+                                //insert data to firestore
+                                insertMoodData(response.body()!!.mood, moodCode, context)
+                            }
+                        }
+                    }
+                } catch (e: Throwable) {
+                    Log.d("TAGDATAKU", "reqChatbotReply RetrofitFail: " + e.message.toString())
+                }
+            }
         }
 
     }
 
-    private fun getChatbotData(context: Context):ArrayList<ChatbotMessage>{
-         val db = FirebaseFirestore.getInstance()
+    private fun getChatbotData(context: Context): ArrayList<ChatbotMessage> {
+        val db = FirebaseFirestore.getInstance()
         val chatData = ArrayList<ChatbotMessage>()
-         val currentDate : String= SimpleDateFormat("yyyyMMdd", Locale("in", "ID")).format(Date())
+        val currentDate: String = SimpleDateFormat("yyyyMMdd", Locale("in", "ID")).format(Date())
 
         CoroutineScope(Dispatchers.IO).launch {
             val data = db.collection("db_chatbot").document("1.0").collection("user_chatbot")
-                .document(SharedPref.getPref(context, MyAsset.KEY_USER_ID).toString()).collection("chatbot_messages").document(currentDate).collection("message")
+                .document(SharedPref.getPref(context, MyAsset.KEY_USER_ID).toString())
+                .collection("chatbot_messages").document(currentDate).collection("message")
                 .orderBy("created_at", Query.Direction.ASCENDING)
-            withContext(Dispatchers.Main){
+            withContext(Dispatchers.Main) {
                 data.addSnapshotListener { value, _ ->
                     value?.let {
                         for (message in value.documents) {
