@@ -32,9 +32,7 @@ class MoodTrackerActivity : AppCompatActivity() {
     private val angry = ArrayList<String>()
     private val sad = ArrayList<String>()
     private val fear = ArrayList<String>()
-    private val good = ArrayList<String>()
-    private val love = ArrayList<String>()
-    private val joy = ArrayList<String>()
+    private val happy = ArrayList<String>()
 
     private val lineChartArrayEntry = ArrayList<Entry>()
     private val dateList = ArrayList<String>()
@@ -55,11 +53,9 @@ class MoodTrackerActivity : AppCompatActivity() {
             lineChartArrayEntry.clear()
             dateList.clear()
             angry.clear()
-            joy.clear()
-            good.clear()
+            happy.clear()
             sad.clear()
             fear.clear()
-            love.clear()
             if(it.isNotEmpty()){
                 CoroutineScope(Dispatchers.Default).launch {
                     for (i in 0 until it.size) {
@@ -69,9 +65,7 @@ class MoodTrackerActivity : AppCompatActivity() {
                             "1" -> angry.add(it[i].mood_code)
                             "2" -> sad.add(it[i].mood_code)
                             "3" -> fear.add(it[i].mood_code)
-                            "4" -> good.add(it[i].mood_code)
-                            "5" -> love.add(it[i].mood_code)
-                            "6" -> joy.add(it[i].mood_code)
+                            "6" -> happy.add(it[i].mood_code)
                         }
                     }
                 }
@@ -90,9 +84,7 @@ class MoodTrackerActivity : AppCompatActivity() {
             CoroutineScope(Dispatchers.Main).launch {
                 delay(300)
                 binding?.apply {
-                    tvJoyScore.text = joy.size.toString()
-                    tvLoveScore.text = love.size.toString()
-                    tvGoodScore.text = good.size.toString()
+                    tvJoyScore.text = happy.size.toString()
                     tvFearScore.text = fear.size.toString()
                     tvSadScore.text = sad.size.toString()
                     tvAngryScore.text = angry.size.toString()
@@ -133,19 +125,15 @@ class MoodTrackerActivity : AppCompatActivity() {
             var lineData = LineData(lineDataSet)
 
 
-
             lineChart.data = lineData
             val xAxis: XAxis = lineChart.xAxis
             xAxis.valueFormatter = IndexAxisValueFormatter(dateList)
-            lineChart.setVisibleYRange(1f,6f, YAxis.AxisDependency.LEFT)
+            lineChart.setVisibleYRange(1f,4f, YAxis.AxisDependency.LEFT)
             val yAxis : YAxis = lineChart.getAxis(YAxis.AxisDependency.LEFT)
-            yAxis.valueFormatter = IndexAxisValueFormatter(arrayOf("","Marah", "Takut", "Sedih", "Baik", "Asmara", "Bahagia"))
+            yAxis.valueFormatter = IndexAxisValueFormatter(arrayOf("","Marah", "Takut", "Sedih", "Bahagia"))
 
             //remove line in right side
             lineChart.axisRight.isEnabled = false
-
-            //auto zoom
-            //lineChart.setScaleMinima(1.5f, 1f)
 
             xAxis.setDrawGridLines(false)
             xAxis.setDrawAxisLine(false)
