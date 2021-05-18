@@ -16,7 +16,7 @@
             android:layout_height="wrap_content"
             android:textColor="@color/black"
             android:fontFamily="@font/poppins_semibold"
-            android:text="@string/create_new_group"
+            android:text="@string/create_new_room"
             android:textAlignment="center"
             android:textSize="@dimen/ts_title" />
 
@@ -29,7 +29,7 @@
             android:layout_marginEnd="20dp"
             android:background="@drawable/custom_edittext"
             android:elevation="@dimen/dp_2"
-            android:hint="@string/enter_new_group"
+            android:hint="@string/enter_new_room"
             android:inputType="text"
             android:padding="8dp" />
 

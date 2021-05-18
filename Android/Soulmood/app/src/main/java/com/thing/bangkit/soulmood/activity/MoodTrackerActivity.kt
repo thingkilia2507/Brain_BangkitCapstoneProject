@@ -141,7 +141,6 @@ class MoodTrackerActivity : AppCompatActivity() {
             val yAxis : YAxis = lineChart.getAxis(YAxis.AxisDependency.LEFT)
             yAxis.valueFormatter = IndexAxisValueFormatter(arrayOf("","Marah", "Takut", "Sedih", "Baik", "Asmara", "Bahagia"))
 
-
             //remove line in right side
             lineChart.axisRight.isEnabled = false
 

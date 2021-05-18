@@ -175,9 +175,9 @@ class AlarmReceiver : BroadcastReceiver() {
             if(it.isNotEmpty()){
                 for(i in 0 until it.size){
                     if(it[i].name == "soulmood0280_chatbot"){
-                        message.append("<CB>:${it[i].message}\n")
+                        message.append("<CB>:${it[i].message}")
                     }else{
-                        message.append("<USER>:${it[i].message}\n")
+                        message.append("<USER>:${it[i].message}")
                     }
                 }
             }else{
