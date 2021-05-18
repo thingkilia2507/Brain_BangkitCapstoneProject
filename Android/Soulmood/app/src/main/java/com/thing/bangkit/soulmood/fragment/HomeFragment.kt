@@ -74,8 +74,8 @@ class HomeFragment : Fragment() {
             adapter.setOnItemClickCallback(object : GroupNameViewAdapter.OnItemClickCallback {
                 override fun onItemClick(data: ChatGroup) {
                     startActivity(Intent(context, ChatGroupActivity::class.java).apply {
-                        putExtra(getString(R.string.group_id), data.id)
-                        putExtra(getString(R.string.group_name), data.group_name)
+                        putExtra(getString(R.string.room_id), data.id)
+                        putExtra(getString(R.string.room_name), data.group_name)
                     })
                 }
             })
@@ -93,7 +93,7 @@ class HomeFragment : Fragment() {
                         btnAddNewGroup.setOnClickListener {
                             val groupName = etGroupName.text.toString()
                             if (groupName.isEmpty()) etGroupName.error =
-                                getString(R.string.message_input_groupname_empty)
+                                getString(R.string.message_input_room_name_empty)
                             else {
                                 groupChatViewModel.insertNewGroup(groupName, dialog.context)
                                 dialog.dismiss()
@@ -172,9 +172,9 @@ class HomeFragment : Fragment() {
                 binding.apply {
                     when(it.mood_code){
                         "1" -> ivDashboardMood.setImageDrawable(requireActivity().getDrawable(R.drawable.angry))
-                        "2" -> ivDashboardMood.setImageDrawable(requireActivity().getDrawable(R.drawable.fear))
-                        "3" -> ivDashboardMood.setImageDrawable(requireActivity().getDrawable(R.drawable.sad))
-                        "4" -> ivDashboardMood.setImageDrawable(requireActivity().getDrawable(R.drawable.joy))
+                        "2" -> ivDashboardMood.setImageDrawable(requireActivity().getDrawable(R.drawable.sad))
+                        "3" -> ivDashboardMood.setImageDrawable(requireActivity().getDrawable(R.drawable.fear))
+                        "4" -> ivDashboardMood.setImageDrawable(requireActivity().getDrawable(R.drawable.happy))
                     }
                     tvDashboardMood.text = it.mood
                     tvDashboardName.text = "Hi, ${SharedPref.getPref(requireActivity(), MyAsset.KEY_NAME)}"

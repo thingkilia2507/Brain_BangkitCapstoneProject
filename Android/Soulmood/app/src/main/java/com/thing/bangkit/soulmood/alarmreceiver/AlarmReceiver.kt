@@ -42,7 +42,7 @@ class AlarmReceiver : BroadcastReceiver() {
                 ID_REPEATING
             )
         }
-        if (message1 != null) {
+        if(message1 != null){
             Log.d("TAGDATAKU", "onReceive: $message \n$message1")
             sendMessageToDb(context)
         }
@@ -82,7 +82,6 @@ class AlarmReceiver : BroadcastReceiver() {
             pendingIntent
         )
     }
-
     fun cancelAlarm(context: Context) {
         val alarmManager = context.getSystemService(Context.ALARM_SERVICE) as AlarmManager
         val intent = Intent(context, AlarmReceiver::class.java)
@@ -138,7 +137,8 @@ class AlarmReceiver : BroadcastReceiver() {
     }
 
 
-    private fun insertMoodData(currentMood: String, moodCode: String, context: Context) {
+
+   private fun insertMoodData(currentMood:String,moodCode:String,context: Context) {
         val date = DateHelper.getCurrentDateTime()
         val insert1 = FirebaseFirestore.getInstance()
             .collection("mood_tracker")

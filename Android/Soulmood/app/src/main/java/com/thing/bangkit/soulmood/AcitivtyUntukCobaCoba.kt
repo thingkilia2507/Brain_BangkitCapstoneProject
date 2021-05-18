@@ -44,8 +44,8 @@ class AcitivtyUntukCobaCoba : AppCompatActivity() {
             adapter.setOnItemClickCallback(object :GroupNameViewAdapter.OnItemClickCallback{
                 override fun onItemClick(data: ChatGroup) {
                     startActivity(Intent(this@AcitivtyUntukCobaCoba, ChatGroupActivity::class.java).apply {
-                        putExtra(getString(R.string.group_id),data.id)
-                        putExtra(getString(R.string.group_name),data.group_name)
+                        putExtra(getString(R.string.room_id),data.id)
+                        putExtra(getString(R.string.room_name),data.group_name)
                     })
                 }
             })
@@ -63,7 +63,7 @@ class AcitivtyUntukCobaCoba : AppCompatActivity() {
                     val btnNewGroup = findViewById<Button>(R.id.btn_add_new_group)
                     btnNewGroup.setOnClickListener {
                         val groupName = etGroupName.text.toString()
-                        if(groupName.isEmpty()) etGroupName.error = "Masukkan Nama Grup!"
+                        if(groupName.isEmpty()) etGroupName.error = "Masukkan Nama Ruang!"
                         else {
                             groupChatViewModel.insertNewGroup(groupName,this@AcitivtyUntukCobaCoba)
                             dialog.dismiss()

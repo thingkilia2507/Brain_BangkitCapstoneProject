@@ -24,7 +24,7 @@ class GroupNameActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityGroupNameBinding.inflate(layoutInflater)
         setContentView(binding?.root)
-        supportActionBar?.title = "Daftar Grup"
+        supportActionBar?.title = "Ruang Cerita"
         supportActionBar?.setDisplayHomeAsUpEnabled(true);
 
         initAdapter()
@@ -38,8 +38,8 @@ class GroupNameActivity : AppCompatActivity() {
                             this@GroupNameActivity,
                             ChatGroupActivity::class.java
                         ).apply {
-                            putExtra(getString(R.string.group_id), data.id)
-                            putExtra(getString(R.string.group_name), data.group_name)
+                            putExtra(getString(R.string.room_id), data.id)
+                            putExtra(getString(R.string.room_name), data.group_name)
                         })
                 }
             })

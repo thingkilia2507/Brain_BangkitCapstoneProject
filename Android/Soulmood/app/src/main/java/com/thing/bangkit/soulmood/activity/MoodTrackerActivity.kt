@@ -32,7 +32,7 @@ class MoodTrackerActivity : AppCompatActivity() {
     private val angry = ArrayList<String>()
     private val sad = ArrayList<String>()
     private val fear = ArrayList<String>()
-    private val joy = ArrayList<String>()
+    private val happy = ArrayList<String>()
 
     private val lineChartArrayEntry = ArrayList<Entry>()
     private val dateList = ArrayList<String>()
@@ -53,7 +53,7 @@ class MoodTrackerActivity : AppCompatActivity() {
             lineChartArrayEntry.clear()
             dateList.clear()
             angry.clear()
-            joy.clear()
+            happy.clear()
             sad.clear()
             fear.clear()
 
@@ -64,9 +64,9 @@ class MoodTrackerActivity : AppCompatActivity() {
                         dateList.add(it[i].date.substring(8, 10))
                         when (it[i].mood_code) {
                             "1" -> angry.add(it[i].mood_code)
-                            "2" -> fear.add(it[i].mood_code)
-                            "3" -> sad.add(it[i].mood_code)
-                            "4" -> joy.add(it[i].mood_code)
+                            "2" -> sad.add(it[i].mood_code)
+                            "3" -> fear.add(it[i].mood_code)
+                            "4" -> happy.add(it[i].mood_code)
                         }
                     }
                 }
@@ -85,7 +85,7 @@ class MoodTrackerActivity : AppCompatActivity() {
             CoroutineScope(Dispatchers.Main).launch {
                 delay(300)
                 binding?.apply {
-                    tvJoyScore.text = joy.size.toString()
+                    tvJoyScore.text = happy.size.toString()
                     tvFearScore.text = fear.size.toString()
                     tvSadScore.text = sad.size.toString()
                     tvAngryScore.text = angry.size.toString()
@@ -125,13 +125,13 @@ class MoodTrackerActivity : AppCompatActivity() {
 
             var lineData = LineData(lineDataSet)
 
+
             lineChart.data = lineData
             val xAxis: XAxis = lineChart.xAxis
             xAxis.valueFormatter = IndexAxisValueFormatter(dateList)
-            lineChart.setVisibleYRange(1f,6f, YAxis.AxisDependency.LEFT)
+            lineChart.setVisibleYRange(1f,4f, YAxis.AxisDependency.LEFT)
             val yAxis : YAxis = lineChart.getAxis(YAxis.AxisDependency.LEFT)
             yAxis.valueFormatter = IndexAxisValueFormatter(arrayOf("","Marah", "Takut", "Sedih", "Bahagia"))
-
 
             //remove line in right side
             lineChart.axisRight.isEnabled = false
@@ -145,6 +145,10 @@ class MoodTrackerActivity : AppCompatActivity() {
             xAxis.labelCount = dateList.size
             xAxis.position = XAxis.XAxisPosition.BOTTOM
             lineChart.animate()
+
+
+
+
         }
     }
 
