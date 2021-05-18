@@ -191,7 +191,7 @@ class AlarmReceiver : BroadcastReceiver() {
             )
 
             //retrofit send data to api and get the response
-            insertMoodData("Bahagia","6",context)
+            insertMoodData("Bahagia","4",context)
 
         }
 
