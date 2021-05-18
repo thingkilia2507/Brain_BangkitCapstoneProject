@@ -91,7 +91,7 @@ class LoginActivity : AppCompatActivity(), IProgressResult {
                                 groupChatViewModel.getQuoteOfTheDay().observe(this@LoginActivity,{ it ->
                                     Log.d("TAGDATAKU", "onCreatequotes: "+it)
                                     it?.let{
-                                        AlarmReceiver().setRepeatingAlarm(
+                                        AlarmReceiver().setRepeatingAlarmMotivationWord(
                                             this@LoginActivity,
                                             it
                                         )

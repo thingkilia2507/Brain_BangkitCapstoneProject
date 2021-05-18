@@ -92,7 +92,7 @@ class AcitivtyUntukCobaCoba : AppCompatActivity() {
                 withContext(Dispatchers.Main){
                     if(response.code() == 200){
                         if(response.body() != null){
-                            AlarmReceiver().setRepeatingAlarm(
+                            AlarmReceiver().setRepeatingAlarmMotivationWord(
                                 this@AcitivtyUntukCobaCoba,
                                 "${response.body()?.quotes?.get(0)?.text.toString()} - ${response.body()?.quotes?.get(0)?.author.toString()} -"
                             )
