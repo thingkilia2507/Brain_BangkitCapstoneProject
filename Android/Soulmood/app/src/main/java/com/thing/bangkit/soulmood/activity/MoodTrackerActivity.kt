@@ -65,7 +65,7 @@ class MoodTrackerActivity : AppCompatActivity() {
                             "1" -> angry.add(it[i].mood_code)
                             "2" -> sad.add(it[i].mood_code)
                             "3" -> fear.add(it[i].mood_code)
-                            "6" -> happy.add(it[i].mood_code)
+                            "4" -> happy.add(it[i].mood_code)
                         }
                     }
                 }
@@ -128,8 +128,9 @@ class MoodTrackerActivity : AppCompatActivity() {
             lineChart.data = lineData
             val xAxis: XAxis = lineChart.xAxis
             xAxis.valueFormatter = IndexAxisValueFormatter(dateList)
-            lineChart.setVisibleYRange(1f,4f, YAxis.AxisDependency.LEFT)
+            lineChart.setVisibleYRange(0f,4f, YAxis.AxisDependency.LEFT)
             val yAxis : YAxis = lineChart.getAxis(YAxis.AxisDependency.LEFT)
+            yAxis.granularity = 1f
             yAxis.valueFormatter = IndexAxisValueFormatter(arrayOf("","Marah", "Takut", "Sedih", "Bahagia"))
 
             //remove line in right side
