@@ -174,9 +174,7 @@ class HomeFragment : Fragment() {
                         "1" -> ivDashboardMood.setImageDrawable(requireActivity().getDrawable(R.drawable.angry))
                         "2" -> ivDashboardMood.setImageDrawable(requireActivity().getDrawable(R.drawable.sad))
                         "3" -> ivDashboardMood.setImageDrawable(requireActivity().getDrawable(R.drawable.fear))
-                        "4" -> ivDashboardMood.setImageDrawable(requireActivity().getDrawable(R.drawable.good))
-                        "5" -> ivDashboardMood.setImageDrawable(requireActivity().getDrawable(R.drawable.love))
-                        "6" -> ivDashboardMood.setImageDrawable(requireActivity().getDrawable(R.drawable.joy))
+                        "4" -> ivDashboardMood.setImageDrawable(requireActivity().getDrawable(R.drawable.happy))
                     }
                     tvDashboardMood.text = it.mood
                     tvDashboardName.text = "Hi, ${SharedPref.getPref(requireActivity(), MyAsset.KEY_NAME)}"
