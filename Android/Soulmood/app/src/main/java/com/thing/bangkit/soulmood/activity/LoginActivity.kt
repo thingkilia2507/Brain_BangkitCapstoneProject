@@ -6,6 +6,7 @@ import android.os.Handler
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
+import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import cn.pedant.SweetAlert.SweetAlertDialog
@@ -67,7 +68,7 @@ class LoginActivity : AppCompatActivity(), IProgressResult {
                     onProgress()
                     loginViewModel.login(email, password, this@LoginActivity,
                         this@LoginActivity).observe(this@LoginActivity, {
-                            if (it != null) {
+                            if (it.email != "") {
                                 Log.d("TAGDATAKU", "onCreate: notnull")
                                 //save data to shared preference
                                 SharedPref.setPref(
@@ -98,6 +99,8 @@ class LoginActivity : AppCompatActivity(), IProgressResult {
                                     }
                                 })
 
+                            }else{
+                                Toast.makeText(this@LoginActivity, "hai", Toast.LENGTH_SHORT).show()
                             }
                         })
                 }
