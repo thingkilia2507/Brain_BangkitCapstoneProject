@@ -6,7 +6,6 @@ import android.os.Handler
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
-import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import cn.pedant.SweetAlert.SweetAlertDialog
@@ -99,8 +98,6 @@ class LoginActivity : AppCompatActivity(), IProgressResult {
                                     }
                                 })
 
-                            }else{
-                                Toast.makeText(this@LoginActivity, "hai", Toast.LENGTH_SHORT).show()
                             }
                         })
                 }
