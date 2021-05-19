@@ -176,11 +176,13 @@ class HomeFragment : Fragment() {
                     }
                     tvDashboardMood.text = it.mood
                     tvDashboardName.text = "Hi, ${SharedPref.getPref(requireActivity(), MyAsset.KEY_NAME)}"
-                    tvDashboardDate.visibility = View.VISIBLE
                     tvDashboardDate.text = "Moodmu saat ini ("+DateHelper.dateFormat(it.date.take(10)) + ")"
+                    tvDashboardDate.visibility = View.VISIBLE
                 }
             }else{
                 binding.tvDashboardName.text = "Hi, ${SharedPref.getPref(requireActivity(), MyAsset.KEY_NAME)}"
+                binding.tvDashboardMood.text = "Semoga Harimu menyenangkan ^-^"
+                binding.tvDashboardDate.visibility = View.GONE
             }
         })
     }

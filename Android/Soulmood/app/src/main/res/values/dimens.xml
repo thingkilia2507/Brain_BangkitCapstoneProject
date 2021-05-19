@@ -67,4 +67,5 @@
     <dimen name="margin_chat_max">50dp</dimen>
     <dimen name="height_action_bar">40dp</dimen>
     <dimen name="height_of_mood">120dp</dimen>
+    <dimen name="size_of_arrow_detail">30dp</dimen>
 </resources>
