@@ -134,6 +134,7 @@ class MoodTrackerActivity : AppCompatActivity() {
             yAxis.granularity = 1f
             yAxis.valueFormatter = IndexAxisValueFormatter(arrayOf("","Marah", "Takut", "Sedih", "Bahagia"))
 
+
             //remove line in right side
             lineChart.axisRight.isEnabled = false
 
