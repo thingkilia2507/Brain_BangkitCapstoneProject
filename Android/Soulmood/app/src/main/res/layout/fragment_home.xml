@@ -40,8 +40,10 @@
                     android:id="@+id/tv_dashboard_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/small_margin"
                     android:fontFamily="@font/poppins_semibold"
                     android:maxLines="1"
+                    android:layout_marginBottom="-2dp"
                     android:textColor="@color/soulmood_primary_color_dark"
                     android:textSize="@dimen/ts_title"
                     tools:text="Hi, Philip" />
@@ -57,6 +59,7 @@
                 <TextView
                     android:id="@+id/tv_dashboard_mood"
                     android:layout_width="wrap_content"
+                    android:layout_marginTop="-3dp"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/poppins_semibold"
                     android:textColor="@color/yellow"
