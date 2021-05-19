@@ -150,6 +150,8 @@ class ProfileFragment : Fragment(), IProgressResult {
 
                         if (etOldPassword.text.toString().isNotEmpty() && etNewPassword.text.toString().isNotEmpty() && etConfirmNewPassword.text.toString().isNotEmpty()) {
                             if (etNewPassword.text.toString() != etConfirmNewPassword.text.toString()) {
+                                dialog.dismiss()
+                                onProgress()
                                 this@ProfileFragment.onFailure(getString(R.string.sorry_confirm_password_wrong))
                             } else {
                                 dialog.dismiss()
