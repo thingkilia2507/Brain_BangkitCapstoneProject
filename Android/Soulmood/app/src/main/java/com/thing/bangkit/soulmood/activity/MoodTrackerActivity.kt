@@ -105,7 +105,7 @@ class MoodTrackerActivity : AppCompatActivity() {
             noDataAnimation.visibility = View.GONE
             lineChart.visibility = View.VISIBLE
         }
-        val lineDataSet = LineDataSet(lineChartArrayEntry, "Mood Harianmu")
+        val lineDataSet = LineDataSet(lineChartArrayEntry, "Mood Harian")
         lineDataSet.notifyDataSetChanged()
         val color = ContextCompat.getColor(this, R.color.soulmood_primary_color)
         lineDataSet.color = color
@@ -129,9 +129,10 @@ class MoodTrackerActivity : AppCompatActivity() {
             lineChart.data = lineData
             val xAxis: XAxis = lineChart.xAxis
             xAxis.valueFormatter = IndexAxisValueFormatter(dateList)
-            lineChart.setVisibleYRange(0f,4f, YAxis.AxisDependency.LEFT)
             val yAxis : YAxis = lineChart.getAxis(YAxis.AxisDependency.LEFT)
             yAxis.granularity = 1f
+            yAxis.axisMinimum = 0f
+            yAxis.axisMaximum = 4.5f
             yAxis.valueFormatter = IndexAxisValueFormatter(arrayOf("","Marah", "Takut", "Sedih", "Bahagia"))
 
 
