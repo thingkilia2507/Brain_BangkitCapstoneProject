@@ -65,7 +65,6 @@ class RegisterActivity : AppCompatActivity() {
                 val email = etEmail.text.toString()
                 val password = etPassword.text.toString()
 
-
                 if (name.isEmpty()) etName.error = getString(R.string.enter_your_name)
                 if (email.isEmpty()) etEmail.error = getString(R.string.enter_your_email)
                 if (password.isEmpty()){
@@ -82,7 +81,6 @@ class RegisterActivity : AppCompatActivity() {
                 }
 
                 if (name.isNotEmpty() && email.isNotEmpty() && password.isNotEmpty() && gender.isNotEmpty()) {
-
                     val alerDialog = MyAsset.sweetAlertDialog(this@RegisterActivity, getString(R.string.loading), false)
                     alerDialog.show()
                     //insert data user

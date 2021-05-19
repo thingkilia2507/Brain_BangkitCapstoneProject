@@ -19,16 +19,19 @@
             android:name=".activity.LoginActivity"
             android:theme="@style/Theme.Soulmood.NoActionBar" />
         <activity android:name=".activity.ChatGroupActivity" />
-        <activity android:name=".AcitivtyUntukCobaCoba" />
         <activity
             android:name=".activity.RegisterActivity"
             android:theme="@style/Theme.Soulmood.NoActionBar"/>
         <activity
             android:name=".activity.splash.SplashActivity1"
-            android:theme="@style/Theme.Soulmood.NoActionBar" />
+            android:theme="@style/Theme.Soulmood.NoActionBar"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".activity.splash.SplashActivity"
-            android:theme="@style/Theme.Soulmood.NoActionBar">
+            android:theme="@style/Theme.Soulmood.NoActionBar"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
