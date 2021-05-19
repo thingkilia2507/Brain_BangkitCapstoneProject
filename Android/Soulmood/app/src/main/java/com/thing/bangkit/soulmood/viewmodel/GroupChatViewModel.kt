@@ -37,7 +37,7 @@ class GroupChatViewModel : ViewModel() {
         map["id"] = id
         map["group_name"] = groupName
         map["created_at"] = DateHelper.getCurrentDateTime()
-        map["created_by"] = auth.currentUser?.email.toString()
+        map["created_by"] = auth.currentUser?.email.toString().toLowerCase()
         viewModelScope.launch(Dispatchers.IO) {
             val database = db.collection("groups_chat").document(id).set(map)
             withContext(Dispatchers.Main) {
