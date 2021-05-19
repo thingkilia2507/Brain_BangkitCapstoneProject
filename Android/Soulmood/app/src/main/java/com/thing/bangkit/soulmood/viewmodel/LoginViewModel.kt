@@ -52,7 +52,7 @@ class LoginViewModel : ViewModel() {
                         Toasty.error(context, context.getString(R.string.wrong_password), Toasty.LENGTH_SHORT).show()
                     }else if(it.message.toString().equals("There is no user record corresponding to this identifier. The user may have been deleted.",true)){
                         Toasty.error(context,  context.getString(R.string.wrong_email_login), Toasty.LENGTH_SHORT).show()
-                    }else if(it.message.toString().equals("The email address is badly formatted",true)){
+                    }else if(it.message.toString().equals("The email address is badly formatted.",true)){
                         Toasty.error(context,  context.getString(R.string.wrong_email_input_format), Toasty.LENGTH_SHORT).show()
                     }else {
                         Toasty.error(context, it.message.toString(), Toasty.LENGTH_SHORT).show()
@@ -73,7 +73,7 @@ class LoginViewModel : ViewModel() {
                     status.postValue(false)
                     if(it.message.toString().equals("There is no user record corresponding to this identifier. The user may have been deleted.",true)){
                         Toasty.error(context,  context.getString(R.string.wrong_email_login), Toasty.LENGTH_SHORT).show()
-                    }else if(it.message.toString().equals("The email address is badly formatted",true)){
+                    }else if(it.message.toString().equals("The email address is badly formatted.",true)){
                         Toasty.error(context,  context.getString(R.string.wrong_email_input_format), Toasty.LENGTH_SHORT).show()
                     }else {
                         Toasty.error(context, it.message.toString(), Toasty.LENGTH_SHORT).show()
