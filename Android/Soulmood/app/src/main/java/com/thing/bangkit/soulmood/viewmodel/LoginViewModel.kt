@@ -31,17 +31,20 @@ class LoginViewModel : ViewModel() {
                     db.collection("users").whereEqualTo("email",email)
                         .addSnapshotListener { value, _ ->
                             val data = value?.documents
-                            if(data != null){
+                            if(data?.isNotEmpty() == true){
                                 for (data1 in data) {
                                     dataUser.postValue(UserData( data1.getString("id").toString(),
                                         data1.getString("email").toString(),
                                         data1.getString("name").toString()
                                     ))
                                 }
+                                progressResult.onSuccess("")
+                            }else{
+                                progressResult.onFailure("")
+                                Toasty.error(context,  context.getString(R.string.wrong_email_input_format), Toasty.LENGTH_SHORT).show()
                             }
                         }
 
-                    progressResult.onSuccess("")
                 }.addOnFailureListener {
                     progressResult.onFailure("")
                     Log.d("TAGDATAKU", "login: "+it.message.toString())

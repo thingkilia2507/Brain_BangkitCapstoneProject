@@ -64,8 +64,8 @@ class MoodTrackerActivity : AppCompatActivity() {
                         dateList.add(it[i].date.substring(8, 10))
                         when (it[i].mood_code) {
                             "1" -> angry.add(it[i].mood_code)
-                            "2" -> sad.add(it[i].mood_code)
-                            "3" -> fear.add(it[i].mood_code)
+                            "2" -> fear.add(it[i].mood_code)
+                            "3" -> sad.add(it[i].mood_code)
                             "4" -> happy.add(it[i].mood_code)
                         }
                     }
