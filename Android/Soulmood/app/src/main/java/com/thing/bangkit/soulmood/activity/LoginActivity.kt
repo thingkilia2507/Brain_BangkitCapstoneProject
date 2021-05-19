@@ -78,7 +78,7 @@ class LoginActivity : AppCompatActivity(), IProgressResult {
                                 SharedPref.setPref(
                                     this@LoginActivity,
                                     MyAsset.KEY_EMAIL,
-                                    it.email
+                                    it.email.toLowerCase()
                                 )
                               
                                 SharedPref.setPref(

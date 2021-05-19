@@ -28,7 +28,7 @@ class LoginViewModel : ViewModel() {
             val firebaseAuth = auth.signInWithEmailAndPassword(email, password)
             withContext(Dispatchers.Main){
                 firebaseAuth.addOnSuccessListener {
-                    db.collection("users").whereEqualTo("email",email)
+                    db.collection("users").whereEqualTo("email",email.toLowerCase())
                         .addSnapshotListener { value, _ ->
                             val data = value?.documents
                             if(data != null){
