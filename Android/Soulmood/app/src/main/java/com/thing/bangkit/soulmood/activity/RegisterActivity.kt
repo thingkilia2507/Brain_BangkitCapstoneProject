@@ -4,12 +4,9 @@ import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
-import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.textfield.TextInputLayout
-import android.os.Handler
-import cn.pedant.SweetAlert.SweetAlertDialog
 import com.thing.bangkit.soulmood.R
 import com.thing.bangkit.soulmood.databinding.ActivityRegisterBinding
 import com.thing.bangkit.soulmood.helper.MyAsset
@@ -71,29 +68,17 @@ class RegisterActivity : AppCompatActivity() {
 
                 if (name.isEmpty()) etName.error = getString(R.string.enter_your_name)
                 if (email.isEmpty()) etEmail.error = getString(R.string.enter_your_email)
-
                 if (password.isEmpty()){
                     tfPassword.endIconMode = TextInputLayout.END_ICON_NONE
                     etPassword.error = getString(R.string.enter_your_pass)
                 }
-
-                if (gender.isEmpty()) Toasty.error(
-                    this@RegisterActivity,
-                    getString(R.string.choose_your_gender),
-                    Toasty.LENGTH_SHORT
-                ).show()
-
-
+                if (gender.isEmpty()) Toasty.error(this@RegisterActivity, getString(R.string.choose_your_gender), Toasty.LENGTH_SHORT).show()
                 if (name.isEmpty() && email.isEmpty() && password.isEmpty() && gender.isEmpty()) {
                     etName.error = getString(R.string.enter_your_name)
                     etEmail.error = getString(R.string.enter_your_email)
                     etPassword.error = getString(R.string.enter_your_pass)
                     tfPassword.endIconMode = TextInputLayout.END_ICON_NONE
-                    Toasty.error(
-                        this@RegisterActivity,
-                        getString(R.string.choose_your_gender),
-                        Toasty.LENGTH_SHORT
-                    ).show()
+                    Toasty.error(this@RegisterActivity, getString(R.string.choose_your_gender), Toasty.LENGTH_SHORT).show()
                 }
 
                 if (name.isNotEmpty() && email.isNotEmpty() && password.isNotEmpty() && gender.isNotEmpty()) {
@@ -109,12 +94,10 @@ class RegisterActivity : AppCompatActivity() {
                         this@RegisterActivity
                     ).observe(this@RegisterActivity, { status ->
                         if (status) {
-                            alerDialog.setTitleText(getString(R.string.success)).hideConfirmButton().changeAlertType(SweetAlertDialog.SUCCESS_TYPE)
-                            Handler(mainLooper).postDelayed({
-                                alerDialog.dismiss()
-                                startActivity(Intent(this@RegisterActivity, LoginActivity::class.java))
-                                finish()
-                            }, 2000)
+                            alerDialog.dismiss()
+                            Toasty.success(this@RegisterActivity, this@RegisterActivity.getString(R.string.success), Toasty.LENGTH_SHORT).show()
+                            startActivity(Intent(this@RegisterActivity, LoginActivity::class.java))
+                            finish()
                         }else{
                             alerDialog.dismiss()
                         }
