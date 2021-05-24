@@ -14,9 +14,19 @@ object RetrofitBuild {
         .readTimeout(1, TimeUnit.MINUTES)
         .writeTimeout(1, TimeUnit.MINUTES)
         .build()
-    fun instance(URL : String): Retrofit = Retrofit.Builder()
-        .baseUrl(URL)
-        .addConverterFactory(GsonConverterFactory.create())
-        .client(client)
-        .build()
+
+    @Volatile
+    private var instance: Retrofit? = null
+
+    @JvmStatic
+    fun getInstance(URL: String): Retrofit {
+        if (instance == null) {
+            instance = Retrofit.Builder()
+                .baseUrl(URL)
+                .addConverterFactory(GsonConverterFactory.create())
+                .client(client)
+                .build()
+        }
+        return instance as Retrofit
+    }
 }

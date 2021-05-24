@@ -173,8 +173,14 @@ class HomeFragment : Fragment(), IProgressResult {
     }
 
     companion object {
+        @Volatile
+        private var instance: HomeFragment? = null
+
         @JvmStatic
-        fun newInstance() = HomeFragment()
+        fun newInstance(): HomeFragment =
+            instance ?: synchronized(this) {
+                instance ?: HomeFragment().apply { instance = this }
+            }
     }
 
     private fun setDashboard() {
