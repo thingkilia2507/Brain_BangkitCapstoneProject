@@ -96,5 +96,6 @@
     <string name="wrong_password">Maaf, kata sandi yang dimasukkan salah.</string>
     <string name="wrong_email_login">Email yang Anda masukkan belum terdaftar.</string>
     <string name="wrong_email_input_format">Harap masukkan email yang benar.</string>
+    <string name="motivation_word_notavailable">Maaf, Kata Motivasi Sedang tidak tersedia!</string>
 
 </resources>

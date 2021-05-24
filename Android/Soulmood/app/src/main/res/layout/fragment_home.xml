@@ -172,18 +172,33 @@
             android:layout_marginBottom="@dimen/margin_def"
             app:cardCornerRadius="@dimen/corner_radius"
             app:cardElevation="@dimen/card_elevation">
-
-            <TextView
-                android:id="@+id/tv_motivation_quotes"
+            <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@drawable/gradient_background"
-                android:fontFamily="@font/poppins_semibold"
-                android:padding="@dimen/small_padding"
-                android:textAlignment="center"
-                android:textColor="@color/soulmood_primary_color_dark"
-                android:textSize="@dimen/ts_standard"
-                tools:text="@tools:sample/lorem" />
+                android:layout_height="wrap_content">
+
+                <ProgressBar
+                    android:id="@+id/progress_motivation_word"
+                    android:layout_width="@dimen/progress_motivation_size"
+                    android:layout_height="@dimen/progress_motivation_size"
+                    android:layout_centerInParent="true"
+                    android:indeterminate="true"
+                    android:elevation="@dimen/progress_motivation_elevation"
+                    android:indeterminateTint="@color/white"
+                    android:visibility="visible"
+                    />
+
+                <TextView
+                    android:id="@+id/tv_motivation_quotes"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/gradient_background"
+                    android:fontFamily="@font/poppins_semibold"
+                    android:padding="@dimen/small_padding"
+                    android:textAlignment="center"
+                    android:textColor="@color/soulmood_primary_color_dark"
+                    android:textSize="@dimen/ts_standard"
+                    tools:text="@tools:sample/lorem" />
+            </RelativeLayout>
 
         </androidx.cardview.widget.CardView>
 

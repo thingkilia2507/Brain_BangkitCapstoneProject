@@ -12,6 +12,7 @@ import com.google.firebase.firestore.Query
 import com.thing.bangkit.soulmood.R
 import com.thing.bangkit.soulmood.apiservice.ApiConfig
 import com.thing.bangkit.soulmood.helper.DateHelper
+import com.thing.bangkit.soulmood.helper.IProgressResult
 import com.thing.bangkit.soulmood.helper.MyAsset
 import com.thing.bangkit.soulmood.helper.SharedPref
 import com.thing.bangkit.soulmood.model.ChatGroup
@@ -94,13 +95,14 @@ class GroupChatViewModel : ViewModel() {
                         if(response.body() != null){
                             var aiMessage=""
                             var status="true"
-                            if(response.body()!!.status){
+                            if(!response.body()!!.status){
                                 aiMessage = message
                                 status = "false"
                             }else{
                                 aiMessage = "*Pesan ini mengandung kata kasar*"
                                 status = "true"
                             }
+                            Log.d("statusku : ",status)
                             val id = UUID.randomUUID().toString()
                             viewModelScope.launch(Dispatchers.IO) {
                                 val database = db.collection("groups_chat")
@@ -122,8 +124,10 @@ class GroupChatViewModel : ViewModel() {
                     }
                 }
             }catch (e:Throwable){
-                Log.d("TAGDATAKU", "reqChatbotReply RetrofitFail: "+  e.message.toString())
-                Toasty.error(context, "Maaf, Soulmood sedang dalam perbaikan.", Toasty.LENGTH_SHORT).show()
+                withContext(Dispatchers.Main){
+                    Log.d("TAGDATAKU", "reqChatbotReply RetrofitFail: "+  e.message.toString())
+                    Toasty.error(context, "Maaf, Soulmood sedang dalam perbaikan.", Toasty.LENGTH_SHORT).show()
+                }
             }
 
         }
@@ -165,7 +169,7 @@ class GroupChatViewModel : ViewModel() {
         return groupChatData
     }
 
-    fun getQuoteOfTheDay():LiveData<String>{
+    fun getQuoteOfTheDay(context:Context,status:IProgressResult?=null):LiveData<String>{
         var quoteMessage = MutableLiveData<String>()
         val service = ApiConfig.getRetrofitQuotes()
         CoroutineScope(Dispatchers.IO).launch {
@@ -173,16 +177,21 @@ class GroupChatViewModel : ViewModel() {
                 val response = service.getDialyQuote(1)
                 withContext(Dispatchers.Main){
                     if(response.code() == 200){
-                        if(response.body() != null){
+                        response.body().let{
                             response.body()?.quotes?.get(0)?.let {
                                 quoteMessage.postValue("${it.text} \n- ${it.author} -")
+                                status?.onSuccess("")
                             }
                         }
+                    }else{
+                        status?.onFailure(context.getString(R.string.motivation_word_notavailable))
+                        Log.v("response code",response.code().toString())
                     }
                 }
             }
             catch (e: Throwable){
                 withContext(Dispatchers.Main) {
+                    status?.onFailure(context.getString(R.string.motivation_word_notavailable))
                     Log.v("retrofit error", e.message.toString())
                 }
             }

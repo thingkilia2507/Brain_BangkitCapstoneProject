@@ -5,6 +5,7 @@ import android.view.View
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
+import cn.pedant.SweetAlert.SweetAlertDialog
 import com.github.dewinjm.monthyearpicker.MonthYearPickerDialogFragment
 import com.github.mikephil.charting.components.Description
 import com.github.mikephil.charting.components.XAxis
@@ -16,6 +17,7 @@ import com.github.mikephil.charting.formatter.IndexAxisValueFormatter
 import com.thing.bangkit.soulmood.R
 import com.thing.bangkit.soulmood.databinding.ActivityMoodTrackerBinding
 import com.thing.bangkit.soulmood.helper.DateHelper
+import com.thing.bangkit.soulmood.helper.MyAsset
 import com.thing.bangkit.soulmood.viewmodel.MoodTrackerViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -24,7 +26,7 @@ import kotlinx.coroutines.launch
 import java.util.*
 import kotlin.collections.ArrayList
 
-class MoodTrackerActivity : AppCompatActivity() {
+class MoodTrackerActivity : AppCompatActivity(){
     private var binding: ActivityMoodTrackerBinding? = null
     private val moodTrackerViewModel: MoodTrackerViewModel by viewModels()
 
@@ -36,6 +38,8 @@ class MoodTrackerActivity : AppCompatActivity() {
 
     private val lineChartArrayEntry = ArrayList<Entry>()
     private val dateList = ArrayList<String>()
+
+    private lateinit var sweetAlertDialog: SweetAlertDialog
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMoodTrackerBinding.inflate(layoutInflater)
@@ -45,7 +49,7 @@ class MoodTrackerActivity : AppCompatActivity() {
         supportActionBar?.title = getString(R.string.your_mood_recap)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
-
+        onProgress()
         moodTrackerViewModel.setMoodData(DateHelper.getCurrentDateTime(), this)
 
         moodTrackerViewModel.setMoodData(DateHelper.getCurrentDateTime(), this)
@@ -79,6 +83,7 @@ class MoodTrackerActivity : AppCompatActivity() {
                 binding?.apply {
                     lineChart.visibility = View.GONE
                     noDataAnimation.visibility = View.VISIBLE
+                    onFinish()
                 }
             }
 
@@ -97,7 +102,6 @@ class MoodTrackerActivity : AppCompatActivity() {
             tvMoodDate.text = DateHelper.convertDateToMonthYearFormat(DateHelper.getCurrentDateTime().take(7))
             floatingFilterByDate.setOnClickListener { datePicker() }
         }
-
     }
 
     private fun lineChart() {
@@ -148,7 +152,7 @@ class MoodTrackerActivity : AppCompatActivity() {
             xAxis.labelCount = dateList.size
             xAxis.position = XAxis.XAxisPosition.BOTTOM
             lineChart.animate()
-
+            onFinish()
 
 
 
@@ -180,4 +184,19 @@ class MoodTrackerActivity : AppCompatActivity() {
         onBackPressed()
         return super.onSupportNavigateUp()
     }
+
+    private fun onProgress() {
+        this.let {
+            sweetAlertDialog = MyAsset.sweetAlertDialog(
+                it,
+                getString(R.string.LOADING),
+                false
+            )
+            sweetAlertDialog.show()
+        }
+    }
+    private fun onFinish(){
+        sweetAlertDialog.dismiss()
+    }
+
 }
