@@ -345,8 +345,14 @@ class ProfileFragment : Fragment(), IProgressResult {
 
 
     companion object {
+        @Volatile
+        private var instance: ProfileFragment? = null
+
         @JvmStatic
-        fun newInstance() = ProfileFragment()
+        fun newInstance(): ProfileFragment =
+            instance ?: synchronized(this) {
+                instance ?: ProfileFragment().apply { instance = this }
+            }
     }
 
     override fun onProgress() {

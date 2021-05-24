@@ -9,9 +9,19 @@ object RetrofitBuild {
     private val client = OkHttpClient.Builder()
         .addInterceptor(HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY))
         .build()
-    fun instance(URL : String): Retrofit = Retrofit.Builder()
-        .baseUrl(URL)
-        .addConverterFactory(GsonConverterFactory.create())
-        .client(client)
-        .build()
+
+    @Volatile
+    private var instance: Retrofit? = null
+
+    @JvmStatic
+    fun getInstance(URL: String): Retrofit {
+        if (instance == null) {
+            instance = Retrofit.Builder()
+                .baseUrl(URL)
+                .addConverterFactory(GsonConverterFactory.create())
+                .client(client)
+                .build()
+        }
+        return instance as Retrofit
+    }
 }
