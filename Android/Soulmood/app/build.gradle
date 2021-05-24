@@ -59,7 +59,10 @@ dependencies {
     implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
 
     //http logging retrofit
-    implementation "com.squareup.okhttp3:logging-interceptor:4.6.0"
+    implementation "com.squareup.okhttp3:logging-interceptor:4.9.0"
+
+    //time out
+    implementation 'com.squareup.okhttp:okhttp:2.7.5'
 
     //viewpager indicator
     implementation 'me.relex:circleindicator:2.1.4'

@@ -29,7 +29,6 @@ class LoginActivity : AppCompatActivity(), IProgressResult {
         super.onCreate(savedInstanceState)
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding?.root)
-
         binding?.apply {
 
             etPassword.addTextChangedListener(object : TextWatcher {
@@ -88,7 +87,7 @@ class LoginActivity : AppCompatActivity(), IProgressResult {
                                 )
 
                                 //set dialy motivation word repeat alarm
-                                groupChatViewModel.getQuoteOfTheDay().observe(this@LoginActivity,{ it ->
+                                groupChatViewModel.getQuoteOfTheDay(this@LoginActivity).observe(this@LoginActivity,{ it ->
                                     Log.d("TAGDATAKU", "onCreatequotes: "+it)
                                     it?.let{
                                         AlarmReceiver().setRepeatingAlarmMotivationWord(
