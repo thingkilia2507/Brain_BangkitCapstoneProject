@@ -52,7 +52,6 @@ class MoodTrackerViewModel : ViewModel() {
     fun getDashboardMood(context: Context): LiveData<MoodData> {
         val date = DateHelper.getCurrentDateTime()
         val dataMood = MutableLiveData<MoodData>()
-        viewModelScope.launch(IO) {
             val db = FirebaseFirestore.getInstance().collection("mood_tracker")
                 .document("mood_tracker1")
                 .collection(SharedPref.getPref(context, MyAsset.KEY_USER_ID).toString())
@@ -60,8 +59,6 @@ class MoodTrackerViewModel : ViewModel() {
                 .collection(date.substring(5, 7))
                 .orderBy("updated_at", Query.Direction.DESCENDING)
                 .limit(1)
-//                .document(date.substring(8,10))
-            withContext(Dispatchers.Main) {
                 db.addSnapshotListener { value, error ->
                     if (value != null) {
                         for (i in 0 until value.size()) {
@@ -75,11 +72,6 @@ class MoodTrackerViewModel : ViewModel() {
                         dataMood.postValue(MoodData("","",""))
                     }
                 }
-
-
-            }
-        }
-
         return dataMood
     }
 
