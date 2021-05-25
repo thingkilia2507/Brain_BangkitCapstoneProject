@@ -27,12 +27,15 @@ The original dataset is Twitter-based so the preprocessing part includes:
 * Removing `'RT', '\n', 'username', 'USER'`
 * Masking `'link'` into `<link>`
 * Replacing HTML character symbols, such as `&gt; &lt;`
-* Converting bytes to emoji symbols
+* Converting bytes to emoji symbols, for example: `\\xf0\\x9f\\x8e\\xb6`--> `🎶`
 * Lowercasing
 * Removing byte (`b'` atau `b"`)
 * Removing trailing spaces and multi spaces
 
-We convert the original multi-label hate speech dataset into binary label, then we split it into `train:val:test` with ratio `0.6:0.2:0.2`.
+We convert the original multi-label hate speech dataset into binary label, then we split it into `train:val:test` with ratio `0.6:0.2:0.2`. The final preprocessed datasets can be accessed here:
+- [Training Set](datasets/hate_speech/train_emo_v2.csv)
+- [Validation Set](datasets/hate_speech/val_emo_v2.csv)
+- [Test Set](datasets/hate_speech/test_emo_v2.csv)
 
 ## 3. Model and Deployment
 Both the Emotion Detection and Hate Speech Detection use <b>ALBERT</b> pre-trained language model [(IndoBERT-lite)](https://huggingface.co/indobenchmark/indobert-lite-base-p1) from [IndoNLU](https://www.indobenchmark.com/) and then adapted to the corresponding downstream tasks. The IndoBERT-lite is a work of:
@@ -81,3 +84,8 @@ predictions = ed_model(subwords)['logits']
 predicted_class_idx = np.argmax(predictions, axis=1)[0]
 predicted_class_label = ed_config.id2label[predicted_class_idx]
 ```
+## 4. Acknowledgment
+To train the model on our downstream tasks, we use TensorFlow for HuggingFace. We mainly use and refer to codes from below, then modified accordingly:
+* https://github.com/huggingface/transformers/blob/master/examples/tensorflow/text-classification/run_text_classification.py
+* https://towardsdatascience.com/tensorflow-and-transformers-df6fceaf57cc
+* https://towardsdatascience.com/working-with-hugging-face-transformers-and-tf-2-0-89bf35e3555a
