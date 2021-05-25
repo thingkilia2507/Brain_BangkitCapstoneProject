@@ -6,12 +6,14 @@ import android.content.Context
 import android.content.Intent
 import android.media.RingtoneManager
 import android.os.Build
+import android.util.Log
 import androidx.core.app.NotificationCompat
 import androidx.core.content.ContextCompat
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Query
 import com.thing.bangkit.soulmood.R
 import com.thing.bangkit.soulmood.activity.MainActivity
+import com.thing.bangkit.soulmood.apiservice.ApiConfig
 import com.thing.bangkit.soulmood.helper.DateHelper
 import com.thing.bangkit.soulmood.helper.MyAsset
 import com.thing.bangkit.soulmood.helper.SharedPref
@@ -22,16 +24,16 @@ import java.util.*
 
 class AlarmReceiver : BroadcastReceiver() {
     companion object {
-        const val EXTRA_MESSAGE = "message"
-        const val EXTRA_MESSAGE1 = "message1"
+        const val EXTRA_MESSAGE_MOTIVATION_WORD = "motivation_word"
+        const val EXTRA_MESSAGE_CHATBOT_DATA = "chatbot_data"
         private const val ID_REPEATING = 101
         private const val ID_REPEATING1 = 102
     }
 
     override fun onReceive(context: Context, intent: Intent) {
         // This method is called when the BroadcastReceiver is receiving an Intent broadcast.
-        val message = intent.getStringExtra(EXTRA_MESSAGE)
-        val message1 = intent.getStringExtra(EXTRA_MESSAGE1)
+        val message = intent.getStringExtra(EXTRA_MESSAGE_MOTIVATION_WORD)
+        val message1 = intent.getStringExtra(EXTRA_MESSAGE_CHATBOT_DATA)
         if (message != null) {
             showAlarmNotification(
                 context,
@@ -41,14 +43,15 @@ class AlarmReceiver : BroadcastReceiver() {
             )
         }
         if(message1 != null){
+            Log.d("TAGDATAKU", "onReceive: $message \n$message1")
             sendMessageToDb(context)
         }
     }
 
-    fun setRepeatingAlarm(context: Context, message: String) {
+    fun setRepeatingAlarmMotivationWord(context: Context, message: String) {
         val alarmManager = context.getSystemService(Context.ALARM_SERVICE) as AlarmManager
         val intent = Intent(context, AlarmReceiver::class.java)
-        intent.putExtra(EXTRA_MESSAGE, message)
+        intent.putExtra(EXTRA_MESSAGE_MOTIVATION_WORD, message)
 
         val calendar = Calendar.getInstance().apply {
             set(Calendar.HOUR_OF_DAY, 8)
@@ -65,10 +68,10 @@ class AlarmReceiver : BroadcastReceiver() {
         )
     }
 
-    fun setRepeating1(context: Context, message: String) {
+    fun setRepeatingSendChatbotDataToApi(context: Context, message: String) {
         val alarmManager = context.getSystemService(Context.ALARM_SERVICE) as AlarmManager
         val intent = Intent(context, AlarmReceiver::class.java)
-        intent.putExtra(EXTRA_MESSAGE1, message)
+        intent.putExtra(EXTRA_MESSAGE_CHATBOT_DATA, message)
 
 
         val pendingIntent = PendingIntent.getBroadcast(context, ID_REPEATING1, intent, 0)
@@ -165,46 +168,64 @@ class AlarmReceiver : BroadcastReceiver() {
         )
     }
 
-    private fun sendMessageToDb(context: Context){
-        var message= StringBuilder("")
+    //background task insert mood data to db
+    private fun sendMessageToDb(context: Context) {
+        var message = StringBuilder("")
+        //get dialy chatbot data from firestore
         var it = getChatbotData(context)
         CoroutineScope(Dispatchers.Main).launch {
             delay(1000)
-            if(it.isNotEmpty()){
-                for(i in 0 until it.size){
-                    if(it[i].name == "soulmood0280_chatbot"){
+            if (it.isNotEmpty()) {
+                for (i in 0 until it.size) {
+                    if (it[i].name == "soulmood0280_chatbot") {
                         message.append("<CB>:${it[i].message}")
-                    }else{
+                    } else {
                         message.append("<USER>:${it[i].message}")
                     }
                 }
-            }else{
+            } else {
                 message.append("")
             }
-            showAlarmNotification(
-                context,
-                context.getString(R.string.dialy_motivation),
-               "test background task is running",
-                ID_REPEATING1
-            )
 
-            //retrofit send data to api and get the response
-            insertMoodData("baik","4",context)
-
+            val service = ApiConfig.getRetrofitSoulmood()
+            CoroutineScope(Dispatchers.IO).launch {
+                try {
+                    val response = service.moodDetectorResponse(message.toString())
+                    withContext(Dispatchers.Main) {
+                        if (response.code() == 200) {
+                            if (response.body() != null) {
+                                val mood = response.body()!!.mood
+                                var moodCode:String = ""
+                                when(mood){
+                                    "Bahagia"-> moodCode = "4"
+                                    "Sedih"-> moodCode = "3"
+                                    "Takut"-> moodCode = "2"
+                                    "Marah"-> moodCode = "1"
+                                }
+                                //insert data to firestore
+                                insertMoodData(response.body()!!.mood, moodCode, context)
+                            }
+                        }
+                    }
+                } catch (e: Throwable) {
+                    Log.d("TAGDATAKU", "reqChatbotReply RetrofitFail: " + e.message.toString())
+                }
+            }
         }
 
     }
 
-    private fun getChatbotData(context: Context):ArrayList<ChatbotMessage>{
-         val db = FirebaseFirestore.getInstance()
+    private fun getChatbotData(context: Context): ArrayList<ChatbotMessage> {
+        val db = FirebaseFirestore.getInstance()
         val chatData = ArrayList<ChatbotMessage>()
-         val currentDate : String= SimpleDateFormat("yyyyMMdd", Locale.getDefault()).format(Date())
+        val currentDate: String = SimpleDateFormat("yyyyMMdd", Locale("in", "ID")).format(Date())
 
         CoroutineScope(Dispatchers.IO).launch {
             val data = db.collection("db_chatbot").document("1.0").collection("user_chatbot")
-                .document(SharedPref.getPref(context, MyAsset.KEY_USER_ID).toString()).collection("chatbot_messages").document(currentDate).collection("message")
+                .document(SharedPref.getPref(context, MyAsset.KEY_USER_ID).toString())
+                .collection("chatbot_messages").document(currentDate).collection("message")
                 .orderBy("created_at", Query.Direction.ASCENDING)
-            withContext(Dispatchers.Main){
+            withContext(Dispatchers.Main) {
                 data.addSnapshotListener { value, _ ->
                     value?.let {
                         for (message in value.documents) {

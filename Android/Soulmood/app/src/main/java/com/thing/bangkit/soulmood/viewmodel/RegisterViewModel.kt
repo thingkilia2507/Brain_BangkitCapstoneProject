@@ -36,7 +36,7 @@ class RegisterViewModel : ViewModel() {
                     val map = HashMap<String, String>()
                     map["id"] = id
                     map["name"] = name
-                    map["email"] = auth.currentUser?.email.toString()
+                    map["email"] = auth.currentUser?.email.toString().toLowerCase()
                     map["gender"] = gender
                     map["created_at"] = DateHelper.getCurrentDateTime()
                     db.collection("users").document(id).set(
@@ -52,7 +52,9 @@ class RegisterViewModel : ViewModel() {
                                 context.getString(R.string.invalid_password_message),
                                 Toasty.LENGTH_SHORT
                             ).show()
-                        } else {
+                        } else if(message.equals("The email address is badly formatted.",true)){
+                            Toasty.error(context,  context.getString(R.string.wrong_email_input_format), Toasty.LENGTH_SHORT).show()
+                        }else {
                             Toasty.error(context, message, Toasty.LENGTH_SHORT).show()
                         }
                     }

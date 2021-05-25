@@ -30,7 +30,7 @@ class ProfileViewModel : ViewModel() {
 
                             it_user.updateEmail(email).addOnCompleteListener {
                                 it.addOnSuccessListener {
-                                    SharedPref.setPref(context, MyAsset.KEY_EMAIL, email)
+                                    SharedPref.setPref(context, MyAsset.KEY_EMAIL, email.toLowerCase())
                                     SharedPref.getPref(context, MyAsset.KEY_USER_ID)?.let { id ->
                                         db.collection("users").document(id).update(
                                             "email", it_user.email, "name", name

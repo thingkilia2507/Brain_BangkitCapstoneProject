@@ -22,6 +22,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             tools:text="You"
+            android:paddingStart="@dimen/small_padding"
+            android:paddingEnd="@dimen/small_padding"
             android:textAlignment="textEnd"
             android:textColor="#FD8415" />
 
@@ -31,15 +33,19 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="3dp"
             android:fontFamily="@font/roboto"
+            android:paddingStart="@dimen/small_padding"
+            android:paddingEnd="@dimen/small_padding"
             android:gravity="end"
-            tools:text="@tools:sample/lorem"
-            android:textColor="@color/black" />
+            android:textColor="@color/black"
+            tools:text="@tools:sample/lorem" />
 
         <TextView
             android:id="@+id/tv_date_sender"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="2dp"
+            android:paddingStart="@dimen/small_padding"
+            android:paddingEnd="@dimen/small_padding"
             tools:text="30-01-2021"
             android:textSize="@dimen/ts_standard" />
 
@@ -60,6 +66,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             tools:text="Philip"
+            android:paddingStart="@dimen/small_padding"
+            android:paddingEnd="@dimen/small_padding"
             android:textColor="#610430" />
 
         <TextView
@@ -67,6 +75,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="3dp"
+            android:paddingStart="@dimen/small_padding"
+            android:paddingEnd="@dimen/small_padding"
             android:fontFamily="@font/roboto"
             tools:text="@tools:sample/lorem"
             android:textColor="@color/black" />
@@ -76,6 +86,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="2dp"
+            android:paddingStart="@dimen/small_padding"
+            android:paddingEnd="@dimen/small_padding"
             tools:text="30-01-2021"
             android:textAlignment="textEnd"
             android:textSize="@dimen/ts_standard" />

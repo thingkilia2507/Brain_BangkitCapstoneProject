@@ -44,7 +44,7 @@ class GroupChatViewAdapter : RecyclerView.Adapter<GroupChatViewAdapter.ViewHolde
                 tvMessageReceiver.text = data[position].ai_message
                 tvDateReceiver.text = data[position].created_at
             }
-            if(data[position].status =="false"){
+            if(data[position].status =="true"){
                 tvMessageSender.setTextColor(Color.RED)
                 tvMessageReceiver.setTextColor(Color.RED)
             }else{

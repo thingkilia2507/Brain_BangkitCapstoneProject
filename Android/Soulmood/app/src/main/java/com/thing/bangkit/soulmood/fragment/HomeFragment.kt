@@ -19,27 +19,23 @@ import androidx.viewpager2.widget.CompositePageTransformer
 import androidx.viewpager2.widget.MarginPageTransformer
 import androidx.viewpager2.widget.ViewPager2
 import com.thing.bangkit.soulmood.R
-import com.thing.bangkit.soulmood.activity.ChatGroupActivity
-import com.thing.bangkit.soulmood.activity.ChatbotActivity
-import com.thing.bangkit.soulmood.activity.GroupNameActivity
-import com.thing.bangkit.soulmood.activity.MoodTrackerActivity
+import com.thing.bangkit.soulmood.activity.*
 import com.thing.bangkit.soulmood.adapter.GroupNameViewAdapter
 import com.thing.bangkit.soulmood.adapter.SliderCSFAdapter
 import com.thing.bangkit.soulmood.databinding.FragmentHomeBinding
 import com.thing.bangkit.soulmood.helper.DateHelper
+import com.thing.bangkit.soulmood.helper.IProgressResult
 import com.thing.bangkit.soulmood.helper.MyAsset
 import com.thing.bangkit.soulmood.helper.SharedPref
 import com.thing.bangkit.soulmood.model.ChatGroup
 import com.thing.bangkit.soulmood.model.ComingSoonFeatureSliderItem
-import com.thing.bangkit.soulmood.viewmodel.ChatbotViewModel
 import com.thing.bangkit.soulmood.viewmodel.GroupChatViewModel
 import com.thing.bangkit.soulmood.viewmodel.MoodTrackerViewModel
 
-class HomeFragment : Fragment() {
+class HomeFragment : Fragment(), IProgressResult {
     private lateinit var sliderRunnable: Runnable
     private val groupChatViewModel: GroupChatViewModel by viewModels()
-    private val moodTrackerViewModel : MoodTrackerViewModel by viewModels()
-    private val chatBotViewModel:ChatbotViewModel by viewModels()
+    private val moodTrackerViewModel: MoodTrackerViewModel by viewModels()
     private lateinit var binding: FragmentHomeBinding
 
     private val sliderHandler = Handler(Looper.getMainLooper())
@@ -60,11 +56,12 @@ class HomeFragment : Fragment() {
                 startActivity(Intent(requireActivity(), ChatbotActivity::class.java))
             }
             //chatBotViewModel.reqChatbotMessagesData(requireActivity())
-          groupChatViewModel.getQuoteOfTheDay().observe(requireActivity(),{
-              it.let {
-                  tvMotivationQuotes.text = StringBuilder(it)
-              }
-          })
+            groupChatViewModel.getQuoteOfTheDay(requireActivity(), this@HomeFragment)
+                .observe(requireActivity(), {
+                    it.let {
+                        tvMotivationQuotes.text = StringBuilder(it)
+                    }
+                })
             val adapter = GroupNameViewAdapter("homeFragment")
             rvGroupName.layoutManager = LinearLayoutManager(
                 context,
@@ -74,8 +71,8 @@ class HomeFragment : Fragment() {
             adapter.setOnItemClickCallback(object : GroupNameViewAdapter.OnItemClickCallback {
                 override fun onItemClick(data: ChatGroup) {
                     startActivity(Intent(context, ChatGroupActivity::class.java).apply {
-                        putExtra(getString(R.string.group_id), data.id)
-                        putExtra(getString(R.string.group_name), data.group_name)
+                        putExtra(getString(R.string.room_id), data.id)
+                        putExtra(getString(R.string.room_name), data.group_name)
                     })
                 }
             })
@@ -88,24 +85,38 @@ class HomeFragment : Fragment() {
                     dialog.setContentView(R.layout.add_new_group_dialog)
                     dialog.setCancelable(true)
                     dialog.show()
-                    val etGroupName:EditText = dialog.findViewById(R.id.et_group_name)
+                    val etGroupName: EditText = dialog.findViewById(R.id.et_group_name)
                     val btnAddNewGroup = dialog.findViewById<Button>(R.id.btn_add_new_group)
-                        btnAddNewGroup.setOnClickListener {
-                            val groupName = etGroupName.text.toString()
-                            if (groupName.isEmpty()) etGroupName.error =
-                                getString(R.string.message_input_groupname_empty)
-                            else {
-                                groupChatViewModel.insertNewGroup(groupName, dialog.context)
-                                dialog.dismiss()
-                            }
+                    btnAddNewGroup.setOnClickListener {
+                        val groupName = etGroupName.text.toString()
+                        if (groupName.isEmpty()) etGroupName.error =
+                            getString(R.string.message_input_room_name_empty)
+                        else {
+                            groupChatViewModel.insertNewGroup(groupName, dialog.context)
+                            dialog.dismiss()
                         }
+                    }
 
                 }
             }
 
-            floatingSeeAll.setOnClickListener { startActivity(Intent(requireActivity(),GroupNameActivity::class.java)) }
-            constraintDashboard.setOnClickListener { startActivity(Intent(requireActivity(),MoodTrackerActivity::class.java)) }
-            groupChatViewModel.setGroupName()
+            floatingSeeAll.setOnClickListener {
+                startActivity(
+                    Intent(
+                        requireActivity(),
+                        GroupNameActivity::class.java
+                    )
+                )
+            }
+            constraintDashboard.setOnClickListener {
+                startActivity(
+                    Intent(
+                        requireActivity(),
+                        MoodTrackerActivity::class.java
+                    )
+                )
+            }
+            groupChatViewModel.setGroupName(MyAsset.HOME_FRAGMENT)
             groupChatViewModel.getGroupName().observe(viewLifecycleOwner, {
                 if (it != null) {
                     adapter.setData(it)
@@ -134,7 +145,7 @@ class HomeFragment : Fragment() {
                 sliderRunnable = Runnable {
                     if (this.currentItem + 1 == sliderItem.size) {
                         this.currentItem = 0
-                    }else{
+                    } else {
                         this.currentItem = this.currentItem + 1
                     }
                 }
@@ -162,31 +173,59 @@ class HomeFragment : Fragment() {
     }
 
     companion object {
+        @Volatile
+        private var instance: HomeFragment? = null
+
         @JvmStatic
-        fun newInstance() = HomeFragment()
+        fun newInstance(): HomeFragment =
+            instance ?: synchronized(this) {
+                instance ?: HomeFragment().apply { instance = this }
+            }
     }
 
-    private fun setDashboard(){
-        moodTrackerViewModel.getDashboardMood(requireActivity()).observe(requireActivity(),{
-            if(it.mood != "") {
+    private fun setDashboard() {
+        moodTrackerViewModel.getDashboardMood(requireActivity()).observe(requireActivity(), {
+            if (it.mood != "") {
                 binding.apply {
-                    when(it.mood_code){
+                    when (it.mood_code) {
                         "1" -> ivDashboardMood.setImageDrawable(requireActivity().getDrawable(R.drawable.angry))
-                        "2" -> ivDashboardMood.setImageDrawable(requireActivity().getDrawable(R.drawable.sad))
-                        "3" -> ivDashboardMood.setImageDrawable(requireActivity().getDrawable(R.drawable.fear))
-                        "4" -> ivDashboardMood.setImageDrawable(requireActivity().getDrawable(R.drawable.good))
-                        "5" -> ivDashboardMood.setImageDrawable(requireActivity().getDrawable(R.drawable.love))
-                        "6" -> ivDashboardMood.setImageDrawable(requireActivity().getDrawable(R.drawable.joy))
+                        "2" -> ivDashboardMood.setImageDrawable(requireActivity().getDrawable(R.drawable.fear))
+                        "3" -> ivDashboardMood.setImageDrawable(requireActivity().getDrawable(R.drawable.sad))
+                        "4" -> ivDashboardMood.setImageDrawable(requireActivity().getDrawable(R.drawable.happy))
                     }
                     tvDashboardMood.text = it.mood
-                    tvDashboardName.text = "Hi, ${SharedPref.getPref(requireActivity(), MyAsset.KEY_NAME)}"
+                    tvDashboardName.text =
+                        "Hi, ${SharedPref.getPref(requireActivity(), MyAsset.KEY_NAME)}"
+                    tvDashboardDate.text =
+                        "Moodmu saat ini (" + DateHelper.dateFormat(it.date.take(10)) + ")"
                     tvDashboardDate.visibility = View.VISIBLE
-                    tvDashboardDate.text = DateHelper.dateFormat(it.date.take(10)) + "(Terakhir diubah)"
                 }
-            }else{
-                binding.tvDashboardName.text = "Hi, ${SharedPref.getPref(requireActivity(), MyAsset.KEY_NAME)}"
+            } else {
+                binding.tvDashboardName.text =
+                    "Hi, ${SharedPref.getPref(requireActivity(), MyAsset.KEY_NAME)}"
+                binding.tvDashboardMood.text = "Semoga Harimu menyenangkan ^-^"
+                binding.tvDashboardDate.visibility = View.GONE
             }
         })
+    }
+
+    override fun onProgress() {
+
+    }
+
+    override fun onSuccess(message: String) {
+        Handler(requireActivity().mainLooper).postDelayed({
+            binding.apply { progressMotivationWord.visibility = View.GONE }
+        }, 500)
+    }
+
+    override fun onFailure(message: String) {
+        binding.apply {
+            tvMotivationQuotes.text = message
+            progressMotivationWord.visibility = View.GONE
+        }
+
+
     }
 
 }

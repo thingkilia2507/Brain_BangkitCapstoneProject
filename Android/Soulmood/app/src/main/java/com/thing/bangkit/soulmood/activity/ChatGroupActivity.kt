@@ -16,8 +16,8 @@ class ChatGroupActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityChatGroupBinding.inflate(layoutInflater)
         setContentView(binding?.root)
-        val groupId = intent.getStringExtra(getString(R.string.group_id))
-        val groupName = intent.getStringExtra(getString(R.string.group_name))
+        val groupId = intent.getStringExtra(getString(R.string.room_id))
+        val groupName = intent.getStringExtra(getString(R.string.room_name))
         supportActionBar?.title = groupName
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         groupChatViewModel.setDataChat(groupId.toString())

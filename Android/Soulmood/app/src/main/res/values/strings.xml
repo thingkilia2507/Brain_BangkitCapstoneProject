@@ -15,10 +15,10 @@
     <string name="enter_your_email">Masukkan Email Anda</string>
     <string name="enter_your_pass">Masukkan Password Anda</string>
     <string name="choose_your_gender">Pilih Jenis Kelamin Anda</string>
-    <string name="enter_new_group">Masukkan Nama Grup…</string>
-    <string name="create_new_group">Buat Grup Baru</string>
-    <string name="group_id">group_id</string>
-    <string name="group_name">group_name</string>
+    <string name="enter_new_room">Masukkan Nama Ruang…</string>
+    <string name="create_new_room">Buat Ruang Baru</string>
+    <string name="room_id">room_id</string>
+    <string name="room_name">room_name</string>
     <string name="masuk">Masuk</string>
 
     <string name="dialy_motivation">Motivasi Harian</string>
@@ -42,8 +42,8 @@
     <string name="signature">Tanda Tangan / Paraf</string>
 
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="message_input_groupname_empty">Nama Grup tidak boleh kosong.</string>
-    <string name="fab_add_group_name">fab_add_group_name</string>
+    <string name="message_input_room_name_empty">Nama Ruang tidak boleh kosong.</string>
+    <string name="fab_add_room_name">fab_add_room_name</string>
     <string name="iv_topper">iv_topper</string>
     <string name="ic_password">ic_password</string>
     <string name="ic_log_out">ic_logout</string>
@@ -89,8 +89,13 @@
 
     <string name="coming_soon">Segera tersedia pada Soulmood versi terbaru.</string>
     <string name="enter_message_hint">Masukkan Pesan Anda…</string>
-    <string name="group_added">Grup Berhasil ditambah</string>
+    <string name="room_added">Ruang Berhasil ditambah</string>
     <string name="loading">Loading…</string>
-    <string name="group_name_activity">GroupNameActivity</string>
+    <string name="dummy_date">Mei 2021</string>
+    <string name="happy">Bahagia</string>
+    <string name="wrong_password">Maaf, kata sandi yang dimasukkan salah.</string>
+    <string name="wrong_email_login">Email yang Anda masukkan belum terdaftar.</string>
+    <string name="wrong_email_input_format">Harap masukkan email yang benar.</string>
+    <string name="motivation_word_notavailable">Maaf, Kata Motivasi Sedang tidak tersedia!</string>
 
 </resources>

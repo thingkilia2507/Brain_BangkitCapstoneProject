@@ -10,6 +10,7 @@ import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Query
 import com.thing.bangkit.soulmood.apiservice.ApiConfig
 import com.thing.bangkit.soulmood.helper.DateHelper
+import com.thing.bangkit.soulmood.helper.IFinishedListener
 import com.thing.bangkit.soulmood.helper.MyAsset
 import com.thing.bangkit.soulmood.helper.SharedPref
 import com.thing.bangkit.soulmood.model.ChatbotMessage
@@ -27,15 +28,23 @@ class ChatbotViewModel : ViewModel() {
     private val _suggestionResponse = MutableLiveData<ArrayList<String>>()
     val chat : LiveData<ArrayList<ChatbotMessage>> = _chat
     val suggestionResponse : LiveData<ArrayList<String>> = _suggestionResponse
-    private val currentDate : String= SimpleDateFormat("yyyyMMdd", Locale.getDefault()).format(Date())
+    private val currentDate : String= SimpleDateFormat("yyyyMMdd", Locale("in", "ID")).format(Date())
 
     fun initChatbot(context: Context) {
         val name = SharedPref.getPref(context, MyAsset.KEY_NAME)
         viewModelScope.launch {
             reqChatbotMessagesData(context)
-            sendMessage(context, "Halo, $name!")
-            delay(2000)
-            sendMessage(context, "Saya Soulmoo, teman curhatmu. Cerita yuk!")
+            sendMessage(object : IFinishedListener{
+                override fun onFinish() {
+                    //
+                }
+            },context, "Halo, $name!")
+            delay(1000)
+            sendMessage(object : IFinishedListener{
+                override fun onFinish() {
+                    //
+                }
+            },context, "Saya Soulmoo, teman curhatmu. Cerita yuk!")
         }
     }
 
@@ -66,7 +75,7 @@ class ChatbotViewModel : ViewModel() {
         }
     }
 
-    fun sendMessage(context : Context, message: String, name: String=MyAsset.SOULMOOD_CHATBOT_NAME, email: String="") {
+    fun sendMessage(finishedListener : IFinishedListener, context : Context, message: String, name: String=MyAsset.SOULMOOD_CHATBOT_NAME, email: String="") {
         if(email != "") {
             messageReqReply += message + "\n"
         }
@@ -86,6 +95,7 @@ class ChatbotViewModel : ViewModel() {
                 )
             withContext(Dispatchers.Main){
                 database.addOnSuccessListener {
+                    finishedListener.onFinish()
                     Log.d("TAGDATAKU", "sendMessage: message_sent" + message)
                 }.addOnFailureListener {
                     Toasty.error(context, it.message.toString(), Toasty.LENGTH_SHORT).show()
@@ -105,10 +115,8 @@ class ChatbotViewModel : ViewModel() {
                     withContext(Dispatchers.Main){
                         if(response.code() == 200){
                             response.body()?.let {
-                                for (reply in it.message) {
-                                    Log.d("TAGDATAKU", "===MessageSend: message " + reply)
-                                    sendMessage(context, reply)
-                                }
+                                recursionSendMessage(it.message, it.message.size-1, context)
+
                                 _suggestionResponse.postValue(it.suggestion)
                                 messageReqReply = ""
                             }
@@ -125,6 +133,27 @@ class ChatbotViewModel : ViewModel() {
                     }
                 }
             }
+        }
+
+
+    }
+
+    private fun recursionSendMessage(message: List<String>, indexMax: Int, context: Context) {
+        if (message.size == indexMax+1) {
+            sendMessage(object : IFinishedListener {
+                override fun onFinish() {
+                    if(indexMax == 0) return
+                    recursionSendMessage(message.reversed(), indexMax-1, context)
+                }
+            }, context, message.reversed()[indexMax])
+        }else{
+            sendMessage(object : IFinishedListener {
+                override fun onFinish() {
+                    if(indexMax == 0) return
+                    recursionSendMessage(message, indexMax-1, context)
+
+                }
+            }, context, message[indexMax])
         }
 
 

@@ -1,14 +1,15 @@
 package com.thing.bangkit.soulmood.activity
 
-import android.graphics.Color
 import android.os.Bundle
 import android.view.View
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
+import cn.pedant.SweetAlert.SweetAlertDialog
 import com.github.dewinjm.monthyearpicker.MonthYearPickerDialogFragment
 import com.github.mikephil.charting.components.Description
 import com.github.mikephil.charting.components.XAxis
+import com.github.mikephil.charting.components.YAxis
 import com.github.mikephil.charting.data.Entry
 import com.github.mikephil.charting.data.LineData
 import com.github.mikephil.charting.data.LineDataSet
@@ -16,6 +17,7 @@ import com.github.mikephil.charting.formatter.IndexAxisValueFormatter
 import com.thing.bangkit.soulmood.R
 import com.thing.bangkit.soulmood.databinding.ActivityMoodTrackerBinding
 import com.thing.bangkit.soulmood.helper.DateHelper
+import com.thing.bangkit.soulmood.helper.MyAsset
 import com.thing.bangkit.soulmood.viewmodel.MoodTrackerViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -24,7 +26,7 @@ import kotlinx.coroutines.launch
 import java.util.*
 import kotlin.collections.ArrayList
 
-class MoodTrackerActivity : AppCompatActivity() {
+class MoodTrackerActivity : AppCompatActivity(){
     private var binding: ActivityMoodTrackerBinding? = null
     private val moodTrackerViewModel: MoodTrackerViewModel by viewModels()
 
@@ -32,12 +34,12 @@ class MoodTrackerActivity : AppCompatActivity() {
     private val angry = ArrayList<String>()
     private val sad = ArrayList<String>()
     private val fear = ArrayList<String>()
-    private val good = ArrayList<String>()
-    private val love = ArrayList<String>()
-    private val joy = ArrayList<String>()
+    private val happy = ArrayList<String>()
 
     private val lineChartArrayEntry = ArrayList<Entry>()
     private val dateList = ArrayList<String>()
+
+    private lateinit var sweetAlertDialog: SweetAlertDialog
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMoodTrackerBinding.inflate(layoutInflater)
@@ -47,7 +49,7 @@ class MoodTrackerActivity : AppCompatActivity() {
         supportActionBar?.title = getString(R.string.your_mood_recap)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
-
+        onProgress()
         moodTrackerViewModel.setMoodData(DateHelper.getCurrentDateTime(), this)
 
         moodTrackerViewModel.setMoodData(DateHelper.getCurrentDateTime(), this)
@@ -55,11 +57,10 @@ class MoodTrackerActivity : AppCompatActivity() {
             lineChartArrayEntry.clear()
             dateList.clear()
             angry.clear()
-            joy.clear()
-            good.clear()
+            happy.clear()
             sad.clear()
             fear.clear()
-            love.clear()
+
             if(it.isNotEmpty()){
                 CoroutineScope(Dispatchers.Default).launch {
                     for (i in 0 until it.size) {
@@ -67,11 +68,9 @@ class MoodTrackerActivity : AppCompatActivity() {
                         dateList.add(it[i].date.substring(8, 10))
                         when (it[i].mood_code) {
                             "1" -> angry.add(it[i].mood_code)
-                            "2" -> sad.add(it[i].mood_code)
-                            "3" -> fear.add(it[i].mood_code)
-                            "4" -> good.add(it[i].mood_code)
-                            "5" -> love.add(it[i].mood_code)
-                            "6" -> joy.add(it[i].mood_code)
+                            "2" -> fear.add(it[i].mood_code)
+                            "3" -> sad.add(it[i].mood_code)
+                            "4" -> happy.add(it[i].mood_code)
                         }
                     }
                 }
@@ -84,15 +83,14 @@ class MoodTrackerActivity : AppCompatActivity() {
                 binding?.apply {
                     lineChart.visibility = View.GONE
                     noDataAnimation.visibility = View.VISIBLE
+                    onFinish()
                 }
             }
 
             CoroutineScope(Dispatchers.Main).launch {
                 delay(300)
                 binding?.apply {
-                    tvJoyScore.text = joy.size.toString()
-                    tvLoveScore.text = love.size.toString()
-                    tvGoodScore.text = good.size.toString()
+                    tvJoyScore.text = happy.size.toString()
                     tvFearScore.text = fear.size.toString()
                     tvSadScore.text = sad.size.toString()
                     tvAngryScore.text = angry.size.toString()
@@ -104,7 +102,6 @@ class MoodTrackerActivity : AppCompatActivity() {
             tvMoodDate.text = DateHelper.convertDateToMonthYearFormat(DateHelper.getCurrentDateTime().take(7))
             floatingFilterByDate.setOnClickListener { datePicker() }
         }
-
     }
 
     private fun lineChart() {
@@ -112,13 +109,12 @@ class MoodTrackerActivity : AppCompatActivity() {
             noDataAnimation.visibility = View.GONE
             lineChart.visibility = View.VISIBLE
         }
-        val lineDataSet = LineDataSet(lineChartArrayEntry, "Rekapan Mood Anda")
+        val lineDataSet = LineDataSet(lineChartArrayEntry, "Mood Harian")
         lineDataSet.notifyDataSetChanged()
         val color = ContextCompat.getColor(this, R.color.soulmood_primary_color)
         lineDataSet.color = color
         lineDataSet.lineWidth = 4f
-        lineDataSet.valueTextSize = 5f
-        lineDataSet.valueTextColor = Color.BLACK
+        lineDataSet.valueTextSize = 0f
         lineDataSet.circleRadius = 6f
         lineDataSet.setCircleColor(color)
         lineDataSet.circleHoleColor = color
@@ -134,10 +130,14 @@ class MoodTrackerActivity : AppCompatActivity() {
             var lineData = LineData(lineDataSet)
 
 
-
             lineChart.data = lineData
             val xAxis: XAxis = lineChart.xAxis
             xAxis.valueFormatter = IndexAxisValueFormatter(dateList)
+            val yAxis : YAxis = lineChart.getAxis(YAxis.AxisDependency.LEFT)
+            yAxis.granularity = 1f
+            yAxis.axisMinimum = 0f
+            yAxis.axisMaximum = 4.5f
+            yAxis.valueFormatter = IndexAxisValueFormatter(arrayOf("","Marah", "Takut", "Sedih", "Bahagia"))
 
 
             //remove line in right side
@@ -152,12 +152,13 @@ class MoodTrackerActivity : AppCompatActivity() {
             xAxis.labelCount = dateList.size
             xAxis.position = XAxis.XAxisPosition.BOTTOM
             lineChart.animate()
-
+            onFinish()
 
 
 
         }
     }
+
 
     override fun onDestroy() {
         super.onDestroy()
@@ -183,4 +184,19 @@ class MoodTrackerActivity : AppCompatActivity() {
         onBackPressed()
         return super.onSupportNavigateUp()
     }
+
+    private fun onProgress() {
+        this.let {
+            sweetAlertDialog = MyAsset.sweetAlertDialog(
+                it,
+                getString(R.string.LOADING),
+                false
+            )
+            sweetAlertDialog.show()
+        }
+    }
+    private fun onFinish(){
+        sweetAlertDialog.dismiss()
+    }
+
 }

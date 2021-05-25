@@ -80,7 +80,7 @@ class MainActivity : AppCompatActivity() {
 
 private fun startPeriodicTask(){
         //set data
-        AlarmReceiver().setRepeating1(
+        AlarmReceiver().setRepeatingSendChatbotDataToApi(
             this,
             "message"
         )

@@ -29,7 +29,6 @@ class LoginActivity : AppCompatActivity(), IProgressResult {
         super.onCreate(savedInstanceState)
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding?.root)
-
         binding?.apply {
 
             etPassword.addTextChangedListener(object : TextWatcher {
@@ -67,7 +66,7 @@ class LoginActivity : AppCompatActivity(), IProgressResult {
                     onProgress()
                     loginViewModel.login(email, password, this@LoginActivity,
                         this@LoginActivity).observe(this@LoginActivity, {
-                            if (it != null) {
+                            if (it.email != "") {
                                 Log.d("TAGDATAKU", "onCreate: notnull")
                                 //save data to shared preference
                                 SharedPref.setPref(
@@ -78,7 +77,7 @@ class LoginActivity : AppCompatActivity(), IProgressResult {
                                 SharedPref.setPref(
                                     this@LoginActivity,
                                     MyAsset.KEY_EMAIL,
-                                    it.email
+                                    it.email.toLowerCase()
                                 )
                               
                                 SharedPref.setPref(
@@ -88,9 +87,10 @@ class LoginActivity : AppCompatActivity(), IProgressResult {
                                 )
 
                                 //set dialy motivation word repeat alarm
-                                groupChatViewModel.getQuoteOfTheDay().observe(this@LoginActivity,{
-                                    if(it.isNotEmpty()){
-                                        AlarmReceiver().setRepeatingAlarm(
+                                groupChatViewModel.getQuoteOfTheDay(this@LoginActivity).observe(this@LoginActivity,{ it ->
+                                    Log.d("TAGDATAKU", "onCreatequotes: "+it)
+                                    it?.let{
+                                        AlarmReceiver().setRepeatingAlarmMotivationWord(
                                             this@LoginActivity,
                                             it
                                         )
