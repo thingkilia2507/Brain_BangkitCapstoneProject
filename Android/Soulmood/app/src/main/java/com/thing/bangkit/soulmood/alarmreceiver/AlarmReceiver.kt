@@ -73,7 +73,6 @@ class AlarmReceiver : BroadcastReceiver() {
         val intent = Intent(context, AlarmReceiver::class.java)
         intent.putExtra(EXTRA_MESSAGE_CHATBOT_DATA, message)
 
-
         val pendingIntent = PendingIntent.getBroadcast(context, ID_REPEATING1, intent, 0)
         alarmManager.setInexactRepeating(
             AlarmManager.RTC_WAKEUP,
@@ -186,6 +185,7 @@ class AlarmReceiver : BroadcastReceiver() {
             } else {
                 message.append("")
             }
+            println("message chat : "+ message)
 
             val service = ApiConfig.getRetrofitSoulmood()
             CoroutineScope(Dispatchers.IO).launch {

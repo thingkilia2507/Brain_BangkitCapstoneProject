@@ -99,7 +99,7 @@ class GroupChatViewModel : ViewModel() {
                                 aiMessage = message
                                 status = "false"
                             }else{
-                                aiMessage = "*Pesan ini mengandung kata kasar*"
+                                aiMessage = "*${response.body()!!.message}*"
                                 status = "true"
                             }
                             Log.d("statusku : ",status)
@@ -174,12 +174,16 @@ class GroupChatViewModel : ViewModel() {
         val service = ApiConfig.getRetrofitQuotes()
         CoroutineScope(Dispatchers.IO).launch {
             try{
-                val response = service.getDialyQuote(1)
+                val response = service.getDialyQuote()
                 withContext(Dispatchers.Main){
                     if(response.code() == 200){
                         response.body().let{
-                            response.body()?.quotes?.get(0)?.let {
-                                quoteMessage.postValue("${it.text} \n- ${it.author} -")
+                            response.body()?.let {
+                                if(it.author.isNotEmpty()){
+                                    quoteMessage.postValue("${it.quote} \n- ${it.author} -")
+                                }else{
+                                    quoteMessage.postValue("${it.quote}")
+                                }
                                 status?.onSuccess("")
                             }
                         }
