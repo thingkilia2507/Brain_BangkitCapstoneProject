@@ -10,11 +10,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Query
 import com.thing.bangkit.soulmood.R
-import com.thing.bangkit.soulmood.apiservice.ApiConfig
-import com.thing.bangkit.soulmood.helper.DateHelper
-import com.thing.bangkit.soulmood.helper.IProgressResult
-import com.thing.bangkit.soulmood.helper.MyAsset
-import com.thing.bangkit.soulmood.helper.SharedPref
+import com.thing.bangkit.soulmood.helper.*
 import com.thing.bangkit.soulmood.model.ChatGroup
 import com.thing.bangkit.soulmood.model.ChatMessage
 import es.dmoral.toasty.Toasty
@@ -86,7 +82,7 @@ class GroupChatViewModel : ViewModel() {
     }
 
     fun insertNewChat(group_id: String, message: String, context: Context) {
-        val service = ApiConfig.getRetrofitSoulmood()
+        val service = RetrofitBuild.instanceBadwordService()
         viewModelScope.launch(Dispatchers.IO){
             try {
                 val response = service.checkBadWordResponse(message)
@@ -171,7 +167,7 @@ class GroupChatViewModel : ViewModel() {
 
     fun getQuoteOfTheDay(context:Context,status:IProgressResult?=null):LiveData<String>{
         var quoteMessage = MutableLiveData<String>()
-        val service = ApiConfig.getRetrofitQuotes()
+        val service = RetrofitBuild.instanceQuotesService()
         CoroutineScope(Dispatchers.IO).launch {
             try{
                 val response = service.getDialyQuote()

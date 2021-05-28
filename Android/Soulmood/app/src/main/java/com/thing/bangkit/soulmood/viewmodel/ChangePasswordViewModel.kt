@@ -28,7 +28,6 @@ class ChangePasswordViewModel : ViewModel() {
 
                             }.addOnFailureListener { exception ->
                                 Log.d("TAGDATAKU", "onChangePassword: "+ exception.message.toString())
-                                Log.d("TAGDATAKU", "onChangePassword: "+ exception.message.toString())
                                 resultI.onFailure(context.getString(R.string.invalid_password_message))
                             }
                         }
