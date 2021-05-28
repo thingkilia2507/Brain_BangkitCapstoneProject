@@ -4,7 +4,7 @@ import com.thing.bangkit.soulmood.helper.RetrofitBuild
 
 object ApiConfig {
     fun getRetrofitQuotes(): ApiService {
-        return RetrofitBuild.getInstance("https://freequote.herokuapp.com").create(ApiService::class.java)
+        return RetrofitBuild.getInstance("https://api.quotable.io/").create(ApiService::class.java)
     }
     fun getRetrofitSoulmood(): ApiService{
         return RetrofitBuild.getInstance("").create(ApiService::class.java)

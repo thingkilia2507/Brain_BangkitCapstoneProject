@@ -175,21 +175,19 @@ class GroupChatViewModel : ViewModel() {
         CoroutineScope(Dispatchers.IO).launch {
             try{
                 val response = service.getDialyQuote()
-                withContext(Dispatchers.Main){
-                    if(response.code() == 200){
-                        response.body().let{
-                            response.body()?.let {
-                                if(it.author.isNotEmpty()){
-                                    quoteMessage.postValue("${it.quote} \n- ${it.author} -")
-                                }else{
-                                    quoteMessage.postValue("${it.quote}")
-                                }
-                                status?.onSuccess("")
+                withContext(Dispatchers.Main) {
+                    if (response.code() == 200) {
+                        response.body()?.let {
+
+                            if (it.author.isNotEmpty()) {
+                                quoteMessage.postValue("${it.content} \n- ${it.author} -")
+                            } else {
+                                quoteMessage.postValue("${it.content}")
                             }
+                            status?.onSuccess("")
                         }
                     }else{
                         status?.onFailure(context.getString(R.string.motivation_word_notavailable))
-                        Log.v("response code",response.code().toString())
                     }
                 }
             }
