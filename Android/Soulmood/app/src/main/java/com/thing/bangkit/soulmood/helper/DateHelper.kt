@@ -5,6 +5,8 @@ import java.util.*
 
 
 object DateHelper {
+    val currentDate : String= SimpleDateFormat("yyyyMMdd", Locale("in", "ID")).format(Date())
+
     fun getCurrentDateTime(): String {
         val dateFormat = SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale("in", "ID"))
         val date = Date()

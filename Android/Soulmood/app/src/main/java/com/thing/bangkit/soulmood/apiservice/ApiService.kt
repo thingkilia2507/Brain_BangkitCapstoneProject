@@ -15,15 +15,15 @@ interface ApiService {
     suspend fun getDialyQuote():Response<QuoteOfTheDay>
 
     @FormUrlEncoded
-    @POST("https://asia-southeast2-soulmood.cloudfunctions.net/chatbot")
+    @POST("chatbot")
     suspend fun reqChatbotResponse(@Field("name") name:String, @Field("message") message:String):Response<ChatbotResponse>
 
     @FormUrlEncoded
-    @POST("https://soulmood.uc.r.appspot.com")
+    @POST("/")
     suspend fun checkBadWordResponse(@Field("message") message:String):Response<BadWordResponse>
 
     @FormUrlEncoded
-    @POST("https://asia-southeast2-soulmood.cloudfunctions.net/moodDetector")
+    @POST("moodDetector")
     suspend fun moodDetectorResponse(@Field("message") message:String):Response<MoodDetectorResponse>
 
 }

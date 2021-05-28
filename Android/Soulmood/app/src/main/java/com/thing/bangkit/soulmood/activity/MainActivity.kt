@@ -3,6 +3,7 @@ package com.thing.bangkit.soulmood.activity
 import android.content.Intent
 import android.content.res.ColorStateList
 import android.os.Bundle
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.core.widget.ImageViewCompat
@@ -14,11 +15,13 @@ import com.thing.bangkit.soulmood.fragment.HomeFragment
 import com.thing.bangkit.soulmood.fragment.ProfileFragment
 
 class MainActivity : AppCompatActivity() {
-    private lateinit var binding : ActivityMainBinding
+    private lateinit var binding: ActivityMainBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        Log.d("TAGDATAKU", "onCreate: called")
         startPeriodicTask()
 
         binding.apply {
@@ -35,7 +38,7 @@ class MainActivity : AppCompatActivity() {
             fabChatbot.imageTintMode = null
 
         }
-        
+
     }
 
     private fun handleFragment(fragment: Fragment) {
@@ -52,13 +55,23 @@ class MainActivity : AppCompatActivity() {
         ivBNHome.layoutParams.height = 105
         ivBNHome.requestLayout()
         tvBNProfile.setTextColor(resources.getColor(R.color.grey, theme))
-        ImageViewCompat.setImageTintList(ivBNProfile, ColorStateList.valueOf(ContextCompat.getColor(this@MainActivity,
-            R.color.grey
-        )))
+        ImageViewCompat.setImageTintList(
+            ivBNProfile, ColorStateList.valueOf(
+                ContextCompat.getColor(
+                    this@MainActivity,
+                    R.color.grey
+                )
+            )
+        )
         tvBNHome.setTextColor(resources.getColor(R.color.white, theme))
-        ImageViewCompat.setImageTintList(ivBNHome, ColorStateList.valueOf(ContextCompat.getColor(this@MainActivity,
-            R.color.white
-        )))
+        ImageViewCompat.setImageTintList(
+            ivBNHome, ColorStateList.valueOf(
+                ContextCompat.getColor(
+                    this@MainActivity,
+                    R.color.white
+                )
+            )
+        )
     }
 
     private fun ActivityMainBinding.setProfileFrament() {
@@ -68,27 +81,35 @@ class MainActivity : AppCompatActivity() {
         ivBNHome.layoutParams.height = 80
         ivBNHome.requestLayout()
         tvBNProfile.setTextColor(resources.getColor(R.color.white, theme))
-        ImageViewCompat.setImageTintList(ivBNProfile, ColorStateList.valueOf(ContextCompat.getColor(this@MainActivity,
-            R.color.white
-        )))
+        ImageViewCompat.setImageTintList(
+            ivBNProfile, ColorStateList.valueOf(
+                ContextCompat.getColor(
+                    this@MainActivity,
+                    R.color.white
+                )
+            )
+        )
         tvBNHome.setTextColor(resources.getColor(R.color.grey, theme))
-        ImageViewCompat.setImageTintList(ivBNHome, ColorStateList.valueOf(ContextCompat.getColor(this@MainActivity,
-            R.color.grey
-        )))
+        ImageViewCompat.setImageTintList(
+            ivBNHome, ColorStateList.valueOf(
+                ContextCompat.getColor(
+                    this@MainActivity,
+                    R.color.grey
+                )
+            )
+        )
     }
 
 
-private fun startPeriodicTask(){
+    private fun startPeriodicTask() {
+        Log.d("TAGDATAKU", "startPeriodicTask: called")
         //set data
         AlarmReceiver().setRepeatingSendChatbotDataToApi(
             this,
-            "message"
+            "ChatbotMessage"
         )
 
 
-
-
-
-}
+    }
 
 }
