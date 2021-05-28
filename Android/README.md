@@ -2,12 +2,67 @@
 
 ## 1. AI Chatbot Feature
 This AI chatbot feature helps users to be able to tell stories about various things with the AI Chatbot
-for API AI chatbot, we use url:
-POST request
-[API AI Chatbot](https://asia-southeast2-soulmood.cloudfunctions.net/chatbot)
-example post parameter:
-name = "joy"
-message = "aku lagi sedig banget hari ini"
+###### for API AI chatbot, we use url:
+###### POST request
+###### [API AI Chatbot](https://asia-southeast2-soulmood.cloudfunctions.net/chatbot)
+###### example post parameter:
+###### name = "joy"
+###### message = "aku lagi sedig banget hari ini"
+
+sample code that we use :
+* retrofit code is used to post data messages to the Chatbot API
+```
+private fun getInstance(URL: String): Retrofit {
+        return Retrofit.Builder()
+            .baseUrl(URL)
+            .addConverterFactory(GsonConverterFactory.create())
+            .client(client)
+            .build()
+    }
+    @Volatile
+    private var baseService: ApiService? = null
+
+    @JvmStatic
+    fun instanceService(): ApiService {
+        if (baseService == null) {
+            baseService = getInstance("https://asia-southeast2-soulmood.cloudfunctions.net/").create(ApiService::class.java)
+        }
+        return baseService as ApiService
+    }
+```
+* Request chatbot response code
+```
+fun reqChatbotReply(context: Context){
+        val name = SharedPref.getPref(context, MyAsset.KEY_NAME)!!
+        if(messageReqReply.isNotEmpty()){
+            val apiService = RetrofitBuild.instanceService()
+            CoroutineScope(Dispatchers.IO).launch {
+                try{
+                    val response = apiService.reqChatbotResponse(name, messageReqReply)
+                    withContext(Dispatchers.Main){
+                        if(response.code() == 200){
+                            response.body()?.let {
+                                recursionSendMessage(it.message, it.message.size-1, context)
+
+                                _suggestionResponse.postValue(it.suggestion)
+                                messageReqReply = ""
+                            }
+                        }else{
+                            Toasty.error(context, "Maaf, Soulmood sedang dalam perbaikan.", Toasty.LENGTH_SHORT).show()
+                        }
+                    }
+                }
+                catch (e: Throwable){
+                    withContext(Dispatchers.Main) {
+                        Toasty.error(context, "Maaf, Soulmood sedang dalam perbaikan.", Toasty.LENGTH_SHORT).show()
+                    }
+                }
+            }
+        }
+
+
+    }
+```
 
 
 
@@ -18,8 +73,59 @@ if there are hate speech sent by users. then the application will automatically 
 ###### POST request
 ###### [API Hate Speech](https://soulmood.uc.r.appspot.com)
 ###### example post parameter:
-###### message = "anjay loh, gak tau malu"
+###### message = "dasar, bermuka dua"
 
+sample code that we use :
+This code is used to insert message data into the database, but before inserting new data, messages sent by the user will be checked into the hate speech API first to check for hate speech.
+###### group_id = 1, message = "dasar, bermuka dua"
+```
+ fun insertNewChat(group_id: String, message: String, context: Context) {
+        val service = RetrofitBuild.instanceBadwordService()
+        viewModelScope.launch(Dispatchers.IO){
+            try {
+                val response = service.checkBadWordResponse(message)
+                withContext(Dispatchers.Main){
+                    if(response.code() == 200){
+                        if(response.body() != null){
+                            var aiMessage=""
+                            var status="true"
+                            if(!response.body()!!.status){
+                                aiMessage = message
+                                status = "false"
+                            }else{
+                                aiMessage = "*${response.body()!!.message}*"
+                                status = "true"
+                            }
+                            val id = UUID.randomUUID().toString()
+                            viewModelScope.launch(Dispatchers.IO) {
+                                val database = db.collection("groups_chat")
+                                    .document(group_id).collection("message").add(
+                                        ChatMessage(id, SharedPref.getPref(context, MyAsset.KEY_NAME).toString(),
+                                            SharedPref.getPref(context, MyAsset.KEY_EMAIL), message, aiMessage, DateHelper.getCurrentDateTime(), ""
+                                        ,status)
+                                    )
+                                withContext(Dispatchers.Main){
+                                    database.addOnSuccessListener {
+                                    }.addOnFailureListener {
+                                        Toasty.error(context, it.message.toString(), Toasty.LENGTH_SHORT).show()
+                                    }
+                                }
+                            }
+                        }
+                    }else{
+                        Toasty.error(context, "Maaf, Soulmood sedang dalam perbaikan.", Toasty.LENGTH_SHORT).show()
+                    }
+                }
+            }catch (e:Throwable){
+                withContext(Dispatchers.Main){
+                    Toasty.error(context, "Maaf, Soulmood sedang dalam perbaikan.", Toasty.LENGTH_SHORT).show()
+                }
+            }
+
+        }
+
+    }
+```
 
 
 
