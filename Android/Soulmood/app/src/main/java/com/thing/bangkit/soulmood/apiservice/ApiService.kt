@@ -11,7 +11,7 @@ import retrofit2.http.GET
 import retrofit2.http.POST
 
 interface ApiService {
-    @GET("/")
+    @GET("random")
     suspend fun getDialyQuote():Response<QuoteOfTheDay>
 
     @FormUrlEncoded
