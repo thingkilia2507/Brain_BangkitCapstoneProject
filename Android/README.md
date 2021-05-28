@@ -4,7 +4,7 @@
 This AI chatbot feature helps users to be able to tell stories about various things with the AI Chatbot
 for API AI chatbot, we use url:
 POST request
-[GitHub](https://asia-southeast2-soulmood.cloudfunctions.net/chatbot)
+[API AI Chatbot](https://asia-southeast2-soulmood.cloudfunctions.net/chatbot)
 example post parameter:
 name = "joy"
 message = "aku lagi sedig banget hari ini"
@@ -14,11 +14,15 @@ message = "aku lagi sedig banget hari ini"
 ## 2. Human Chat Group Support
 This feature is a chat forum feature where users can support and motivate each other. Users can make the name anonymous.
 if there are hate speech sent by users. then the application will automatically hide the hate speech.
-for API Detect Hate Speech, we use url:
-POST request
-[GitHub](https://soulmood.uc.r.appspot.com)
-example post parameter:
-message = "anjay loh, gak tau malu"
+###### for API Detect Hate Speech, we use url:
+###### POST request
+###### [API Hate Speech](https://soulmood.uc.r.appspot.com)
+###### example post parameter:
+###### message = "anjay loh, gak tau malu"
+
+
+
+
 
 
 
@@ -31,7 +35,7 @@ The application can check the current mood of users through the user's message h
 for dialy motication word, we use free public api
 link API: 
 GET request
-[GitHub](https://api.quotable.io/random)
+[API Dialy motivation word](https://api.quotable.io/random)
 
 ## 5. Firebase
 We use Firebase because Firebase has a realtime database feature that we can use to create realtime chat features.
