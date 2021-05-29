@@ -9,7 +9,7 @@ This AI chatbot feature helps users to be able to tell stories about various thi
 ###### name = "joy"
 ###### message = "aku lagi sedig banget hari ini"
 
-sample code that we use :
+###### sample code that we use :
 * retrofit code is used to post data messages to the Chatbot API
 ```
 private fun getInstance(URL: String): Retrofit {
@@ -75,7 +75,7 @@ if there are hate speech sent by users. then the application will automatically 
 ###### example post parameter:
 ###### message = "dasar, bermuka dua"
 
-sample code that we use :
+###### sample code that we use :
 This code is used to insert message data into the database, but before inserting new data, messages sent by the user will be checked into the hate speech API first to check for hate speech.
 ###### group_id = 1, message = "dasar, bermuka dua"
 ```
@@ -123,7 +123,6 @@ This code is used to insert message data into the database, but before inserting
             }
 
         }
-
     }
 ```
 
@@ -135,6 +134,101 @@ This code is used to insert message data into the database, but before inserting
 ## 3. Mood Detection Feature
 The application can check the current mood of users through the user's message history with AI chatbot.
 
+###### for API Mood Detection, we use url:
+###### POST request
+###### [API Mood Detection](https://asia-southeast2-soulmood.cloudfunctions.net/moodDetector)
+###### example post parameter:
+###### message = "<CB>:Hallo, aku bot soulmood<USER>:aku mau cerita nih, sekarang aku lagi sedih banget<CB>:Kamu boleh cerita kok tentang kesedihanmu"
+###### Example result mood detection : "sedih"
+###### sample code that we use :
+        
+```
+        //first, we get messsage data from Database
+ private fun getChatbotData(context: Context): ArrayList<ChatbotMessage> {
+        val db = FirebaseFirestore.getInstance()
+        val chatData = ArrayList<ChatbotMessage>()
+
+        CoroutineScope(Dispatchers.IO).launch {
+            val data =
+                db.collection(CHATBOT_DB_NAME).document(BuildConfig.VERSION_NAME)
+                    .collection("user_chatbot")
+                    .document(SharedPref.getPref(context, MyAsset.KEY_USER_ID).toString())
+                    .collection("chatbot_messages")
+                    .document(currentDate)
+                    .collection("message")
+                    .orderBy("created_at", Query.Direction.ASCENDING)
+
+            data.addSnapshotListener { value, _ ->
+                value?.let {
+                    for (message in value.documents) {
+                        chatData.add(
+                            ChatbotMessage(
+                                id = message.getString("id").toString(),
+                                name = message.getString("name").toString(),
+                                email = message.getString("email").toString(),
+                                message = message.getString("message").toString(),
+                                created_at = message.getString("created_at").toString()
+                            )
+                        )
+                    }
+                }
+            }
+        }
+        return chatData
+    }
+        
+        
+        //end then, we send message data to Mood detection API to get mood result
+         private fun sendMessageToDb(context: Context) {
+        val message = StringBuilder("")
+
+        //get dialy chatbot data from firestore
+        GlobalScope.launch(Dispatchers.IO) {
+            val chatbotData = async(Dispatchers.IO) {
+                getChatbotData(context)
+            }.await()
+            delay(1000)
+            Log.d("TAGDATAKU", "sendMessageToDb: " + chatbotData)
+            if (chatbotData.isNotEmpty()) {
+                for (i in 0 until chatbotData.size) {
+                    if (chatbotData[i].name == SOULMOOD_CHATBOT_NAME) {
+                        message.append("<CB>:${chatbotData[i].message}")
+                    } else {
+                        message.append("<USER>:${chatbotData[i].message}")
+                    }
+                }
+
+                Log.d("TAGDATAKU", "sendMessageToDb message: \n" + message)
+
+                val service = RetrofitBuild.instanceService()
+                CoroutineScope(Dispatchers.IO).launch {
+                    try {
+                        val response = service.moodDetectorResponse(message.toString())
+                        Log.d("TAGDATAKU", "sendMessageToDb: ${response.code()}" )
+                        if (response.code() == 200) {
+                                Log.d("TAGDATAKU", "sendMessageToDb: ${response.body() != null}" )
+                            if (response.body() != null) {
+                                val mood = response.body()!!.mood
+                                var moodCode = ""
+                                when (mood) {
+                                    "Bahagia" -> moodCode = "4"
+                                    "Sedih" -> moodCode = "3"
+                                    "Takut" -> moodCode = "2"
+                                    "Marah" -> moodCode = "1"
+                                }
+                                //insert data to firestore
+                                insertMoodData(response.body()!!.mood, moodCode, context)
+                            }
+                        }
+
+                    } catch (e: Throwable) {
+                        Log.d("TAGDATAKU", "reqChatbotReply RetrofitFail: " + e.message.toString())
+                    }
+                }
+            }
+        }
+    }
+```
 
 
 ## 4. Dialy Motivation word
@@ -146,10 +240,17 @@ GET request
 ## 5. Firebase
 We use Firebase because Firebase has a realtime database feature that we can use to create realtime chat features.
 
+
 ### 1. Authentication
 In your sign-in activity's onCreate method, get the shared instance of the FirebaseAuth object:
 You can let your users authenticate with Firebase using their Email Accounts by integrating Email Sign-In into your app.
-Example code for Login Authentication
+
+###### add dependency for firebase Auth in build.gradle
+``` 
+    implementation 'com.google.firebase:firebase-auth:21.0.0'
+```
+
+###### Example code for Login Authentication
  ```
 private var auth = FirebaseAuth.getInstance()
 private val db = FirebaseFirestore.getInstance()
@@ -182,7 +283,12 @@ Example code for Register Authentication
 Store and sync your app data with this flexible, scalable NoSQL cloud-hosted database.
 Cloud Firestore is a flexible, scalable database from Firebase and Google Cloud. It keeps your data in sync across client apps through realtime listeners and offers offline support so you can build responsive apps that work regardless of network latency or internet connectivity.
 
-Example code firestore : 
+###### add dependency for Cloud Firestore build.gradle
+``` 
+    implementation 'com.google.firebase:firebase-firestore:23.0.0'
+```
+
+###### Example code firestore : 
 ```
 FirebaseFirestore db = FirebaseFirestore.getInstance()
 // Create a new user with a first and last name
