@@ -1,0 +1,6 @@
+# Function dependencies, for example:
+# package>=version
+
+Flask==1.0.2
+dialogflow==0.5.1
+google-api-core==1.4.1
