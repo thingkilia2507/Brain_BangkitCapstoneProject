@@ -8,15 +8,13 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Query
-import com.thing.bangkit.soulmood.apiservice.ApiConfig
-import com.thing.bangkit.soulmood.helper.DateHelper
-import com.thing.bangkit.soulmood.helper.IFinishedListener
-import com.thing.bangkit.soulmood.helper.MyAsset
-import com.thing.bangkit.soulmood.helper.SharedPref
+import com.thing.bangkit.soulmood.BuildConfig
+import com.thing.bangkit.soulmood.helper.*
+import com.thing.bangkit.soulmood.helper.DateHelper.currentDate
+import com.thing.bangkit.soulmood.helper.MyAsset.CHATBOT_DB_NAME
 import com.thing.bangkit.soulmood.model.ChatbotMessage
 import es.dmoral.toasty.Toasty
 import kotlinx.coroutines.*
-import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.collections.ArrayList
 
@@ -28,29 +26,60 @@ class ChatbotViewModel : ViewModel() {
     private val _suggestionResponse = MutableLiveData<ArrayList<String>>()
     val chat : LiveData<ArrayList<ChatbotMessage>> = _chat
     val suggestionResponse : LiveData<ArrayList<String>> = _suggestionResponse
-    private val currentDate : String= SimpleDateFormat("yyyyMMdd", Locale("in", "ID")).format(Date())
+
 
     fun initChatbot(context: Context) {
         val name = SharedPref.getPref(context, MyAsset.KEY_NAME)
         viewModelScope.launch {
             reqChatbotMessagesData(context)
-            sendMessage(object : IFinishedListener{
-                override fun onFinish() {
-                    //
-                }
-            },context, "Halo, $name!")
             delay(1000)
-            sendMessage(object : IFinishedListener{
-                override fun onFinish() {
-                    //
+            if(chat.value == null || chat.value!!.isEmpty()){
+                sendMessage(object : IFinishedListener{
+                    override fun onFinish() {
+                        //
+                    }
+                },context, "Halo, $name!")
+                delay(1000)
+
+                sendMessage(object : IFinishedListener {
+                    override fun onFinish() {
+                        //
+                    }
+                }, context, "Halo, aku adalah SoulMoo, bot yang bisa kamu ajak bicara tentang apa yg kamu rasakan dan pikirkan kapan saja.\n" +
+                        "\n" +
+                        "Apa yang ingin kamu bicarakan denganku hari ini?\uD83D\uDE0A")
+            }else {
+                sendMessage(object : IFinishedListener{
+                    override fun onFinish() {
+                        //
+                    }
+                },context, "Halo, $name!")
+                delay(1000)
+
+                if(chat.value != null && chat.value!!.size <1){
+                    sendMessage(object : IFinishedListener {
+                        override fun onFinish() {
+                            //
+                        }
+                    }, context, "Halo, aku adalah SoulMoo, bot yang bisa kamu ajak bicara tentang apa yg kamu rasakan dan pikirkan kapan saja.\n" +
+                            "\n" +
+                            "Apa yang ingin kamu bicarakan denganku hari ini?\uD83D\uDE0A")
+                }else {
+                    sendMessage(object : IFinishedListener {
+                        override fun onFinish() {
+                            //
+                        }
+                    }, context, "Saya Soulmoo, teman curhatmu. Cerita yuk!")
                 }
-            },context, "Saya Soulmoo, teman curhatmu. Cerita yuk!")
+            }
+
+            _suggestionResponse.postValue(arrayListOf("Diri Sendiri", "Rumah", "Sekolah", "Pekerjaan", "Pertemanan", "Percintaan","Lainnya","Ngga dulu deh"))
         }
     }
 
      fun reqChatbotMessagesData(context: Context) {
         viewModelScope.launch(Dispatchers.IO) {
-            val data = db.collection("db_chatbot").document("1.0").collection("user_chatbot")
+            val data = db.collection(CHATBOT_DB_NAME).document(BuildConfig.VERSION_NAME).collection("user_chatbot")
                 .document(SharedPref.getPref(context, MyAsset.KEY_USER_ID).toString()).collection("chatbot_messages").document(currentDate).collection("message")
                 .orderBy("created_at", Query.Direction.ASCENDING)
             withContext(Dispatchers.Main){
@@ -82,7 +111,7 @@ class ChatbotViewModel : ViewModel() {
 
         val id = UUID.randomUUID().toString()
         viewModelScope.launch(Dispatchers.IO) {
-            val database = db.collection("db_chatbot").document("1.0").collection("user_chatbot")
+            val database = db.collection(CHATBOT_DB_NAME).document(BuildConfig.VERSION_NAME).collection("user_chatbot")
                 .document(SharedPref.getPref(context, MyAsset.KEY_USER_ID)!!).collection("chatbot_messages").document(currentDate).collection("message")
                 .document(id).set(
                     ChatbotMessage(
@@ -96,7 +125,7 @@ class ChatbotViewModel : ViewModel() {
             withContext(Dispatchers.Main){
                 database.addOnSuccessListener {
                     finishedListener.onFinish()
-                    Log.d("TAGDATAKU", "sendMessage: message_sent" + message)
+                    Log.d("TAGDATAKU", "sendMessage: message_sent " + message)
                 }.addOnFailureListener {
                     Toasty.error(context, it.message.toString(), Toasty.LENGTH_SHORT).show()
                 }
@@ -108,7 +137,7 @@ class ChatbotViewModel : ViewModel() {
         val name = SharedPref.getPref(context, MyAsset.KEY_NAME)!!
         Log.d("TAGDATAKU", "reqChatbotReply isnotempty: ${messageReqReply.isNotEmpty()}")
         if(messageReqReply.isNotEmpty()){
-            val apiService = ApiConfig.getRetrofitSoulmood()
+            val apiService = RetrofitBuild.instanceService()
             CoroutineScope(Dispatchers.IO).launch {
                 try{
                     val response = apiService.reqChatbotResponse(name, messageReqReply)

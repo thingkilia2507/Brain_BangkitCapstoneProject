@@ -1,6 +1,7 @@
 package com.thing.bangkit.soulmood.viewmodel
 
 import android.content.Context
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -52,7 +53,7 @@ class MoodTrackerViewModel : ViewModel() {
     fun getDashboardMood(context: Context): LiveData<MoodData> {
         val date = DateHelper.getCurrentDateTime()
         val dataMood = MutableLiveData<MoodData>()
-            val db = FirebaseFirestore.getInstance().collection("mood_tracker")
+        val db = FirebaseFirestore.getInstance().collection("mood_tracker")
                 .document("mood_tracker1")
                 .collection(SharedPref.getPref(context, MyAsset.KEY_USER_ID).toString())
                 .document(date.take(4))
@@ -68,6 +69,8 @@ class MoodTrackerViewModel : ViewModel() {
                             doc.getString("updated_at").toString()))
                         }
                     }
+
+                    //if mood documents empty
                     if(value?.documents?.size == 0){
                         dataMood.postValue(MoodData("","",""))
                     }
@@ -89,7 +92,7 @@ class MoodTrackerViewModel : ViewModel() {
                 db.get().addOnSuccessListener {value->
                     if (value != null) {
                         for (i in 0 until value.size()) {
-                            println("mydata" + value.documents[i])
+                            Log.d("mydata", value.documents[i].toString())
                             val doc = value.documents[i]
                             data.add(
                                 MoodData(
