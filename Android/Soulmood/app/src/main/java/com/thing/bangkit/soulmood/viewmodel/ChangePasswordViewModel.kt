@@ -37,7 +37,7 @@ class ChangePasswordViewModel : ViewModel() {
                         }else{
                             resultI.onFailure(context.getString(R.string.changepassword_failed_message))
                         }
-                        Log.d("TAGDATAKU", it.message.toString())
+                            Log.d("TAGDATAKU", it.message.toString())
                     }
                 }
             }
