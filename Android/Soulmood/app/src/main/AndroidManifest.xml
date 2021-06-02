@@ -22,7 +22,8 @@
             android:name=".activity.LoginActivity"
             android:theme="@style/Theme.Soulmood.NoActionBar"
             android:screenOrientation="portrait"/>
-        <activity android:name=".activity.ChatGroupActivity" />
+        <activity android:name=".activity.ChatGroupActivity"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".activity.RegisterActivity"
             android:theme="@style/Theme.Soulmood.NoActionBar"

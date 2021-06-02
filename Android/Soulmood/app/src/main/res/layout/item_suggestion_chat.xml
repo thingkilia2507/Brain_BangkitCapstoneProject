@@ -13,7 +13,7 @@
         android:padding="@dimen/padding_def"
         android:background="@drawable/gradient_background"
         tools:text = "@tools:sample/lorem"
-        android:textColor="@color/black"
+        android:textColor="@color/black_fix"
         android:layout_height="match_parent"/>
 
 </androidx.cardview.widget.CardView>

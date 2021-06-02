@@ -11,6 +11,7 @@
         <item name="colorOnSecondary">@color/black</item>
         <!-- Status bar color. -->
         <item name="android:statusBarColor" tools:targetApi="l">@color/soulmood_primary_color</item>
+        <!-- Customize your theme here. -->
     </style>
     <style name="Theme.Soulmood.NoActionBar">
         <item name="windowActionBar">false</item>

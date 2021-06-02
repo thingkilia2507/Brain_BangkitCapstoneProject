@@ -35,6 +35,17 @@ class ProfileFragment : Fragment(), IProgressResult {
     private val profileViewModel: ProfileViewModel by viewModels()
     private lateinit var sweetAlertDialog: SweetAlertDialog
 
+    companion object {
+        @Volatile
+        private var instance: ProfileFragment? = null
+
+        @JvmStatic
+        fun newInstance(): ProfileFragment =
+            instance ?: synchronized(this) {
+                instance ?: ProfileFragment().apply { instance = this }
+            }
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -56,7 +67,7 @@ class ProfileFragment : Fragment(), IProgressResult {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.apply {
-            llChangeIdentity.setOnClickListener { _ ->
+            llChangeIdentity.setOnClickListener {
                 context?.let {itContext->
                     val dialog = Dialog(itContext)
                     dialog.window?.setBackgroundDrawableResource(android.R.color.transparent)
@@ -75,7 +86,7 @@ class ProfileFragment : Fragment(), IProgressResult {
                     etEmailProfile.text =
                         Editable.Factory.getInstance().newEditable(tvEmailProfile.text.toString())
 
-                    btnSaveEditProfile.setOnClickListener { _: View? ->
+                    btnSaveEditProfile.setOnClickListener {
                         emptyCheckedProfile(etEmailProfile, etNameProfile)
 
                         if (etNameProfile.text.toString().isNotEmpty() && etEmailProfile.text.toString().isNotEmpty()) {
@@ -344,16 +355,6 @@ class ProfileFragment : Fragment(), IProgressResult {
     }
 
 
-    companion object {
-        @Volatile
-        private var instance: ProfileFragment? = null
-
-        @JvmStatic
-        fun newInstance(): ProfileFragment =
-            instance ?: synchronized(this) {
-                instance ?: ProfileFragment().apply { instance = this }
-            }
-    }
 
     override fun onProgress() {
         context?.let {

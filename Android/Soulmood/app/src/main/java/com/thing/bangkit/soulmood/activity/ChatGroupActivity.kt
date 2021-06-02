@@ -47,7 +47,7 @@ class ChatGroupActivity : AppCompatActivity() {
             groupChatViewModel.setDataChat(groupId.toString())
 
             binding?.apply {
-                val adapter = GroupChatViewAdapter()
+                val adapter = GroupChatViewAdapter(this@ChatGroupActivity)
                 val linearLayout = LinearLayoutManager(this@ChatGroupActivity)
                 //auto scroll recyclerview to bottom
                 linearLayout.reverseLayout = true

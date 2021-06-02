@@ -35,7 +35,7 @@
             android:layout_height="@dimen/height_action_bar"
             android:fontFamily="@font/poppins_semibold"
             android:text="@string/soulmoo"
-            android:textColor="@color/black"
+            android:textColor="@color/black_fix"
             android:textSize="@dimen/ts_heading5" />
     </LinearLayout>
 
