@@ -34,12 +34,18 @@ class ChangePasswordViewModel : ViewModel() {
                     }.addOnFailureListener {
                         if(it.message.toString().equals("A network error (such as timeout, interrupted connection or unreachable host) has occurred.",true)){
                             resultI.onFailure(context.getString(R.string.no_internet_connection))
-                        }else{
+                        } else if(it.message.toString().equals("The password is invalid or the user does not have a password.",true)) {
                             resultI.onFailure(context.getString(R.string.changepassword_failed_message))
+                        }else{
+                            resultI.onFailure(it.message.toString())
                         }
                             Log.d("TAGDATAKU", it.message.toString())
                     }
                 }
+            }
+
+            user?.email.isNullOrEmpty().let {
+                resultI.onFailure(context.getString(R.string.changepassword_failed_message))
             }
         }
     }
