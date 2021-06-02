@@ -6,6 +6,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.firebase.ui.firestore.FirestoreRecyclerOptions
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Query
@@ -26,7 +27,8 @@ class GroupChatViewModel : ViewModel() {
     private var auth = FirebaseAuth.getInstance()
     private val db = FirebaseFirestore.getInstance()
     private var groupNameData = MutableLiveData<ArrayList<ChatGroup>>()
-    private var groupChatData = MutableLiveData<ArrayList<ChatMessage>>()
+//    private var groupChatData = MutableLiveData<ArrayList<ChatMessage>>()
+  private var groupChatData = MutableLiveData<FirestoreRecyclerOptions<ChatMessage>>()
 
     fun insertNewGroup(groupName: String, context: Context) {
         val id = UUID.randomUUID().toString()
@@ -136,32 +138,35 @@ class GroupChatViewModel : ViewModel() {
             val database =db.collection("groups_chat").document(group_id).collection("message")
                 .orderBy("created_at", Query.Direction.DESCENDING)
             withContext(Dispatchers.Main){
-                database.addSnapshotListener { value, _ ->
-                    if (value != null) {
-                        var chatData = ArrayList<ChatMessage>()
-                        for (data in value.documents) {
-                            chatData.add(
-                                ChatMessage(
-                                    id = data.getString("id").toString(),
-                                    sender = data.getString("sender").toString(),
-                                    ori_message = data.getString("ori_message").toString(),
-                                    ai_message = data.getString("ai_message").toString(),
-                                    email = data.getString("email").toString(),
-                                    created_at = data.getString("created_at").toString(),
-                                    status = data.getString("status").toString()
-                                )
-                            )
-                        }
-                        groupChatData.postValue(chatData)
-                    }
+                val firebaseRecyclerOptions = FirestoreRecyclerOptions.Builder<ChatMessage>()
+                    .setQuery(database , ChatMessage::class.java).build()
+                groupChatData.postValue(firebaseRecyclerOptions)
+
+                // database.addSnapshotListener { value, _ ->
+//                   if (value != null) {
+//                        var chatData = ArrayList<ChatMessage>()
+//                        for (data in value.documents) {
+//                            chatData.add(
+//                                ChatMessage(
+//                                    id = data.getString("id").toString(),
+//                                    sender = data.getString("sender").toString(),
+//                                    ori_message = data.getString("ori_message").toString(),
+//                                    ai_message = data.getString("ai_message").toString(),
+//                                    email = data.getString("email").toString(),
+//                                    created_at = data.getString("created_at").toString(),
+//                                    status = data.getString("status").toString()
+//                                )
+//                            )
+//                        }
+//                    }
                 }
             }
         }
 
 
-    }
 
-    fun getDataChat(): LiveData<ArrayList<ChatMessage>> {
+
+    fun getDataChat(): LiveData<FirestoreRecyclerOptions<ChatMessage>> {
         return groupChatData
     }
 

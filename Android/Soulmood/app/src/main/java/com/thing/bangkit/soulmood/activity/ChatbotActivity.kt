@@ -10,6 +10,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.thing.bangkit.soulmood.R
 import com.thing.bangkit.soulmood.adapter.ChatbotAdapter
+import com.thing.bangkit.soulmood.adapter.ChatbotFirebaseAdapter
 import com.thing.bangkit.soulmood.adapter.SuggestionChatAdapter
 import com.thing.bangkit.soulmood.databinding.ActivityChatbotBinding
 import com.thing.bangkit.soulmood.databinding.NoInternetLayoutBinding
@@ -26,7 +27,8 @@ class ChatbotActivity : AppCompatActivity(), IClickedItemListener {
     private var noInternetBinding : NoInternetLayoutBinding? = null
     private var checkInternet: NetworkCapabilities? = null
 
-    private val adapter = ChatbotAdapter()
+    //private val adapter = ChatbotAdapter()
+    private var adapter : ChatbotFirebaseAdapter?=null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -49,13 +51,15 @@ class ChatbotActivity : AppCompatActivity(), IClickedItemListener {
         }else{
             binding?.apply {
                 rvChatbot.layoutManager = LinearLayoutManager(this@ChatbotActivity)
-                rvChatbot.adapter = adapter
 
                 viewModel.initChatbot(this@ChatbotActivity)
 
                 viewModel.chat.observe(this@ChatbotActivity, {
-                    adapter.setData(it)
-                    rvChatbot.scrollToPosition(it.size-1)
+                   // adapter.setData(it)
+                   adapter = ChatbotFirebaseAdapter(it)
+                    adapter?.startListening()
+                    rvChatbot.adapter = adapter
+                   // rvChatbot.scrollToPosition(it.size-1)
                 })
 
                 ivBack.setOnClickListener {
@@ -110,5 +114,15 @@ class ChatbotActivity : AppCompatActivity(), IClickedItemListener {
                 binding?.rvSuggestionMessage?.visibility = GONE
             }
         },this@ChatbotActivity,message, SharedPref.getPref(this@ChatbotActivity, MyAsset.KEY_NAME)!!, SharedPref.getPref(this@ChatbotActivity, MyAsset.KEY_EMAIL)!!)
+    }
+
+    override fun onStart() {
+        super.onStart()
+        adapter?.startListening()
+    }
+
+    override fun onStop() {
+        super.onStop()
+        adapter?.stopListening()
     }
 }

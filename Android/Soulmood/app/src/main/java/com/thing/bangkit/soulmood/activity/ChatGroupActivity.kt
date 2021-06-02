@@ -6,14 +6,22 @@ import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.firebase.ui.firestore.FirestoreRecyclerOptions
+import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.Query
 import com.thing.bangkit.soulmood.R
+import com.thing.bangkit.soulmood.adapter.GroupChatFirebaseViewAdapter
 import com.thing.bangkit.soulmood.adapter.GroupChatViewAdapter
 import com.thing.bangkit.soulmood.databinding.ActivityChatGroupBinding
 import com.thing.bangkit.soulmood.databinding.NoInternetLayoutBinding
 import com.thing.bangkit.soulmood.helper.MyAsset
+import com.thing.bangkit.soulmood.model.ChatMessage
 import com.thing.bangkit.soulmood.viewmodel.GroupChatViewModel
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 
 class ChatGroupActivity : AppCompatActivity() {
+    private  var adapterFirebase:GroupChatFirebaseViewAdapter?=null
     private var noInternetBinding : NoInternetLayoutBinding? = null
     private var checkInternet: NetworkCapabilities? = null
     private val groupChatViewModel: GroupChatViewModel by viewModels()
@@ -27,6 +35,8 @@ class ChatGroupActivity : AppCompatActivity() {
         val groupName = intent.getStringExtra(getString(R.string.room_name))
         supportActionBar?.title = groupName
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
+
+
 
         //check internet connection
         checkInternet = MyAsset.checkInternetConnection(this)
@@ -45,14 +55,9 @@ class ChatGroupActivity : AppCompatActivity() {
             }
         }else{
             groupChatViewModel.setDataChat(groupId.toString())
-
             binding?.apply {
-                val adapter = GroupChatViewAdapter()
-                val linearLayout = LinearLayoutManager(this@ChatGroupActivity)
-                //auto scroll recyclerview to bottom
-                linearLayout.reverseLayout = true
-                rvChatGroup.layoutManager = linearLayout
-                rvChatGroup.adapter = adapter
+               // val adapter = GroupChatViewAdapter()
+
 
                 floatingSend.setOnClickListener {
                     val message = etChatGroup.text.toString()
@@ -67,15 +72,19 @@ class ChatGroupActivity : AppCompatActivity() {
                     }
                 }
                 groupChatViewModel.getDataChat().observe(this@ChatGroupActivity, {
-                    if (it.isNotEmpty()) {
-                        adapter.setData(it)
+                    if (it != null) {
+                        val linearLayout = LinearLayoutManager(this@ChatGroupActivity)
+                        //auto scroll recyclerview to bottom
+                        linearLayout.reverseLayout = true
+                        binding?.rvChatGroup?.layoutManager = linearLayout
+                        adapterFirebase = GroupChatFirebaseViewAdapter(it)
+                        adapterFirebase?.startListening()
+                        binding?.rvChatGroup?.adapter = adapterFirebase
+
                     }
                 })
             }
         }
-
-
-
     }
 
     override fun onDestroy() {
@@ -89,4 +98,14 @@ class ChatGroupActivity : AppCompatActivity() {
         return super.onSupportNavigateUp()
     }
 
+    override fun onStart() {
+        super.onStart()
+        adapterFirebase?.startListening()
+
+    }
+
+    override fun onStop() {
+        super.onStop()
+        adapterFirebase?.stopListening()
+    }
 }
