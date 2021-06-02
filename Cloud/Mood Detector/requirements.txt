@@ -1,0 +1,8 @@
+# Function dependencies, for example:
+# package>=version
+
+Flask==1.0.2
+google-cloud-storage==1.38.0
+simpletransformers==0.61.4
+tensorflow==2.5.0
+transformers==4.6.0

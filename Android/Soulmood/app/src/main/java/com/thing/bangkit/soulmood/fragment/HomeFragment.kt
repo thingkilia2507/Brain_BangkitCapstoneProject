@@ -37,8 +37,8 @@ class HomeFragment : Fragment(), IProgressResult {
     private val groupChatViewModel: GroupChatViewModel by viewModels()
     private val moodTrackerViewModel: MoodTrackerViewModel by viewModels()
     private lateinit var binding: FragmentHomeBinding
-
     private val sliderHandler = Handler(Looper.getMainLooper())
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -50,6 +50,7 @@ class HomeFragment : Fragment(), IProgressResult {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        if(activity != null) {
             setDashboard()
             binding.apply {
                 ivChatbot.setOnClickListener {
@@ -158,10 +159,8 @@ class HomeFragment : Fragment(), IProgressResult {
                         }
                     })
                 }
-
             }
-
-
+        }
     }
 
     override fun onPause() {

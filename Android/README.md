@@ -4,10 +4,10 @@
 This AI chatbot feature helps users to be able to tell stories about various things with the AI Chatbot
 ###### for API AI chatbot, we use url:
 ###### POST request
-###### [API AI Chatbot](https://asia-southeast2-soulmood.cloudfunctions.net/chatbot)
+###### [https://asia-southeast2-soulmood.cloudfunctions.net/chatbot](https://asia-southeast2-soulmood.cloudfunctions.net/chatbot)
 ###### example post parameter:
-###### name = "joy"
-###### message = "aku lagi sedig banget hari ini"
+ name = "joy",
+ message = "aku lagi sedig banget hari ini"
 
 ###### sample code that we use :
 * retrofit code is used to post data messages to the Chatbot API
@@ -71,7 +71,7 @@ This feature is a chat forum feature where users can support and motivate each o
 if there are hate speech sent by users. then the application will automatically hide the hate speech.
 ###### for API Detect Hate Speech, we use url:
 ###### POST request
-###### [API Hate Speech](https://soulmood.uc.r.appspot.com)
+###### [https://soulmood.uc.r.appspot.com](https://soulmood.uc.r.appspot.com)
 ###### example post parameter:
 ###### message = "dasar, bermuka dua"
 
@@ -136,7 +136,7 @@ The application can check the current mood of users through the user's message h
 
 ###### for API Mood Detection, we use url:
 ###### POST request
-###### [API Mood Detection](https://asia-southeast2-soulmood.cloudfunctions.net/moodDetector)
+###### [https://asia-southeast2-soulmood.cloudfunctions.net/moodDetector](https://asia-southeast2-soulmood.cloudfunctions.net/moodDetector)
 ###### example post parameter:
 ###### message = "<CB>:Hallo, aku bot soulmood<USER>:aku mau cerita nih, sekarang aku lagi sedih banget<CB>:Kamu boleh cerita kok tentang kesedihanmu"
 ###### Example result mood detection : "sedih"
@@ -235,7 +235,7 @@ The application can check the current mood of users through the user's message h
 for dialy motication word, we use free public api
 link API: 
 GET request
-[API Dialy motivation word](https://api.quotable.io/random)
+[https://api.quotable.io/random](https://api.quotable.io/random)
 
 ## 5. Firebase
 We use Firebase because Firebase has a realtime database feature that we can use to create realtime chat features.

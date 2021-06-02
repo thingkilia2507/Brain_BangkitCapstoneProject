@@ -17,11 +17,11 @@ Together, we can handle it all. Fighting... A new Start Up that will become the 
     <br />
     <a href="">APK Link</a>
     ·
-    <a href="">View Demo</a>
+    <a href="https://s.id/SoulmoodVideo">App Video</a>
     ·
     <a href="">Presentation Video</a>
     ·
-    <a href="">Presentation Slides</a>
+    <a href="https://s.id/BrainTeamPresentationSlide">Presentation Slides</a>
   </p>
 </p>
 
@@ -30,6 +30,6 @@ Mental health, the core of human life, is a rising issue in Indonesia. The numbe
 
 ## [Android README.md](Android/README.md)
 
-## [Cloud Computing README.md]()
+## [Cloud Computing README.md](Cloud/README.md)
 
 ## [Machine Learning README.md](Machine%20Learning/README.md)
