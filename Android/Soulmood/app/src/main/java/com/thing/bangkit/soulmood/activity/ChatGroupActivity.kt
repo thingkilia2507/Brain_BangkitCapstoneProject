@@ -1,6 +1,5 @@
 package com.thing.bangkit.soulmood.activity
 
-import android.content.Intent
 import android.net.NetworkCapabilities
 import android.os.Bundle
 import androidx.activity.viewModels
@@ -9,12 +8,11 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.thing.bangkit.soulmood.R
 import com.thing.bangkit.soulmood.adapter.GroupChatViewAdapter
 import com.thing.bangkit.soulmood.databinding.ActivityChatGroupBinding
-import com.thing.bangkit.soulmood.databinding.NoInternetLayoutBinding
 import com.thing.bangkit.soulmood.helper.MyAsset
 import com.thing.bangkit.soulmood.viewmodel.GroupChatViewModel
+import es.dmoral.toasty.Toasty
 
 class ChatGroupActivity : AppCompatActivity() {
-    private var noInternetBinding : NoInternetLayoutBinding? = null
     private var checkInternet: NetworkCapabilities? = null
     private val groupChatViewModel: GroupChatViewModel by viewModels()
     private var binding: ActivityChatGroupBinding? = null
@@ -31,19 +29,8 @@ class ChatGroupActivity : AppCompatActivity() {
         //check internet connection
         checkInternet = MyAsset.checkInternetConnection(this)
         if(checkInternet == null){
-            noInternetBinding = NoInternetLayoutBinding.inflate(layoutInflater)
-            setContentView(noInternetBinding?.root)
-            noInternetBinding?.btnTryAgain?.setOnClickListener {
-                checkInternet = MyAsset.checkInternetConnection(this)
-                if (checkInternet != null) {
-                    val intent = Intent(this, ChatbotActivity::class.java)
-                    intent.putExtra(getString(R.string.room_id),groupId)
-                    intent.putExtra(getString(R.string.room_name),groupName)
-                    startActivity(intent)
-                    finish()
-                }
-            }
-        }else{
+            Toasty.error(this,  getString(R.string.no_internet_connection), Toasty.LENGTH_SHORT).show()
+        }
             groupChatViewModel.setDataChat(groupId.toString())
 
             binding?.apply {
@@ -72,7 +59,7 @@ class ChatGroupActivity : AppCompatActivity() {
                     }
                 })
             }
-        }
+
 
 
 

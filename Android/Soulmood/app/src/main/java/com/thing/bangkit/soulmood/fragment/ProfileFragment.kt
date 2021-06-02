@@ -8,6 +8,7 @@ import android.os.Handler
 import android.os.Looper
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -357,6 +358,7 @@ class ProfileFragment : Fragment(), IProgressResult {
 
 
     override fun onProgress() {
+        Log.d("TAGDATAKU", "onProgress: ")
         context?.let {
             sweetAlertDialog = MyAsset.sweetAlertDialog(
                 it,
@@ -368,16 +370,17 @@ class ProfileFragment : Fragment(), IProgressResult {
     }
 
     override fun onSuccess(message: String) {
+        Log.d("TAGDATAKU", "onSuccess: ")
         sweetAlertDialog.setTitleText(getString(R.string.success)).setContentText(message)
             .hideConfirmButton()
             .changeAlertType(SweetAlertDialog.SUCCESS_TYPE)
-        Handler(Looper.getMainLooper()).postDelayed({
-            sweetAlertDialog.dismiss()
-        }, 2000)
+        Handler(Looper.getMainLooper()).postDelayed({ sweetAlertDialog.dismiss()}, 2000)
 
     }
 
+
     override fun onFailure(message: String) {
+        Log.d("TAGDATAKU", "onFailure: ")
         sweetAlertDialog.setTitleText(getString(R.string.error))
             .setContentText(message)
             .hideConfirmButton()
