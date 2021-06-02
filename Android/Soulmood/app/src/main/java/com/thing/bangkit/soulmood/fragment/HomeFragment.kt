@@ -38,7 +38,7 @@ class HomeFragment : Fragment(), IProgressResult {
     private val moodTrackerViewModel: MoodTrackerViewModel by viewModels()
     private lateinit var binding: FragmentHomeBinding
     private val sliderHandler = Handler(Looper.getMainLooper())
-    
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -159,7 +159,6 @@ class HomeFragment : Fragment(), IProgressResult {
                         }
                     })
                 }
-
             }
         }
     }
@@ -187,26 +186,30 @@ class HomeFragment : Fragment(), IProgressResult {
 
     private fun setDashboard() {
         moodTrackerViewModel.getDashboardMood(requireActivity()).observe(requireActivity(), {
-            if (it.mood != "") {
-                binding.apply {
-                    when (it.mood_code) {
-                        "1" -> ivDashboardMood.setImageDrawable(requireActivity().getDrawable(R.drawable.angry))
-                        "2" -> ivDashboardMood.setImageDrawable(requireActivity().getDrawable(R.drawable.fear))
-                        "3" -> ivDashboardMood.setImageDrawable(requireActivity().getDrawable(R.drawable.sad))
-                        "4" -> ivDashboardMood.setImageDrawable(requireActivity().getDrawable(R.drawable.happy))
+            if(activity != null) {
+                if (it.mood != "") {
+                    binding.apply {
+
+                        when (it.mood_code) {
+                            "1" -> ivDashboardMood.setImageDrawable(requireActivity().getDrawable(R.drawable.angry))
+                            "2" -> ivDashboardMood.setImageDrawable(requireActivity().getDrawable(R.drawable.fear))
+                            "3" -> ivDashboardMood.setImageDrawable(requireActivity().getDrawable(R.drawable.sad))
+                            "4" -> ivDashboardMood.setImageDrawable(requireActivity().getDrawable(R.drawable.happy))
+                        }
+
+                        tvDashboardMood.text = it.mood
+                        tvDashboardName.text =
+                            "Hi, ${SharedPref.getPref(requireActivity(), MyAsset.KEY_NAME)}"
+                        tvDashboardDate.text =
+                            "Moodmu saat ini (" + DateHelper.dateFormat(it.date.take(10)) + ")"
+                        tvDashboardDate.visibility = View.VISIBLE
                     }
-                    tvDashboardMood.text = it.mood
-                    tvDashboardName.text =
-                        StringBuilder("Hi, ${SharedPref.getPref(requireActivity(), MyAsset.KEY_NAME)}")
-                    tvDashboardDate.text =
-                        StringBuilder("Moodmu saat ini (" + DateHelper.dateFormat(it.date.take(10)) + ")")
-                    tvDashboardDate.visibility = View.VISIBLE
+                } else {
+                    binding.tvDashboardName.text =
+                        "Hi, ${SharedPref.getPref(requireActivity(), MyAsset.KEY_NAME)}"
+                    binding.tvDashboardMood.text = "Semoga Harimu menyenangkan ^-^"
+                    binding.tvDashboardDate.visibility = View.GONE
                 }
-            } else {
-                binding.tvDashboardName.text =
-                    StringBuilder("Hi, ${SharedPref.getPref(requireActivity(), MyAsset.KEY_NAME)}")
-                binding.tvDashboardMood.text = StringBuilder("Semoga Harimu menyenangkan ^-^")
-                binding.tvDashboardDate.visibility = View.GONE
             }
         })
     }
