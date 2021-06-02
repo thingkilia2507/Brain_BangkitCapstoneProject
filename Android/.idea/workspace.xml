@@ -1,0 +1,292 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="NONE" />
+  </component>
+  <component name="BranchesTreeState">
+    <expand>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+    </expand>
+    <select />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="94acaa4a-61fc-4b38-9d46-377941146195" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/../.gitattributes" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ASSET/icon/Angry Face.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ASSET/icon/Sad.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ASSET/icon/angry.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ASSET/icon/asmara.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ASSET/icon/fear.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ASSET/icon/joy.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ASSET/icon/smile.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ASSET/soulmood_chat_kuy.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ASSET/soulmood_circle_black.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ASSET/soulmood_circle_blue.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ASSET/soulmood_circle_white.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ASSET/soulmood_logo.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ASSET/topper_smol.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Soulmood/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Soulmood/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Soulmood/.idea/codeStyles/Project.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Soulmood/.idea/codeStyles/codeStyleConfig.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Soulmood/.idea/compiler.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Soulmood/.idea/gradle.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Soulmood/.idea/jarRepositories.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Soulmood/.idea/misc.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Soulmood/.idea/runConfigurations.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Soulmood/.idea/vcs.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Soulmood/app/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Soulmood/app/build.gradle" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Soulmood/app/google-services.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Soulmood/app/proguard-rules.pro" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Soulmood/app/src/androidTest/java/com/thing/bangkit/soulmood/ExampleInstrumentedTest.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Soulmood/app/src/main/AndroidManifest.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Soulmood/app/src/main/java/com/thing/bangkit/soulmood/activity/ChatGroupActivity.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Soulmood/app/src/main/java/com/thing/bangkit/soulmood/activity/ChatbotActivity.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Soulmood/app/src/main/java/com/thing/bangkit/soulmood/activity/ForgotPasswordActivity.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Soulmood/app/src/main/java/com/thing/bangkit/soulmood/activity/GroupNameActivity.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Soulmood/app/src/main/java/com/thing/bangkit/soulmood/activity/LoginActivity.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Soulmood/app/src/main/java/com/thing/bangkit/soulmood/activity/MainActivity.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Soulmood/app/src/main/java/com/thing/bangkit/soulmood/activity/MoodTrackerActivity.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Soulmood/app/src/main/java/com/thing/bangkit/soulmood/activity/RegisterActivity.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Soulmood/app/src/main/java/com/thing/bangkit/soulmood/activity/splash/SplashActivity.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Soulmood/app/src/main/java/com/thing/bangkit/soulmood/activity/splash/SplashActivity1.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Soulmood/app/src/main/java/com/thing/bangkit/soulmood/activity/splash/SplashDataDummy.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Soulmood/app/src/main/java/com/thing/bangkit/soulmood/adapter/ChatbotAdapter.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Soulmood/app/src/main/java/com/thing/bangkit/soulmood/adapter/GroupChatViewAdapter.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Soulmood/app/src/main/java/com/thing/bangkit/soulmood/adapter/GroupNameViewAdapter.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Soulmood/app/src/main/java/com/thing/bangkit/soulmood/adapter/SliderCSFAdapter.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Soulmood/app/src/main/java/com/thing/bangkit/soulmood/adapter/SplashViewAdapter.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Soulmood/app/src/main/java/com/thing/bangkit/soulmood/adapter/SuggestionChatAdapter.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Soulmood/app/src/main/java/com/thing/bangkit/soulmood/alarmreceiver/AlarmReceiver.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Soulmood/app/src/main/java/com/thing/bangkit/soulmood/apiservice/ApiService.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Soulmood/app/src/main/java/com/thing/bangkit/soulmood/fragment/HomeFragment.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Soulmood/app/src/main/java/com/thing/bangkit/soulmood/fragment/ProfileFragment.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Soulmood/app/src/main/java/com/thing/bangkit/soulmood/helper/DateHelper.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Soulmood/app/src/main/java/com/thing/bangkit/soulmood/helper/IClickedItemListener.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Soulmood/app/src/main/java/com/thing/bangkit/soulmood/helper/IFinishedListener.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Soulmood/app/src/main/java/com/thing/bangkit/soulmood/helper/IProgressResult.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Soulmood/app/src/main/java/com/thing/bangkit/soulmood/helper/MyAsset.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Soulmood/app/src/main/java/com/thing/bangkit/soulmood/helper/RetrofitBuild.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Soulmood/app/src/main/java/com/thing/bangkit/soulmood/helper/SharedPref.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Soulmood/app/src/main/java/com/thing/bangkit/soulmood/model/BadWordResponse.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Soulmood/app/src/main/java/com/thing/bangkit/soulmood/model/ChatGroupData.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Soulmood/app/src/main/java/com/thing/bangkit/soulmood/model/ChatbotMessage.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Soulmood/app/src/main/java/com/thing/bangkit/soulmood/model/ChatbotResponse.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Soulmood/app/src/main/java/com/thing/bangkit/soulmood/model/ComingSoonFeatureSliderItem.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Soulmood/app/src/main/java/com/thing/bangkit/soulmood/model/MoodData.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Soulmood/app/src/main/java/com/thing/bangkit/soulmood/model/MoodDetectorResponse.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Soulmood/app/src/main/java/com/thing/bangkit/soulmood/model/QuoteData.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Soulmood/app/src/main/java/com/thing/bangkit/soulmood/model/SplashData.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Soulmood/app/src/main/java/com/thing/bangkit/soulmood/model/UserData.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Soulmood/app/src/main/java/com/thing/bangkit/soulmood/viewmodel/ChangePasswordViewModel.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Soulmood/app/src/main/java/com/thing/bangkit/soulmood/viewmodel/ChatbotViewModel.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Soulmood/app/src/main/java/com/thing/bangkit/soulmood/viewmodel/GroupChatViewModel.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Soulmood/app/src/main/java/com/thing/bangkit/soulmood/viewmodel/LoginViewModel.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Soulmood/app/src/main/java/com/thing/bangkit/soulmood/viewmodel/MoodTrackerViewModel.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Soulmood/app/src/main/java/com/thing/bangkit/soulmood/viewmodel/ProfileViewModel.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Soulmood/app/src/main/java/com/thing/bangkit/soulmood/viewmodel/RegisterViewModel.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Soulmood/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Soulmood/app/src/main/res/drawable/angry.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Soulmood/app/src/main/res/drawable/asmara.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Soulmood/app/src/main/res/drawable/bg_vector_group_name.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Soulmood/app/src/main/res/drawable/circle_indicator.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Soulmood/app/src/main/res/drawable/custom_edittext.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Soulmood/app/src/main/res/drawable/dashboard_bg.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Soulmood/app/src/main/res/drawable/dialog_shape.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Soulmood/app/src/main/res/drawable/fear.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Soulmood/app/src/main/res/drawable/forgot_pass_icon.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Soulmood/app/src/main/res/drawable/good.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Soulmood/app/src/main/res/drawable/gradient_background.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Soulmood/app/src/main/res/drawable/gradient_background_chat.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Soulmood/app/src/main/res/drawable/gradient_background_dark.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Soulmood/app/src/main/res/drawable/half_circle_blue.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Soulmood/app/src/main/res/drawable/happy.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Soulmood/app/src/main/res/drawable/home_icon.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Soulmood/app/src/main/res/drawable/ic_baseline_add_24.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Soulmood/app/src/main/res/drawable/ic_baseline_arrow_back_24.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Soulmood/app/src/main/res/drawable/ic_baseline_double_arrow_24.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Soulmood/app/src/main/res/drawable/ic_baseline_email_24.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Soulmood/app/src/main/res/drawable/ic_baseline_filter_list_24.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Soulmood/app/src/main/res/drawable/ic_baseline_lock_24.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Soulmood/app/src/main/res/drawable/ic_baseline_person_24.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Soulmood/app/src/main/res/drawable/ic_baseline_search_24.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Soulmood/app/src/main/res/drawable/ic_baseline_send_24.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Soulmood/app/src/main/res/drawable/ic_baseline_visibility_24.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Soulmood/app/src/main/res/drawable/ic_baseline_visibility_off_24.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Soulmood/app/src/main/res/drawable/ic_edit.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Soulmood/app/src/main/res/drawable/ic_launcher_background.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Soulmood/app/src/main/res/drawable/ic_lock.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Soulmood/app/src/main/res/drawable/ic_logout.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Soulmood/app/src/main/res/drawable/ic_profil.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Soulmood/app/src/main/res/drawable/love.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Soulmood/app/src/main/res/drawable/psikolog_konsultasi_soulmood.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Soulmood/app/src/main/res/drawable/receiver.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Soulmood/app/src/main/res/drawable/register_login_bg.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Soulmood/app/src/main/res/drawable/ripple_btn_primary.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Soulmood/app/src/main/res/drawable/ripple_btn_secondary.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Soulmood/app/src/main/res/drawable/sad.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Soulmood/app/src/main/res/drawable/sender.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Soulmood/app/src/main/res/drawable/soulcare.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Soulmood/app/src/main/res/drawable/soulmood_chat.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Soulmood/app/src/main/res/drawable/soulmood_chat_kuy.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Soulmood/app/src/main/res/drawable/soulmood_circle_black.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Soulmood/app/src/main/res/drawable/soulmood_circle_blue.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Soulmood/app/src/main/res/drawable/soulmood_circle_white.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Soulmood/app/src/main/res/drawable/soulmood_logo.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Soulmood/app/src/main/res/drawable/splash_1.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Soulmood/app/src/main/res/drawable/splash_2.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Soulmood/app/src/main/res/drawable/splash_3.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Soulmood/app/src/main/res/drawable/splash_bg.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Soulmood/app/src/main/res/drawable/splash_bg1.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Soulmood/app/src/main/res/drawable/topper_smol.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Soulmood/app/src/main/res/font/poppins_semibold.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Soulmood/app/src/main/res/font/righteous.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Soulmood/app/src/main/res/font/roboto.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Soulmood/app/src/main/res/font/roboto_thin.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Soulmood/app/src/main/res/font/yanone_kaffeesatz.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Soulmood/app/src/main/res/layout/activity_chat_group.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Soulmood/app/src/main/res/layout/activity_chatbot.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Soulmood/app/src/main/res/layout/activity_forgot_password.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Soulmood/app/src/main/res/layout/activity_group_name.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Soulmood/app/src/main/res/layout/activity_login.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Soulmood/app/src/main/res/layout/activity_main.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Soulmood/app/src/main/res/layout/activity_mood_tracker.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Soulmood/app/src/main/res/layout/activity_register.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Soulmood/app/src/main/res/layout/activity_splash.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Soulmood/app/src/main/res/layout/activity_splash1.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Soulmood/app/src/main/res/layout/add_new_group_dialog.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Soulmood/app/src/main/res/layout/change_password_dialog.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Soulmood/app/src/main/res/layout/edit_info_profile_dialog.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Soulmood/app/src/main/res/layout/fragment_home.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Soulmood/app/src/main/res/layout/fragment_profile.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Soulmood/app/src/main/res/layout/item_chat.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Soulmood/app/src/main/res/layout/item_chatbot.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Soulmood/app/src/main/res/layout/item_coming_soon_feature.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Soulmood/app/src/main/res/layout/item_group_name.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Soulmood/app/src/main/res/layout/item_splash.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Soulmood/app/src/main/res/layout/item_suggestion_chat.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Soulmood/app/src/main/res/layout/validation_with_password_dialog.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Soulmood/app/src/main/res/menu/menu.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Soulmood/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Soulmood/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Soulmood/app/src/main/res/mipmap-hdpi/ic_launcher.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Soulmood/app/src/main/res/mipmap-hdpi/ic_launcher_round.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Soulmood/app/src/main/res/mipmap-mdpi/ic_launcher.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Soulmood/app/src/main/res/mipmap-mdpi/ic_launcher_round.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Soulmood/app/src/main/res/mipmap-xhdpi/ic_launcher.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Soulmood/app/src/main/res/mipmap-xhdpi/ic_launcher_round.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Soulmood/app/src/main/res/mipmap-xxhdpi/ic_launcher.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Soulmood/app/src/main/res/mipmap-xxhdpi/ic_launcher_round.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Soulmood/app/src/main/res/mipmap-xxxhdpi/ic_launcher.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Soulmood/app/src/main/res/mipmap-xxxhdpi/ic_launcher_round.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Soulmood/app/src/main/res/raw/no_data.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Soulmood/app/src/main/res/values-night/themes.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Soulmood/app/src/main/res/values/colors.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Soulmood/app/src/main/res/values/dimens.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Soulmood/app/src/main/res/values/font_certs.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Soulmood/app/src/main/res/values/preloaded_fonts.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Soulmood/app/src/main/res/values/strings.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Soulmood/app/src/main/res/values/themes.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Soulmood/app/src/test/java/com/thing/bangkit/soulmood/ExampleUnitTest.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Soulmood/build.gradle" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Soulmood/gradle.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Soulmood/gradle/wrapper/gradle-wrapper.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Soulmood/gradle/wrapper/gradle-wrapper.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Soulmood/gradlew" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Soulmood/gradlew.bat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Soulmood/settings.gradle" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Machine Learning/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Machine Learning/datasets/hate_speech/hs-abusive dataset_okkyIbrohim.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Machine Learning/datasets/hate_speech/hs-abusive_preprocessed.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Machine Learning/datasets/hate_speech/hs-abusive_preprocessed_all-step.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Machine Learning/datasets/hate_speech/test.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Machine Learning/datasets/hate_speech/test_emo_v2.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Machine Learning/datasets/hate_speech/train.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Machine Learning/datasets/hate_speech/train_emo_v2.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Machine Learning/datasets/hate_speech/val.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Machine Learning/datasets/hate_speech/val_emo_v2.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Machine Learning/notebooks/Hate Speech Dataset Preprocessing.ipynb" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Machine Learning/notebooks/Hate Speech Dataset Splitting TrainValTest Set.ipynb" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Machine Learning/notebooks/Hate Speech Detection - ALBERT.ipynb" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Machine Learning/notebooks/Hate Speech Detection - ALBERT_v3.ipynb" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Machine Learning/notebooks/Hate Speech Detection - BERT.ipynb" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Machine Learning/notebooks/Hate Speech Detection - FINAL (ALBERT_v3).ipynb" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Machine Learning/results/hate_speech/albert/fine-tuning/config.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Machine Learning/results/hate_speech/albert/fine-tuning/test_preds.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Machine Learning/results/hate_speech/albert/fine-tuning/tf_model.h5" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Machine Learning/results/hate_speech/albert/ori/test_preds.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Machine Learning/results/hate_speech/albert/transfer-learning/config.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Machine Learning/results/hate_speech/albert/transfer-learning/test_preds.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Machine Learning/results/hate_speech/albert/transfer-learning/tf_model.h5" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Machine Learning/results/hate_speech/bert/fine-tuning/config.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Machine Learning/results/hate_speech/bert/fine-tuning/test_preds.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Machine Learning/results/hate_speech/bert/fine-tuning/tf_model.h5" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Machine Learning/results/hate_speech/bert/ori/test_preds.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Machine Learning/results/hate_speech/bert/transfer-learning/config.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Machine Learning/results/hate_speech/bert/transfer-learning/test_preds.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Machine Learning/results/hate_speech/bert/transfer-learning/tf_model.h5" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../README.md" beforeDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="ProjectId" id="1tLBcnYeJnSIYKSBGORnr88IZiD" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="android.sdk.path" value="$USER_HOME$/AppData/Local/Android/Sdk" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/Soulmood" />
+    <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="94acaa4a-61fc-4b38-9d46-377941146195" name="Default Changelist" comment="" />
+      <created>1622538571822</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1622538571822</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="463" y="119" key="FileChooserDialogImpl" timestamp="1622538629781">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="463" y="119" key="FileChooserDialogImpl/0.0.1366.728@0.0.1366.728" timestamp="1622538629781" />
+  </component>
+</project>

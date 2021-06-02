@@ -54,7 +54,10 @@ class RegisterViewModel : ViewModel() {
                             ).show()
                         } else if(message.equals("The email address is badly formatted.",true)){
                             Toasty.error(context,  context.getString(R.string.wrong_email_input_format), Toasty.LENGTH_SHORT).show()
-                        }else {
+                        }else if(it.message.toString().equals("A network error (such as timeout, interrupted connection or unreachable host) has occurred.",true)){
+                            Toasty.error(context,  context.getString(R.string.no_internet_connection), Toasty.LENGTH_SHORT).show()
+                        }
+                        else {
                             Toasty.error(context, message, Toasty.LENGTH_SHORT).show()
                         }
                     }

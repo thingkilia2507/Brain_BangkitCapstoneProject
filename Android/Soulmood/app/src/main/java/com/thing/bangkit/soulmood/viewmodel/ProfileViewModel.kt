@@ -11,6 +11,7 @@ import com.thing.bangkit.soulmood.R
 import com.thing.bangkit.soulmood.helper.IProgressResult
 import com.thing.bangkit.soulmood.helper.MyAsset
 import com.thing.bangkit.soulmood.helper.SharedPref
+import es.dmoral.toasty.Toasty
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
@@ -47,7 +48,12 @@ class ProfileViewModel : ViewModel() {
                                 }
                             }
                         }.addOnFailureListener {
-                            result.onFailure(context.getString(R.string.changepassword_failed_message))
+
+                            if(it.message.toString().equals("A network error (such as timeout, interrupted connection or unreachable host) has occurred.",true)){
+                                result.onFailure(context.getString(R.string.no_internet_connection))
+                        }else{
+                                result.onFailure(context.getString(R.string.changepassword_failed_message))
+                            }
                             Log.d("TAGDATAKU", it.message.toString())
                         }
                     }
