@@ -54,7 +54,10 @@ class LoginViewModel : ViewModel() {
                         Toasty.error(context,  context.getString(R.string.wrong_email_login), Toasty.LENGTH_SHORT).show()
                     }else if(it.message.toString().equals("The email address is badly formatted.",true)){
                         Toasty.error(context,  context.getString(R.string.wrong_email_input_format), Toasty.LENGTH_SHORT).show()
-                    }else {
+                    }else if(it.message.toString().equals("A network error (such as timeout, interrupted connection or unreachable host) has occurred.",true)){
+                        Toasty.error(context,  context.getString(R.string.no_internet_connection), Toasty.LENGTH_SHORT).show()
+                    }
+                    else {
                         Toasty.error(context, it.message.toString(), Toasty.LENGTH_SHORT).show()
                     }
                 }
@@ -75,7 +78,10 @@ class LoginViewModel : ViewModel() {
                         Toasty.error(context,  context.getString(R.string.wrong_email_login), Toasty.LENGTH_SHORT).show()
                     }else if(it.message.toString().equals("The email address is badly formatted.",true)){
                         Toasty.error(context,  context.getString(R.string.wrong_email_input_format), Toasty.LENGTH_SHORT).show()
-                    }else {
+                    }else if(it.message.toString().equals("A network error (such as timeout, interrupted connection or unreachable host) has occurred.",true)){
+                        Toasty.error(context,  context.getString(R.string.no_internet_connection), Toasty.LENGTH_SHORT).show()
+                    }
+                    else {
                         Toasty.error(context, it.message.toString(), Toasty.LENGTH_SHORT).show()
                     }
                 }

@@ -1,6 +1,8 @@
 package com.thing.bangkit.soulmood.helper
 
 import android.content.Context
+import android.net.ConnectivityManager
+import android.net.NetworkCapabilities
 import cn.pedant.SweetAlert.SweetAlertDialog
 import com.thing.bangkit.soulmood.R
 
@@ -83,4 +85,14 @@ object MyAsset {
             .setTitleText(titleConfirmation) //"Are you sure?"
             .setContentText(messageConfirmation) //"Won't be able to recover this file!"
     }
+
+    //check internet connection
+    fun checkInternetConnection(context: Context): NetworkCapabilities? {
+        val connectivityManager: ConnectivityManager =
+            context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+        val nw = connectivityManager.activeNetwork
+        return connectivityManager.getNetworkCapabilities(nw)
+    }
+
 }
+
