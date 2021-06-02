@@ -16,22 +16,30 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class ProfileViewModel : ViewModel() {
-
     private val db = FirebaseFirestore.getInstance()
     private val auth = FirebaseAuth.getInstance()
 
-    fun onChangeProfileInformation(context: Context, name: String, email: String, password: String, result: IProgressResult) {
+    fun onChangeProfileInformation(
+        context: Context,
+        name: String,
+        email: String,
+        password: String,
+        result: IProgressResult
+    ) {
         viewModelScope.launch(Dispatchers.IO) {
             val user = auth.currentUser
-            user?.let{it_user->
+            user?.let { it_user ->
                 it_user.email?.let {
                     val credential = EmailAuthProvider.getCredential(it, password)
                     user.reauthenticate(credential).addOnCompleteListener { task ->
                         task.addOnSuccessListener {
-
                             it_user.updateEmail(email).addOnCompleteListener {
                                 it.addOnSuccessListener {
-                                    SharedPref.setPref(context, MyAsset.KEY_EMAIL, email.toLowerCase())
+                                    SharedPref.setPref(
+                                        context,
+                                        MyAsset.KEY_EMAIL,
+                                        email.toLowerCase()
+                                    )
                                     SharedPref.getPref(context, MyAsset.KEY_USER_ID)?.let { id ->
                                         db.collection("users").document(id).update(
                                             "email", it_user.email, "name", name
@@ -48,10 +56,12 @@ class ProfileViewModel : ViewModel() {
                                 }
                             }
                         }.addOnFailureListener {
-
-                            if(it.message.toString().equals("A network error (such as timeout, interrupted connection or unreachable host) has occurred.",true)){
+                            if (it.message.toString().equals(
+                                    "A network error (such as timeout, interrupted connection or unreachable host) has occurred.", true
+                                )
+                            ) {
                                 result.onFailure(context.getString(R.string.no_internet_connection))
-                        }else{
+                            } else {
                                 result.onFailure(context.getString(R.string.changepassword_failed_message))
                             }
                             Log.d("TAGDATAKU", it.message.toString())
