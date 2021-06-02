@@ -11,11 +11,12 @@ import com.thing.bangkit.soulmood.R
 import com.thing.bangkit.soulmood.helper.IProgressResult
 import com.thing.bangkit.soulmood.helper.MyAsset
 import com.thing.bangkit.soulmood.helper.SharedPref
-import es.dmoral.toasty.Toasty
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import java.util.*
 
 class ProfileViewModel : ViewModel() {
+
     private val db = FirebaseFirestore.getInstance()
     private val auth = FirebaseAuth.getInstance()
 
@@ -34,37 +35,46 @@ class ProfileViewModel : ViewModel() {
                     user.reauthenticate(credential).addOnCompleteListener { task ->
                         task.addOnSuccessListener {
                             it_user.updateEmail(email).addOnCompleteListener {
-                                it.addOnSuccessListener {
-                                    SharedPref.setPref(
-                                        context,
-                                        MyAsset.KEY_EMAIL,
-                                        email.toLowerCase()
-                                    )
-                                    SharedPref.getPref(context, MyAsset.KEY_USER_ID)?.let { id ->
-                                        db.collection("users").document(id).update(
-                                            "email", it_user.email, "name", name
-                                        ).addOnSuccessListener {
-                                            SharedPref.setPref(context, MyAsset.KEY_NAME, name)
-                                            result.onSuccess(context.getString(R.string.changeProfileSuccess))
 
-                                        }.addOnFailureListener {
-                                            result.onFailure(it.message.toString())
-                                        }
+                                it_user.updateEmail(email).addOnCompleteListener { it ->
+                                    it.addOnSuccessListener {
+                                        SharedPref.setPref(
+                                            context,
+                                            MyAsset.KEY_EMAIL,
+                                            email.toLowerCase(Locale.ROOT)
+                                        )
+                                        SharedPref.getPref(context, MyAsset.KEY_USER_ID)
+                                            ?.let { id ->
+                                                db.collection("users").document(id).update(
+                                                    "email", it_user.email, "name", name
+                                                ).addOnSuccessListener {
+                                                    SharedPref.setPref(
+                                                        context,
+                                                        MyAsset.KEY_NAME,
+                                                        name
+                                                    )
+                                                    result.onSuccess(context.getString(R.string.changeProfileSuccess))
+
+                                                }.addOnFailureListener {
+                                                    result.onFailure(it.message.toString())
+                                                }
+                                            }
+                                    }.addOnFailureListener {
+                                        result.onFailure(it.message.toString())
                                     }
-                                }.addOnFailureListener {
-                                    result.onFailure(it.message.toString())
                                 }
+                            }.addOnFailureListener { it ->
+                                if (it.message.toString().equals(
+                                        "A network error (such as timeout, interrupted connection or unreachable host) has occurred.",
+                                        true
+                                    )
+                                ) {
+                                    result.onFailure(context.getString(R.string.no_internet_connection))
+                                } else {
+                                    result.onFailure(context.getString(R.string.changepassword_failed_message))
+                                }
+                                Log.d("TAGDATAKU", it.message.toString())
                             }
-                        }.addOnFailureListener {
-                            if (it.message.toString().equals(
-                                    "A network error (such as timeout, interrupted connection or unreachable host) has occurred.", true
-                                )
-                            ) {
-                                result.onFailure(context.getString(R.string.no_internet_connection))
-                            } else {
-                                result.onFailure(context.getString(R.string.changepassword_failed_message))
-                            }
-                            Log.d("TAGDATAKU", it.message.toString())
                         }
                     }
                 }

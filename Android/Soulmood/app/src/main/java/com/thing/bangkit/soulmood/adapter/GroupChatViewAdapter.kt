@@ -1,16 +1,18 @@
 package com.thing.bangkit.soulmood.adapter
 
+import android.content.Context
 import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.thing.bangkit.soulmood.R
 import com.thing.bangkit.soulmood.databinding.ItemChatBinding
 import com.thing.bangkit.soulmood.helper.MyAsset
 import com.thing.bangkit.soulmood.helper.SharedPref
 import com.thing.bangkit.soulmood.model.ChatMessage
 
-class GroupChatViewAdapter : RecyclerView.Adapter<GroupChatViewAdapter.ViewHolder>() {
+class GroupChatViewAdapter(val context: Context) : RecyclerView.Adapter<GroupChatViewAdapter.ViewHolder>() {
     private val data = ArrayList<ChatMessage>()
 
     class ViewHolder(val binding: ItemChatBinding) : RecyclerView.ViewHolder(binding.root)
@@ -48,8 +50,8 @@ class GroupChatViewAdapter : RecyclerView.Adapter<GroupChatViewAdapter.ViewHolde
                 tvMessageSender.setTextColor(Color.RED)
                 tvMessageReceiver.setTextColor(Color.RED)
             }else{
-                tvMessageSender.setTextColor(Color.BLACK)
-                tvMessageReceiver.setTextColor(Color.BLACK)
+                tvMessageSender.setTextColor(context.resources.getColor(R.color.black, context.theme))
+                tvMessageReceiver.setTextColor(context.resources.getColor(R.color.black, context.theme))
             }
 
         }

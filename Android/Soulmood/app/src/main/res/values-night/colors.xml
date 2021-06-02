@@ -5,10 +5,10 @@
     <color name="purple_700">#FF3700B3</color>
     <color name="teal_200">#FF03DAC5</color>
     <color name="teal_700">#FF018786</color>
-    <color name="black">#FF000000</color>
+    <color name="black">#FFFFFFFF</color>
     <color name="black_fix">#FF000000</color>
     <color name="grey">#42000000</color>
-    <color name="white">#FFFFFFFF</color>
+    <color name="white">#FF000000</color>
     <color name="white_fix">#FFFFFFFF</color>
 
     <color name="red_A200">#FF5252</color>
@@ -19,13 +19,13 @@
     <color name="light_green">#69F0AE</color>
     <color name="light_blue_A200">#40C4FF</color>
 
-    <color name="wheat">#F5DEB3</color>
+    <color name="wheat">#42000000</color>
     <color name="soulmood_primary_color_light">#C2DCFF</color>
     <color name="soulmood_primary_color">#88B0E6</color>
     <color name="soulmood_primary_color_darkmiddle">#0C499C</color>
     <color name="soulmood_primary_color_dark">#052047</color>
 
     <color name="background_roomchat">#88B0E6</color>
-    <color name="ts_color_def">#FF000000</color>
+    <color name="ts_color_def">#FFFFFFFF</color>
 
 </resources>

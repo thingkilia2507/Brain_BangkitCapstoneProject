@@ -127,16 +127,18 @@ class MoodTrackerActivity : AppCompatActivity(){
             lineChart.invalidate()
             lineChart.description = desc
 
-            var lineData = LineData(lineDataSet)
+            val lineData = LineData(lineDataSet)
 
 
             lineChart.data = lineData
             val xAxis: XAxis = lineChart.xAxis
             xAxis.valueFormatter = IndexAxisValueFormatter(dateList)
+            xAxis.textColor = getColor(R.color.black)
             val yAxis : YAxis = lineChart.getAxis(YAxis.AxisDependency.LEFT)
             yAxis.granularity = 1f
             yAxis.axisMinimum = 0f
             yAxis.axisMaximum = 4.5f
+            yAxis.textColor = getColor(R.color.black)
             yAxis.valueFormatter = IndexAxisValueFormatter(arrayOf("","Marah", "Takut", "Sedih", "Bahagia"))
 
 
@@ -172,10 +174,10 @@ class MoodTrackerActivity : AppCompatActivity(){
         val month = calendar.get(Calendar.MONTH)
         val dialogFragment = MonthYearPickerDialogFragment.getInstance(month, year, title)
         dialogFragment.show(supportFragmentManager, null)
-        dialogFragment.setOnDateSetListener { year, monthOfYear ->
-            moodTrackerViewModel.setMoodData("$year-0" + (monthOfYear + 1), this)
+        dialogFragment.setOnDateSetListener { years, monthOfYear ->
+            moodTrackerViewModel.setMoodData("$years-0" + (monthOfYear + 1), this)
             binding?.apply{
-                tvMoodDate.text = DateHelper.convertDateToMonthYearFormat("$year-0" + (monthOfYear + 1))
+                tvMoodDate.text = DateHelper.convertDateToMonthYearFormat("$years-0" + (monthOfYear + 1))
             }
         }
     }
