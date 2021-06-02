@@ -17,11 +17,11 @@ Together, we can handle it all. Fighting... A new Start Up that will become the 
     <br />
     <a href="">APK Link</a>
     ·
-    <a href="">View Demo</a>
+    <a href="https://s.id/SoulmoodVideo">App Video</a>
     ·
     <a href="">Presentation Video</a>
     ·
-    <a href="">Presentation Slides</a>
+    <a href="https://s.id/BrainTeamPresentationSlide">Presentation Slides</a>
   </p>
 </p>
 
