@@ -8,6 +8,7 @@ import android.view.View.GONE
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.thing.bangkit.soulmood.R
 import com.thing.bangkit.soulmood.adapter.ChatbotAdapter
 import com.thing.bangkit.soulmood.adapter.ChatbotFirebaseAdapter
@@ -52,7 +53,13 @@ class ChatbotActivity : AppCompatActivity(), IClickedItemListener {
                 adapter = ChatbotFirebaseAdapter(it)
                 adapter?.startListening()
                 rvChatbot.adapter = adapter
-                // rvChatbot.scrollToPosition(it.size-1)
+                //   rvChatbot.scrollToPosition(it.size-1)
+                adapter?.registerAdapterDataObserver(object: RecyclerView.AdapterDataObserver() {
+                    override fun onItemRangeInserted(positionStart: Int, itemCount: Int) {
+                        super.onItemRangeInserted(positionStart, itemCount)
+                        rvChatbot.scrollToPosition(positionStart)
+                    }
+                })
             })
 
             ivBack.setOnClickListener {
