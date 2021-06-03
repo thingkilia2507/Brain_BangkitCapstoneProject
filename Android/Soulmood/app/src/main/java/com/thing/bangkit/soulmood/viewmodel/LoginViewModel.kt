@@ -15,20 +15,19 @@ import es.dmoral.toasty.Toasty
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import java.util.*
 
 class LoginViewModel : ViewModel() {
-    private var auth = FirebaseAuth.getInstance()
-    private val db = FirebaseFirestore.getInstance()
     private var dataUser = MutableLiveData<UserData>()
     private  var status =MutableLiveData<Boolean>()
 
 
     fun login(email: String, password: String,context: Context, progressResult: IProgressResult):LiveData<UserData> {
         viewModelScope.launch(Dispatchers.IO) {
-            val firebaseAuth = auth.signInWithEmailAndPassword(email, password)
+            val firebaseAuth = FirebaseAuth.getInstance().signInWithEmailAndPassword(email, password)
             withContext(Dispatchers.Main){
                 firebaseAuth.addOnSuccessListener {
-                    db.collection("users").whereEqualTo("email",email.toLowerCase())
+                    FirebaseFirestore.getInstance().collection("users").whereEqualTo("email", email.toLowerCase(Locale.ROOT))
                         .addSnapshotListener { value, _ ->
                             val data = value?.documents
                             if(data?.isNotEmpty() == true){
@@ -48,14 +47,22 @@ class LoginViewModel : ViewModel() {
                 }.addOnFailureListener {
                     progressResult.onFailure("")
                     Log.d("TAGDATAKU", "login: "+it.message.toString())
-                    if(it.message.toString().equals("The password is invalid or the user does not have a password.",true)){
-                        Toasty.error(context, context.getString(R.string.wrong_password), Toasty.LENGTH_SHORT).show()
-                    }else if(it.message.toString().equals("There is no user record corresponding to this identifier. The user may have been deleted.",true)){
-                        Toasty.error(context,  context.getString(R.string.wrong_email_login), Toasty.LENGTH_SHORT).show()
-                    }else if(it.message.toString().equals("The email address is badly formatted.",true)){
-                        Toasty.error(context,  context.getString(R.string.wrong_email_input_format), Toasty.LENGTH_SHORT).show()
-                    }else {
-                        Toasty.error(context, it.message.toString(), Toasty.LENGTH_SHORT).show()
+                    when {
+                        it.message.toString().equals("The password is invalid or the user does not have a password.",true) -> {
+                            Toasty.error(context, context.getString(R.string.wrong_password), Toasty.LENGTH_SHORT).show()
+                        }
+                        it.message.toString().equals("There is no user record corresponding to this identifier. The user may have been deleted.",true) -> {
+                            Toasty.error(context,  context.getString(R.string.wrong_email_login), Toasty.LENGTH_SHORT).show()
+                        }
+                        it.message.toString().equals("The email address is badly formatted.",true) -> {
+                            Toasty.error(context,  context.getString(R.string.wrong_email_input_format), Toasty.LENGTH_SHORT).show()
+                        }
+                        it.message.toString().equals("A network error (such as timeout, interrupted connection or unreachable host) has occurred.",true) -> {
+                            Toasty.error(context,  context.getString(R.string.no_internet_connection), Toasty.LENGTH_SHORT).show()
+                        }
+                        else -> {
+                            Toasty.error(context, it.message.toString(), Toasty.LENGTH_SHORT).show()
+                        }
                     }
                 }
             }
@@ -65,18 +72,25 @@ class LoginViewModel : ViewModel() {
 
     fun forgotPassword(email: String, context: Context):LiveData<Boolean>{
         viewModelScope.launch(Dispatchers.IO) {
-            val firebaseAuth = auth.sendPasswordResetEmail(email)
+            val firebaseAuth = FirebaseAuth.getInstance().sendPasswordResetEmail(email)
             withContext(Dispatchers.Main){
                 firebaseAuth.addOnSuccessListener {
                     status.postValue(true)
                 }.addOnFailureListener {
                     status.postValue(false)
-                    if(it.message.toString().equals("There is no user record corresponding to this identifier. The user may have been deleted.",true)){
-                        Toasty.error(context,  context.getString(R.string.wrong_email_login), Toasty.LENGTH_SHORT).show()
-                    }else if(it.message.toString().equals("The email address is badly formatted.",true)){
-                        Toasty.error(context,  context.getString(R.string.wrong_email_input_format), Toasty.LENGTH_SHORT).show()
-                    }else {
-                        Toasty.error(context, it.message.toString(), Toasty.LENGTH_SHORT).show()
+                    when {
+                        it.message.toString().equals("There is no user record corresponding to this identifier. The user may have been deleted.",true) -> {
+                            Toasty.error(context,  context.getString(R.string.wrong_email_login), Toasty.LENGTH_SHORT).show()
+                        }
+                        it.message.toString().equals("The email address is badly formatted.",true) -> {
+                            Toasty.error(context,  context.getString(R.string.wrong_email_input_format), Toasty.LENGTH_SHORT).show()
+                        }
+                        it.message.toString().equals("A network error (such as timeout, interrupted connection or unreachable host) has occurred.",true) -> {
+                            Toasty.error(context,  context.getString(R.string.no_internet_connection), Toasty.LENGTH_SHORT).show()
+                        }
+                        else -> {
+                            Toasty.error(context, it.message.toString(), Toasty.LENGTH_SHORT).show()
+                        }
                     }
                 }
             }

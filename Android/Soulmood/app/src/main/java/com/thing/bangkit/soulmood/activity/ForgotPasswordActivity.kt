@@ -5,6 +5,7 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import com.thing.bangkit.soulmood.R
 import com.thing.bangkit.soulmood.databinding.ActivityForgotPasswordBinding
+import com.thing.bangkit.soulmood.helper.MyAsset
 import com.thing.bangkit.soulmood.viewmodel.LoginViewModel
 import es.dmoral.toasty.Toasty
 
@@ -21,12 +22,22 @@ class ForgotPasswordActivity : AppCompatActivity() {
                 val email = etEmail.text.toString()
                 if(email.isEmpty()) etEmail.error = getString(R.string.enter_your_email)
                 else{
+
+                    val sweetAlertDialog = MyAsset.sweetAlertDialog(
+                        this@ForgotPasswordActivity,
+                        getString(R.string.LOADING),
+                        false
+                    )
+                    sweetAlertDialog.show()
+
                     loginViewModel.forgotPassword(email,this@ForgotPasswordActivity).observe(this@ForgotPasswordActivity,
                         { status ->
                             if (status) {
                                 Toasty.warning(this@ForgotPasswordActivity, getString(R.string.message_forgot_pass_email), Toasty.LENGTH_SHORT).show()
                                 etEmail.text.clear()
                             }
+
+                            sweetAlertDialog.dismiss()
                         })
                 }
             }

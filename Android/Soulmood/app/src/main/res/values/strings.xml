@@ -97,5 +97,6 @@
     <string name="wrong_email_login">Email yang Anda masukkan belum terdaftar.</string>
     <string name="wrong_email_input_format">Harap masukkan email yang benar.</string>
     <string name="motivation_word_notavailable">Maaf, Kata Motivasi Sedang tidak tersedia!</string>
+    <string name="no_internet_connection">Maaf, Saat ini Anda Tidak memiliki Koneksi Internet</string>
 
 </resources>

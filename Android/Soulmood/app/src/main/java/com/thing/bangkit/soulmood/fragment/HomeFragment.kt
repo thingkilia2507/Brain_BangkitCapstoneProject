@@ -37,8 +37,8 @@ class HomeFragment : Fragment(), IProgressResult {
     private val groupChatViewModel: GroupChatViewModel by viewModels()
     private val moodTrackerViewModel: MoodTrackerViewModel by viewModels()
     private lateinit var binding: FragmentHomeBinding
-
     private val sliderHandler = Handler(Looper.getMainLooper())
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -50,115 +50,116 @@ class HomeFragment : Fragment(), IProgressResult {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        setDashboard()
-        binding.apply {
-            ivChatbot.setOnClickListener {
-                startActivity(Intent(requireActivity(), ChatbotActivity::class.java))
-            }
-            //chatBotViewModel.reqChatbotMessagesData(requireActivity())
-            groupChatViewModel.getQuoteOfTheDay(requireActivity(), this@HomeFragment)
-                .observe(requireActivity(), {
-                    it.let {
-                        tvMotivationQuotes.text = StringBuilder(it)
+        if(activity != null) {
+            setDashboard()
+            binding.apply {
+                ivChatbot.setOnClickListener {
+                    startActivity(Intent(requireActivity(), ChatbotActivity::class.java))
+                }
+                //chatBotViewModel.reqChatbotMessagesData(requireActivity())
+                groupChatViewModel.getQuoteOfTheDay(requireActivity(), this@HomeFragment)
+                    .observe(requireActivity(), {
+                        it.let {
+                            tvMotivationQuotes.text = StringBuilder(it)
+                        }
+                    })
+                val adapter = GroupNameViewAdapter("homeFragment")
+                rvGroupName.layoutManager = LinearLayoutManager(
+                    context,
+                    LinearLayoutManager.HORIZONTAL, false
+                )
+                rvGroupName.adapter = adapter
+                adapter.setOnItemClickCallback(object : GroupNameViewAdapter.OnItemClickCallback {
+                    override fun onItemClick(data: ChatGroup) {
+                        startActivity(Intent(context, ChatGroupActivity::class.java).apply {
+                            putExtra(getString(R.string.room_id), data.id)
+                            putExtra(getString(R.string.room_name), data.group_name)
+                        })
                     }
                 })
-            val adapter = GroupNameViewAdapter("homeFragment")
-            rvGroupName.layoutManager = LinearLayoutManager(
-                context,
-                LinearLayoutManager.HORIZONTAL, false
-            )
-            rvGroupName.adapter = adapter
-            adapter.setOnItemClickCallback(object : GroupNameViewAdapter.OnItemClickCallback {
-                override fun onItemClick(data: ChatGroup) {
-                    startActivity(Intent(context, ChatGroupActivity::class.java).apply {
-                        putExtra(getString(R.string.room_id), data.id)
-                        putExtra(getString(R.string.room_name), data.group_name)
-                    })
-                }
-            })
 
-            floatingAdd.setOnClickListener {
-                context?.let {
-                    val dialog = Dialog(it)
-                    dialog.window?.setBackgroundDrawableResource(android.R.color.transparent)
-                    dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
-                    dialog.setContentView(R.layout.add_new_group_dialog)
-                    dialog.setCancelable(true)
-                    dialog.show()
-                    val etGroupName: EditText = dialog.findViewById(R.id.et_group_name)
-                    val btnAddNewGroup = dialog.findViewById<Button>(R.id.btn_add_new_group)
-                    btnAddNewGroup.setOnClickListener {
-                        val groupName = etGroupName.text.toString()
-                        if (groupName.isEmpty()) etGroupName.error =
-                            getString(R.string.message_input_room_name_empty)
-                        else {
-                            groupChatViewModel.insertNewGroup(groupName, dialog.context)
-                            dialog.dismiss()
+                floatingAdd.setOnClickListener {
+                    context?.let {
+                        val dialog = Dialog(it)
+                        dialog.window?.setBackgroundDrawableResource(android.R.color.transparent)
+                        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
+                        dialog.setContentView(R.layout.add_new_group_dialog)
+                        dialog.setCancelable(true)
+                        dialog.show()
+                        val etGroupName: EditText = dialog.findViewById(R.id.et_group_name)
+                        val btnAddNewGroup = dialog.findViewById<Button>(R.id.btn_add_new_group)
+                        btnAddNewGroup.setOnClickListener {
+                            val groupName = etGroupName.text.toString()
+                            if (groupName.isEmpty()) etGroupName.error =
+                                getString(R.string.message_input_room_name_empty)
+                            else {
+                                groupChatViewModel.insertNewGroup(groupName, dialog.context)
+                                dialog.dismiss()
+                            }
+                        }
+
+                    }
+                }
+
+                floatingSeeAll.setOnClickListener {
+                    startActivity(
+                        Intent(
+                            requireActivity(),
+                            GroupNameActivity::class.java
+                        )
+                    )
+                }
+                constraintDashboard.setOnClickListener {
+                    startActivity(
+                        Intent(
+                            requireActivity(),
+                            MoodTrackerActivity::class.java
+                        )
+                    )
+                }
+                groupChatViewModel.setGroupName(MyAsset.HOME_FRAGMENT)
+                groupChatViewModel.getGroupName().observe(viewLifecycleOwner, {
+                    if (it != null) {
+                        adapter.setData(it)
+                    }
+                })
+
+                val sliderItem = ArrayList<ComingSoonFeatureSliderItem>()
+                sliderItem.add(ComingSoonFeatureSliderItem(R.drawable.psikolog_konsultasi_soulmood))
+                sliderItem.add(ComingSoonFeatureSliderItem(R.drawable.soulcare))
+
+                val compositePageTransformer = CompositePageTransformer()
+                compositePageTransformer.addTransformer(MarginPageTransformer(30))
+                compositePageTransformer.addTransformer { page, position ->
+                    val r = 1 - kotlin.math.abs(position)
+                    page.scaleY = 0.85f + r * 0.25f
+                }
+
+                binding.viewPagerComingSoonFeature.apply {
+                    this.adapter = SliderCSFAdapter(sliderItem)
+                    this.clipChildren = false
+                    this.clipToPadding = false
+                    this.offscreenPageLimit = 3
+                    this.getChildAt(0).overScrollMode = RecyclerView.OVER_SCROLL_NEVER
+                    this.setPageTransformer(compositePageTransformer)
+
+                    sliderRunnable = Runnable {
+                        if (this.currentItem + 1 == sliderItem.size) {
+                            this.currentItem = 0
+                        } else {
+                            this.currentItem = this.currentItem + 1
                         }
                     }
 
+                    this.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
+                        override fun onPageSelected(position: Int) {
+                            super.onPageSelected(position)
+                            sliderHandler.removeCallbacks(sliderRunnable)
+                            sliderHandler.postDelayed(sliderRunnable, 3000)
+                        }
+                    })
                 }
             }
-
-            floatingSeeAll.setOnClickListener {
-                startActivity(
-                    Intent(
-                        requireActivity(),
-                        GroupNameActivity::class.java
-                    )
-                )
-            }
-            constraintDashboard.setOnClickListener {
-                startActivity(
-                    Intent(
-                        requireActivity(),
-                        MoodTrackerActivity::class.java
-                    )
-                )
-            }
-            groupChatViewModel.setGroupName(MyAsset.HOME_FRAGMENT)
-            groupChatViewModel.getGroupName().observe(viewLifecycleOwner, {
-                if (it != null) {
-                    adapter.setData(it)
-                }
-            })
-
-            val sliderItem = ArrayList<ComingSoonFeatureSliderItem>()
-            sliderItem.add(ComingSoonFeatureSliderItem(R.drawable.psikolog_konsultasi_soulmood))
-            sliderItem.add(ComingSoonFeatureSliderItem(R.drawable.soulcare))
-
-            val compositePageTransformer = CompositePageTransformer()
-            compositePageTransformer.addTransformer(MarginPageTransformer(30))
-            compositePageTransformer.addTransformer { page, position ->
-                val r = 1 - kotlin.math.abs(position)
-                page.scaleY = 0.85f + r * 0.25f
-            }
-
-            binding.viewPagerComingSoonFeature.apply {
-                this.adapter = SliderCSFAdapter(sliderItem)
-                this.clipChildren = false
-                this.clipToPadding = false
-                this.offscreenPageLimit = 3
-                this.getChildAt(0).overScrollMode = RecyclerView.OVER_SCROLL_NEVER
-                this.setPageTransformer(compositePageTransformer)
-
-                sliderRunnable = Runnable {
-                    if (this.currentItem + 1 == sliderItem.size) {
-                        this.currentItem = 0
-                    } else {
-                        this.currentItem = this.currentItem + 1
-                    }
-                }
-
-                this.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
-                    override fun onPageSelected(position: Int) {
-                        super.onPageSelected(position)
-                        sliderHandler.removeCallbacks(sliderRunnable)
-                        sliderHandler.postDelayed(sliderRunnable, 3000)
-                    }
-                })
-            }
-
         }
     }
 
@@ -185,26 +186,30 @@ class HomeFragment : Fragment(), IProgressResult {
 
     private fun setDashboard() {
         moodTrackerViewModel.getDashboardMood(requireActivity()).observe(requireActivity(), {
-            if (it.mood != "") {
-                binding.apply {
-                    when (it.mood_code) {
-                        "1" -> ivDashboardMood.setImageDrawable(requireActivity().getDrawable(R.drawable.angry))
-                        "2" -> ivDashboardMood.setImageDrawable(requireActivity().getDrawable(R.drawable.fear))
-                        "3" -> ivDashboardMood.setImageDrawable(requireActivity().getDrawable(R.drawable.sad))
-                        "4" -> ivDashboardMood.setImageDrawable(requireActivity().getDrawable(R.drawable.happy))
+            if(activity != null) {
+                if (it.mood != "") {
+                    binding.apply {
+
+                        when (it.mood_code) {
+                            "1" -> ivDashboardMood.setImageDrawable(requireActivity().getDrawable(R.drawable.angry))
+                            "2" -> ivDashboardMood.setImageDrawable(requireActivity().getDrawable(R.drawable.fear))
+                            "3" -> ivDashboardMood.setImageDrawable(requireActivity().getDrawable(R.drawable.sad))
+                            "4" -> ivDashboardMood.setImageDrawable(requireActivity().getDrawable(R.drawable.happy))
+                        }
+
+                        tvDashboardMood.text = it.mood
+                        tvDashboardName.text =
+                            "Hi, ${SharedPref.getPref(requireActivity(), MyAsset.KEY_NAME)}"
+                        tvDashboardDate.text =
+                            "Moodmu saat ini (" + DateHelper.dateFormat(it.date.take(10)) + ")"
+                        tvDashboardDate.visibility = View.VISIBLE
                     }
-                    tvDashboardMood.text = it.mood
-                    tvDashboardName.text =
+                } else {
+                    binding.tvDashboardName.text =
                         "Hi, ${SharedPref.getPref(requireActivity(), MyAsset.KEY_NAME)}"
-                    tvDashboardDate.text =
-                        "Moodmu saat ini (" + DateHelper.dateFormat(it.date.take(10)) + ")"
-                    tvDashboardDate.visibility = View.VISIBLE
+                    binding.tvDashboardMood.text = "Semoga Harimu menyenangkan ^-^"
+                    binding.tvDashboardDate.visibility = View.GONE
                 }
-            } else {
-                binding.tvDashboardName.text =
-                    "Hi, ${SharedPref.getPref(requireActivity(), MyAsset.KEY_NAME)}"
-                binding.tvDashboardMood.text = "Semoga Harimu menyenangkan ^-^"
-                binding.tvDashboardDate.visibility = View.GONE
             }
         })
     }
