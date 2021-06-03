@@ -5,26 +5,35 @@ Emotion Detection is used to detecth what emotion the user is feeling based on t
 ### Dataset:
 * ### http://saifmohammad.com/WebPages/EmotionIntensity-SharedTask.html.
 ```
-Part of the 8th Workshop on Computational Approaches to Subjectivity, Sentiment and Social Media Analysis (WASSA-2017), which is to be held in conjunction with EMNLP-2017.
+Part of the 8th Workshop on Computational Approaches to Subjectivity, Sentiment and Social Media Analysis (WASSA-2017), 
+which is to be held in conjunction with EMNLP-2017.
 
-Background and Significance: Existing emotion datasets are mainly annotated categorically without an indication of degree of emotion. Further, the tasks are almost always framed as classification tasks (identify 1 among n emotions for this sentence). In contrast, it is often useful for applications to know the degree to which an emotion is expressed in text. This is the first task where systems have to automatically determine the intensity of emotions in tweets.
+Background and Significance: Existing emotion datasets are mainly annotated categorically without an indication of degree of emotion. 
+Further, the tasks are almost always framed as classification tasks (identify 1 among n emotions for this sentence). 
+In contrast, it is often useful for applications to know the degree to which an emotion is expressed in text. 
+This is the first task where systems have to automatically determine the intensity of emotions in tweets.
 
-Data: Training and test datasets are provided for four emotions: joy, sadness, fear, and anger. For example, the anger training dataset has tweets along with a real-valued score between 0 and 1 indicating the degree of anger felt by the speaker. The test data includes only the tweet text. Gold emotion intensity scores will be released after the evaluation period.
+Data: Training and test datasets are provided for four emotions: joy, sadness, fear, and anger. For example, the anger training 
+dataset has tweets along with a real-valued score between 0 and 1 indicating the degree of anger felt by the speaker. 
+The test data includes only the tweet text. Gold emotion intensity scores will be released after the evaluation period.
 ```
 The dataset which consists of:
 * Train
 * Validation
 * Test
 
-with each categories split into four (joy, sadness, anger, fear) is merged according to categories for training purposes. This dataset is in english so we use Google Translate API to translate the whole dataset.
+with each categories split into four (joy, sadness, anger, fear) is merged according to categories for training purposes. 
+This dataset is in english so we use Google Translate API to translate the whole dataset.
 
 * ### https://github.com/meisaputri21/Indonesian-Twitter-Emotion-Dataset
 ```
-Author: Mei Silviana Saputri, Rahmad Mahendra, and Mirna Adriani, "Emotion Classification on Indonesian Twitter Dataset", in Proceeding of International Conference on Asian Language Processing 2018. 2018.
+Author: Mei Silviana Saputri, Rahmad Mahendra, and Mirna Adriani, "Emotion Classification on Indonesian Twitter Dataset", 
+in Proceeding of International Conference on Asian Language Processing 2018. 2018.
 
 This dataset contains 4.403 Indonesian tweets which are labeled into five emotion classes: love, anger, sadness, joy and fear.
 
-Data Format: Each line consists of a tweet and its respective emotion label separated by semicolon (,). The first line is a header. For a tweet with coma (,) inside the text, there is an quote (" ") to avoid column separation.
+Data Format: Each line consists of a tweet and its respective emotion label separated by semicolon (,). The first line is a header. 
+For a tweet with coma (,) inside the text, there is an quote (" ") to avoid column separation.
 The tweets in this dataset has been pre-processed using the following criterias:
 1. Username mention (@) has been replaced with term [USERNAME]
 2. URL/hyperlink (http://... or https://...) has been replaced with term [URL]
