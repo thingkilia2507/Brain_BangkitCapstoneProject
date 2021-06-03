@@ -4,7 +4,6 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2
-import com.thing.bangkit.soulmood.R
 import com.thing.bangkit.soulmood.databinding.ItemSplashBinding
 import com.thing.bangkit.soulmood.model.SplashData
 

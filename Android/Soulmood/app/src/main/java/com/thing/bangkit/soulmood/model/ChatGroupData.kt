@@ -15,4 +15,4 @@ data class ChatMessage(
     val created_at: String="",
     val deleted_at: String? = null,
     val status: String=""
-){}
+)

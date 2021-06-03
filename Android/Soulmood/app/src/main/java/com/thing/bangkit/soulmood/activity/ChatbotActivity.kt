@@ -1,6 +1,5 @@
 package com.thing.bangkit.soulmood.activity
 
-import android.content.Intent
 import android.net.NetworkCapabilities
 import android.os.Bundle
 import android.view.View
@@ -10,7 +9,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.thing.bangkit.soulmood.R
-import com.thing.bangkit.soulmood.adapter.ChatbotAdapter
 import com.thing.bangkit.soulmood.adapter.ChatbotFirebaseAdapter
 import com.thing.bangkit.soulmood.adapter.SuggestionChatAdapter
 import com.thing.bangkit.soulmood.databinding.ActivityChatbotBinding

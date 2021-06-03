@@ -5,19 +5,12 @@ import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.firebase.ui.firestore.FirestoreRecyclerOptions
-import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.firestore.Query
 import com.thing.bangkit.soulmood.R
 import com.thing.bangkit.soulmood.adapter.GroupChatFirebaseViewAdapter
-import com.thing.bangkit.soulmood.adapter.GroupChatViewAdapter
 import com.thing.bangkit.soulmood.databinding.ActivityChatGroupBinding
 import com.thing.bangkit.soulmood.helper.MyAsset
-import com.thing.bangkit.soulmood.model.ChatMessage
 import com.thing.bangkit.soulmood.viewmodel.GroupChatViewModel
 import es.dmoral.toasty.Toasty
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.withContext
 
 class ChatGroupActivity : AppCompatActivity() {
     private  var adapterFirebase:GroupChatFirebaseViewAdapter?=null
