@@ -9,18 +9,17 @@ import android.os.Build
 import android.util.Log
 import androidx.core.app.NotificationCompat
 import androidx.core.content.ContextCompat
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Query
 import com.thing.bangkit.soulmood.BuildConfig
 import com.thing.bangkit.soulmood.R
 import com.thing.bangkit.soulmood.activity.MainActivity
-import com.thing.bangkit.soulmood.helper.DateHelper
+import com.thing.bangkit.soulmood.helper.*
 import com.thing.bangkit.soulmood.helper.DateHelper.currentDate
-import com.thing.bangkit.soulmood.helper.MyAsset
 import com.thing.bangkit.soulmood.helper.MyAsset.CHATBOT_DB_NAME
 import com.thing.bangkit.soulmood.helper.MyAsset.SOULMOOD_CHATBOT_NAME
-import com.thing.bangkit.soulmood.helper.RetrofitBuild
-import com.thing.bangkit.soulmood.helper.SharedPref
 import com.thing.bangkit.soulmood.model.ChatbotMessage
 import kotlinx.coroutines.*
 import java.util.*
@@ -39,16 +38,46 @@ class AlarmReceiver : BroadcastReceiver() {
         val message = intent.getStringExtra(EXTRA_MESSAGE_MOTIVATION_WORD)
         val message1 = intent.getStringExtra(EXTRA_MESSAGE_CHATBOT_DATA)
         if (message != null) {
-            showAlarmNotification(
-                context,
-                context.getString(R.string.dialy_motivation),
-                message,
-                ID_REPEATING
-            )
+            //get data from api and send to notif
+            getQuoteOfTheDay(context)
         }
         Log.d("TAGDATAKU", "onReceive: message1 " + message1)
         if (message1 != null) {
             sendMessageToDb(context)
+        }
+    }
+
+    fun getQuoteOfTheDay(context: Context){
+        val service = RetrofitBuild.instanceQuotesService()
+        CoroutineScope(Dispatchers.IO).launch {
+            try{
+                val response = service.getDialyQuote()
+                withContext(Dispatchers.Main) {
+                    if (response.code() == 200) {
+                        response.body()?.let {
+                            var message =""
+                            if (it.author.isNotEmpty()) {
+                                message = "${it.content} \n- ${it.author} -"
+                            } else {
+                                message ="${it.content}"
+                            }
+                            showAlarmNotification(
+                                context,
+                                context.getString(R.string.dialy_motivation),
+                                message,
+                                ID_REPEATING
+                            )
+                        }
+                    }else{
+                        Log.v("retrofit error", response.code().toString())
+                    }
+                }
+            }
+            catch (e: Throwable){
+                withContext(Dispatchers.Main) {
+                    Log.v("retrofit error", e.message.toString())
+                }
+            }
         }
     }
 
