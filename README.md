@@ -15,11 +15,11 @@ Together, we can handle it all. Fighting... A new Start Up that will become the 
     <a href=""><strong>Meet the Team »</strong></a>
     <br />
     <br />
-    <a href="">APK Link</a>
+    <a href="https://s.id/SoulmoodAPK">APK Link</a>
     ·
     <a href="https://s.id/SoulmoodVideo">App Video</a>
     ·
-    <a href="">Presentation Video</a>
+    <a href="https://s.id/BrainTeamPresentationVideo">Presentation Video</a>
     ·
     <a href="https://s.id/BrainTeamPresentationSlide">Presentation Slides</a>
   </p>
