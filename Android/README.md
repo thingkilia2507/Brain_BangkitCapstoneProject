@@ -144,7 +144,7 @@ This application is equipped with a mood detection feature so that it can find o
 #### POST request
 https://asia-southeast2-soulmood.cloudfunctions.net/moodDetector
 #### example post parameter:
-message = "<CB>:Hallo, aku bot soulmood<USER>:aku mau cerita nih, sekarang aku lagi sedih banget<CB>:Kamu boleh cerita kok tentang kesedihanmu"
+message = "\<CB>:Hallo, aku bot soulmood<USER>:aku mau cerita nih, sekarang aku lagi sedih banget<CB>:Kamu boleh cerita kok tentang kesedihanmu"
 ##### Example result mood detection : "sedih"
 ###### sample code that we use :
         
