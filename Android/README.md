@@ -2,10 +2,10 @@
 
 ## 1. AI Chatbot Feature
 This AI chatbot feature helps users to be able to tell stories safely and comfortably with our smart bot provided by our machine learning team.
-#### For API AI chatbot, we use the url provided by our cloud team:
+### For API AI chatbot, we use the url provided by our cloud team:
 #### POST request
 https://asia-southeast2-soulmood.cloudfunctions.net/chatbot
-### example post parameter:
+#### example post parameter:
  name = "joy",
  message = "aku lagi sedig banget hari ini"
 
@@ -68,14 +68,15 @@ fun reqChatbotReply(context: Context){
 
 ## 2. Human Chat Group Support
 This feature is a feature that users can use to confide, share stories/experiences to strengthen each other so they can give "Human to human support". This feature is equipped with abusive speech detection so that if there is hate speech sent by the user, the application will automatically hide the hate speech.
-### for API Detect Hate Speech,we use the url provided by our cloud team:
-### POST request
+### For API Detect Hate Speech,we use the url provided by our cloud team:
+#### POST request
 https://soulmood.uc.r.appspot.com
-###### example post parameter:
-###### message = "dasar, bermuka dua"
+#### example post parameter:
+ message = "dasar, bermuka dua"
 
 ###### sample code that we use :
 This code is used to insert message data into the database, but before inserting new data, messages sent by the user will be checked into the hate speech API first to check for hate speech.
+
 ###### group_id = 1, message = "dasar, bermuka dua"
 ```
  fun insertNewChat(group_id: String, message: String, context: Context) {
@@ -128,12 +129,12 @@ This code is used to insert message data into the database, but before inserting
 ## 3. Mood Detection Feature
 This application is equipped with a mood detection feature so that it can find out the user's mood from chat history with our chatbot, Soulmoo. With the user's mood history data, in the future, this data can be useful for consultation features with psychologists and psychiatrists
 
-### for API Mood Detection, we use the url provided by our cloud team:
-### POST request
+### For API Mood Detection, we use the url provided by our cloud team:
+#### POST request
 https://asia-southeast2-soulmood.cloudfunctions.net/moodDetector
-### example post parameter:
-### message = "<CB>:Hallo, aku bot soulmood<USER>:aku mau cerita nih, sekarang aku lagi sedih banget<CB>:Kamu boleh cerita kok tentang kesedihanmu"
-###### Example result mood detection : "sedih"
+#### example post parameter:
+message = "<CB>:Hallo, aku bot soulmood<USER>:aku mau cerita nih, sekarang aku lagi sedih banget<CB>:Kamu boleh cerita kok tentang kesedihanmu"
+##### Example result mood detection : "sedih"
 ###### sample code that we use :
         
 ```
