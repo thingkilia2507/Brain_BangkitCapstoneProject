@@ -237,9 +237,9 @@ message = "<CB>:Hallo, aku bot soulmood<USER>:aku mau cerita nih, sekarang aku l
 ```
 
 
-## 4. Dialy Motivation word
+## 4. Daily Motivation word
 This application will provide motivational word notification every morning.
-For dialy motication word, we use free public api
+For daily motication word, we use free public api
 link API: 
 GET request
 https://api.quotable.io/random
