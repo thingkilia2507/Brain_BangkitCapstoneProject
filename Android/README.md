@@ -3,8 +3,8 @@
 Our Application Preview Video : https://s.id/SoulmoodVideo
 <p align="center">
   <a href="https://s.id/SoulmoodVideo">
-    <img src="https://github.com/thingkilia2507/Brain_BangkitCapstoneProject/tree/main/ASSET/soulmood apps cover.png" alt="soulmood apps cover" width="200" height="200">
-    <img src="https://github.com/thingkilia2507/Brain_BangkitCapstoneProject/tree/main/ASSET/mock-up-soulmood.png" alt="mock-up-soulmood" width="200" height="200">
+    <img src="../ASSET/soulmood apps cover.png" alt="soulmood apps cover" width="200" height="200">
+    <img src="../ASSET/mock-up-soulmood.png" alt="mock-up-soulmood" width="200" height="200">
   </a>
 
   <h3 align="center">SoulMood: Your Mental Health Care Application</h3>
