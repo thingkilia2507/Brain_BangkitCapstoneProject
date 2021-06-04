@@ -59,10 +59,10 @@ class ChatGroupActivity : AppCompatActivity() {
                         adapterFirebase?.registerAdapterDataObserver(object : RecyclerView.AdapterDataObserver() {
                             override fun onItemRangeInserted(positionStart: Int, itemCount: Int) {
                                 super.onItemRangeInserted(positionStart, itemCount)
-                                progressBar.visibility = View.GONE
                                 rvChatGroup.scrollToPosition(0)
                             }
                         })
+                        progressBar.visibility = View.GONE
                     }
                 })
             }
