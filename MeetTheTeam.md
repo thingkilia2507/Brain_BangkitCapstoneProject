@@ -3,7 +3,7 @@
 <p align="center">
     <img src="ASSET/brainTeam.png" alt="BrainTeam">
 
-  <h3 align="center">Brain Team : Brain of Everything</h3>
+  <h3 align="center">We are Brain Team ~ Brain of Everything</h3>
 
   <p align="center">
     <a href="https://www.linkedin.com/in/celine-setyawan/">Celine</a>
