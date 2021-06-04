@@ -42,7 +42,10 @@ The tweets in this dataset has been pre-processed using the following criterias:
 This second dataset is split into five classes: love, anger, sadness, happy and fear. For training purposes love is dropped and happy is transformed into joy. The dataset is then merged with the first dataset.
 
 ### Training
-For training we merged both datasets. For the test set we used the test dataset from the first dataset.
+For training we merged both datasets. For the test set we used the test dataset from the first dataset. The final distribution of the dataset are:
+- [Training Set](datasets/emotion_detection/train_emotion_fix.csv) (7277 samples)
+- [Validation Set](datasets/emotion_detection/dev_emotion_fix.csv) (347 samples)
+- [Test Set](datasets/emotion_detection/test_emotion_fix.csv) (3047 samples)
 
 ## 2. Hate Speech Detection
 Hate speech detection is used to block messages containing hate speech in the live-chat forum (between users).
