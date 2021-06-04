@@ -9,7 +9,7 @@ This AI chatbot feature helps users to be able to tell stories safely and comfor
 https://asia-southeast2-soulmood.cloudfunctions.net/chatbot
 #### example post parameter:
  name = "joy",
- message = "aku lagi sedig banget hari ini"
+ message = "aku lagi sedih banget hari ini"
 
 ###### sample code that we use :
 * retrofit code is used to post data messages to the Chatbot API
