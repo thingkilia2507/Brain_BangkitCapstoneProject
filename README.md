@@ -5,7 +5,7 @@ Together, we can handle it all. Fighting... A new Start Up that will become the 
 <!-- PROJECT LOGO -->
 <br />
 <p align="center">
-  <a href="https://github.com/othneildrew/Best-README-Template">
+  <a href="https://s.id/BrainTeamPresentationVideo">
     <img src="ASSET/soulmood_logo.png" alt="Logo" width="200" height="200">
   </a>
 
