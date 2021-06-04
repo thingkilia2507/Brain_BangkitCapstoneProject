@@ -1,5 +1,5 @@
 # Android
-
+##### This Application supports for Light & Dark Mode
 Our Application Preview Video : https://s.id/SoulmoodVideo
 <p align="center">
   <a href="https://s.id/SoulmoodVideo">
@@ -9,7 +9,7 @@ Our Application Preview Video : https://s.id/SoulmoodVideo
   <h3 align="center">SoulMood: Your Mental Health Care Application</h3>
 </p>
 
-### This Application supports for Light & Dark Mode
+
 
 ## 1. AI Chatbot Feature
 This AI chatbot feature helps users to be able to tell stories safely and comfortably with our smart bot provided by our machine learning team.
