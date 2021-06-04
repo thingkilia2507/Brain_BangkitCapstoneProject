@@ -52,7 +52,7 @@
             android:layout_height="wrap_content"
             android:background="@drawable/custom_edittext"
             android:hint="@string/name"
-            android:inputType="text" />
+            android:inputType="textCapWords" />
     </com.google.android.material.textfield.TextInputLayout>
 
 

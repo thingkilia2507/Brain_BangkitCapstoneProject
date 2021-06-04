@@ -30,7 +30,7 @@
             android:background="@drawable/custom_edittext"
             android:elevation="@dimen/dp_2"
             android:hint="@string/enter_new_room"
-            android:inputType="text"
+            android:inputType="textCapWords"
             android:padding="8dp" />
 
         <Button

@@ -81,7 +81,7 @@
                 android:background="@drawable/custom_edittext"
                 android:elevation="@dimen/small_elevation"
                 android:hint="@string/enter_message_hint"
-                android:inputType="textMultiLine|text"
+                android:inputType="textMultiLine|textCapSentences"
                 android:maxLines="7"
                 android:padding="@dimen/small_padding"
                 android:scrollbars="vertical" />
