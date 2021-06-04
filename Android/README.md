@@ -3,7 +3,7 @@
 Our Application Preview Video : https://s.id/SoulmoodVideo
 <p align="center">
   <a href="https://s.id/SoulmoodVideo">
-    <img src="../ASSET/soulmood apps cover.png" alt="soulmood apps cover" width="50%"><img src="../ASSET/mock-up-soulmood.png" alt="mock-up-soulmood" width="40%">
+    <img src="../ASSET/soulmood apps cover.png" alt="soulmood apps cover" width="50%"><img src="../ASSET/mock-up-soulmood.png" alt="mock-up-soulmood" width="45%">
   </a>
 
   <h3 align="center">SoulMood: Your Mental Health Care Application</h3>
