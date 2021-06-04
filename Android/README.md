@@ -1,6 +1,14 @@
 # Android
 
 Our Application Preview Video : https://s.id/SoulmoodVideo
+<p align="center">
+  <a href="https://s.id/SoulmoodVideo">
+    <img src="ASSET/soulmood apps cover.png" alt="Logo" width="200" height="200">
+    <img src="ASSET/mock-up-soulmood.png" alt="Logo" width="200" height="200">
+  </a>
+
+  <h3 align="center">SoulMood: Your Mental Health Care Application</h3>
+</p>
 
 ## 1. AI Chatbot Feature
 This AI chatbot feature helps users to be able to tell stories safely and comfortably with our smart bot provided by our machine learning team.
@@ -9,7 +17,7 @@ This AI chatbot feature helps users to be able to tell stories safely and comfor
 https://asia-southeast2-soulmood.cloudfunctions.net/chatbot
 #### example post parameter:
  name = "joy",
- message = "aku lagi sedih banget hari ini"
+ message = "aku lagi sedig banget hari ini"
 
 ###### sample code that we use :
 * retrofit code is used to post data messages to the Chatbot API
@@ -311,5 +319,8 @@ db.collection("users")
             }
         });
 ```
-
+ 
+# COMING SOON FEATURE
+    <img src="ASSET/comingsoonkonsultasiSoulmood.png" alt="Logo" width="200" height="200">
+    <img src="ASSET/comingsoonsoulcare.png" alt="Logo" width="200" height="200">
 
