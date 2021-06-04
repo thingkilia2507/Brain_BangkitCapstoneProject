@@ -1,7 +1,7 @@
 # Machine Learning
 
 ## 1. Emotion Detection
-Emotion Detection is used to detecth what emotion the user is feeling based on the user's chat
+Emotion Detection is used to detect what emotion the user is feeling based on the user's chat with the bot.
 ### Dataset:
 * ### http://saifmohammad.com/WebPages/EmotionIntensity-SharedTask.html.
 ```
@@ -42,7 +42,13 @@ The tweets in this dataset has been pre-processed using the following criterias:
 This second dataset is split into five classes: love, anger, sadness, happy and fear. For training purposes love is dropped and happy is transformed into joy. The dataset is then merged with the first dataset.
 
 ### Training
-For training we merged both datasets. For the test set we used the test dataset from the first dataset.
+For training we merged both datasets. For the test set we used the test dataset from the first dataset. The final distribution of the dataset are:
+- [Training Set](datasets/emotion_detection/train_emotion_fix.csv) (7277 samples)
+- [Validation Set](datasets/emotion_detection/dev_emotion_fix.csv) (347 samples)
+- [Test Set](datasets/emotion_detection/test_emotion_fix.csv) (3047 samples)
+
+### Model Performance on Test Set:
+<img src="results/Emotion Detection - Model Performance on Test Set.JPG" width="500" height="250">
 
 ## 2. Hate Speech Detection
 Hate speech detection is used to block messages containing hate speech in the live-chat forum (between users).
@@ -74,9 +80,12 @@ The original dataset is Twitter-based so the preprocessing part includes:
 * Removing trailing spaces and multi spaces
 
 We convert the original multi-label hate speech dataset into binary label, then we split it into `train:val:test` with ratio `0.6:0.2:0.2`. The final preprocessed datasets can be accessed here:
-- [Training Set](datasets/hate_speech/train_emo_v2.csv)
-- [Validation Set](datasets/hate_speech/val_emo_v2.csv)
-- [Test Set](datasets/hate_speech/test_emo_v2.csv)
+- [Training Set](datasets/hate_speech/train_emo_v2.csv) (7873 samples)
+- [Validation Set](datasets/hate_speech/val_emo_v2.csv) (2625 samples)
+- [Test Set](datasets/hate_speech/test_emo_v2.csv) (2625 samples)
+
+### Model Performance on Test Set:
+<img src="results/Hate Speech Detection - Model Performance on Test Set.JPG" width="500" height="250">
 
 ## 3. Model and Deployment
 Both the Emotion Detection and Hate Speech Detection use <b>ALBERT</b> pre-trained language model [(IndoBERT-lite)](https://huggingface.co/indobenchmark/indobert-lite-base-p1) from [IndoNLU](https://www.indobenchmark.com/) and then adapted to the corresponding downstream tasks. The IndoBERT-lite is a work of:

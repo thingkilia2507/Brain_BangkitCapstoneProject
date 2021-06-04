@@ -1,13 +1,24 @@
 # Android
+##### This Application supports for Light & Dark Mode
+Our Application Preview Video : https://s.id/SoulmoodVideo
+<p align="center">
+  <a href="https://s.id/SoulmoodVideo">
+    <img src="../ASSET/soulmood apps cover.png" alt="soulmood apps cover" width="50%"><img src="../ASSET/mock-up-soulmood.png" alt="mock-up-soulmood" width="43%">
+  </a>
+
+  <h3 align="center">SoulMood: Your Mental Health Care Application</h3>
+</p>
+
+
 
 ## 1. AI Chatbot Feature
-This AI chatbot feature helps users to be able to tell stories about various things with the AI Chatbot
-###### for API AI chatbot, we use url:
-###### POST request
-###### [https://asia-southeast2-soulmood.cloudfunctions.net/chatbot](https://asia-southeast2-soulmood.cloudfunctions.net/chatbot)
-###### example post parameter:
+This AI chatbot feature helps users to be able to tell stories safely and comfortably with our smart bot provided by our machine learning team.
+### we use AI chatbot API which provided by our cloud team:
+#### POST request
+https://asia-southeast2-soulmood.cloudfunctions.net/chatbot
+#### example post parameter:
  name = "joy",
- message = "aku lagi sedig banget hari ini"
+ message = "aku lagi sedih banget hari ini"
 
 ###### sample code that we use :
 * retrofit code is used to post data messages to the Chatbot API
@@ -67,16 +78,16 @@ fun reqChatbotReply(context: Context){
 
 
 ## 2. Human Chat Group Support
-This feature is a chat forum feature where users can support and motivate each other. Users can make the name anonymous.
-if there are hate speech sent by users. then the application will automatically hide the hate speech.
-###### for API Detect Hate Speech, we use url:
-###### POST request
-###### [https://soulmood.uc.r.appspot.com](https://soulmood.uc.r.appspot.com)
-###### example post parameter:
-###### message = "dasar, bermuka dua"
+This feature is a feature that users can use to confide, share stories/experiences to strengthen each other so they can give "Human to human support". This feature is equipped with abusive speech detection so that if there is hate speech sent by the user, the application will automatically hide the hate speech.
+### we use Detect Hate Speech API which provided by our cloud team:
+#### POST request
+https://soulmood.uc.r.appspot.com
+#### example post parameter:
+ message = "dasar, bermuka dua"
 
 ###### sample code that we use :
 This code is used to insert message data into the database, but before inserting new data, messages sent by the user will be checked into the hate speech API first to check for hate speech.
+
 ###### group_id = 1, message = "dasar, bermuka dua"
 ```
  fun insertNewChat(group_id: String, message: String, context: Context) {
@@ -126,20 +137,15 @@ This code is used to insert message data into the database, but before inserting
     }
 ```
 
-
-
-
-
-
 ## 3. Mood Detection Feature
-The application can check the current mood of users through the user's message history with AI chatbot.
+This application is equipped with a mood detection feature so that it can find out the user's mood from chat history with our chatbot, Soulmoo. With the user's mood history data, in the future, this data can be useful for consultation features with psychologists and psychiatrists
 
-###### for API Mood Detection, we use url:
-###### POST request
-###### [https://asia-southeast2-soulmood.cloudfunctions.net/moodDetector](https://asia-southeast2-soulmood.cloudfunctions.net/moodDetector)
-###### example post parameter:
-###### message = "<CB>:Hallo, aku bot soulmood<USER>:aku mau cerita nih, sekarang aku lagi sedih banget<CB>:Kamu boleh cerita kok tentang kesedihanmu"
-###### Example result mood detection : "sedih"
+### we use Mood Detection API which provided by our cloud team:
+#### POST request
+https://asia-southeast2-soulmood.cloudfunctions.net/moodDetector
+#### example post parameter:
+message = "\<CB>:Hallo, aku bot soulmood \<USER>:aku mau cerita nih, sekarang aku lagi sedih banget \<CB>:Kamu boleh cerita kok tentang kesedihanmu"
+##### Example result mood detection : "sedih"
 ###### sample code that we use :
         
 ```
@@ -231,17 +237,15 @@ The application can check the current mood of users through the user's message h
 ```
 
 
-## 4. Dialy Motivation word
-for dialy motication word, we use free public api
-link API: 
-GET request
-[https://api.quotable.io/random](https://api.quotable.io/random)
+## 4. Daily Motivation word
+This application will provide motivational word notification every morning.
+For daily motication word, we use free public API https://api.quotable.io/random
 
 ## 5. Firebase
-We use Firebase because Firebase has a realtime database feature that we can use to create realtime chat features.
+In our application, we implement the Firebase platform which provides many tools and infrastructure from Google	to help us develop our applications, such as	Firebase Authentication and Cloud Firestore for our Realtime database.
 
 
-### 1. Authentication
+### 5.1. Authentication
 In your sign-in activity's onCreate method, get the shared instance of the FirebaseAuth object:
 You can let your users authenticate with Firebase using their Email Accounts by integrating Email Sign-In into your app.
 
@@ -279,7 +283,7 @@ Example code for Register Authentication
             
 ```
 
-### 2. Cloud Firestore
+### 5.2. Cloud Firestore
 Store and sync your app data with this flexible, scalable NoSQL cloud-hosted database.
 Cloud Firestore is a flexible, scalable database from Firebase and Google Cloud. It keeps your data in sync across client apps through realtime listeners and offers offline support so you can build responsive apps that work regardless of network latency or internet connectivity.
 
@@ -313,5 +317,9 @@ db.collection("users")
             }
         });
 ```
+ 
+# COMING SOON FEATURE
 
-
+<p align="center">
+    <img src="../ASSET/comingsoonkonsultasiSoulmood.png" alt="comingsoonkonsultasiSoulmood" width="50%"><img src="../ASSET/comingsoonsoulcare.png" alt="comingsoonsoulcare" width="50%">
+  </p>

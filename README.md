@@ -1,11 +1,11 @@
-# PTCJNN_BangkitCapstoneProject
+# BRAIN_BangkitCapstoneProject
 WE ARE THE BRAIN ~ The core of everything
 Together, we can handle it all. Fighting... A new Start Up that will become the Unicorn Corp in the Future.
 
 <!-- PROJECT LOGO -->
 <br />
 <p align="center">
-  <a href="https://github.com/othneildrew/Best-README-Template">
+  <a href="https://s.id/BrainTeamPresentationVideo">
     <img src="ASSET/soulmood_logo.png" alt="Logo" width="200" height="200">
   </a>
 
@@ -15,11 +15,11 @@ Together, we can handle it all. Fighting... A new Start Up that will become the 
     <a href=""><strong>Meet the Team »</strong></a>
     <br />
     <br />
-    <a href="">APK Link</a>
+    <a href="https://s.id/SoulmoodAPK">APK Link</a>
     ·
     <a href="https://s.id/SoulmoodVideo">App Video</a>
     ·
-    <a href="">Presentation Video</a>
+    <a href="https://s.id/BrainTeamPresentationVideo">Presentation Video</a>
     ·
     <a href="https://s.id/BrainTeamPresentationSlide">Presentation Slides</a>
   </p>
