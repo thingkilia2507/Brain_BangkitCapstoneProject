@@ -239,9 +239,7 @@ message = "<CB>:Hallo, aku bot soulmood<USER>:aku mau cerita nih, sekarang aku l
 
 ## 4. Daily Motivation word
 This application will provide motivational word notification every morning.
-For daily motication word, we use free public API
-GET request
-https://api.quotable.io/random
+For daily motication word, we use free public API https://api.quotable.io/random
 
 ## 5. Firebase
 In our application, we implement the Firebase platform which provides many tools and infrastructure from Google	to help us develop our applications, such as	Firebase Authentication and Cloud Firestore for our Realtime database.
