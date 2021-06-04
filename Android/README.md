@@ -2,10 +2,10 @@
 
 ## 1. AI Chatbot Feature
 This AI chatbot feature helps users to be able to tell stories about various things with the AI Chatbot
-###### for API AI chatbot, we use url:
-###### POST request
-###### [https://asia-southeast2-soulmood.cloudfunctions.net/chatbot](https://asia-southeast2-soulmood.cloudfunctions.net/chatbot)
-###### example post parameter:
+### for API AI chatbot, we use url:
+### POST request
+######[https://asia-southeast2-soulmood.cloudfunctions.net/chatbot](https://asia-southeast2-soulmood.cloudfunctions.net/chatbot)
+### example post parameter:
  name = "joy",
  message = "aku lagi sedig banget hari ini"
 
@@ -69,7 +69,7 @@ fun reqChatbotReply(context: Context){
 ## 2. Human Chat Group Support
 This feature is a chat forum feature where users can support and motivate each other. Users can make the name anonymous.
 if there are hate speech sent by users. then the application will automatically hide the hate speech.
-###### for API Detect Hate Speech, we use url:
+### for API Detect Hate Speech, we use url:
 ###### POST request
 ###### [https://soulmood.uc.r.appspot.com](https://soulmood.uc.r.appspot.com)
 ###### example post parameter:
