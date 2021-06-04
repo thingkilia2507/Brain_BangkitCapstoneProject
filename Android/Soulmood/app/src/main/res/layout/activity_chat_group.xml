@@ -7,6 +7,11 @@
     android:background="@drawable/gradient_background"
     tools:context=".activity.ChatGroupActivity">
 
+    <ProgressBar
+        android:id="@+id/progress_bar"
+        android:layout_width="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_height="match_parent"/>
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_chat_group"
         android:layout_width="match_parent"
@@ -34,7 +39,7 @@
             android:background="@drawable/custom_edittext"
             android:elevation="@dimen/small_elevation"
             android:hint="@string/enter_message_hint"
-            android:inputType="textMultiLine|text"
+            android:inputType="textMultiLine|textCapSentences"
             android:maxLines="7"
             android:maxHeight="60dp"
             android:padding="@dimen/small_padding"

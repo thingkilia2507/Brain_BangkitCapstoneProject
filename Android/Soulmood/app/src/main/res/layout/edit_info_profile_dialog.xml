@@ -36,7 +36,7 @@
                android:layout_gravity="center"
                android:background="@drawable/custom_edittext"
                android:hint="@string/name"
-               android:inputType="text"
+               android:inputType="textCapWords"
                android:textSize="@dimen/ts_standard" />
        </com.google.android.material.textfield.TextInputLayout>
 

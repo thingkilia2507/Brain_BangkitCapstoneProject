@@ -99,5 +99,7 @@
     <string name="motivation_word_notavailable">Maaf, Kata Motivasi Sedang tidak tersedia!</string>
     <string name="no_internet_connection">Maaf, Saat ini Anda Tidak memiliki Koneksi Internet</string>
     <string name="email_used">Email ini telah digunakan oleh akun lain.</string>
+    <string name="ceritakan_masalah_anda">Ceritakan Masalah Anda</string>
+    <string name="beban_terasa_lebih_ringan_dengan_menceritakan_masalah_anda">Beban terasa lebih ringan dengan menceritakan masalah anda.</string>
 
 </resources>

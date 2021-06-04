@@ -27,5 +27,6 @@
 
     <color name="background_roomchat">#88B0E6</color>
     <color name="ts_color_def">#FFFFFFFF</color>
+    <color name="dark_purple">#ED0171</color>
 
 </resources>

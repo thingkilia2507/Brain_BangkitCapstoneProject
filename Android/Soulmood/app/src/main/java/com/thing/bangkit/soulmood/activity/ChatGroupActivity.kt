@@ -2,6 +2,7 @@ package com.thing.bangkit.soulmood.activity
 
 import android.net.NetworkCapabilities
 import android.os.Bundle
+import android.view.View
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -51,15 +52,15 @@ class ChatGroupActivity : AppCompatActivity() {
                         val linearLayout = LinearLayoutManager(this@ChatGroupActivity)
                         //auto scroll recyclerview to bottom
                         linearLayout.reverseLayout = true
-                        binding?.rvChatGroup?.layoutManager = linearLayout
+                        rvChatGroup.layoutManager = linearLayout
                         adapterFirebase = GroupChatFirebaseViewAdapter(it)
                         adapterFirebase?.startListening()
-                        binding?.rvChatGroup?.adapter = adapterFirebase
-
+                        rvChatGroup.adapter = adapterFirebase
                         adapterFirebase?.registerAdapterDataObserver(object : RecyclerView.AdapterDataObserver() {
                             override fun onItemRangeInserted(positionStart: Int, itemCount: Int) {
                                 super.onItemRangeInserted(positionStart, itemCount)
-                                binding?.rvChatGroup?.scrollToPosition(0)
+                                progressBar.visibility = View.GONE
+                                rvChatGroup.scrollToPosition(0)
                             }
                         })
                     }
