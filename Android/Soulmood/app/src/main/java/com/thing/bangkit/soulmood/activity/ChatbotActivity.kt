@@ -51,10 +51,10 @@ class ChatbotActivity : AppCompatActivity(), IClickedItemListener {
                 adapter?.registerAdapterDataObserver(object : RecyclerView.AdapterDataObserver() {
                     override fun onItemRangeInserted(positionStart: Int, itemCount: Int) {
                         super.onItemRangeInserted(positionStart, itemCount)
-                        progressBar.visibility = GONE
                         rvChatbot.scrollToPosition(positionStart)
                     }
                 })
+                progressBar.visibility = GONE
             })
 
             ivBack.setOnClickListener {
