@@ -3,8 +3,8 @@
 Our Application Preview Video : https://s.id/SoulmoodVideo
 <p align="center">
   <a href="https://s.id/SoulmoodVideo">
-    <img src="../ASSET/soulmood apps cover.png" alt="soulmood apps cover" width="50%">
-    <img src="../ASSET/mock-up-soulmood.png" alt="mock-up-soulmood" width="50%">
+    <img src="../ASSET/soulmood apps cover.png" alt="soulmood apps cover" width="50%" align="left">
+    <img src="../ASSET/mock-up-soulmood.png" alt="mock-up-soulmood" width="50%" align="right">
   </a>
 
   <h3 align="center">SoulMood: Your Mental Health Care Application</h3>
@@ -324,5 +324,5 @@ db.collection("users")
 
 <p align="center">
     <img src="../ASSET/comingsoonkonsultasiSoulmood.png" alt="comingsoonkonsultasiSoulmood" width="50%" align="left">
-    <img src="../ASSET/comingsoonsoulcare.png" alt="comingsoonsoulcare" width="50%">
+    <img src="../ASSET/comingsoonsoulcare.png" alt="comingsoonsoulcare" width="50%" align="right">
   </p>
