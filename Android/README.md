@@ -2,8 +2,8 @@
 
 ## 1. AI Chatbot Feature
 This AI chatbot feature helps users to be able to tell stories safely and comfortably with our smart bot provided by our machine learning team.
-### for API AI chatbot, we use the url provided by our cloud team:
-### POST request
+#### For API AI chatbot, we use the url provided by our cloud team:
+#### POST request
 https://asia-southeast2-soulmood.cloudfunctions.net/chatbot
 ### example post parameter:
  name = "joy",
