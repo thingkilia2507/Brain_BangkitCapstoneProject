@@ -13,7 +13,7 @@ Our Application Preview Video : https://s.id/SoulmoodVideo
 
 ## 1. AI Chatbot Feature
 This AI chatbot feature helps users to be able to tell stories safely and comfortably with our smart bot provided by our machine learning team.
-### For API AI chatbot, we use the url provided by our cloud team:
+### we use AI chatbot API which provided by our cloud team:
 #### POST request
 https://asia-southeast2-soulmood.cloudfunctions.net/chatbot
 #### example post parameter:
@@ -79,7 +79,7 @@ fun reqChatbotReply(context: Context){
 
 ## 2. Human Chat Group Support
 This feature is a feature that users can use to confide, share stories/experiences to strengthen each other so they can give "Human to human support". This feature is equipped with abusive speech detection so that if there is hate speech sent by the user, the application will automatically hide the hate speech.
-### For API Detect Hate Speech,we use the url provided by our cloud team:
+### we use Detect Hate Speech API which provided by our cloud team:
 #### POST request
 https://soulmood.uc.r.appspot.com
 #### example post parameter:
@@ -140,7 +140,7 @@ This code is used to insert message data into the database, but before inserting
 ## 3. Mood Detection Feature
 This application is equipped with a mood detection feature so that it can find out the user's mood from chat history with our chatbot, Soulmoo. With the user's mood history data, in the future, this data can be useful for consultation features with psychologists and psychiatrists
 
-### For API Mood Detection, we use the url provided by our cloud team:
+### we use Mood Detection API which provided by our cloud team:
 #### POST request
 https://asia-southeast2-soulmood.cloudfunctions.net/moodDetector
 #### example post parameter:
@@ -239,8 +239,7 @@ message = "<CB>:Hallo, aku bot soulmood<USER>:aku mau cerita nih, sekarang aku l
 
 ## 4. Daily Motivation word
 This application will provide motivational word notification every morning.
-For daily motication word, we use free public api
-link API: 
+For daily motication word, we use free public API
 GET request
 https://api.quotable.io/random
 
