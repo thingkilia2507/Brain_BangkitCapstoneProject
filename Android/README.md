@@ -237,7 +237,7 @@ https://api.quotable.io/random
 In our application, we implement the Firebase platform which provides many tools and infrastructure from Google	to help us develop our applications, such as	Firebase Authentication and Cloud Firestore for our Realtime database.
 
 
-### 1. Authentication
+### 5.1. Authentication
 In your sign-in activity's onCreate method, get the shared instance of the FirebaseAuth object:
 You can let your users authenticate with Firebase using their Email Accounts by integrating Email Sign-In into your app.
 
@@ -275,7 +275,7 @@ Example code for Register Authentication
             
 ```
 
-### 2. Cloud Firestore
+### 5.2. Cloud Firestore
 Store and sync your app data with this flexible, scalable NoSQL cloud-hosted database.
 Cloud Firestore is a flexible, scalable database from Firebase and Google Cloud. It keeps your data in sync across client apps through realtime listeners and offers offline support so you can build responsive apps that work regardless of network latency or internet connectivity.
 
