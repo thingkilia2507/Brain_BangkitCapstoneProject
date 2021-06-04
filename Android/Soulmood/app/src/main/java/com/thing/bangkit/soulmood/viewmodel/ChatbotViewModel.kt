@@ -13,21 +13,17 @@ import com.thing.bangkit.soulmood.BuildConfig
 import com.thing.bangkit.soulmood.helper.*
 import com.thing.bangkit.soulmood.helper.DateHelper.currentDate
 import com.thing.bangkit.soulmood.helper.MyAsset.CHATBOT_DB_NAME
-import com.thing.bangkit.soulmood.model.ChatMessage
 import com.thing.bangkit.soulmood.model.ChatbotMessage
 import es.dmoral.toasty.Toasty
 import kotlinx.coroutines.*
 import java.util.*
-import kotlin.collections.ArrayList
 
 class ChatbotViewModel : ViewModel() {
 
     private val db = FirebaseFirestore.getInstance()
     private var messageReqReply : String = ""
-    //private var _chat = MutableLiveData<ArrayList<ChatbotMessage>>()
     private var _chat = MutableLiveData<FirestoreRecyclerOptions<ChatbotMessage>>()
     private val _suggestionResponse = MutableLiveData<ArrayList<String>>()
-    //val chat : LiveData<ArrayList<ChatbotMessage>> = _chat
     val chat : LiveData<FirestoreRecyclerOptions<ChatbotMessage>> = _chat
     val suggestionResponse : LiveData<ArrayList<String>> = _suggestionResponse
 
@@ -37,8 +33,7 @@ class ChatbotViewModel : ViewModel() {
         viewModelScope.launch {
             reqChatbotMessagesData(context)
             delay(1000)
-         //   if(chat.value == null || chat.value!!.isEmpty()){
-            if(chat.value == null){
+            if(chat.value  != null && chat.value!!.snapshots.size <1 ){
                 sendMessage(object : IFinishedListener{
                     override fun onFinish() {
                         //
@@ -61,51 +56,24 @@ class ChatbotViewModel : ViewModel() {
                 },context, "Halo, $name!")
                 delay(1000)
 
-                //if(chat.value != null && chat.value!!.size <1){
-                if(chat.value != null ){
-                    sendMessage(object : IFinishedListener {
-                        override fun onFinish() {
-                            //
-                        }
-                    }, context, "Halo, aku adalah SoulMoo, bot yang bisa kamu ajak bicara tentang apa yg kamu rasakan dan pikirkan kapan saja.\n" +
-                            "\n" +
-                            "Apa yang ingin kamu bicarakan denganku hari ini?\uD83D\uDE0A")
-                }else {
-                    sendMessage(object : IFinishedListener {
-                        override fun onFinish() {
-                            //
-                        }
-                    }, context, "Saya Soulmoo, teman curhatmu. Cerita yuk!")
-                }
+                sendMessage(object : IFinishedListener {
+                    override fun onFinish() {
+                        //
+                    }
+                }, context, "Saya Soulmoo, teman curhatmu. Cerita yuk!")
+
             }
 
             _suggestionResponse.postValue(arrayListOf("Diri Sendiri", "Rumah", "Sekolah", "Pekerjaan", "Pertemanan", "Percintaan","Lainnya","Ngga dulu deh"))
         }
     }
 
-     fun reqChatbotMessagesData(context: Context) {
+     private fun reqChatbotMessagesData(context: Context) {
         viewModelScope.launch(Dispatchers.IO) {
             val data = db.collection(CHATBOT_DB_NAME).document(BuildConfig.VERSION_NAME).collection("user_chatbot")
                 .document(SharedPref.getPref(context, MyAsset.KEY_USER_ID).toString()).collection("chatbot_messages").document(currentDate).collection("message")
                 .orderBy("created_at", Query.Direction.ASCENDING)
             withContext(Dispatchers.Main){
-//                data.addSnapshotListener { value, _ ->
-//                    value?.let {
-//                        val chatData = ArrayList<ChatbotMessage>()
-//                        for (message in value.documents) {
-//                            chatData.add(
-//                                ChatbotMessage(
-//                                    id = message.getString("id").toString(),
-//                                    name = message.getString("name").toString(),
-//                                    email = message.getString("email").toString(),
-//                                    message = message.getString("message").toString(),
-//                                    created_at = message.getString("created_at").toString()
-//                                )
-//                            )
-//                        }
-//                        _chat.postValue(chatData)
-//                    }
-//                }
                 val firebaseRecyclerOptions = FirestoreRecyclerOptions.Builder<ChatbotMessage>()
                     .setQuery(data , ChatbotMessage::class.java).build()
                 _chat.postValue(firebaseRecyclerOptions)
@@ -134,7 +102,7 @@ class ChatbotViewModel : ViewModel() {
             withContext(Dispatchers.Main){
                 database.addOnSuccessListener {
                     finishedListener.onFinish()
-                    Log.d("TAGDATAKU", "sendMessage: message_sent " + message)
+                    Log.d("TAGDATAKU", "sendMessage: message_sent $message")
                 }.addOnFailureListener {
                     Toasty.error(context, it.message.toString(), Toasty.LENGTH_SHORT).show()
                 }

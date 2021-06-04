@@ -34,12 +34,8 @@ class ChatGroupActivity : AppCompatActivity() {
         }
             groupChatViewModel.setDataChat(groupId.toString())
             binding?.apply {
-               // val adapter = GroupChatViewAdapter()
-
-
                 floatingSend.setOnClickListener {
                     val message = etChatGroup.text.toString()
-                    //if (message.isEmpty()) etChatGroup.error = "Masukkan Pesan Anda!"
                     if(message.isNotEmpty()) {
                         groupChatViewModel.insertNewChat(
                             groupId.toString(),
