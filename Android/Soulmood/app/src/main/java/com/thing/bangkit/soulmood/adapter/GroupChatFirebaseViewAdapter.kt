@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter
 import com.firebase.ui.firestore.FirestoreRecyclerOptions
+import com.thing.bangkit.soulmood.R
 import com.thing.bangkit.soulmood.databinding.ItemChatBinding
 import com.thing.bangkit.soulmood.helper.MyAsset
 import com.thing.bangkit.soulmood.helper.SharedPref
@@ -56,8 +57,8 @@ class GroupChatFirebaseViewAdapter(options:FirestoreRecyclerOptions<ChatMessage>
                 tvMessageSender.setTextColor(Color.RED)
                 tvMessageReceiver.setTextColor(Color.RED)
             }else{
-                tvMessageSender.setTextColor(Color.BLACK)
-                tvMessageReceiver.setTextColor(Color.BLACK)
+                tvMessageSender.setTextColor(holder.itemView.context.getColor(R.color.black))
+                tvMessageReceiver.setTextColor(holder.itemView.context.getColor(R.color.black))
             }
 
         }

@@ -68,7 +68,7 @@
             tools:text="Philip"
             android:paddingStart="@dimen/small_padding"
             android:paddingEnd="@dimen/small_padding"
-            android:textColor="#610430" />
+            android:textColor="@color/dark_purple" />
 
         <TextView
             android:id="@+id/tv_message_receiver"
