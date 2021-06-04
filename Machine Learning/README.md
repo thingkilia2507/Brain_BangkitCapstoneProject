@@ -1,7 +1,7 @@
 # Machine Learning
 
 ## 1. Emotion Detection
-Emotion Detection is used to detecth what emotion the user is feeling based on the user's chat
+Emotion Detection is used to detect what emotion the user is feeling based on the user's chat with the bot.
 ### Dataset:
 * ### http://saifmohammad.com/WebPages/EmotionIntensity-SharedTask.html.
 ```
@@ -74,9 +74,9 @@ The original dataset is Twitter-based so the preprocessing part includes:
 * Removing trailing spaces and multi spaces
 
 We convert the original multi-label hate speech dataset into binary label, then we split it into `train:val:test` with ratio `0.6:0.2:0.2`. The final preprocessed datasets can be accessed here:
-- [Training Set](datasets/hate_speech/train_emo_v2.csv)
-- [Validation Set](datasets/hate_speech/val_emo_v2.csv)
-- [Test Set](datasets/hate_speech/test_emo_v2.csv)
+- [Training Set](datasets/hate_speech/train_emo_v2.csv) (7873 samples)
+- [Validation Set](datasets/hate_speech/val_emo_v2.csv) (2625 samples)
+- [Test Set](datasets/hate_speech/test_emo_v2.csv) (2625 samples)
 
 ## 3. Model and Deployment
 Both the Emotion Detection and Hate Speech Detection use <b>ALBERT</b> pre-trained language model [(IndoBERT-lite)](https://huggingface.co/indobenchmark/indobert-lite-base-p1) from [IndoNLU](https://www.indobenchmark.com/) and then adapted to the corresponding downstream tasks. The IndoBERT-lite is a work of:
