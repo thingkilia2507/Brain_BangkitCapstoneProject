@@ -98,6 +98,8 @@ dependencies {
     // sweetalert
     implementation 'com.github.f0ris.sweetalert:library:1.6.2'
 
+// FirebaseUI for Cloud Firestore
+    implementation 'com.firebaseui:firebase-ui-firestore:6.2.1'
 
 
 }

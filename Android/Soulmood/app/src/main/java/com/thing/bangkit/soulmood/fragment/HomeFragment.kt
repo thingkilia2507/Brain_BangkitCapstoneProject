@@ -93,7 +93,7 @@ class HomeFragment : Fragment(), IProgressResult {
                             if (groupName.isEmpty()) etGroupName.error =
                                 getString(R.string.message_input_room_name_empty)
                             else {
-                                groupChatViewModel.insertNewGroup(groupName, dialog.context)
+                                groupChatViewModel.insertNewGroup(groupName, requireActivity())
                                 dialog.dismiss()
                             }
                         }

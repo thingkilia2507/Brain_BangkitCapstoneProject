@@ -7,8 +7,9 @@ import android.view.View.GONE
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.thing.bangkit.soulmood.R
-import com.thing.bangkit.soulmood.adapter.ChatbotAdapter
+import com.thing.bangkit.soulmood.adapter.ChatbotFirebaseAdapter
 import com.thing.bangkit.soulmood.adapter.SuggestionChatAdapter
 import com.thing.bangkit.soulmood.databinding.ActivityChatbotBinding
 import com.thing.bangkit.soulmood.helper.IClickedItemListener
@@ -24,8 +25,9 @@ class ChatbotActivity : AppCompatActivity(), IClickedItemListener {
     private var binding: ActivityChatbotBinding? = null
     private var checkInternet: NetworkCapabilities? = null
 
-    private val adapter = ChatbotAdapter()
 
+    //private val adapter = ChatbotAdapter()
+    private var adapter : ChatbotFirebaseAdapter?=null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -45,8 +47,17 @@ class ChatbotActivity : AppCompatActivity(), IClickedItemListener {
             viewModel.initChatbot(this@ChatbotActivity)
 
             viewModel.chat.observe(this@ChatbotActivity, {
-                adapter.setData(it)
-                rvChatbot.scrollToPosition(it.size - 1)
+                // adapter.setData(it)
+                adapter = ChatbotFirebaseAdapter(it)
+                adapter?.startListening()
+                rvChatbot.adapter = adapter
+                //   rvChatbot.scrollToPosition(it.size-1)
+                adapter?.registerAdapterDataObserver(object: RecyclerView.AdapterDataObserver() {
+                    override fun onItemRangeInserted(positionStart: Int, itemCount: Int) {
+                        super.onItemRangeInserted(positionStart, itemCount)
+                        rvChatbot.scrollToPosition(positionStart)
+                    }
+                })
             })
 
             ivBack.setOnClickListener {
@@ -88,6 +99,7 @@ class ChatbotActivity : AppCompatActivity(), IClickedItemListener {
                 }
             })
         }
+
 
     }
 

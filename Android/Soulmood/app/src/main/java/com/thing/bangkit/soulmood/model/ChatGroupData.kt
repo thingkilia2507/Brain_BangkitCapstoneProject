@@ -7,12 +7,12 @@ data class ChatGroup(
 
 
 data class ChatMessage(
-    val id: String,
-    val sender: String,
+    val id: String="",
+    val sender: String="",
     val email: String? = null,
     val ori_message: String? = null,
-    val ai_message: String,
-    val created_at: String,
+    val ai_message: String="",
+    val created_at: String="",
     val deleted_at: String? = null,
-    val status: String
+    val status: String=""
 )

@@ -85,17 +85,11 @@ class LoginActivity : AppCompatActivity(), IProgressResult {
                                     MyAsset.KEY_USER_ID,
                                     it.id
                                 )
-
-                                //set dialy motivation word repeat alarm
-                                groupChatViewModel.getQuoteOfTheDay(this@LoginActivity).observe(this@LoginActivity,{ it ->
-                                    Log.d("TAGDATAKU", "onCreatequotes: "+it)
-                                    it?.let{
+                                        //set dialy motivation notif
                                         AlarmReceiver().setRepeatingAlarmMotivationWord(
                                             this@LoginActivity,
-                                            it
+                                            "quote_message"
                                         )
-                                    }
-                                })
 
                             }
                         })
