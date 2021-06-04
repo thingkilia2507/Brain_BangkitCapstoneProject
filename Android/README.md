@@ -321,6 +321,8 @@ db.collection("users")
 ```
  
 # COMING SOON FEATURE
+
+<p align="center">
     <img src="ASSET/comingsoonkonsultasiSoulmood.png" alt="Logo" width="200" height="200">
     <img src="ASSET/comingsoonsoulcare.png" alt="Logo" width="200" height="200">
-
+  </p>
