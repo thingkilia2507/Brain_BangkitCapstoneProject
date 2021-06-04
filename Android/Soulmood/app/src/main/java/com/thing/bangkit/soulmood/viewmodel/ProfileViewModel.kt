@@ -75,7 +75,30 @@ class ProfileViewModel : ViewModel() {
                             }
                         }
                     }.addOnFailureListener { exc ->
-                        result.onFailure(exc.message.toString())
+                        when {
+                            exc.message.toString().equals(
+                                "A network error (such as timeout, interrupted connection or unreachable host) has occurred.",
+                                true
+                            ) -> {
+                                result.onFailure(context.getString(R.string.no_internet_connection))
+                            }
+                            exc.message.toString().equals(
+                                "The password is invalid or the user does not have a password.",
+                                true
+                            ) -> {
+                                result.onFailure(context.getString(R.string.wrong_password))
+                            }
+                            exc.message.toString().equals(
+                                "The email address is already in use by another account.",
+                                true
+                            ) -> {
+                                result.onFailure( context.getString(R.string.email_used))
+                            }
+                            else -> {
+                                result.onFailure(exc.message.toString())
+                            }
+                        }
+                        Log.d("TAGDATAKU", exc.message.toString())
                     }
                 }
             }.addOnFailureListener { exc ->
@@ -92,6 +115,12 @@ class ProfileViewModel : ViewModel() {
                         true
                     ) -> {
                         result.onFailure(context.getString(R.string.wrong_password))
+                    }
+                    exc.message.toString().equals(
+                        "The email address is already in use by another account.",
+                        true
+                    ) -> {
+                        result.onFailure( context.getString(R.string.email_used))
                     }
                     else -> {
                         result.onFailure(exc.message.toString())

@@ -20,8 +20,14 @@ android {
     }
 
     buildTypes {
+        debug {
+            minifyEnabled true
+            shrinkResources true
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
         release {
-            minifyEnabled false
+            minifyEnabled true
+            shrinkResources true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
@@ -58,9 +64,6 @@ dependencies {
 
     //http logging retrofit
     implementation "com.squareup.okhttp3:logging-interceptor:4.9.0"
-
-    //time out
-    implementation 'com.squareup.okhttp:okhttp:2.7.5'
 
     //viewpager indicator
     implementation 'me.relex:circleindicator:2.1.4'

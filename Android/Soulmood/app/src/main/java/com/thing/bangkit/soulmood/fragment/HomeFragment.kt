@@ -50,7 +50,7 @@ class HomeFragment : Fragment(), IProgressResult {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        if(activity != null) {
+        if (activity != null) {
             setDashboard()
             binding.apply {
                 ivChatbot.setOnClickListener {
@@ -79,26 +79,25 @@ class HomeFragment : Fragment(), IProgressResult {
                 })
 
                 floatingAdd.setOnClickListener {
-                    context?.let {
-                        val dialog = Dialog(it)
-                        dialog.window?.setBackgroundDrawableResource(android.R.color.transparent)
-                        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
-                        dialog.setContentView(R.layout.add_new_group_dialog)
-                        dialog.setCancelable(true)
-                        dialog.show()
-                        val etGroupName: EditText = dialog.findViewById(R.id.et_group_name)
-                        val btnAddNewGroup = dialog.findViewById<Button>(R.id.btn_add_new_group)
-                        btnAddNewGroup.setOnClickListener {
-                            val groupName = etGroupName.text.toString()
-                            if (groupName.isEmpty()) etGroupName.error =
-                                getString(R.string.message_input_room_name_empty)
-                            else {
-                                groupChatViewModel.insertNewGroup(groupName, requireActivity())
-                                dialog.dismiss()
-                            }
+                    val dialog = Dialog(requireContext())
+                    dialog.window?.setBackgroundDrawableResource(android.R.color.transparent)
+                    dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
+                    dialog.setContentView(R.layout.add_new_group_dialog)
+                    dialog.setCancelable(true)
+                    dialog.show()
+                    val etGroupName: EditText = dialog.findViewById(R.id.et_group_name)
+                    val btnAddNewGroup = dialog.findViewById<Button>(R.id.btn_add_new_group)
+                    btnAddNewGroup.setOnClickListener {
+                        val groupName = etGroupName.text.toString()
+                        if (groupName.isEmpty()) etGroupName.error =
+                            getString(R.string.message_input_room_name_empty)
+                        else {
+                            groupChatViewModel.insertNewGroup(groupName, requireActivity())
+                            dialog.dismiss()
                         }
-
                     }
+
+
                 }
 
                 floatingSeeAll.setOnClickListener {
@@ -186,7 +185,7 @@ class HomeFragment : Fragment(), IProgressResult {
 
     private fun setDashboard() {
         moodTrackerViewModel.getDashboardMood(requireActivity()).observe(requireActivity(), {
-            if(activity != null) {
+            if (activity != null) {
                 if (it.mood != "") {
                     binding.apply {
 

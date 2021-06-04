@@ -27,7 +27,6 @@ class GroupChatViewModel : ViewModel() {
     private var auth = FirebaseAuth.getInstance()
     private val db = FirebaseFirestore.getInstance()
     private var groupNameData = MutableLiveData<ArrayList<ChatGroup>>()
-//    private var groupChatData = MutableLiveData<ArrayList<ChatMessage>>()
   private var groupChatData = MutableLiveData<FirestoreRecyclerOptions<ChatMessage>>()
 
     fun insertNewGroup(groupName: String, context: Context) {
@@ -36,7 +35,7 @@ class GroupChatViewModel : ViewModel() {
         map["id"] = id
         map["group_name"] = groupName
         map["created_at"] = DateHelper.getCurrentDateTime()
-        map["created_by"] = auth.currentUser?.email.toString().toLowerCase()
+        map["created_by"] = auth.currentUser?.email.toString().toLowerCase(Locale.ROOT)
         viewModelScope.launch(Dispatchers.IO) {
             val database = db.collection("groups_chat").document(id).set(map)
             withContext(Dispatchers.Main) {
@@ -62,7 +61,7 @@ class GroupChatViewModel : ViewModel() {
                 }
                 database.addSnapshotListener { value, _ ->
                     if (value != null) {
-                        var group = ArrayList<ChatGroup>()
+                        val group = ArrayList<ChatGroup>()
                         for (data in value.documents) {
                             group.add(
                                 ChatGroup(
@@ -91,8 +90,8 @@ class GroupChatViewModel : ViewModel() {
                 withContext(Dispatchers.Main){
                     if(response.code() == 200){
                         if(response.body() != null){
-                            var aiMessage=""
-                            var status="true"
+                            val aiMessage : String
+                            val status : String
                             if(!response.body()!!.status){
                                 aiMessage = message
                                 status = "false"
@@ -100,7 +99,7 @@ class GroupChatViewModel : ViewModel() {
                                 aiMessage = "*${response.body()!!.message}*"
                                 status = "true"
                             }
-                            Log.d("statusku : ",status)
+                            Log.d("TAGDATAKU : ",status)
                             val id = UUID.randomUUID().toString()
                             viewModelScope.launch(Dispatchers.IO) {
                                 val database = db.collection("groups_chat")
@@ -171,7 +170,7 @@ class GroupChatViewModel : ViewModel() {
     }
 
     fun getQuoteOfTheDay(context:Context,status:IProgressResult?=null):LiveData<String>{
-        var quoteMessage = MutableLiveData<String>()
+        val quoteMessage = MutableLiveData<String>()
         val service = RetrofitBuild.instanceQuotesService()
         CoroutineScope(Dispatchers.IO).launch {
             try{
@@ -183,7 +182,7 @@ class GroupChatViewModel : ViewModel() {
                             if (it.author.isNotEmpty()) {
                                 quoteMessage.postValue("${it.content} \n- ${it.author} -")
                             } else {
-                                quoteMessage.postValue("${it.content}")
+                                quoteMessage.postValue(it.content)
                             }
                             status?.onSuccess("")
                         }

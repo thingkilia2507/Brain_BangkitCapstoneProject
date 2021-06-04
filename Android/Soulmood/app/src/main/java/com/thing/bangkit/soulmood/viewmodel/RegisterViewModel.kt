@@ -1,6 +1,7 @@
 package com.thing.bangkit.soulmood.viewmodel
 
 import android.content.Context
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -36,7 +37,7 @@ class RegisterViewModel : ViewModel() {
                     val map = HashMap<String, String>()
                     map["id"] = id
                     map["name"] = name
-                    map["email"] = auth.currentUser?.email.toString().toLowerCase()
+                    map["email"] = auth.currentUser?.email.toString().toLowerCase(Locale.ROOT)
                     map["gender"] = gender
                     map["created_at"] = DateHelper.getCurrentDateTime()
                     db.collection("users").document(id).set(
@@ -56,9 +57,12 @@ class RegisterViewModel : ViewModel() {
                             Toasty.error(context,  context.getString(R.string.wrong_email_input_format), Toasty.LENGTH_SHORT).show()
                         }else if(it.message.toString().equals("A network error (such as timeout, interrupted connection or unreachable host) has occurred.",true)){
                             Toasty.error(context,  context.getString(R.string.no_internet_connection), Toasty.LENGTH_SHORT).show()
+                        }else if(it.message.toString().equals("The email address is already in use by another account.",true)){
+                            Toasty.error(context,  context.getString(R.string.email_used), Toasty.LENGTH_SHORT).show()
                         }
                         else {
                             Toasty.error(context, message, Toasty.LENGTH_SHORT).show()
+                            Log.d("TAGDATAKU", message)
                         }
                     }
                 }

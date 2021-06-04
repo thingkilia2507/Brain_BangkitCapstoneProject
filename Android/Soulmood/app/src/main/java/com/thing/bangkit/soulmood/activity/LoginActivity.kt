@@ -16,13 +16,12 @@ import com.thing.bangkit.soulmood.databinding.ActivityLoginBinding
 import com.thing.bangkit.soulmood.helper.IProgressResult
 import com.thing.bangkit.soulmood.helper.MyAsset
 import com.thing.bangkit.soulmood.helper.SharedPref
-import com.thing.bangkit.soulmood.viewmodel.GroupChatViewModel
 import com.thing.bangkit.soulmood.viewmodel.LoginViewModel
+import java.util.*
 
 class LoginActivity : AppCompatActivity(), IProgressResult {
     //view model
     private  val loginViewModel:LoginViewModel by viewModels()
-    private  val groupChatViewModel:GroupChatViewModel by viewModels()
     private lateinit var alerDialog: SweetAlertDialog
     var binding :ActivityLoginBinding? = null
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -77,7 +76,7 @@ class LoginActivity : AppCompatActivity(), IProgressResult {
                                 SharedPref.setPref(
                                     this@LoginActivity,
                                     MyAsset.KEY_EMAIL,
-                                    it.email.toLowerCase()
+                                    it.email.toLowerCase(Locale.ROOT)
                                 )
                               
                                 SharedPref.setPref(

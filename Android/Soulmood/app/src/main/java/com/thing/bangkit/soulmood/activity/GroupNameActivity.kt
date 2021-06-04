@@ -14,6 +14,8 @@ import com.thing.bangkit.soulmood.adapter.GroupNameViewAdapter
 import com.thing.bangkit.soulmood.databinding.ActivityGroupNameBinding
 import com.thing.bangkit.soulmood.model.ChatGroup
 import com.thing.bangkit.soulmood.viewmodel.GroupChatViewModel
+import java.util.*
+import kotlin.collections.ArrayList
 
 class GroupNameActivity : AppCompatActivity() {
     private lateinit var adapter: GroupNameViewAdapter
@@ -87,7 +89,7 @@ class GroupNameActivity : AppCompatActivity() {
                 else {
                     var data = ArrayList<ChatGroup>()
                     for(i in 0 until dataGroupName.size){
-                        if(dataGroupName[i].group_name.toLowerCase().contains(newText!!.toLowerCase())){
+                        if(dataGroupName[i].group_name.toLowerCase(Locale.ROOT).contains(newText!!.toLowerCase(Locale.ROOT))){
                             data.add(ChatGroup(dataGroupName[i].id,dataGroupName[i].group_name))
                         }
                     }

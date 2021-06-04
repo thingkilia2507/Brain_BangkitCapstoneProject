@@ -381,13 +381,15 @@ class ProfileFragment : Fragment(), IProgressResult {
 
     override fun onFailure(message: String) {
         Log.d("TAGDATAKU", "onFailure: ")
-        sweetAlertDialog.setTitleText(getString(R.string.error))
-            .setContentText(message)
-            .hideConfirmButton()
-            .changeAlertType(SweetAlertDialog.ERROR_TYPE)
-        Handler(Looper.getMainLooper()).postDelayed({
-            sweetAlertDialog.dismiss()
-        }, 2000)
+        sweetAlertDialog?.let {
+            sweetAlertDialog.setTitleText(getString(R.string.error))
+                .setContentText(message)
+                .hideConfirmButton()
+                .changeAlertType(SweetAlertDialog.ERROR_TYPE)
+            Handler(Looper.getMainLooper()).postDelayed({
+                sweetAlertDialog.dismiss()
+            }, 2000)
+        }
     }
 
 
