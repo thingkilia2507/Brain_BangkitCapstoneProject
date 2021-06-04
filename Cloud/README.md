@@ -1,7 +1,7 @@
 # Cloud Platform
 
 ## 1. Hate Speech Detector API
-Hate speech detector is used to block messages containing hate speech in the live-chat forum (between users).
+Hate speech detector is used to block messages containing hate speech in the live chat forum (between users).
 Hate Speech Detector API is using FLASK framework and deployed on google app engine.
 ### [This is the sourcecode of hate speech detector deployed on google app engine](/Cloud/Hate%20Speech)
 
