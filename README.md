@@ -12,7 +12,7 @@ Together, we can handle it all. Fighting... A new Start Up that will become the 
   <h3 align="center">SoulMood: Your Mental Health Care Application</h3>
 
   <p align="center">
-    <a href=""><strong>Meet the Team »</strong></a>
+    <a href="MeetTheTeam.md"><strong>Meet the Team »</strong></a>
     <br />
     <br />
     <a href="https://s.id/SoulmoodAPK">APK Link</a>
