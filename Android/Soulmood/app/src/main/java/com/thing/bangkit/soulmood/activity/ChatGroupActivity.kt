@@ -5,6 +5,7 @@ import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.thing.bangkit.soulmood.R
 import com.thing.bangkit.soulmood.adapter.GroupChatFirebaseViewAdapter
 import com.thing.bangkit.soulmood.databinding.ActivityChatGroupBinding
@@ -34,12 +35,8 @@ class ChatGroupActivity : AppCompatActivity() {
         }
             groupChatViewModel.setDataChat(groupId.toString())
             binding?.apply {
-               // val adapter = GroupChatViewAdapter()
-
-
                 floatingSend.setOnClickListener {
                     val message = etChatGroup.text.toString()
-                    //if (message.isEmpty()) etChatGroup.error = "Masukkan Pesan Anda!"
                     if(message.isNotEmpty()) {
                         groupChatViewModel.insertNewChat(
                             groupId.toString(),
@@ -59,6 +56,12 @@ class ChatGroupActivity : AppCompatActivity() {
                         adapterFirebase?.startListening()
                         binding?.rvChatGroup?.adapter = adapterFirebase
 
+                        adapterFirebase?.registerAdapterDataObserver(object : RecyclerView.AdapterDataObserver() {
+                            override fun onItemRangeInserted(positionStart: Int, itemCount: Int) {
+                                super.onItemRangeInserted(positionStart, itemCount)
+                                binding?.rvChatGroup?.scrollToPosition(0)
+                            }
+                        })
                     }
                 })
             }

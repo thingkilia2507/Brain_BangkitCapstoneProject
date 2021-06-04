@@ -145,9 +145,6 @@ class MoodTrackerActivity : AppCompatActivity(){
             //remove line in right side
             lineChart.axisRight.isEnabled = false
 
-            //auto zoom
-            //lineChart.setScaleMinima(1.5f, 1f)
-
             xAxis.setDrawGridLines(false)
             xAxis.setDrawAxisLine(false)
             xAxis.granularity = 1f

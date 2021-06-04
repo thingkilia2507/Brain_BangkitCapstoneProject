@@ -21,33 +21,6 @@ import kotlinx.coroutines.withContext
 class MoodTrackerViewModel : ViewModel() {
 
     private var moodData = MutableLiveData<ArrayList<MoodData>>()
-    val date = DateHelper.getCurrentDateTime()
-
-
-    fun insertMoodData(currentMood:String,moodCode:String,context: Context) {
-        viewModelScope.launch(IO) {
-            val insert1 = FirebaseFirestore.getInstance()
-                .collection("mood_tracker")
-                .document("mood_tracker1")
-                .collection(SharedPref.getPref(context, MyAsset.KEY_USER_ID).toString())
-                .document(date.take(4))
-                .collection(date.substring(5, 7))
-                .document(date.substring(8, 10))
-            //untuk mood perhari(slalu update)
-            insert1.set(
-                mapOf(
-                    "current_mood" to currentMood, "mood_code" to moodCode,
-                    "updated_at" to date
-                )
-            )
-            insert1.collection("list_mood").add(
-                mapOf(
-                    "mood" to currentMood, "mood_code" to moodCode,
-                    "updated_at" to date
-                )
-            )
-        }
-    }
 
     //untuk dashboard
     fun getDashboardMood(context: Context): LiveData<MoodData> {
@@ -60,7 +33,7 @@ class MoodTrackerViewModel : ViewModel() {
                 .collection(date.substring(5, 7))
                 .orderBy("updated_at", Query.Direction.DESCENDING)
                 .limit(1)
-                db.addSnapshotListener { value, error ->
+                db.addSnapshotListener { value, _ ->
                     if (value != null) {
                         for (i in 0 until value.size()) {
                             val doc = value.documents[i]
@@ -92,7 +65,7 @@ class MoodTrackerViewModel : ViewModel() {
                 db.get().addOnSuccessListener {value->
                     if (value != null) {
                         for (i in 0 until value.size()) {
-                            Log.d("mydata", value.documents[i].toString())
+                            Log.d("TAGDATAKU", value.documents[i].toString())
                             val doc = value.documents[i]
                             data.add(
                                 MoodData(
