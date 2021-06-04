@@ -323,6 +323,6 @@ db.collection("users")
 # COMING SOON FEATURE
 
 <p align="center">
-    <img src="../ASSET/comingsoonkonsultasiSoulmood.png" alt="comingsoonkonsultasiSoulmood">
-    <img src="../ASSET/comingsoonsoulcare.png" alt="comingsoonsoulcare">
+    <img src="../ASSET/comingsoonkonsultasiSoulmood.png" alt="comingsoonkonsultasiSoulmood" width="50%">
+    <img src="../ASSET/comingsoonsoulcare.png" alt="comingsoonsoulcare" width="50%">
   </p>
